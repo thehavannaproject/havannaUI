@@ -1,0 +1,6 @@
+.footer {
+    background-image: url("../../../public/images/svg/abstract-footer.svg");
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    background-size: contain;
+}

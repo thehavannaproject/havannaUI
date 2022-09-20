@@ -1,0 +1,9 @@
+.button .slanty, .button span {
+    transition: all ease-in-out 200ms;
+}
+.button:hover span {
+    padding-left: 2rem;
+}
+.button:hover .slanty {
+ width: 4rem;
+}

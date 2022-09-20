@@ -1,0 +1,20 @@
+.card {
+    transform: skewX(-12deg);
+    background: #F4F4F4;
+}
+
+.cardContent {
+    transform: skewX(12deg);
+}
+
+.card img, .card svg{
+    transition: all ease-in-out 200ms;
+}
+
+.card:hover img{
+    transform: scale(1.05);
+}
+
+.card:hover svg{
+    transform: translateX(-10px)
+}

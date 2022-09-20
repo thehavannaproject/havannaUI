@@ -1,0 +1,15 @@
+.cardGreen {
+    background: #EDFFFE;
+}
+
+.cardYellow {
+    background: #FFFAEF;
+}
+
+.cardDescription {
+    line-height: 1.6;
+}
+
+.title {
+    line-height: 1.2;
+}
