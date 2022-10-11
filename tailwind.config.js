@@ -12,6 +12,7 @@ module.exports = {
         serif: [...defaultTheme.fontFamily.serif],
         mono: [...defaultTheme.fontFamily.mono],
       },
+      
       fontSize: {
         "sm-15": "0.9375rem", //15px
       },

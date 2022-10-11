@@ -4,8 +4,6 @@ import SlantBox from '../../../blocks/slantBox';
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import FormikCustomInput from '../../../atoms/CustomInput/FormikCustomInput';
-// import { errorMessages } from '../../../shared/libs/helpers';
-
 
 const SignupSchema = Yup.object().shape({
     name: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required("This field is compulsory"),
@@ -83,7 +81,6 @@ const MailListingSection = () => {
                     <div className='mt-8 tablet:mt-8 tablet:w-1/2 tablet:m-auto'>
                         <button className="text-12 text-white border h-[46px] bg-[#0B4340] text-center tablet:text-16 font-bold !w-full rounded-md " type="submit">Get Easy Access</button>
                     </div>
-                   
                 </div>
               </div>
             </Form>

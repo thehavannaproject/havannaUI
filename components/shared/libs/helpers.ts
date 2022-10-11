@@ -25,7 +25,6 @@ export const errorMessages = {
   passwordMatch: "Passwords dont match",
 };
 
-
 /**
  * Status for various responses
  */
