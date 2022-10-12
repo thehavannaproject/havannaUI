@@ -12,7 +12,7 @@ const SignupSchema = Yup.object().shape({
     phoneNumber: Yup.string().min(11).max(50, "Too Long!").required("This field is compulsory"),
   });
 
-const MailListingSection = () => {
+const MailListSection = () => {
 
     const handleSubmit = async (values) => {
         console.log(values);
@@ -94,4 +94,4 @@ const MailListingSection = () => {
   )
 }
 
-export default MailListingSection;
+export default MailListSection;
