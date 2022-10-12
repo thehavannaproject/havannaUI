@@ -2,6 +2,7 @@ import DownloadSection from "../components/blocks/downloadSection";
 import FaqsSection from "../components/blocks/faqsSection";
 import MainWrapper from "../components/layout/mainWrapper";
 import FutureSection from "../components/pages/home/futureSection";
+import MailListingSection from "../components/pages/home/mailListSection";
 import OpportunitySection from "../components/pages/home/opportunitySection";
 import StartSection from "../components/pages/home/startSection";
 import TopSection from "../components/pages/home/topSection";
@@ -16,6 +17,7 @@ export default function Home() {
       <OpportunitySection />
       <FutureSection />
       <FaqsSection />
+      <MailListingSection/>
       <DownloadSection />
     </MainWrapper>
   )
