@@ -22,6 +22,7 @@ module.exports = {
         bigLaptop: "1440px",
         television: "1536px",
       },
+      
       fontSize: {
         8: ["0.5rem", "0.688rem"],
         10: ["0.625rem", "0.938rem"],
