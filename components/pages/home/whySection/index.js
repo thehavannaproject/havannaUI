@@ -26,9 +26,9 @@ const WhySection = () => {
                 <div className="w-full lg:w-6/12">
                     <Animate.Fade bottom>
                         <h2 className={`text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-primary w-10/12 ${styles.title}`}>
-                            Why Real Estate Virtual Slots (REVS)
+                            Why Real Estate Asset Slots (REAS)
                         </h2>
-                        <p className="text-default text-sm-15 md:text-base lg:text-lg mt-5 lg:mt-10">Real Estate Virtual Slots (REVS) are units of real estate assets such as
+                        <p className="text-default text-sm-15 md:text-base lg:text-lg mt-5 lg:mt-10">Real Estate Asset Slots (REAS) are units of real estate assets such as
                             income-producing residential or industrial properties, high-growth lands,
                             and ongoing or proposed estate development projects.
                         </p>

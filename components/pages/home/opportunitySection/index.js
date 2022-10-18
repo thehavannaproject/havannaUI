@@ -45,8 +45,8 @@ const OpportunitySection = () => {
                 
                     <div className="w-8/12 lg:w-8/12 mx-auto mt-16 lg:mt-20 xl:mt-28">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                            <Card title="Buy REVS" image={BuyImage} linkUrl="/products/buy" />
-                            <Card title="Sell REVS" image={SellImage} linkUrl="/products/sell" />
+                            <Card title="Buy REAS" image={BuyImage} linkUrl="/products/buy" />
+                            <Card title="Sell REAS" image={SellImage} linkUrl="/products/sell" />
                         </div>
                     </div>
                 </Animate.Fade>
