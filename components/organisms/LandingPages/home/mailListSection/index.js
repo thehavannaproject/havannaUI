@@ -1,9 +1,9 @@
 import React from 'react';
 import * as Animate from "react-reveal"
-import SlantBox from '../../../blocks/slantBox';
+import SlantBox from '../../../../blocks/slantBox';
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
-import FormikCustomInput from '../../../atoms/CustomInput/FormikCustomInput';
+import FormikCustomInput from '../../../../atoms/CustomInput/FormikCustomInput';
 
 
 const SignupSchema = Yup.object().shape({

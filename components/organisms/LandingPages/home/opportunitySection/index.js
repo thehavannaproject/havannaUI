@@ -1,9 +1,9 @@
 import Image from 'next/image'
 import React from 'react'
-import SlantBox from '../../../blocks/slantBox'
+import SlantBox from '../../../../blocks/slantBox'
 import styles from "./opportunitySection.module.css"
-import BuyImage from "../../../../public/images/webp/buy.webp"
-import SellImage from "../../../../public/images/webp/sell.webp"
+import BuyImage from "../../../../../public/images/webp/buy.webp"
+import SellImage from "../../../../../public/images/webp/sell.webp"
 import Link from 'next/link'
 import * as Animate from "react-reveal"
 

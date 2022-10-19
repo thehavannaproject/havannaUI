@@ -1,5 +1,5 @@
 import React from 'react'
-import SlantBox from '../../../blocks/slantBox'
+import SlantBox from '../../../../blocks/slantBox'
 import styles from "./whySection.module.css"
 import * as Animate from "react-reveal"
 
