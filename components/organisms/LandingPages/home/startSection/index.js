@@ -39,17 +39,17 @@ const StartSection = () => {
                     <Animate.Fade bottom>
                         <div className='relative'>
                             <h1 className='text-2xl md:text-3xl lg:text-4xl font-semibold text-primary'>
-                                Start your way into Real Estate through REVS
+                                Start your way into Real Estate through REAS
                             </h1>
                         </div>
                         <p className='w-full mt-6 lg:mt-10 text-sm-15 lg:text-default leading-7'>
-                            REVS is a very good way to start your journey into Real Estate investements.
+                            REAS is a very good way to start your journey into Real Estate investements.
                             If you have always wanted to become a Real Estate Investor but you
-                            dont know how and where to start, consider starting with REVS.
+                            dont know how and where to start, consider starting with REAS.
                             <br /><br />
                             <span className="font-semibold">
-                                Land REVS are backed by lands that appreciate in value annually.
-                                Property REVS are backed by revenue generating
+                                Land REAS are backed by lands that appreciate in value annually.
+                                Property REAS are backed by revenue generating
                                 real estate properties
                             </span>
                         </p>

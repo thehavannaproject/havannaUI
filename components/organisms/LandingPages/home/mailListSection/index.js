@@ -2,6 +2,7 @@ import React from 'react';
 import * as Animate from "react-reveal"
 import SlantBox from '../../../../blocks/slantBox';
 import { Form, Formik } from "formik";
+import axios from 'axios';
 import * as Yup from "yup";
 import FormikCustomInput from '../../../../atoms/CustomInput/FormikCustomInput';
 
@@ -14,9 +15,25 @@ const SignupSchema = Yup.object().shape({
 
 const MailListSection = () => {
 
-    const handleSubmit = async (values) => {
-        console.log(values);
-      };
+  const handleSubmit = (values) => {
+    axios({
+      method: 'POST',
+      url: `${baseUrl}/lead/create`,
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      data: {
+        name: values.name,
+        email: values.email,
+        phoneNumber: values.phoneNumber
+      }
+    })
+    .then((response) => {
+      toast("Your request has been submitted successfully") 
+      console.log(response);
+    })
+    .catch((error) => {console.log(error);})
+  };
 
   return (
     <>
