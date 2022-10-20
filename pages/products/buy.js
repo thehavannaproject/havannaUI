@@ -1,10 +1,10 @@
 import React from 'react'
-import DownloadSection from '../../components/blocks/downloadSection'
-import FaqsSection from '../../components/blocks/faqsSection'
+import DownloadSection from '../../components/organisms/LandingPages/home/downloadSection'
+import FaqsSection from '../../components/organisms/LandingPages/home/faqsSection'
 import MainWrapper from '../../components/layout/mainWrapper'
-import BuyTopSection from '../../components/pages/products/buyTopSection'
-import HowItWorksBuySection from '../../components/pages/products/components/howItWorksBuySection'
-import PropertiesSection from '../../components/pages/products/components/propertiesSection'
+import BuyTopSection from '../../components/organisms/products/buyTopSection'
+import HowItWorksBuySection from '../../components/organisms/products/components/howItWorksBuySection'
+import PropertiesSection from '../../components/organisms/products/components/propertiesSection'
 
 const Buy = () => {
     return (

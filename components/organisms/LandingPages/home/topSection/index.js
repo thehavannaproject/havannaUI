@@ -1,15 +1,15 @@
 import React from 'react'
-import Button from '../../../elements/button'
-import Header from '../../../layout/header'
+import Button from '../../../../elements/button'
+import Header from '../../../../layout/header'
 import styles from "./topSection.module.css"
 import * as Animate from "react-reveal"
-import TopImage1 from "../../../../public/images/webp/top.webp"
+import TopImage1 from "../../../../../public/images/webp/top.webp"
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
-import SlantBox from '../../../blocks/slantBox'
+import SlantBox from '../../../../blocks/slantBox'
 
 const TestimonySlider = dynamic(
-    () => import("./../../../carousel/testimonySlider"),
+    () => import("./../../../../carousel/testimonySlider"),
     // No need for SSR, when the module includes a library that only works in the
     // browser.
     { ssr: false }

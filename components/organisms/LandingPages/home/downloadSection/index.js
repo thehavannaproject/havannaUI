@@ -1,10 +1,10 @@
 import React from 'react'
 import styles from "./downloadSection.module.css"
-import MobileImage from "../../../public/images/webp/mobile.webp"
-import AndroidIcon from "../../../public/images/svg/android.svg"
-import AppleIcon from "../../../public/images/svg/apple.svg"
+import MobileImage from "../../../../../public/images/webp/mobile.webp"
+import AndroidIcon from "../../../../../public/images/svg/android.svg"
+import AppleIcon from "../../../../../public/images/svg/apple.svg"
 import Image from 'next/image'
-import SlantBox from '../slantBox'
+import SlantBox from '../../../../blocks/slantBox'
 import * as Animate from "react-reveal"
 
 const DownloadSection = () => {
