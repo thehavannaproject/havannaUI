@@ -1,5 +1,5 @@
 import React from 'react'
-import SlantBox from '../slantBox'
+import SlantBox from '../../../../blocks/slantBox'
 import { faqsData } from './data'
 import styles from "./faqsSection.module.css"
 import * as Animate from "react-reveal"

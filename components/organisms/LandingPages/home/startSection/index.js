@@ -1,10 +1,10 @@
 import Image from 'next/image'
 import React from 'react'
 import * as Animate from "react-reveal"
-import SlantBox from '../../../blocks/slantBox'
+import SlantBox from '../../../../blocks/slantBox'
 
-import StartImage from "../../../../public/images/webp/start.webp"
-import GrowthImage from "../../../../public/images/webp/growth.webp"
+import StartImage from "../../../../../public/images/webp/start.webp"
+import GrowthImage from "../../../../../public/images/webp/growth.webp"
 
 const StartSection = () => {
     return (

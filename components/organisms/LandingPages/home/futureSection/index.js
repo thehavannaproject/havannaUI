@@ -1,8 +1,8 @@
 import Image from 'next/image'
 import React from 'react'
 import styles from "./futureSection.module.css"
-import FutureImage from "../../../../public/images/webp/future.webp"
-import SlantBox from '../../../blocks/slantBox'
+import FutureImage from "../../../../../public/images/webp/future.webp"
+import SlantBox from '../../../../blocks/slantBox'
 import * as Animate from "react-reveal"
 
 const FutureSection = () => {

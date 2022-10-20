@@ -1,14 +1,10 @@
 import React from 'react';
 import * as Animate from "react-reveal"
-import SlantBox from '../../../blocks/slantBox';
+import SlantBox from '../../../../blocks/slantBox';
 import { Form, Formik } from "formik";
 import axios from 'axios';
 import * as Yup from "yup";
-import FormikCustomInput from '../../../atoms/CustomInput/FormikCustomInput';
-import { baseUrl } from '../../../../config';
-import { citiToast } from '../../../atoms/Toast';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import FormikCustomInput from '../../../../atoms/CustomInput/FormikCustomInput';
 
 
 const SignupSchema = Yup.object().shape({
