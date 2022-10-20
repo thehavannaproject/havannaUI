@@ -9,8 +9,7 @@ const Company = () => {
         <MainWrapper>
             <TopSection />
             <EmpowerSection />
-            <ContactSection />
-            
+            <ContactSection />   
        </MainWrapper>
     )
 }
