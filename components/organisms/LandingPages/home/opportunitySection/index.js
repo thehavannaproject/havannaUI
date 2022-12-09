@@ -1,58 +1,83 @@
-import Image from 'next/image'
-import React from 'react'
-import SlantBox from '../../../../blocks/slantBox'
-import styles from "./opportunitySection.module.css"
-import BuyImage from "../../../../../public/images/webp/buy.webp"
-import SellImage from "../../../../../public/images/webp/sell.webp"
-import Link from 'next/link'
-import * as Animate from "react-reveal"
+import Image from "next/image";
+import React from "react";
+import styles from "./opportunitySection.module.css";
+import BuyImage from "../../../../../public/images/OpportunityImages/Image.svg";
+import SellImage from "../../../../../public/images/OpportunityImages/unsplash_N2zk9yXjmLA.svg";
+import Link from "next/link";
+import * as Animate from "react-reveal";
 
-const Card = ({ title, image, linkUrl }) => {
-    return <Link href={linkUrl || "/"}>
-        <a>
-            <div className={`${styles.card} pt-10 lg:pt-16`}>
-                <div className={`${styles.cardContent}`}>
-                    <div className="flex flex-row justify-between items-center pb-4 pl-14 lg:pl-20 ">
-                        <p className="text-xl lg:text-2xl font-semibold text-primary">{title}</p>
-                        <svg width="27" height="15" viewBox="0 0 27 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M26.042 8.24251C26.4325 7.85198 26.4325 7.21882 26.042 6.82829L19.678 0.464333C19.2875 0.0738082 18.6543 0.0738082 18.2638 0.464333C17.8733 0.854857 17.8733 1.48802 18.2638 1.87855L23.9206 7.5354L18.2638 13.1923C17.8733 13.5828 17.8733 14.2159 18.2638 14.6065C18.6543 14.997 19.2875 14.997 19.678 14.6065L26.042 8.24251ZM0.653137 8.5354H25.3348V6.5354H0.653137V8.5354Z" fill="#F1BC00" />
-                        </svg>
-                    </div>
-                    <div className="" style={{fontSize: 0}}>
-                        <Image src={image || BuyImage} placeholder="Opportunity Image" alt="" />
-                    </div>
-                </div>
+const Card = ({ title, image, linkUrl, description }) => {
+  return (
+    <Link href={linkUrl || "/"}>
+      <a>
+        <div className={`bg-white  bigLaptop:w-[418px] bigLaptop:h-[598px] shadow-2xl rounded-xl `}>
+          <div className={``}>
+            <div className="px-8 pt-12 ">
+              <Image
+                width={354}
+                height={240}
+                src={image || BuyImage}
+                placeholder="Opportunity Image"
+                alt="oppotunity Image"
+              />
+              <p className="text-xl lg:text-2xl mt-[40px] font-bold font-mulish text-[22px] text-primary">
+                {title}
+              </p>
+              <p className="pt-4 pb-[40px] font-mulish">{description}</p>
+              <button className="bg-HavannaGreen-primary text-white w-full  mb-[80px] h-[58px] rounded-lg  ">
+                Invest now
+              </button>
             </div>
-
-        </a>
+            <div className="" style={{ fontSize: 0 }}></div>
+          </div>
+        </div>
+      </a>
     </Link>
-}
+  );
+};
 
 const OpportunitySection = () => {
-    return (
-        <section className={`pt-24 lg:pt-28 pb-28 lg:pb-32 relative ${styles.bg}`}>
-            <div className="container px-4 mx-auto">
-                <Animate.Fade bottom>
-                    <div className="flex justify-center w-full">
-                        <div className="relative">
-                            <div className='absolute -top-1 -right-1'><SlantBox /></div>
-                            <div className='z-10 relative'>
-                                <h2 className="text-2xl lg:text-3xl text-primary font-semibold">Opportunities made for you</h2>
-                            </div>
-                        </div>
-                    </div>
-
-                
-                    <div className="w-8/12 lg:w-8/12 mx-auto mt-16 lg:mt-20 xl:mt-28">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                            <Card title="Buy REAS" image={BuyImage} linkUrl="/products/buy" />
-                            <Card title="Sell REAS" image={SellImage} linkUrl="/products/sell" />
-                        </div>
-                    </div>
-                </Animate.Fade>
+  return (
+    <section
+      className={`pt-24 lg:pt-28 pb-28 lg:pb-32 px-5  bg-HavannaGreen-light `}
+    >
+      <Animate.Fade bottom>
+        <div className="">
+          <div className=" ">
+            <div className="   ">
+              <h2 className="text-4xl  font-mulish lg:text-3xl text-primary font-bold">
+                Opportunities made for
+                <span className="text-HavannaGreen-tertiaryMain"> you</span>.
+              </h2>
+              <p className="  font-mulish font-medium text-base ">
+                Real Estate Asset Slots (REAS) are units of real estate assets
+                such as income-producing residential or industrial properties,
+                high-growth lands, and ongoing or proposed estate development
+                projects.
+              </p>
             </div>
-        </section>
-    )
-}
 
-export default OpportunitySection
+            <div className="  mt-10">
+              <div className="grid smallLaptop:grid tablet:grid-cols-2 smallLaptop:grid-cols-2 gap-20  ">
+                <Card
+                  image={BuyImage}
+                  title="Land REAS"
+                  description="Land REAS are backed by lands that appreciate in value."
+                  linkUrl="/products/buy"
+                />
+                <Card
+                  image={SellImage}
+                  title="Property REAS"
+                  description="Property REAS are backed by revenue generating real estate asset."
+                  linkUrl="/products/sell"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </Animate.Fade>
+    </section>
+  );
+};
+
+export default OpportunitySection;

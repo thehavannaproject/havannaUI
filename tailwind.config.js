@@ -12,6 +12,12 @@ module.exports = {
         serif: [...defaultTheme.fontFamily.serif],
         mono: [...defaultTheme.fontFamily.mono],
       },
+
+      fontFamily: {
+        mulish: ["Mulish", "sans-serif"],
+        Popins: ["Poppins", "sans-serif"],
+      },
+
       screens: {
         mobile: "640px",
         mobileBelow: { max: "640px" },
@@ -22,7 +28,7 @@ module.exports = {
         bigLaptop: "1440px",
         television: "1536px",
       },
-      
+
       fontSize: {
         8: ["0.5rem", "0.688rem"],
         10: ["0.625rem", "0.938rem"],
@@ -37,13 +43,19 @@ module.exports = {
         64: ["4rem", "4.375rem"],
         "sm-15": "0.9375rem", //15px
       },
-      
+
       colors: {
         default: "var(--color-default)",
         primary: "var(--color-primary)",
         secondary: "var(--color-secondary)",
         dark: "var(--color-dark)",
         "light-green": "var(--color-light-green)",
+        HavannaGreen: {
+          primary: "#0B4340",
+          secondary: "#39876B",
+          light: "#F3FCFB",
+          tertiaryMain: "#F1BC00",
+        },
       },
     },
   },

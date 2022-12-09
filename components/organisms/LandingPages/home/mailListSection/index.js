@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import * as Animate from "react-reveal";
 import SlantBox from "../../../../blocks/slantBox";
@@ -42,8 +41,8 @@ const MailListSection = () => {
       data: {
         name: values.name,
         email: values.email,
-        phoneNumber: values.phoneNumber
-      }
+        phoneNumber: values.phoneNumber,
+      },
     })
       .then((response) => {
         setLoading(false);
@@ -63,23 +62,15 @@ const MailListSection = () => {
 
   return (
     <>
-  
       <section
-        className={`pt-24 lg:pt-28 pb-28 lg:pb-32 relative bg-[#EDFFFE]`}
+        className={`pt-24 lg:pt-28 px-5 tablet:px-10 pb-28 text-white lg:pb-32 relative bg-HavannaGreen-primary`}
       >
-        <div className="container px-4 mx-auto">
+        <div className="container  mx-auto">
           <Animate.Fade bottom>
             <div className="flex justify-center w-full">
-              <div className="relative">
-                <div className="absolute -top-1 -right-1">
-                  <SlantBox />
-                </div>
-                <div className="z-10 relative">
-                  <h2 className="text-2xl lg:text-3xl text-primary font-semibold">
-                    Get Priority access when we launch
-                  </h2>
-                </div>
-              </div>
+              <h2 className="text-2xl lg:text-3xl text-white font-bold font-mulish">
+                Get Priority access when we launch.
+              </h2>
             </div>
           </Animate.Fade>
 
@@ -97,11 +88,12 @@ const MailListSection = () => {
               {() => (
                 <Form>
                   <div>
-                    <div className="tablet:w-[50%] tablet:m-auto">
+                    <div className="  tablet:m-auto">
                       <div className="tablet:mt-8 rounded-md">
                         <div>
+                          <label htmlFor="">Full Name</label>
                           <FormikCustomInput
-                            className={`rounded-md h-[46px] mt-2 w-full border `}
+                            className={`rounded-md h-[46px] mt-1 bigLaptop:w-[620px] border `}
                             id="name"
                             inputClassName={`placeholder:text-14 outline-none placeholder:text-citiGray-300`}
                             name="name"
@@ -110,8 +102,9 @@ const MailListSection = () => {
                           />
                         </div>
                         <div className="mt-4 tablet:mt-6">
+                          <label htmlFor="">Email Address</label>
                           <FormikCustomInput
-                            className={`rounded-md w-full h-[46px] mt-2 border  `}
+                            className={`rounded-md bigLaptop:w-[620px] mt-1 h-[46px] border  `}
                             id="email"
                             inputClassName="placeholder:text-14 outline-none placeholder:text-citiGray-300 "
                             name="email"
@@ -120,8 +113,9 @@ const MailListSection = () => {
                           />
                         </div>
                         <div className="mt-4 tablet:mt-6">
+                          <label htmlFor="">Phone Number</label>
                           <FormikCustomInput
-                            className={`rounded-md w-full h-[46px] tablet:mt-6 border`}
+                            className={`rounded-md bigLaptop:w-[620px] h-[46px] mt-1 tablet:mt-6 border`}
                             id="phoneNumber"
                             inputClassName="placeholder:text-14 outline-none  placeholder:text-citiGray-300 "
                             name="phoneNumber"
@@ -129,13 +123,13 @@ const MailListSection = () => {
                             type="text"
                           />
                         </div>
-                      </div>
-                      <div className="mt-8 tablet:mt-8 tablet:w-1/2 tablet:m-auto">
-                        <Button
-                          customClass="text-12 text-white border h-[46px] bg-[#0B4340] text-center tablet:text-16 font-bold !w-full rounded-md"
-                          title=" Get Easy Access"
-                          isLoading={loading}
-                        />
+                        <div className="mt-8 tablet:mt-8  tablet:m-auto">
+                          <Button
+                            customClass="text-12 text-white rounded-lg border h-[46px] bg-[#0B4340] text-center tablet:text-16 font-bold bigLaptop:w-[620px] w-full "
+                            title=" Get Easy Access"
+                            isLoading={loading}
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>

@@ -1,62 +1,65 @@
-import React from 'react'
-import Button from '../../../../elements/button'
-import Header from '../../../../layout/header'
-import styles from "./topSection.module.css"
-import * as Animate from "react-reveal"
-import TopImage1 from "../../../../../public/images/webp/top.webp"
-import Image from 'next/image'
-import dynamic from 'next/dynamic'
-import SlantBox from '../../../../blocks/slantBox'
+import React from "react";
+import Header from "../../../../layout/header";
+import styles from "./topSection.module.css";
+import * as Animate from "react-reveal";
+import Image from "next/image";
+import dynamic from "next/dynamic";
+import vector from "../../../../../public/images/Vector (Stroke).svg";
+import stairs from "../../../../../public/images/Hero image (1).png";
 
 const TestimonySlider = dynamic(
-    () => import("./../../../../carousel/testimonySlider"),
-    // No need for SSR, when the module includes a library that only works in the
-    // browser.
-    { ssr: false }
+  () => import("./../../../../carousel/testimonySlider"),
+  // No need for SSR, when the module includes a library that only works in the
+  // browser.
+  { ssr: false }
 );
 
 const TopSection = () => {
-    return (
-        <section className={`relative w-full pb-28 lg:pb-32 ${styles.bg}`}>
-            <Header />
-            <div className="pl-4 md:pl-20 lg:pl-32 pr-4 md:pr-10 lg:pr-14 px-4 mx-auto pt-12 lg:pt-20 pb-10 lg:pb-6">
-                <div className="flex flex-wrap flex-row">
-                    <div className="w-full lg:w-5/12 relative pt-6 lg:pt-10">
-                        <Animate.Fade bottom>
-                            <h1 className="text-4xl lg:text-4xl xl:text-6xl font-semibold text-primary w-11/12">
-                                Now, Everyone can Invest  in Real Estate!
-                            </h1>
-                            <p className="text-default text-base lg:text-lg mt-4 lg:mt-6 pr-0 lg:pr-6">
-                                Real estate investment is considered the safest way to secure your future but seems inaccessible to all. Havanna is here to bridge the gap.
-                            </p>
-                            <div className="pt-14 lg:pt-16 flex">
-                                <Button title="START NOW" isLink={true} href="/products" />
-                            </div>
-                        </Animate.Fade>
-                    </div>
-                    <div className="relative w-full lg:w-7/12 pl-0 lg:pl-6 mt-16 lg:-mt-12">
-                        <Animate.Zoom>
-                            <div className=''>
-                                <Image src={TopImage1} alt="Havanna Image 1" />
-                            </div>
-                        </Animate.Zoom>
-                    </div>
+  return (
+    <section
+      className={`font-mulish relative  w-full pb-28 lg:pb-32 ${styles.bg} border`}
+    >
+      <Header />
+      <div className="px-6 smallLaptop:px-[120px]">
+        <div className=" tablet:flex justify-between">
+          <div className="w-full  smallLaptop:pt-[100px]">
+            <Animate.Fade bottom>
+              <h1 className="text-[32px] leading-10 smallLaptop:text-[60px] font-extrabold font-mulish smallLaptop:leading-[72px] text-primary">
+                Now,
+                <span className="text-HavannaGreen-secondary"> everyone </span>
+                can
+                <span className="text-HavannaGreen-secondary"> Invest </span>in
+                real estate.
+              </h1>
+              <p className="text-default text-base lg:text-lg mt-4 font-mulish lg:mt-6 pr-0 lg:pr-6">
+                With as low as 20,000 naira, you can co-own income producing
+                real estate assets and earn rental income.
+              </p>
+              <div className="pt-14  lg:pt-16">
+                <button className="bg-HavannaGreen-primary font-mulish font-bold flex gap-[14.4px] justify-center items-center text-white w-[300px] h-[60px] rounded-lg ">
+                  Explore now
+                  <Image src={vector} alt="vector" />
+                </button>
+              </div>
+            </Animate.Fade>
+          </div>
+          <div className="smallLaptop:pl-[120px]">
+            <Animate.Zoom>
+              <div className="mt-10">
+                <div className="w-full h-4 mt-[77px]  ">
+                  <Image
+                    className="w-full"
+                    src={stairs}
+                    alt="Havanna Image 1"
+                  />
                 </div>
-            </div>
+              </div>
+            </Animate.Zoom>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
 
-            {/* <div className='container w-10/12 lg:w-5/12 mx-auto pb-12'>
-                <Animate.Fade bottom>
-                    <div className='flex space-x-2 justify-center'>
-                        <SlantBox width="w-5" height="h-6" />
-                        <SlantBox width="w-5" height="h-6" bgColor={"bg-primary"} />
-                    </div>
-                    <div className='block relative mt-6 lg:mt-14'>
-                        <TestimonySlider />
-                    </div>
-                </Animate.Fade>
-            </div> */}
-        </section>
-    )
-}
-
-export default TopSection
+export default TopSection;
