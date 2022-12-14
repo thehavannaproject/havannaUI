@@ -51,10 +51,10 @@ const Header = ({ isDark = false }) => {
               isDark ? "text-white" : "text-primary"
             }`}
           >
-            <NavItem className="mt-4" title="Log in" url="/login" />
+            <NavItem className="mt-4" title="Log in" url="/LogIn" />
             <NavItem
               title="Create an account"
-              url="/Sign-up"
+              url="/Signup"
               className="bg-HavannaGreen-primary text-white py-[18px] px-6 rounded-lg "
             />
           </nav>

@@ -5,12 +5,7 @@ import TopSection from "../components/organisms/products/topSection";
 import SignIn from "../components/organisms/signIn/SignIn";
 
 const LogIn = () => {
-  return (
-    <MainWrapper>
-      <TopSection />
-      <SignIn />
-    </MainWrapper>
-  );
+  return <SignIn />;
 };
 
 export default LogIn;

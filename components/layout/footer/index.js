@@ -6,7 +6,7 @@ import Link from "next/link";
 
 const Column = ({ title, links = [], isTargetLink = false }) => {
   return (
-    <div className="">
+    <div className=" ">
       <h3 className="text-HavannaGreen-tertiaryMain font-mulish text-[22px] lg:text-base font-bold mb-6">
         {title}
       </h3>
@@ -124,7 +124,7 @@ const Footer = () => {
 
           <div className=" lg:w-5/12  lg:pt-4">
             <div
-              className="flex flex-wrap-reverse justify-between
+              className=" justify-between
              items-start gap-5 mt-10  "
             >
               <Column title="Products" links={columnData1} />
