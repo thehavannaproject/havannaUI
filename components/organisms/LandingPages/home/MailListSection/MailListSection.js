@@ -65,7 +65,7 @@ const MailListSection = () => {
       <section
         className={`pt-24 lg:pt-28 px-5 tablet:px-10 pb-28 text-white lg:pb-32 relative bg-HavannaGreen-primary`}
       >
-        <div className="container  mx-auto">
+        <div className=" smallLaptop:w-1/2 smallLaptop:m-auto">
           <Animate.Fade bottom>
             <div className="flex justify-center w-full">
               <h2 className="text-2xl lg:text-3xl text-white font-bold font-mulish">

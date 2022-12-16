@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "./whySection.module.css";
 import * as Animate from "react-reveal";
 import Image from "next/image";
 import cardIcon from "../../../../../public/images/Card Icons/Card icon.svg";
@@ -10,19 +9,17 @@ import cardIcon3 from "../../../../../public/images/Card Icons/Card icon-3.svg";
 const Card = ({ bgColor, title, description, image }) => {
   return (
     <div
-      className={`${
-        bgColor === "green" ? styles.cardWhite : styles.cardWhite
-      } py-6 px-8 bigLaptop:w-[352px] rounded-xl shadow-lg `}
+      className={`py-6 px-8  smallLaptop:h-[492px] rounded-xl shadow-lg `}
     >
       <Animate.Fade bottom>
-        <div className="text-dark font-bold text-sm-15 lg:text-base pt-3 lg:pt-7  items-center">
-          <div className="mb-12   ">
+        <div className="text-dark font-bold text-sm-15 lg:text-base pt-3 lg:pt-7 items-center">
+          <div className="mb-12">
             <Image height={84} width={84} src={image} alt="CardIcons" />
           </div>
           <p className=" text-sm lg:text-sm-15">{title}</p>
         </div>
         <p
-          className={`text-default font-mulish font-medium text-xs lg:text-sm mt-6 ${styles.cardDescription}`}
+          className={`text-default font-mulish font-medium text-xs lg:text-sm mt-6 leading-[1.6rem]}`}
         >
           {description}
         </p>
@@ -33,12 +30,12 @@ const Card = ({ bgColor, title, description, image }) => {
 
 const WhySection = () => {
   return (
-    <section className="bg-HavannaGreen-light px-5 font-mulish pt-24 lg:pt-28 pb-28 lg:pb-32 relative">
-      <div className="container bigLaptop:px-[120px] mx-auto">
+    <section className="bg-HavannaGreen-light px-5 font-mulish pt-8 lg:pt-28 pb-28 lg:pb-32 relative">
+      <div className="container smallLaptop:px-[120px] mx-auto">
         <div className="w-full lg:w-6/12">
           <Animate.Fade bottom>
             <h2
-              className={`text-[36px] md:text-3xl lg:text-4xl xl:text-5xl font-bold text-primary bigLaptop:w-[538px] ${styles.title}`}
+              className={`leading-10 text-[36px] md:text-3xl lg:text-4xl xl:text-5xl font-bold text-primary bigLaptop:w-[538px] `}
             >
               Why Real Estate Asset Slots
               <span className="text-HavannaGreen-tertiaryMain">(REAS)</span> ?

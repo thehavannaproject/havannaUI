@@ -6,8 +6,8 @@ import StartImage from "../../../../../public/images/StartSectionImages/Image (2
 
 const StartSection = () => {
   return (
-    <section className={`relative w-full px-5 bg-white`}>
-      <div className="container mx-auto pt-10 lg:pt-20 pb-28 lg:pb-36 items-center">
+    <section className={`relative  w-full px-5 bg-white`}>
+      <div className="container smallLaptop:flex mx-auto pt-10 lg:pt-20 pb-28 lg:pb-36 items-center">
         <div className="w-full lg:w-6/12 relative mt-10  md:mt-0 order-2 lg:order-1">
           <div className="w-10/12 md:w-9/12 lg:mx-auto relative">
             <div className=" ">
@@ -16,8 +16,7 @@ const StartSection = () => {
 
             <div className="">
               <Image
-                width={692.88}
-                height={576}
+               
                 src={StartImage}
                 alt="Start Investing"
               />
@@ -36,7 +35,7 @@ const StartSection = () => {
         <div className="w-full lg:w-5/12  order-1 lg:order-2">
           <Animate.Fade bottom>
             <div className="">
-              <h1 className="text-2xl md:text-3xl lg:text-4xl font-semibold mt-6 text-primary">
+              <h1 className="text-[32px] leading-10 mt-10 md:text-3xl lg:text-4xl font-medium text-primary">
                 Start your way into Real Estate through
                 <span className="text-HavannaGreen-tertiaryMain"> REAS</span>.
               </h1>
@@ -47,7 +46,7 @@ const StartSection = () => {
               Investor but you dont know how and where to start, consider
               starting with REAS.
             </p>
-            <button className="bg-HavannaGreen-primary font-mulish font-bold flex gap-[14.4px] justify-center items-center text-white w-full tablet:w-[50%] bigLaptop:w-[354px] h-[60px] rounded-lg ">
+            <button className="w-1/2 bg-HavannaGreen-primary font-mulish font-bold flex gap-[14.4px] justify-center items-center text-white tablet:w-[50%] bigLaptop:w-[354px] h-[60px] rounded-lg ">
               Explore now <Image src={vector} alt="vector" />
             </button>
           </Animate.Fade>
