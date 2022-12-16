@@ -33,23 +33,23 @@ const Card = ({ bgColor, title, description }) => {
   );
 };
 
-const index = () => {
+const HavannaProvision = () => {
   return (
-    <section className="py-[150px] px-5 tablet:px-10 ">
+    <section className="py-14 smallLaptop:py-[150px] px-4 smallLaptop:px-[120px] tablet:px-10 ">
       <div>
         <div className=" ">
           <Animate.Fade bottom>
-            <div className=" ">
-              <div className=" ">
+            <div className=" flex flex-col-reverse smallLaptop:flex-row ">
+              <div className=" mt-6 smallLaptop:mt-0">
                 <Image width={858} height={500} src={House} alt="House" />
               </div>
-              <div className="">
+              <div className="smallLaptop:ml-[92px]">
                 <div>
-                  <h1 className="font-mulish font-bold text-[36px] mb-10  mt-5  ">
+                  <h1 className="font-mulish font-bold text-24 leading-[44px] smallLaptop:text-[36px] mb-10  mt-5 text-HavannaGreen-300 ">
                     Havanna provides the easiest way to build your real estate
                     porfolio.
                   </h1>
-                  <button className="bg-HavannaGreen-primary font-mulish font-bold text-white flex gap-[14.4px] justify-center items-center rounded-lg bigLaptop:w-[354px] w-full tablet:w-[50%] h-[60px] ">
+                  <button className="my-14 bg-HavannaGreen-primary text-16 font-mulish font-bold text-white flex gap-[14.4px] justify-center items-center rounded-lg bigLaptop:w-[354px] w-1/2 tablet:w-[50%] h-[60px] ">
                     Explore now
                     <Image src={vector} alt="Vector" />
                   </button>
@@ -63,4 +63,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default HavannaProvision;

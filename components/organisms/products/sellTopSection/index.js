@@ -1,6 +1,6 @@
 import React from 'react'
 import Button from '../../../elements/button'
-import Header from '../../../layout/header'
+import Header from '../../../layout/Header/Header'
 import TopImage1 from "../../../../public/images/webp/sell-top.webp"
 import Image from 'next/image'
 import SlantBox from '../../../blocks/slantBox'

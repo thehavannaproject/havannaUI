@@ -1,26 +1,20 @@
 import { useState } from "react";
 import Link from "next/link";
 import axios from "axios";
-import { REGEX } from "../../shared/libs/helpers.ts";
+import { REGEX } from "@shared/libs/helpers.ts";
 import * as Yup from "yup";
 import FormikCustomInput from "../../atoms/CustomInput/FormikCustomInput";
 import { baseUrl } from "../../../config";
 import Image from "next/image";
-import Button from "../../atoms/CustomButton/Button";
-import Logo from "../../../public/images/Sign In images/Logo.svg";
+import Button from "@atoms/CustomButton/Button";
+import Logo from "@images/Sign In images/Logo.svg";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Form, Formik } from "formik";
 
 const signInSchema = Yup.object().shape({
-  email: Yup.string()
-    .email("Invalid email")
-    .required("This field is compulsory"),
-  password: Yup.string()
-    .min(5)
-    .max(50, "Too Long!")
-    .matches(REGEX.password, { message: "please create a stronger password" })
-    .required("This field is compulsory"),
+  email: Yup.string().email("Invalid email").required("This field is compulsory"),
+  password: Yup.string().min(5).max(50, "Too Long!").matches(REGEX.password, { message: "please create a stronger password" }).required("This field is compulsory"),
 });
 
 const SignIn = () => {
@@ -41,9 +35,7 @@ const SignIn = () => {
     })
       .then((response) => {
         setLoading(false);
-        toast(
-          `Hi ${response.data.data[0].name}, Your request has been submitted successfully`
-        );
+        toast(`Hi ${response.data.data[0].name}, Your request has been submitted successfully`);
         router.push("/");
         values.email = "";
         values.password = "";
@@ -55,19 +47,13 @@ const SignIn = () => {
   };
 
   return (
-    <section
-      className={`pt-14 lg:pt-28  pb-28 lg:pb-32 px-5 tablet:px-20 smallLaptop:px-[200px] font-mulish bg-HavannaGreen-primary`}
-    >
+    <section className={`pt-14 lg:pt-28  pb-28 lg:pb-32 px-5 tablet:px-20 smallLaptop:px-[200px] font-mulish bg-HavannaGreen-primary`}>
       <div className="  ">
         <div className="flex justify-center">
           <Link href="/">
             <a>
               <span className="sr-only">Havanna</span>
-              <Image
-                className="h-7 md:w-auto tablet:h-8 lg:h-9 ml-30  "
-                src={Logo}
-                alt="Havanna"
-              />
+              <Image className="h-7 md:w-auto tablet:h-8 lg:h-9 ml-30  " src={Logo} alt="Havanna" />
             </a>
           </Link>
         </div>
@@ -87,12 +73,8 @@ const SignIn = () => {
                 <div className="m-auto justify-center items-center  ">
                   <div className="flex justify-center">
                     <div>
-                      <h1 className="font-bold text-[32px] pt-10 text-center   ">
-                        Welcome back
-                      </h1>
-                      <p className="font-medium text-base pt-3 pb-16  ">
-                        Log in to your account and start investing.
-                      </p>
+                      <h1 className="font-bold text-[32px] pt-10 text-center   ">Welcome back</h1>
+                      <p className="font-medium text-base pt-3 pb-16  ">Log in to your account and start investing.</p>
                     </div>
                   </div>
 
@@ -125,18 +107,12 @@ const SignIn = () => {
                   </div>
                 </div>
                 <div className="mt-10 ">
-                  <Button
-                    customClass="text-4 h-[46px] text-white bg-[#0B4340] text-center tablet:text-16 font-bold !w-full rounded-md"
-                    title=" Log In"
-                    isLoading={loading}
-                  />
+                  <Button customClass="text-4 h-[46px] text-white bg-[#0B4340] text-center tablet:text-16 font-bold !w-full rounded-md" title=" Log In" isLoading={loading} />
                 </div>
                 <div className="pt-[26px] flex justify-center ">
                   <p className=" pb-20">
                     Don’t have an account?&nbsp;
-                    <span className="font-bold text-base text-HavannaGreen-primary   ">
-                      Create an account
-                    </span>
+                    <span className="font-bold text-base text-HavannaGreen-primary   ">Create an account</span>
                   </p>
                 </div>
               </Form>

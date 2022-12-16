@@ -6,8 +6,8 @@ import Link from "next/link";
 
 const Column = ({ title, links = [], isTargetLink = false }) => {
   return (
-    <div className=" ">
-      <h3 className="text-HavannaGreen-tertiaryMain font-mulish text-[22px] lg:text-base font-bold mb-6">
+    <div className="ml-10 smallLaptop:ml-0">
+      <h3 className="text-HavannaGreen-tertiaryMain mt-6 smallLaptop:mt-0 font-mulish text-[22px] lg:text-base font-bold mb-6">
         {title}
       </h3>
 
@@ -101,11 +101,11 @@ const Footer = () => {
     },
   ];
   return (
-    <div className={`bg-primary px-5 text-center font-mulish ${styles.footer}`}>
+    <div className={`bg-primary px-5 smallLaptop:px-[120px] font-mulish ${styles.footer}`}>
       <div className=" ">
-        <div className="pt-20  lg:pt-24 pb-20 lg:pb-36  ">
-          <div className="w-full  lg:w-4/12">
-            <div className="">
+        <div className="smallLaptop:flex pt-20  lg:pt-24 pb-20 lg:pb-36  ">
+          <div className="w-full  smallLaptop:w-[25%]">
+            <div>
               <Image src={Logo} alt="Havanna" />
             </div>
             <div className="mt-2">
@@ -122,10 +122,9 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className=" lg:w-5/12  lg:pt-4">
+          <div className="smallLaptop:w-[70%] smallLaptop:ml-24">
             <div
-              className=" justify-between
-             items-start gap-5 mt-10  "
+              className="flex justify-evenly flex-wrap"
             >
               <Column title="Products" links={columnData1} />
               <Column title="Terms & Privacy " links={columnData2} />

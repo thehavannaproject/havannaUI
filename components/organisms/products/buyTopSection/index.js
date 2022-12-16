@@ -2,7 +2,7 @@ import Image from 'next/image'
 import React from 'react'
 import SlantBox from '../../../blocks/slantBox'
 import Button from '../../../elements/button'
-import Header from '../../../layout/header'
+import Header from '../../../layout/Header/Header'
 import TabSection from '../components/TabSection'
 import TopImage1 from "../../../../public/images/webp/buy-top.webp"
 import { handleScrollTo } from '../../../../utils/handleScrollTo'

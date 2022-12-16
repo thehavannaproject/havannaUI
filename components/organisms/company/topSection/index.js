@@ -1,5 +1,5 @@
 import React from 'react'
-import Header from '../../../layout/header'
+import Header from '../../../layout/Header/Header'
 import styles from "./topSection.module.css"
 import SlantBox from '../../../blocks/slantBox'
 import TopImage from "../../../../public/images/webp/company.webp"

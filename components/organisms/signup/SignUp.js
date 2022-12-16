@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import axios from "axios";
-import { REGEX } from "../../shared/libs/helpers.ts";
+import { REGEX } from "@shared/libs/helpers.ts";
 import * as Yup from "yup";
-import FormikCustomInput from "../../atoms/CustomInput/FormikCustomInput";
+import FormikCustomInput from "@atoms/CustomInput/FormikCustomInput";
 import { baseUrl } from "../../../config";
 import Image from "next/image";
-import Button from "../../atoms/CustomButton/Button";
-import Logo from "../../../public/images/Sign In images/Logo.svg";
+import Button from "@atoms/CustomButton/Button";
+import Logo from "@images/Sign In images/Logo.svg";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Form, Formik } from "formik";
@@ -15,18 +15,9 @@ import { Form, Formik } from "formik";
 const signUpSchema = Yup.object().shape({
   firstName: Yup.string().required("This field is compulsory"),
   lastName: Yup.string().required("This field is compulsory"),
-  email: Yup.string()
-    .email("Invalid email")
-    .required("This field is compulsory"),
-  password: Yup.string()
-    .min(5)
-    .max(50, "Too Long!")
-    .matches(REGEX.password, { message: "Please create a stronger password" })
-    .required("Please Input a password"),
-  confirmPassword: Yup.string().oneOf(
-    [Yup.ref("password"), null],
-    "Password must match"
-  ),
+  email: Yup.string().email("Invalid email").required("This field is compulsory"),
+  password: Yup.string().min(5).max(50, "Too Long!").matches(REGEX.password, { message: "Please create a stronger password" }).required("Please Input a password"),
+  confirmPassword: Yup.string().oneOf([Yup.ref("password"), null], "Password must match"),
 });
 
 const SignUp = () => {
@@ -47,9 +38,7 @@ const SignUp = () => {
     })
       .then((response) => {
         setLoading(false);
-        toast(
-          `Hi ${response.data.data[0].name}, Your request has been submitted successfully`
-        );
+        toast(`Hi ${response.data.data[0].name}, Your request has been submitted successfully`);
         router.push("/");
         values.firstName = "";
         values.lastName = "";
@@ -64,19 +53,13 @@ const SignUp = () => {
 
   return (
     <div>
-      <section
-        className={`pt-14 lg:pt-28  pb-28 lg:pb-32 px-5 tablet:px-20 smallLaptop:px-[200px] font-mulish bg-HavannaGreen-primary`}
-      >
+      <section className={`pt-14 lg:pt-28  pb-28 lg:pb-32 px-5 tablet:px-20 smallLaptop:px-[200px] font-mulish bg-HavannaGreen-primary`}>
         <div className="  ">
           <div className="flex justify-center">
             <Link href="/">
               <a>
                 <span className="sr-only">Havanna</span>
-                <Image
-                  className="h-7 md:w-auto tablet:h-8 lg:h-9 ml-30  "
-                  src={Logo}
-                  alt="Havanna"
-                />
+                <Image className="h-7 md:w-auto tablet:h-8 lg:h-9 ml-30  " src={Logo} alt="Havanna" />
               </a>
             </Link>
           </div>
@@ -95,12 +78,8 @@ const SignUp = () => {
                   <div className="m-auto justify-center items-center  ">
                     <div className="flex justify-center">
                       <div className="">
-                        <h1 className="font-bold text-[32px] pt-10   ">
-                          Get Started
-                        </h1>
-                        <p className="font-medium text-base pt-3 pb-16  ">
-                          Create free account and start investing.
-                        </p>
+                        <h1 className="font-bold text-[32px] pt-10   ">Get Started</h1>
+                        <p className="font-medium text-base pt-3 pb-16  ">Create free account and start investing.</p>
                       </div>
                     </div>
 
@@ -181,9 +160,7 @@ const SignUp = () => {
                   <div className="pt-[26px] flex justify-center ">
                     <p className=" pb-20">
                       Don’t have an account?&nbsp;
-                      <span className="font-bold text-base text-HavannaGreen-primary   ">
-                        Log in
-                      </span>
+                      <span className="font-bold text-base text-HavannaGreen-primary   ">Log in</span>
                     </p>
                   </div>
                 </Form>

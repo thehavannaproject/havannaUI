@@ -15,7 +15,7 @@ const FaqsSection = () => {
             <div className="relative mb-6">
               <div className="absolute -top-1 -right-1"></div>
               <div className="z-10 relative">
-                <h2 className="text-4xl lg:text-3xl text-primary font-bold">
+                <h2 className="text-[32px] leading-10 smallLaptop:text-3xl text-primary font-bold">
                   Frequently Asked Questions (FAQs).
                 </h2>
               </div>
