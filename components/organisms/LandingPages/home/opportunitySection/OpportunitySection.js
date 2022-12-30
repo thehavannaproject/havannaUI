@@ -10,7 +10,7 @@ const Card = ({ title, image, linkUrl, description }) => {
   return (
     <Link href={linkUrl || "/"}>
       <a>
-        <div className={`bg-white w-full mt-6 smallLaptop:ml-6 rounded-xl px-8 py-[48px] smallLaptop:w-[318px] smallLaptop:h-[458px] bigLaptop:h-[598px] bigLaptop:w-[418px]  `}>
+        <div className={`bg-white w-full mt-6 smallLaptop:ml-6 rounded-xl px-8 py-[48px] smallLaptop:w-[318px] smallLaptop:h-[458px] bigLaptop:h-[598px] bigLaptop:w-[418px] shadow-xl  `}>
           <div>
             <div className="">
               <Image

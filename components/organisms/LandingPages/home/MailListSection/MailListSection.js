@@ -1,28 +1,19 @@
 import React, { useState } from "react";
 import * as Animate from "react-reveal";
-import SlantBox from "../../../../blocks/slantBox";
 import { Form, Formik } from "formik";
 import axios from "axios";
 import * as Yup from "yup";
-import FormikCustomInput from "../../../../atoms/CustomInput/FormikCustomInput";
+import FormikCustomInput from "@atoms/CustomInput/FormikCustomInput";
 import { baseUrl } from "../../../../../config";
-import Button from "../../../../atoms/CustomButton/Button";
+import Button from "@atoms/CustomButton/Button";
 import { useRouter } from "next/router";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const SignupSchema = Yup.object().shape({
-  name: Yup.string()
-    .min(2, "Too Short!")
-    .max(50, "Too Long!")
-    .required("This field is compulsory"),
-  email: Yup.string()
-    .email("Invalid email")
-    .required("This field is compulsory"),
-  phoneNumber: Yup.string()
-    .min(11)
-    .max(50, "Too Long!")
-    .required("This field is compulsory"),
+  name: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required("This field is compulsory"),
+  email: Yup.string().email("Invalid email").required("This field is compulsory"),
+  phoneNumber: Yup.string().min(11).max(50, "Too Long!").required("This field is compulsory"),
 });
 
 const MailListSection = () => {
@@ -46,9 +37,7 @@ const MailListSection = () => {
     })
       .then((response) => {
         setLoading(false);
-        toast(
-          `Hi ${response.data.data[0].name}, Your request has been submitted successfully`
-        );
+        toast(`Hi ${response.data.data[0].name}, Your request has been submitted successfully`);
         router.push("/");
         values.name = "";
         values.email = "";
@@ -62,15 +51,11 @@ const MailListSection = () => {
 
   return (
     <>
-      <section
-        className={`pt-24 lg:pt-28 px-5 tablet:px-10 pb-28 text-white lg:pb-32 relative bg-HavannaGreen-primary`}
-      >
+      <section className={`pt-24 lg:pt-28 px-5 tablet:px-10 pb-28 text-white lg:pb-32 relative bg-HavannaGreen-primary`}>
         <div className=" smallLaptop:w-1/2 smallLaptop:m-auto">
           <Animate.Fade bottom>
             <div className="flex justify-center w-full">
-              <h2 className="text-2xl lg:text-3xl text-white font-bold font-mulish">
-                Get Priority access when we launch.
-              </h2>
+              <h2 className="text-2xl lg:text-3xl text-white font-bold font-mulish">Get Priority access when we launch.</h2>
             </div>
           </Animate.Fade>
 

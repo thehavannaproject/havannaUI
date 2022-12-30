@@ -9,7 +9,7 @@ import CustomLink from "@components/atoms/CustomLink/CustomLink";
 const Header = ({ isDark = false }) => {
   return (
     <>
-      <div className=" relative font-mulish px-4 py-3 tablet:px-10 tablet:py-5 smallLaptop:px-[120px] smallLaptop:py-8">
+      <div className=" relative font-mulish px-4 py-3 tablet:px-10 tablet:py-5 smallLaptop:px-[120px] smallLaptop:py-8 bg-HavannaGreen-light">
         <div className=" tablet:flex tablet:justify-between">
           <CustomLink destination="/">
             <span className="sr-only">Havanna</span>
