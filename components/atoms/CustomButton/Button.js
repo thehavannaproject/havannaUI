@@ -2,7 +2,7 @@ import React from "react";
 import { ImSpinner3 } from "react-icons/im";
 
 
-const Button = ({ title, onClick, customClass, isLoading }) => {
+const Button = ( title, onClick, customClass, isLoading ) => {
   return (
     <div>
       <button

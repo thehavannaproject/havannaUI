@@ -1,9 +1,10 @@
 import { useField } from "formik";
 import React, { useState } from "react";
+
 import ErrorMessage from "../ErrorMessage";
 import Icon from "../Icons";
 
-const FormikCustomInput = ({ className, container, type, iconClass, disabled, icon, inputClassName, iconPosition, ...props }) => {
+const FormikCustomInput = ( className, container, type, iconClass, disabled, icon, inputClassName, iconPosition, ...props ) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleShowPassword = () => {
