@@ -1,13 +1,15 @@
+import axios from "axios";
+import { Form, Formik } from "formik";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import * as Animate from "react-reveal";
-import { Form, Formik } from "formik";
-import axios from "axios";
-import * as Yup from "yup";
-import FormikCustomInput from "@atoms/CustomInput/FormikCustomInput";
-import { baseUrl } from "../../../../../config";
-import Button from "@atoms/CustomButton/Button";
-import { useRouter } from "next/router";
 import { ToastContainer, toast } from "react-toastify";
+import * as Yup from "yup";
+
+import Button from "@atoms/CustomButton/Button";
+import FormikCustomInput from "@atoms/CustomInput/FormikCustomInput";
+
+import { baseUrl } from "../../../../../config";
 import "react-toastify/dist/ReactToastify.css";
 
 const SignupSchema = Yup.object().shape({
@@ -111,8 +113,8 @@ const MailListSection = () => {
                         <div className="mt-8 tablet:mt-8  tablet:m-auto">
                           <Button
                             customClass="text-12 text-white rounded-lg border h-[46px] bg-[#0B4340] text-center tablet:text-16 font-bold bigLaptop:w-[620px] w-full "
-                            title=" Get Easy Access"
                             isLoading={loading}
+                            title=" Get Easy Access"
                           />
                         </div>
                       </div>

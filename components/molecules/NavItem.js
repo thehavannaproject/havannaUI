@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react'
 
-const NavItem = ({ title, url, className }) => {
+const NavItem = ( title, url, className ) => {
     const router = useRouter();
     return (
       <div className={`tablet:block ${className}`}>

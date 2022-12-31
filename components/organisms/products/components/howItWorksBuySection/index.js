@@ -1,7 +1,8 @@
 import React from 'react'
+import * as Animate from "react-reveal"
+
 import Card from '../../../../blocks/card'
 import styles from "./howItWorksBuySection.module.css"
-import * as Animate from "react-reveal"
 
 const HowItWorksBuySection = () => {
     return (
@@ -19,33 +20,33 @@ const HowItWorksBuySection = () => {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 pt-14 lg:pt-20">
                         <Card
-                            tag="01"
                             bgColor="green"
-                            title="Browse Investment"
                             description={`Browse through our various assets and determine which is best for you.
                         `}
+                            tag="01"
+                            title="Browse Investment"
                         />
                         <Card
-                            tag="02"
                             bgColor="yellow"
-                            title="Select preferred units of slot"
                             description={`Select preferred units of slot you desire  in the asset. Kindly note that each asset is divided into 100 slots.
                     `}
+                            tag="02"
+                            title="Select preferred units of slot"
                         />
                         <Card
-                            tag="03"
                             bgColor="green"
-                            title="Sit back"
                             description={`Relax and watch your investment grow. Once the asset is 
                             fully funded, the asset is purchased and held in trust on behalf of the subscribers.
                     `}
+                            tag="03"
+                            title="Sit back"
                         />
                         <Card
-                            tag="04"
                             bgColor="yellow"
-                            title="Payout"
                             description={`Depending on the type of asset, all payouts will be made when due into the provided account.
                     `}
+                            tag="04"
+                            title="Payout"
                         />
                     </div>
                 </Animate.Fade>

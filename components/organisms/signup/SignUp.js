@@ -1,16 +1,21 @@
-import Link from "next/link";
-import { REGEX } from "@shared/libs/helpers.ts";
-import Image from "next/image";
-import Logo from "@images/Sign In images/Logo.svg";
-import React, { useState } from "react";
-import { Form, Formik } from "formik";
 import axios from "axios";
-import * as Yup from "yup";
-import FormikCustomInput from "@atoms/CustomInput/FormikCustomInput";
-import { baseUrl } from "../../../config";
-import Button from "@atoms/CustomButton/Button";
+import { Form, Formik } from "formik";
+import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
+import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import * as Yup from "yup";
+
+import { REGEX } from "@shared/libs/helpers.ts";
+
+import Button from "@atoms/CustomButton/Button";
+import FormikCustomInput from "@atoms/CustomInput/FormikCustomInput";
+
+import Logo from "@images/Sign In images/Logo.svg";
+
+import { baseUrl } from "../../../config";
+
 import "react-toastify/dist/ReactToastify.css";
 
 const SignupSchema = Yup.object().shape({
@@ -67,10 +72,10 @@ const SignUp = () => {
               <a>
                 <span className="sr-only">Havanna</span>
                 <Image
+                  alt="Havanna"
                   className="h-7 md:w-auto tablet:h-8 lg:h-9 
                 ml-30  "
                   src={Logo}
-                  alt="Havanna"
                 />
               </a>
             </Link>
@@ -112,7 +117,7 @@ const SignUp = () => {
               {() => (
                 <Form>
                   <div className="mt-4 ">
-                    <label htmlFor="" className="font-bold text-base">
+                    <label className="font-bold text-base" htmlFor="">
                       First Name
                     </label>
                     <FormikCustomInput
@@ -128,7 +133,7 @@ const SignUp = () => {
                   </div>
 
                   <div className="mt-4 ">
-                    <label htmlFor="" className="font-bold text-base">
+                    <label className="font-bold text-base" htmlFor="">
                       Last Name
                     </label>
                     <FormikCustomInput
@@ -143,7 +148,7 @@ const SignUp = () => {
                     />
                   </div>
                   <div className="mt-4 ">
-                    <label htmlFor="" className="font-bold text-base">
+                    <label className="font-bold text-base" htmlFor="">
                       Email Address
                     </label>
                     <FormikCustomInput
@@ -158,7 +163,7 @@ const SignUp = () => {
                     />
                   </div>
                   <div className="mt-4">
-                    <label htmlFor="" className="font-bold text-base">
+                    <label className="font-bold text-base" htmlFor="">
                       Phone Number
                     </label>
                     <FormikCustomInput
@@ -173,7 +178,7 @@ const SignUp = () => {
                     />
                   </div>
                   <div className="mt-4">
-                    <label htmlFor="" className="font-bold text-base">
+                    <label className="font-bold text-base" htmlFor="">
                       password
                     </label>
                     <FormikCustomInput
@@ -192,8 +197,8 @@ const SignUp = () => {
                       customClass="text-4 h-[46px] text-white 
                       bg-[#0B4340] text-center tablet:text-16 font-bold 
                       !w-full rounded-md"
-                      title=" Create account"
                       isLoading={loading}
+                      title=" Create account"
                     />
                   </div>
                   <div className="pt-[26px] flex justify-center ">

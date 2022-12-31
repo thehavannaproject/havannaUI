@@ -1,7 +1,8 @@
 import Image from "next/image";
 import React from "react";
-import FutureImage from "../../../../../public/images/futureImages/Image (3).svg";
 import * as Animate from "react-reveal";
+
+import FutureImage from "@images/futureImages/Image (3).svg";
 
 const FutureSection = () => {
   return (
@@ -11,10 +12,7 @@ const FutureSection = () => {
           <div className="">
             <Animate.Slide bottom>
               <div className="mb-10 ">
-                <Image
-                  src={FutureImage}
-                  alt="Future"
-                />
+                <Image alt="Future" src={FutureImage} />
               </div>
             </Animate.Slide>
           </div>
@@ -28,10 +26,8 @@ const FutureSection = () => {
               </h2>
 
               <p className="text-HavannaGreen-primary font-mulish font-medium  mt-4 smallLaptop:mt-10 text-base md:text-base smallLaptop:text-lg">
-                Real estate is a highly sought-after asset class among
-                professional investors. We&apos;ve simply placed it within
-                everyone’s grasp. Be a real estate pro without needing to be a
-                millionaire.
+                Real estate is a highly sought-after asset class among professional investors. We&apos;ve simply placed it within everyone’s grasp. Be a real estate pro without
+                needing to be a millionaire.
               </p>
             </Animate.Fade>
           </div>

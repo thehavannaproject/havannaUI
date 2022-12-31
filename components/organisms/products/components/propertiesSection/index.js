@@ -1,11 +1,11 @@
+import PropertyModal from '@modal/propertyModal'
 import React, { useState } from 'react'
+import * as Animate from "react-reveal"
+
 import PropertyCard from '../../../../blocks/propertyCard'
 import SlantBox from '../../../../blocks/slantBox'
-import Button from '../../../../elements/button'
 import { propertiesData } from './propertiesData'
 import styles from "./propertiesSection.module.css"
-import * as Animate from "react-reveal"
-import PropertyModal from '../../../../modal/propertyModal'
 
 const PropertiesSection = () => {
     const [selectedData, setSelectedData] = useState({})
@@ -21,7 +21,7 @@ const PropertiesSection = () => {
         setSelectedData({})
     }
     return (
-        <section id="properties" className={`bg-white pt-24 lg:pt-32 pb-28 lg:pb-32 relative ${styles.bg}`}>
+        <section className={`bg-white pt-24 lg:pt-32 pb-28 lg:pb-32 relative ${styles.bg}`} id="properties">
             <div className="container px-4 mx-auto">
                 <Animate.Fade bottom>
                     <div className="flex justify-center w-full">
@@ -35,7 +35,7 @@ const PropertiesSection = () => {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 pt-24">
                         {
-                            propertiesData.map(property => <PropertyCard key={property.id} property={property} handleShowModal={() => handleShowModal(property)} />)
+                            propertiesData.map(property => <PropertyCard handleShowModal={() => handleShowModal(property)} key={property.id} property={property} />)
                         }
                     </div>
 
@@ -46,7 +46,7 @@ const PropertiesSection = () => {
             </div>
 
             {
-                showModal && <PropertyModal show={showModal} selectedData={selectedData} handleClose={handleClose} />
+                showModal && <PropertyModal handleClose={handleClose} selectedData={selectedData} show={showModal} />
             }
         </section>
     )

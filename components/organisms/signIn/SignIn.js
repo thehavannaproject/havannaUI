@@ -1,16 +1,21 @@
-import { useState } from "react";
-import Link from "next/link";
 import axios from "axios";
-import { REGEX } from "@shared/libs/helpers.ts";
-import * as Yup from "yup";
-import FormikCustomInput from "../../atoms/CustomInput/FormikCustomInput";
-import { baseUrl } from "../../../config";
-import Image from "next/image";
-import Button from "@atoms/CustomButton/Button";
-import Logo from "@images/Sign In images/Logo.svg";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { Form, Formik } from "formik";
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import * as Yup from "yup";
+
+import { REGEX } from "@shared/libs/helpers.ts";
+
+import Button from "@atoms/CustomButton/Button";
+import FormikCustomInput from "@atoms/CustomInput/FormikCustomInput";
+
+import Logo from "@images/Sign In images/Logo.svg";
+
+import { baseUrl } from "../../../config";
+
+import "react-toastify/dist/ReactToastify.css";
 
 const signInSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("This field is compulsory"),
@@ -36,7 +41,7 @@ const SignIn = () => {
       .then((response) => {
         setLoading(false);
         toast(`Hi ${response.data.data[0].name}, Your request has been submitted successfully`);
-        router.push("/");
+        // router.push("/");
         values.email = "";
         values.password = "";
       })
@@ -53,7 +58,7 @@ const SignIn = () => {
           <Link href="/">
             <a>
               <span className="sr-only">Havanna</span>
-              <Image className="h-7 md:w-auto tablet:h-8 lg:h-9 ml-30  " src={Logo} alt="Havanna" />
+              <Image alt="Havanna" className="h-7 md:w-auto tablet:h-8 lg:h-9 ml-30  " src={Logo} />
             </a>
           </Link>
         </div>
@@ -79,7 +84,7 @@ const SignIn = () => {
                   </div>
 
                   <div className="mt-4 ">
-                    <label htmlFor="" className="font-bold text-base">
+                    <label className="font-bold text-base" htmlFor="">
                       Email Address
                     </label>
                     <FormikCustomInput
@@ -93,7 +98,7 @@ const SignIn = () => {
                   </div>
 
                   <div className="mt-4">
-                    <label htmlFor="" className="font-bold text-base">
+                    <label className="font-bold text-base" htmlFor="">
                       Password
                     </label>
                     <FormikCustomInput
@@ -107,7 +112,7 @@ const SignIn = () => {
                   </div>
                 </div>
                 <div className="mt-10 ">
-                  <Button customClass="text-4 h-[46px] text-white bg-[#0B4340] text-center tablet:text-16 font-bold !w-full rounded-md" title=" Log In" isLoading={loading} />
+                  <Button customClass="text-4 h-[46px] text-white bg-[#0B4340] text-center tablet:text-16 font-bold !w-full rounded-md" isLoading={loading} title=" Log In" />
                 </div>
                 <div className="pt-[26px] flex justify-center ">
                   <p className=" pb-20">

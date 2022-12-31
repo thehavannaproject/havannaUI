@@ -1,8 +1,9 @@
 import Image from "next/image";
 import React from "react";
 import * as Animate from "react-reveal";
-import vector from "../../../../../public/images/Vector (Stroke).svg";
-import StartImage from "../../../../../public/images/StartSectionImages/Image (2).png";
+
+import StartImage from "@images/StartSectionImages/Image (2).png";
+import vector from "@images/Vector (Stroke).svg";
 
 const StartSection = () => {
   return (
@@ -11,23 +12,19 @@ const StartSection = () => {
         <div className="w-full lg:w-6/12 relative mt-10  md:mt-0 order-2 lg:order-1">
           <div className="w-10/12 md:w-9/12 lg:mx-auto relative">
             <div className=" ">
-              <Animate.Fade bottom></Animate.Fade>
+              <Animate.Fade bottom />
             </div>
 
             <div className="">
-              <Image
-               
-                src={StartImage}
-                alt="Start Investing"
-              />
+              <Image alt="Start Investing" src={StartImage} />
             </div>
 
             <div className="absolute bottom-32 -right-4">
-              <Animate.Fade top></Animate.Fade>
+              <Animate.Fade top />
             </div>
 
             <div className="absolute -mt-2 right-10">
-              <Animate.Fade top></Animate.Fade>
+              <Animate.Fade top />
             </div>
           </div>
         </div>
@@ -41,13 +38,11 @@ const StartSection = () => {
               </h1>
             </div>
             <p className=" font-mulish font-medium lg:w-full mt-6 lg:mt-10 text-16 lg:text-default mb-10 leading-7">
-              REAS is a very good way to start your journey into Real Estate
-              investements. If you have always wanted to become a Real Estate
-              Investor but you dont know how and where to start, consider
-              starting with REAS.
+              REAS is a very good way to start your journey into Real Estate investements. If you have always wanted to become a Real Estate Investor but you dont know how and
+              where to start, consider starting with REAS.
             </p>
             <button className="w-1/2 bg-HavannaGreen-primary font-mulish font-bold flex gap-[14.4px] justify-center items-center text-white tablet:w-[50%] bigLaptop:w-[354px] h-[60px] rounded-lg ">
-              Explore now <Image src={vector} alt="vector" />
+              Explore now <Image alt="vector" src={vector} />
             </button>
           </Animate.Fade>
         </div>

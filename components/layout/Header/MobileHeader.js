@@ -1,14 +1,15 @@
-import NavItem from "@components/molecules/NavItem";
 import React from "react";
+
+import NavItem from "@components/molecules/NavItem";
 
 const MobileHeader = () => {
   return (
     <div>
-      <input type="checkbox" id="active" />
-      <label htmlFor="active" className="menu-btn -mt-3">
-        <span></span>
+      <input id="active" type="checkbox" />
+      <label className="menu-btn -mt-3" htmlFor="active">
+        <span />
       </label>
-      <label htmlFor="active" className="close"></label>
+      <label className="close" htmlFor="active" />
       <div className="wrapper">
         <ul>
           <li>

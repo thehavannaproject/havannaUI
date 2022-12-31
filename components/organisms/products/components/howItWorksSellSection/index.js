@@ -1,8 +1,9 @@
 import React from 'react'
+import * as Animate from "react-reveal"
+
 import Card from '../../../../blocks/card'
 import Button from '../../../../elements/button'
 import styles from "./howItWorksSellSection.module.css"
-import * as Animate from "react-reveal"
 
 const HowItWorksSellSection = () => {
     return (
@@ -20,33 +21,33 @@ const HowItWorksSellSection = () => {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 pt-14 lg:pt-20">
                         <Card
-                            tag="01"
                             bgColor="green"
-                            title="Fill a form"
                             description={`If you can’t wait for a holding period to be complete and 
                        you need to sell off your slots for quick cash, proceed to fill the form provided indicating your details.
                         `}
+                            tag="01"
+                            title="Fill a form"
                         />
                         <Card
-                            tag="02"
                             bgColor="yellow"
-                            title="Select preferred units of slot"
                             description={`You can decide to sell parts or all of your slot for quick cash. It's convenient and easy.
                     `}
+                            tag="02"
+                            title="Select preferred units of slot"
                         />
                         <Card
-                            tag="03"
                             bgColor="green"
-                            title="Await Payment"
                             description={`
                             Payment will be processed within the next 24 hours. This is all 
                             payment associated with the asset including accrued interest if applicable
                     `}
+                            tag="03"
+                            title="Await Payment"
                         />
                     </div>
 
                     <div className="pt-14 lg:pt-28 flex flex-col items-center">
-                        <Button title="SELL NOW" isLink={true} href="/products" />
+                        <Button href="/products" isLink={true} title="SELL NOW" />
 
                         <p className='text-light-green text-xs mt-10'>Terms and Conditions apply</p>
                     </div>
