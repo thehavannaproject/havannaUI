@@ -5,24 +5,21 @@ import React from "react";
  * @return {React.Component} Icon component
  */
 
-const Icon = ({props}) => {
-  if (props.name === "") {
+const Icon = ({ name, className, ...props }) => {
+  if (name === "") {
     return null;
   }
   try {
-    const Image = require(`./stock/${props.name}`).default;
+    // eslint-disable-next-line no-undef
+    const Image = require(`./stock/${name}`).default;
     if (Image) {
-      return <Image aria-label={props.name} className={`${props.className}`} {...props} />;
+      return <Image aria-label={name} className={`${className}`} {...props} />;
     }
     return null;
   } catch (error) {
     return null;
   }
 };
-Icon.defaultProps = {
-  className: "",
-  onClick: () => {
-    return null;
-  },
-};
+
+
 export default Icon;

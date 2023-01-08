@@ -1,5 +1,6 @@
 import { useField } from "formik";
 import React, { useState } from "react";
+
 import ErrorMessage from "../ErrorMessage";
 import Icon from "../Icons";
 
@@ -40,5 +41,3 @@ const FormikCustomInput = ({ className, container, type, iconClass, disabled, ic
 };
 
 export default FormikCustomInput;
-
-

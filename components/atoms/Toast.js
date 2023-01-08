@@ -1,10 +1,7 @@
 import React from "react";
 import { toast } from "react-toastify";
 
-
-
- export const citiToast = ( text, autoClose) => {
- 
+export const citiToast = (text, autoClose) => {
   toast(
     <div className="flex justify-center w-full smallLaptop:w-[500px]">
       <span>{text}</span>
@@ -16,4 +13,3 @@ import { toast } from "react-toastify";
     }
   );
 };
-

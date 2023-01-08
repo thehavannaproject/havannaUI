@@ -1,4 +1,3 @@
-
 export const REGEX = {
   email: /^[a-zA-z]+[a-zA-z.-_\d\W]*@([a-z]+\.)+[a-z]{2,4}$/g,
   name: /^[\sa-zA-Z]+( [a-zA-Z]+)*(-[a-zA-Z\s]+)?$/,
@@ -41,8 +40,3 @@ export enum NotificationTypes {
   SUCCESS = "success",
   INFO = "info",
 }
-
-
-
-
-
