@@ -1,13 +1,14 @@
 /* HAVANNA Default Settings */
 /* Author: Abayomi Olatunji */
 
+ @import url('https://fonts.googleapis.com/css2?family=Mulish:wght@500;700;800&family=Poppins:ital,wght@1,400;1,500;1,700&display=swap');
 :root {
   /*Default  Color */
   --color-default: #414141;
-  --color-primary: #0B4340;
-  --color-secondary: #F1BC00;
-  --color-light-green: #04D0C5;
-  --color-dark: #0C0526;
+  --color-primary: #0b4340;
+  --color-secondary: #f1bc00;
+  --color-light-green: #04d0c5;
+  --color-dark: #0c0526;
 }
 
 @tailwind base;
