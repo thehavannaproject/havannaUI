@@ -1,13 +1,13 @@
 import React from "react";
 
-import MainWrapper from "../components/layout/mainWrapper";
-import TopSection from "../components/organisms/products/topSection";
+import BaseLayout from "@components/layout/BaseLayout/BaseLayout";
+import TopSection from "@components/organisms/LandingPages/home/TopSection/TopSection";
 
 const Products = () => {
   return (
-    <MainWrapper>
+    <BaseLayout>
       <TopSection />
-    </MainWrapper>
+    </BaseLayout>
   );
 };
 

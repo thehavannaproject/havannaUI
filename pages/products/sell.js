@@ -1,19 +1,19 @@
 import React from "react";
 
-import MainWrapper from "@components/layout/mainWrapper";
+import BaseLayout from "@components/layout/BaseLayout/BaseLayout";
 import DownloadSection from "@components/organisms/LandingPages/home/downloadSection";
-import FaqsSection from "@components/organisms/LandingPages/home/faqsSection";
+import FaqsSection from "@components/organisms/LandingPages/home/FaqsSection/Faq";
 import HowItWorksSellSection from "@components/organisms/products/components/howItWorksSellSection";
 import SellTopSection from "@components/organisms/products/sellTopSection";
 
 const Sell = () => {
   return (
-    <MainWrapper>
+    <BaseLayout>
       <SellTopSection />
       <HowItWorksSellSection />
       <FaqsSection />
       <DownloadSection />
-    </MainWrapper>
+    </BaseLayout>
   );
 };
 

@@ -19,11 +19,10 @@ const HavannaProvision = () => {
               <div className="tablet:ml-[92px] tablet:flex tablet:items-center tablet:justify-center">
                 <div>
                   <h1 className="text-center tablet:text-left text-24 smallLaptop:text-36 smallLaptop:leading-[56px] text-HavannaGreen-primary font-bold">
-                    Havanna provides the easiest way to build your real estate
-                    porfolio.
+                    Havanna provides the easiest way to build your real estate porfolio.
                   </h1>
                   <div className="flex justify-center tablet:justify-start mt-10">
-                    <CustomButton customClass="w-[328px] h-[48px] rounded-[8px] text-white bg-HavannaGreen-primary" icon="arrowRight"  iconClass="ml-3 mt-1" title="Explore now" />
+                    <CustomButton customClass="w-[328px] h-[48px] rounded-[8px] text-white bg-HavannaGreen-primary" icon="arrowRight" iconClass="ml-3 mt-1" title="Explore now" />
                   </div>
                 </div>
               </div>

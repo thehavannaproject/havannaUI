@@ -4,7 +4,7 @@ import HomePage from "@components/organisms/LandingPages/home/HomePage/HomePage"
 export default function Home() {
   return (
     <BaseLayout>
-      <HomePage/>
+      <HomePage />
     </BaseLayout>
   );
 }

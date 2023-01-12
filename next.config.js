@@ -1,8 +1,15 @@
-const webpack = require("webpack");
+// import webpack from "webpack";
 
+// eslint-disable-next-line no-undef
 module.exports = {
   reactStrictMode: true,
-  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+  webpack: (
+    config,
+    {
+      // buildId, dev, isServer, defaultLoaders,
+      webpack,
+    }
+  ) => {
     // Note: we provide webpack above so you should not `require` it
     // Perform customizations to webpack config
     config.plugins.push(

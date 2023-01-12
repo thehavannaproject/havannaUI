@@ -3,7 +3,7 @@ export const REGEX = {
   name: /^[\sa-zA-Z]+( [a-zA-Z]+)*(-[a-zA-Z\s]+)?$/,
   password: /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]*)(?!.*\s).{8,50}$/,
   phoneNumber: /^[7-9][0-1][0-9]+$/,
-  specialCharacter: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/,
+  specialCharacter: /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/,
   numbers: /[0-9]/,
   capsCheck: /[A-Z]/,
 };
@@ -35,8 +35,8 @@ export const Status = {
 /**
  * Notification Types
  */
-export enum NotificationTypes {
-  ERROR = "error",
-  SUCCESS = "success",
-  INFO = "info",
-}
+// export enum NotificationTypes {
+//   ERROR = "error",
+//   SUCCESS = "success",
+//   INFO = "info",
+// }

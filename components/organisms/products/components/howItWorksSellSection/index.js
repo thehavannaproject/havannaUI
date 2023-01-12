@@ -1,7 +1,7 @@
 import React from "react";
 import * as Animate from "react-reveal";
 
-import Card from "../../../../blocks/card";
+import Card from "../../../../blocks/card/Card";
 import Button from "../../../../elements/button";
 import styles from "./howItWorksSellSection.module.css";
 
@@ -17,27 +17,27 @@ const HowItWorksSellSection = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 pt-14 lg:pt-20">
             <Card
-              bgColor="green"
+              // bgColor="green"
               description={`If you can’t wait for a holding period to be complete and 
                        you need to sell off your slots for quick cash, proceed to fill the form provided indicating your details.
                         `}
-              tag="01"
+              // tag="01"
               title="Fill a form"
             />
             <Card
-              bgColor="yellow"
+              // bgColor="yellow"
               description={`You can decide to sell parts or all of your slot for quick cash. It's convenient and easy.
                     `}
-              tag="02"
+              // tag="02"
               title="Select preferred units of slot"
             />
             <Card
-              bgColor="green"
+              // bgColor="green"
               description={`
                             Payment will be processed within the next 24 hours. This is all 
                             payment associated with the asset including accrued interest if applicable
                     `}
-              tag="03"
+              // tag="03"
               title="Await Payment"
             />
           </div>

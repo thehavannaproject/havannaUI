@@ -29,9 +29,19 @@
       "@layout/*": ["components/layout/*"],
       "@modules/*": ["modules/*"],
       "@images/*": ["public/images/*"],
-      "@modals/*": ["skeletons/*"],
+      "@modals/*": ["skeletons/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/atoms/Icons/stock/eyeIcon.jsx", "components/atoms/Icons/stock/eyeIcon.jsx", "components/blocks/card/OpportunityCard.jsx", "components/blocks/card/OpportunityCard.jsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "components/atoms/Icons/stock/eyeIcon.jsx",
+    "components/atoms/Icons/stock/eyeIcon.jsx",
+    "components/blocks/card/OpportunityCard.jsx",
+    "components/blocks/card/OpportunityCard.jsx",
+    "components/shared/libs/helpers.js",
+    "components/shared/libs/helpers.js"
+  ],
   "exclude": ["node_modules"]
 }

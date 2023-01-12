@@ -56,7 +56,7 @@ const MailListSection = () => {
       <section className="bg-HavannaGreen-primary text-white font-mulish py-[60px] px-5">
         <div className="">
           <Animate.Fade bottom>
-                <h2 className="text-center leading-8 font-bold text-24">Get Priority access when we launch</h2>
+            <h2 className="text-center leading-8 font-bold text-24">Get Priority access when we launch</h2>
           </Animate.Fade>
 
           <div className="mt-8">
@@ -76,7 +76,9 @@ const MailListSection = () => {
                     <div className="tablet:w-[50%] tablet:m-auto">
                       <div className="tablet:mt-8 rounded-md">
                         <div>
-                          <label className="text-12" htmlFor="fullname">Full Name</label>
+                          <label className="text-12" htmlFor="fullname">
+                            Full Name
+                          </label>
                           <FormikCustomInput
                             className={`rounded-md h-[46px] mt-1 w-full border `}
                             id="name"
@@ -87,7 +89,9 @@ const MailListSection = () => {
                           />
                         </div>
                         <div className="mt-4 tablet:mt-6">
-                          <label className="text-12" htmlFor="email">Email Address</label>
+                          <label className="text-12" htmlFor="email">
+                            Email Address
+                          </label>
                           <FormikCustomInput
                             className={`rounded-md w-full h-[46px] mt-2 border  `}
                             id="email"
@@ -98,7 +102,9 @@ const MailListSection = () => {
                           />
                         </div>
                         <div className="mt-4 tablet:mt-6">
-                          <label className="text-12" htmlFor="phone">Phone Number</label>
+                          <label className="text-12" htmlFor="phone">
+                            Phone Number
+                          </label>
                           <FormikCustomInput
                             className={`rounded-md w-full h-[46px] tablet:mt-6 border`}
                             id="phoneNumber"

@@ -1,25 +1,20 @@
-import Image from 'next/image';
-import React from 'react'
+import Image from "next/image";
+import React from "react";
 
-import NavItem from '@components/molecules/NavItem'
+import NavItem from "@components/molecules/NavItem";
 
-import CustomLink from '@atoms/CustomLink/CustomLink';
+import CustomLink from "@atoms/CustomLink/CustomLink";
 
 import Logo from "@images/logo/logo-dark.svg";
 import LogoWhite from "@images/logo/logo-white.svg";
 
-
-const MobileHeader = ({isDark = false}) => {
+const MobileHeader = ({ isDark = false }) => {
   return (
     <>
-      <div className='flex justify-between px-4 py-[36px] bg-HavannaGreen-100'>
+      <div className="flex justify-between px-4 py-[36px] bg-HavannaGreen-100">
         <CustomLink destination="/">
           <span className="sr-only">Havanna</span>
-          <Image
-            alt="Havanna"
-            src={isDark ? LogoWhite : Logo}
-            width={120}
-          />
+          <Image alt="Havanna" src={isDark ? LogoWhite : Logo} width={120} />
         </CustomLink>
         <div>
           <input id="active" type="checkbox" />
@@ -48,8 +43,8 @@ const MobileHeader = ({isDark = false}) => {
           </div>
         </div>
       </div>
-    </> 
-  )
-}
+    </>
+  );
+};
 
-export default MobileHeader
+export default MobileHeader;

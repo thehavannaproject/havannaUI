@@ -8,7 +8,9 @@ const CustomButton = ({ title, onClick, customClass, isLoading, icon, iconClass 
     <div>
       <button className={`${customClass} flex justify-center items-center`} onClick={onClick} type="submit">
         {isLoading === true ? <ImSpinner3 className="animate-spin  " /> : <>{title}</>}
-        <span className={iconClass}><Icon name={icon}/></span>
+        <span className={iconClass}>
+          <Icon name={icon} />
+        </span>
       </button>
     </div>
   );

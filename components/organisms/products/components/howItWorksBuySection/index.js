@@ -1,7 +1,7 @@
 import React from "react";
 import * as Animate from "react-reveal";
 
-import Card from "../../../../blocks/card";
+import Card from "../../../../blocks/card/Card";
 import styles from "./howItWorksBuySection.module.css";
 
 const HowItWorksBuySection = () => {
@@ -16,32 +16,32 @@ const HowItWorksBuySection = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 pt-14 lg:pt-20">
             <Card
-              bgColor="green"
+              // bgColor="green"
               description={`Browse through our various assets and determine which is best for you.
                         `}
-              tag="01"
+              // tag="01"
               title="Browse Investment"
             />
             <Card
-              bgColor="yellow"
+              // bgColor="yellow"
               description={`Select preferred units of slot you desire  in the asset. Kindly note that each asset is divided into 100 slots.
                     `}
-              tag="02"
+              // tag="02"
               title="Select preferred units of slot"
             />
             <Card
-              bgColor="green"
+              // bgColor="green"
               description={`Relax and watch your investment grow. Once the asset is 
                             fully funded, the asset is purchased and held in trust on behalf of the subscribers.
                     `}
-              tag="03"
+              // tag="03"
               title="Sit back"
             />
             <Card
-              bgColor="yellow"
+              // bgColor="yellow"
               description={`Depending on the type of asset, all payouts will be made when due into the provided account.
                     `}
-              tag="04"
+              // tag="04"
               title="Payout"
             />
           </div>

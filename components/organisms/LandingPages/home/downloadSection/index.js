@@ -9,8 +9,6 @@ import MobileImage from "@images/webp/mobile.webp";
 import SlantBox from "../../../../blocks/slantBox";
 import styles from "./downloadSection.module.css";
 
-
-
 const DownloadSection = () => {
   return (
     <section className={`bg-white pt-28 lg:pt-32 pb-28 lg:pb-32 relative ${styles.bg}`}>

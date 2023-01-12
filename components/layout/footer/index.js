@@ -7,21 +7,16 @@ import Logo from "@images/logo/logo-white.svg";
 
 import styles from "./footer.module.css";
 
-const Column = ( {title, links = [], isTargetLink = false }) => {
+const Column = ({ title, links = [], isTargetLink = false }) => {
   return (
     <div className=" smallLaptop:ml-0">
-      <h3 className="text-white mt-6 smallLaptop:mt-0 font-mulish text-20 lg:text-base font-bold mb-6">
-        {title}
-      </h3>
+      <h3 className="text-white mt-6 smallLaptop:mt-0 font-mulish text-20 lg:text-base font-bold mb-6">{title}</h3>
 
       <ul className="space-y-6 font-medium text-16 lg:text-base">
         {links.map((link, index) => (
           <li className="text-white" key={index}>
             <CustomLink destination={link.url}>
-              <a
-                rel="noopener noreferrer"
-                target={isTargetLink ? "_blank" : ""}
-              >
+              <a rel="noopener noreferrer" target={isTargetLink ? "_blank" : ""}>
                 {link.linkName}
               </a>
             </CustomLink>
@@ -113,22 +108,17 @@ const Footer = () => {
             </div>
             <div className="mt-6">
               <p className="text-white font-bold text-16 ">
-                make money the <span className="text-secondary">easy</span> way
-                with real estate.
+                make money the <span className="text-secondary">easy</span> way with real estate.
               </p>
 
               <CustomLink customClass="pt-8" destination="mailto:hello@havanna.com">
-                <a className="text-light-green  hover:transition-all hover:text-white text-16 font-medium  lg:text-base">
-                  hello@havanna.com
-                </a>
+                <a className="text-light-green  hover:transition-all hover:text-white text-16 font-medium  lg:text-base">hello@havanna.com</a>
               </CustomLink>
             </div>
           </div>
 
           <div className="smallLaptop:w-[70%] smallLaptop:ml-24">
-            <div
-              className=""
-            >
+            <div className="">
               <Column links={columnData1} title="Products" />
               <Column links={columnData2} title="Terms & Privacy " />
               <Column links={columnData3} title="Company" />

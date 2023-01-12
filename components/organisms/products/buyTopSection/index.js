@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 import * as Animate from "react-reveal";
 
-import Header from "@layout/header";
+// import Header from "@layout/header";
 
 import TopImage1 from "@images/webp/buy-top.webp";
 
@@ -11,13 +11,10 @@ import SlantBox from "../../../blocks/slantBox";
 import Button from "../../../elements/button";
 import TabSection from "../components/TabSection";
 
-
-
-
 const BuyTopSection = () => {
   return (
     <section className={`relative w-full bg-gray`}>
-      <Header />
+      {/* <Header /> */}
       <TabSection />
       <div className="container mx-auto px-4 pt-6 lg:pt-10">
         <div className="flex flex-wrap flex-row">

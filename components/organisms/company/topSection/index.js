@@ -8,7 +8,6 @@ import SlantBox from "../../../blocks/slantBox";
 import Header from "../../../layout/header";
 import styles from "./topSection.module.css";
 
-
 const TopSection = () => {
   return (
     <section className={`relative w-full bg-primary ${styles.bg}`}>

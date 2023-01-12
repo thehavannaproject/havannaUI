@@ -4,16 +4,15 @@ import * as Animate from "react-reveal";
 
 import TopImage1 from "@images/webp/sell-top.webp";
 
-import SlantBox from "../../../blocks/slantBox";
+// import SlantBox from "../../../blocks/slantBox";
 import Button from "../../../elements/button";
-import Header from "../../../layout/header";
+// import Header from "../../../layout/header";
 import TabSection from "../components/TabSection";
-
 
 const SellTopSection = () => {
   return (
     <section className={`relative w-full bg-gray`}>
-      <Header />
+      {/* <Header /> */}
       <TabSection />
       <div className="container mx-auto px-4 pt-6 lg:pt-10">
         <div className="flex flex-wrap flex-row">
@@ -31,9 +30,7 @@ const SellTopSection = () => {
           <div className="relative w-full lg:w-5/12 pl-0 lg:pl-6 self-end flex">
             <div className="relative">
               <Animate.Fade bottom>
-                <div className="absolute w-52 lg:w-96 h-56 lg:h-96 left-12 lg:left-24 top-16">
-                  <SlantBox className="slant-gradient" height="h-full" width="w-full" />
-                </div>
+                <div className="absolute w-52 lg:w-96 h-56 lg:h-96 left-12 lg:left-24 top-16">{/* <SlantBox className="slant-gradient" height="h-full" width="w-full" /> */}</div>
                 <div className="w-full lg:w-11/12 mx-auto">
                   <Image alt="Havanna Image 1" src={TopImage1} />
                 </div>

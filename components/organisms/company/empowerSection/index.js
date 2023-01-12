@@ -7,7 +7,6 @@ import InvestorImage from "@images/webp/investor.webp";
 import SlantBox from "../../../blocks/slantBox";
 import styles from "./empowerSection.module.css";
 
-
 const EmpowerSection = () => {
   return (
     <section className={`relative w-full bg-white`}>

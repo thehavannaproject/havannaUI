@@ -7,10 +7,8 @@ import BuyImage from "@images/webp/buy.webp";
 import SellImage from "@images/webp/sell.webp";
 
 import SlantBox from "../../../blocks/slantBox";
-import Header from "../../../layout/header";
+// import Header from "../../../layout/header";
 import styles from "./topSection.module.css";
-
-
 
 const Card = ({ title, image, linkUrl }) => {
   return (
@@ -40,7 +38,7 @@ const Card = ({ title, image, linkUrl }) => {
 const TopSection = () => {
   return (
     <section className={`relative w-full bg-white`}>
-      <Header />
+      {/* <Header /> */}
       <div className="container px-4 mx-auto pt-32 pb-20 lg:pb-24">
         <div className="text-center w-full lg:w-7/12 mx-auto">
           <Animate.Fade bottom>

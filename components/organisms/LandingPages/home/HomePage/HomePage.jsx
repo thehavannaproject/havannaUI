@@ -9,12 +9,11 @@ import WhySection from "@components/organisms/LandingPages/home/WhySection/WhySe
 
 import HavannaProvision from "../HavannaProvision/HavannaProvision";
 
-
 const HomePage = () => {
   return (
     <div>
       <TopSection />
-      <HavannaProvision/>
+      <HavannaProvision />
       <WhySection />
       <StartSection />
       <OpportunitySection />
@@ -23,7 +22,7 @@ const HomePage = () => {
       <FaqsSection />
       {/* <DownloadSection /> */}
     </div>
-  )
-}
+  );
+};
 
 export default HomePage;

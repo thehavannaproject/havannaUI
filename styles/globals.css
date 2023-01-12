@@ -1,7 +1,7 @@
 /* HAVANNA Default Settings */
 /* Author: Abayomi Olatunji */
 
- @import url('https://fonts.googleapis.com/css2?family=Mulish:wght@500;700;800&family=Poppins:ital,wght@1,400;1,500;1,700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Mulish:wght@500;700;800&family=Poppins:ital,wght@1,400;1,500;1,700&display=swap");
 :root {
   /*Default  Color */
   --color-default: #414141;

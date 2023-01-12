@@ -10,7 +10,7 @@ import WhatsAppIcon from "@images/svg/whatsapp.svg";
 import SlantBox from "../../../blocks/slantBox";
 import styles from "./contactSection.module.css";
 
-const Card = ({ title, text, showLink = false}) => {
+const Card = ({ title, text, showLink = false }) => {
   return (
     <div className="bg-white">
       <div className="py-10 px-8 relative">

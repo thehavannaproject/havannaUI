@@ -1,7 +1,6 @@
 import React from "react";
 import * as Animate from "react-reveal";
 
-
 const FaqsSection = () => {
   return (
     <section className="font-mulish px-5 py-[60px] bg-HavannaGreen-light">
