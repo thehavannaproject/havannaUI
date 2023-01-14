@@ -62,8 +62,8 @@ const SignUp = () => {
   return (
     <>
       <section
-        className={`pt-14 lg:pt-28  pb-28 lg:pb-32 px-5 
-      tablet:px-20 smallLaptop:px-[200px] font-mulish
+        className={`pt-14 smallLaptop:pt-28  pb-28 smallLaptop:pb-32 px-4 tablet:px-0
+       font-mulish
       bg-HavannaGreen-primary`}
       >
         <div className="  ">
@@ -84,9 +84,9 @@ const SignUp = () => {
           <div
             className=" bg-white tablet:mt-[154px] mt-8 
             rounded-[20px] tablet:m-auto tablet:rounded-[32px]
-            tablet:px-[120px] w-full  px-5 bigLaptop:w-[800px]"
+             w-full tablet:w-[60%] px-[120px]  "
           >
-            <div className="flex justify-center">
+            <div className="flex justify-center text-center">
               <div className="">
                 <h1
                   className="font-bold text-[32px] 
