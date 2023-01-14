@@ -63,7 +63,7 @@ const SignIn = () => {
           </Link>
         </div>
 
-        <div className=" bg-white tablet:mt-[154px] mt-8 rounded-[20px] tablet:m-auto tablet:rounded-[32px] tablet:px-[120px] w-full px-5 bigLaptop:w-[800px]">
+        <div className=" bg-white tablet:mt-[154px] mt-8 rounded-[20px] tablet:m-auto tablet:rounded-[32px] tablet:px-[120px] w-full px-5 smallLaptop:w-[750px] bigLaptop:w-[800px]">
           <ToastContainer />
           <Formik
             initialValues={{
