@@ -1,5 +1,6 @@
-import BaseLayout from "@components/layout/BaseLayout/BaseLayout";
 import HomePage from "@components/organisms/LandingPages/home/HomePage/HomePage";
+
+import BaseLayout from "@layout/BaseLayout/BaseLayout";
 
 export default function Home() {
   return (

@@ -4,7 +4,7 @@ import OwlCarousel from "react-owl-carousel";
 
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
-import Avatar from "../../../public/images/webp/avatar.webp";
+import Avatar from "@images/webp/avatar.webp";
 
 const Card = ({ item }) => {
   return (
