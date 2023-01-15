@@ -21,9 +21,9 @@ const OpportunitySection = () => {
             </div>
           </div>
 
-          <div className="smallLaptop:flex smallLaptop:ml-10">
+          <div className="tablet:flex smallLaptop:ml-10">
             {Opportunities.map((data, index) => (
-              <div className="flex justify-center mt-6 smallLaptop:ml-10" key={index}>
+              <div className="flex justify-center tablet:mr-7 mt-6 smallLaptop:ml-10" key={index}>
                 <OpportunityCard description={data.description} image={data.image} title={data.title} />
               </div>
             ))}

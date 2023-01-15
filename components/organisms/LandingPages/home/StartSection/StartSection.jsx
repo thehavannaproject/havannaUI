@@ -11,12 +11,12 @@ const StartSection = () => {
     <section className="py-[58px] tablet:py-[112px] tablet:px-[120px] font-mulish px-5">
       <div className="tablet:flex tablet:flex-row-reverse">
         <div className="tablet:ml-[92px] tablet:w-1/2 tablet:flex tablet:items-center tablet:justify-center">
-          <div>
+          <div className="">
             <Animate.Fade bottom>
-              <h1 className="text-center tablet:text-left tablet:text-36 font-bold text-HavannaGreen-primary text-24 leading-8">
+              <h1 className="text-center tablet:text-left tablet:leading-10 tablet:text-36 font-bold text-HavannaGreen-primary text-24 leading-8">
                 Start your way into Real Estate through <span className="text-HavannaGreen-tertiaryMain">REAS</span>{" "}
               </h1>
-              <p className="mt-4 text-14 font-medium leading-5 text-center tablet:text-left">
+              <p className="mt-4 text-14 tablet:text-16 tablet:leading-6 font-medium leading-5 text-center tablet:text-left">
                 REAS is a very good way to start your journey into real estate investements. If you have always wanted to become a real estate Investor but you dont know how and
                 where to start, consider starting with REAS.
               </p>
@@ -26,9 +26,9 @@ const StartSection = () => {
             </Animate.Fade>
           </div>
         </div>
-        <div className="mt-11 tablet:mr-[257px] flex justify-center tablet:justify-start">
+        <div className="mt-11  flex justify-center tablet:justify-start">
           <Animate.Fade top>
-            <Image src={image} />
+            <Image height={576} src={image} width={693} />
           </Animate.Fade>
         </div>
       </div>

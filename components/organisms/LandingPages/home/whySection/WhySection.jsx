@@ -3,7 +3,7 @@ import * as Animate from "react-reveal";
 
 const WhySection = () => {
   return (
-    <section className="px-5 tablet:px-[120px] py-[60px] bg-HavannaGreen-light font-mulish mt-[58px]">
+    <section className="px-5 smallLaptop:px-[120px] py-[60px] bg-HavannaGreen-light font-mulish mt-[58px]">
       <div className="">
         <div className="tablet:w-1/2">
           <Animate.Fade bottom>
