@@ -34,7 +34,7 @@ const SignIn = () => {
         "Content-Type": "application/json",
       },
       data: {
-        email: values.email,
+        emailAddress: values.email,
         password: values.password,
       },
     })
@@ -42,17 +42,16 @@ const SignIn = () => {
         setLoading(false);
         toast(`Hi ${response.data.data[0].name}, Your request has been submitted successfully`);
         // router.push("/");
-        values.email = "";
-        values.password = "";
       })
       .catch((error) => {
         setLoading(false);
-        toast(`${error.message} `);
+        error;
+        toast(`Email or password is incorrect `);
       });
   };
 
   return (
-    <section className={`pt-14 lg:pt-28  pb-28 lg:pb-32 px-5 tablet:px-20 smallLaptop:px-[200px] font-mulish bg-HavannaGreen-primary`}>
+    <section className={`pt-14 smallLaptop:pt-28  pb-28 smallLaptop:pb-32 px-4 tablet:px-0 font-mulish bg-HavannaGreen-primary`}>
       <div className="  ">
         <div className="flex justify-center">
           <Link href="/">
@@ -63,7 +62,11 @@ const SignIn = () => {
           </Link>
         </div>
 
-        <div className=" bg-white tablet:mt-[154px] mt-8 rounded-[20px] tablet:m-auto tablet:rounded-[32px] tablet:px-[120px] w-full px-5 bigLaptop:w-[800px]">
+        <div
+          className=" bg-white tablet:mt-[154px] mt-8 
+            rounded-[20px] tablet:m-auto tablet:rounded-[32px]
+             w-full tablet:w-[60%] px-[120px]  "
+        >
           <ToastContainer />
           <Formik
             initialValues={{
