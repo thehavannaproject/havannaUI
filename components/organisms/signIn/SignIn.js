@@ -10,6 +10,7 @@ import { REGEX } from "@components/shared/libs/helpers.js";
 
 import Button from "@atoms/CustomButton/CustomButton";
 import FormikCustomInput from "@atoms/CustomInput/FormikCustomInput";
+import CustomLink from "@atoms/CustomLink/CustomLink";
 
 import Logo from "@images/SignInImages/Logo.svg";
 
@@ -115,12 +116,12 @@ const SignIn = () => {
                   </div>
                 </div>
                 <div className="mt-10 ">
-                  <Button customClass="text-4 h-[46px] text-white bg-[#0B4340] text-center tablet:text-16 font-bold !w-full rounded-md" isLoading={loading} title=" Log In" />
+                    <Button customClass=" text-4 h-[46px] text-white bg-[#0B4340] text-center tablet:text-16 font-bold !w-full rounded-md" isLoading={loading} title=" Log In" />
                 </div>
                 <div className="pt-[26px] flex justify-center ">
-                  <p className=" pb-20">
+                  <p className=" pb-20 flex">
                     Don’t have an account?&nbsp;
-                    <span className="font-bold text-base text-HavannaGreen-primary   ">Create an account</span>
+                    <span className="font-bold text-base text-HavannaGreen-primary"><CustomLink  destination="sign-up">Create an account</CustomLink></span>
                   </p>
                 </div>
               </Form>

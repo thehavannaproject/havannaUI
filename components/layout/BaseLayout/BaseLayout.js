@@ -3,7 +3,7 @@ import Header from "../Header/Header";
 
 const BaseLayout = ({ children }) => {
   return (
-    <div className="relative">
+    <div className="relative" >
       <Header />
       <main>{children}</main>
       <Footer />
