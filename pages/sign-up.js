@@ -1,6 +1,6 @@
 import React from "react";
 
-import SignUp from "@components/organisms/SignUp/SignUp";
+import SignUp from "@components/organisms/signUp/SignUp";
 
 const Signup = () => {
   return (

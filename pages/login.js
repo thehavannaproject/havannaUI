@@ -1,6 +1,6 @@
 import React from "react";
 
-import SignIn from "@components/organisms/SignIn/SignIn";
+import SignIn from "@components/organisms/signIn/SignIn";
 
 const LogIn = () => {
   return <SignIn />;
