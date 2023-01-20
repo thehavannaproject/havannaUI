@@ -12,7 +12,7 @@ import Button from "@atoms/CustomButton/CustomButton";
 import FormikCustomInput from "@atoms/CustomInput/FormikCustomInput";
 import CustomLink from "@atoms/CustomLink/CustomLink";
 
-import Logo from "@images/SignInImages/Logo.svg";
+import Logo from "@images/svg/Logo.svg";
 
 import { baseUrl } from "../../../config";
 
