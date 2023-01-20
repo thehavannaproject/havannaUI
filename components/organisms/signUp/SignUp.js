@@ -9,7 +9,6 @@ import * as Yup from "yup";
 
 import { REGEX } from "@components/shared/libs/helpers.js";
 
-
 import Button from "@atoms/CustomButton/CustomButton";
 import FormikCustomInput from "@atoms/CustomInput/FormikCustomInput";
 import CustomLink from "@atoms/CustomLink/CustomLink";
@@ -206,8 +205,9 @@ const SignUp = () => {
                   <div className="pt-[26px] flex justify-center ">
                     <p className=" pb-20 flex">
                       Have an account?&nbsp;
-                      <span className="font-bold text-base text-HavannaGreen-primary"><CustomLink  destination="/login">Login</CustomLink></span>
-
+                      <span className="font-bold text-base text-HavannaGreen-primary">
+                        <CustomLink destination="/login">Login</CustomLink>
+                      </span>
                     </p>
                   </div>
                 </Form>

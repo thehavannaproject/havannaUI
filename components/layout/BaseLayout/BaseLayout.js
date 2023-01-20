@@ -1,9 +1,9 @@
-import Footer from "../Footer";
-import Header from "../Header/Header";
+import Footer from "@components/layout/Footer";
+import Header from "@components/layout/Header/Header";
 
 const BaseLayout = ({ children }) => {
   return (
-    <div className="relative" >
+    <div className="relative">
       <Header />
       <main>{children}</main>
       <Footer />
