@@ -2,7 +2,7 @@ import Icon from "@atoms/Icons";
 
 const Card = ({ icon, iconClass, title, description, customClass }) => {
   return (
-    <div className={`font-mullish tablet:h-[432px]  bg-white rounded-3xl ${customClass}`}>
+    <div className={`font-mullish tablet:h-[432px] smallLaptop:h-auto bigLaptop:h-[532px]  bg-white rounded-3xl ${customClass}`}>
       <div className={iconClass}>
         <Icon name={icon} />
       </div>
