@@ -115,7 +115,7 @@ const SignIn = () => {
                       inputClassName="placeholder:text-14 outline-none  placeholder:text-citiGray-300 "
                       name="password"
                       placeholder="Password"
-                      type="text"
+                      type="password"
                     />
                   </div>
                 </div>
