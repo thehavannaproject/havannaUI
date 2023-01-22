@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Form, Formik } from "formik";
+import { useRouter } from "next/dist/client/router";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -14,7 +15,7 @@ import CustomLink from "@atoms/CustomLink/CustomLink";
 
 import Logo from "@images/svg/Logo.svg";
 
-import { baseUrl } from "../../../config";
+import { baseUrl } from "../../../../config";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -25,6 +26,8 @@ const signInSchema = Yup.object().shape({
 
 const SignIn = () => {
   const [loading, setLoading] = useState(false);
+
+  const router = useRouter();
 
   const handleSubmit = (values) => {
     setLoading(true);
@@ -41,9 +44,9 @@ const SignIn = () => {
       },
     })
       .then((response) => {
+        response;
         setLoading(false);
-        toast(`Hi ${response.data.data[0].name}, Your request has been submitted successfully`);
-        // router.push("/");
+        router.push("/dashboard");
       })
       .catch((error) => {
         setLoading(false);
@@ -120,12 +123,12 @@ const SignIn = () => {
                   <Button customClass=" text-4 h-[46px] text-white bg-[#0B4340] text-center tablet:text-16 font-bold !w-full rounded-md" isLoading={loading} title=" Log In" />
                 </div>
                 <div className="pt-[26px] flex justify-center ">
-                  <p className=" pb-20 flex">
+                  <div className=" pb-20 flex">
                     Don’t have an account?&nbsp;
                     <span className="font-bold text-base text-HavannaGreen-primary">
                       <CustomLink destination="sign-up">Create an account</CustomLink>
                     </span>
-                  </p>
+                  </div>
                 </div>
               </Form>
             )}
