@@ -38,7 +38,7 @@ const PropertyModal = ({ show, selectedData, handleClose }) => {
             </div>
 
             <div className="">
-              <Image alt="Property" src={selectedData.image || PropertyImage1} />
+              <Image alt="Property" src={selectedData.Image || PropertyImage1} />
             </div>
 
             <div className="mt-8">
@@ -47,9 +47,9 @@ const PropertyModal = ({ show, selectedData, handleClose }) => {
             </div>
 
             <div className={`mt-8 py-6 md:py-8 px-6 md:px-8 bg-white space-y-4 text-default ${styles.propertyType}`}>
-              <Row name="Price Per Slot" value={selectedData.pricePerSlot} />
-              <Row name="Minimum ROI" value={selectedData.minimumROI} />
-              <Row name="Duration" value={selectedData.duration} />
+              <Row name="Price Per Slot" value={selectedData.SlotPrice} />
+              <Row name="Monthly ROI" value={selectedData.MonthlyROI} />
+              <Row name="Duration" value={selectedData.Duration} />
             </div>
 
             <div className="pt-8 pb-28 flex justify-end">
