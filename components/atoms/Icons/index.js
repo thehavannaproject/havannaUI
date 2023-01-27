@@ -13,7 +13,11 @@ const Icon = ({ name, className, ...props }) => {
     // eslint-disable-next-line no-undef
     const Image = require(`./stock/${name}`).default;
     if (Image) {
-      return <Image aria-label={name} className={`${className}`} {...props} />;
+      return (
+        <div className={className}>
+          <Image aria-label={name} {...props} />
+        </div>
+      );
     }
     return null;
   } catch (error) {

@@ -2,7 +2,7 @@ import axios from "axios";
 import { Form, Formik } from "formik";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import * as Yup from "yup";
@@ -15,7 +15,7 @@ import CustomLink from "@atoms/CustomLink/CustomLink";
 
 import Logo from "@images/svg/Logo.svg";
 
-import { baseUrl } from "../../../config";
+import { baseUrl } from "../../../../config";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -30,7 +30,7 @@ const SignupSchema = Yup.object().shape({
 const SignUp = () => {
   const [loading, setLoading] = useState(false);
 
-  const router = useRouter();
+  // const router = useRouter();
 
   const handleSubmit = (values) => {
     setLoading(true);
@@ -51,12 +51,14 @@ const SignUp = () => {
     })
       .then((response) => {
         setLoading(false);
-        toast(response.message);
-        router.push("/");
+        console.log(response);
+        toast(`${response.data.message}. Please verify your email via link sent to your email.`);
+        // router.push("/");
       })
       .catch((error) => {
         setLoading(false);
-        toast(`${error.message} `);
+        console.log(error);
+        toast(`${error.response.data.message} `);
       });
   };
 
