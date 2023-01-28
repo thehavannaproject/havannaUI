@@ -21,7 +21,7 @@ const index = () => {
   return (
     <section className="bg-HavannaGreen-light pb-[120px] bigLaptop:px-[120px]">
       <div className="">
-        <h1 className="font-mulish font-bold text-[44px] text-HavannaGreen-primary text-center bigLaptop:mt-[100px] pt-10 ">Invest in our listed properties.</h1>
+        <h1 className="font-mulish font-bold text-[36px] leading-[44px] text-HavannaGreen-primary text-center bigLaptop:mt-[100px] pt-10 ">Invest in our listed properties.</h1>
       </div>
       <Animate.Fade>
         <div className="grid grid-cols-1 tablet:grid-cols-2 smallLaptop:grid-cols-3 gap-6 smallLaptop:gap-16 bigLaptop:gap-[84px] px-[22px] pt-11 bigLaptop:pt-[120px] ">

@@ -1,7 +1,7 @@
-import Property1 from "@images/investsvg/Image-1.svg";
-import Property2 from "@images/investsvg/Image-2.svg";
-import Property3 from "@images/investsvg/Image-3.svg";
-import Property from "@images/investsvg/Image.svg";
+import Property1 from "@images/investsvg/Image (7).svg";
+import Property2 from "@images/investsvg/Image (8).svg";
+import Property3 from "@images/investsvg/Image (9).svg";
+import Property from "@images/investsvg/Image (9).svg";
 
 export const propertiesDatas = [
   {

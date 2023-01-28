@@ -1,13 +1,13 @@
 import Image from "next/image";
 import React from "react";
 
-import PropertyImage1 from "@images/investsvg/Image-1.svg";
+import PropertyImage1 from "@images/investsvg/Image (9).svg";
 
 const Row = ({ name, value }) => {
   return (
     <div className="flex  justify-between text-xs">
-      <p>{name}</p>
-      <p>{value}</p>
+      <p className=" font-mulish font-bold text-14 leading-5">{name}</p>
+      <p className=" font-mulish font-medium text-14 leading-5 ">{value}</p>
     </div>
   );
 };
@@ -27,7 +27,7 @@ const investPropertyCard = ({ property, handleShowModal }) => {
       </div>
 
       <div className=" mt-16 ">
-        <button className="bg-HavannaGreen-primary text-white font-mulish rounded-lg w-full h-[58px] mobile:h-12  ">Invest now</button>
+        <button className="bg-HavannaGreen-primary text-white font-mulish font-bold text-14 leading-[18px] rounded-lg w-full h-[58px] mobile:h-12  ">Invest now</button>
       </div>
     </div>
   );
