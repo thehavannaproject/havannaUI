@@ -106,7 +106,7 @@ const MailListSection = () => {
                             Phone Number
                           </label>
                           <FormikCustomInput
-                            className={`rounded-md w-full h-[46px] mt-2 border`}
+                            className={`rounded-md w-full h-[46px] tablet:mt-6 border`}
                             id="phoneNumber"
                             inputClassName="placeholder:text-14 outline-none  placeholder:text-citiGray-300 "
                             name="phoneNumber"
@@ -115,7 +115,7 @@ const MailListSection = () => {
                           />
                         </div>
                       </div>
-                      <div className="mt-8 tablet:mt-8 tablet:w-full tablet:m-auto">
+                      <div className="mt-8 tablet:mt-8 tablet:w-1/2 tablet:m-auto">
                         <Button
                           customClass="text-12 text-white border h-[46px] bg-[#0B4340] text-center tablet:text-16 font-bold !w-full rounded-md"
                           isLoading={loading}

@@ -1,17 +1,16 @@
-import MiddlePage from "./MiddlePage";
 import NavBar from "./NavBar";
 import SideBar from "./SideBar";
 
-const DashboardLayout = () => {
+const DashboardLayout = ({ children }) => {
   return (
-    <div className="flex">
-      <SideBar />
-      <div className="w-screen">
-        <NavBar />
-        <MiddlePage />
-
+    <div className="flex ">
+      <div className="min-w-[20%]">
+        <SideBar />
       </div>
-
+      <div className="min-w-[80%]">
+        <NavBar />
+        {children}
+      </div>
     </div>
   );
 };
