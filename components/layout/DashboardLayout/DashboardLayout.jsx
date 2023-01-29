@@ -1,3 +1,4 @@
+import MiddlePage from "./MiddlePage";
 import NavBar from "./NavBar";
 import SideBar from "./SideBar";
 
@@ -7,7 +8,10 @@ const DashboardLayout = () => {
       <SideBar />
       <div className="w-screen">
         <NavBar />
+        <MiddlePage />
+
       </div>
+
     </div>
   );
 };
