@@ -1,6 +1,6 @@
+import BalanceCard from "@blocks/DashBoardCard/BalanceCard";
 import React from "react";
-
-import DashBoardCard from "@components/blocks/DashBoardCard/index.js";
+// import icon from "@atoms/icons"
 
 const MainDashboard = () => {
   return (
@@ -15,21 +15,44 @@ const MainDashboard = () => {
           <button className="bg-HavannaGreen-primary text-white w-[200px] h-[52px] rounded-lg ">Add money +</button>
         </div>
       </div>
-      <div className="text-white font-mulish bigLaptop:flex smallLaptop:flex gap-[45px]   ">
-        <DashBoardCard description="what up" images="wallet" price="20" title="Life is bigger than " />
-        <DashBoardCard description="what up" images="wallet" price="20" title="Life is bigger than " />
-        <DashBoardCard description="what up" images="wallet" price="20" title="Life is bigger than " />
+      <div className="text-white font-mulish bigLaptop:flex smallLaptop:flex gap-[35px] pb-[60px]    ">
+        {BalanceCardData.map((data, index) => (
+          <div key={index}>
+            <BalanceCard description={data.description} icon={data.icon} price={data.balance} title={data.name} />
+          </div>
+        ))}
       </div>
       <div className="flex justify-between mb-10">
         <p className="font-bold text-[22px] leading-7 ">Properties</p>
         <p className="font-bold text-16 leading-[22px] ">See all</p>
       </div>
-      <div className="bg-white text-center h-[400px] rounded-xl shadow-lg ">
-        <p className="font-bold text-20 leading-[26px] ">You dont own any properties yet.</p>
-        <button className="bg-HavannaGreen-primary text-white rounded-lg w-[328px]   h-[54px] mt-6 ">Explore properties</button>
+      <div className="bg-white text-center h-[400px] rounded-xl shadow-lg pt-[150px] ">
+        <p className="font-bold text-20 leading-[26px]  ">You dont own any properties yet.</p>
+        <button className="bg-HavannaGreen-primary text-white rounded-lg smallLaptop:w-[328px] w-[60%]   h-[54px] mt-6 ">Explore properties</button>
       </div>
     </section>
   );
 };
 
 export default MainDashboard;
+
+const BalanceCardData = [
+  {
+    balance: "0.00",
+    name: "Wallet Balance",
+    description: "Total money in your wallet",
+    icon: "wallet2",
+  },
+  {
+    balance: "0.00",
+    name: "Properties Value",
+    description: "Total worth of your properties",
+    icon: "propertiesWallet",
+  },
+  {
+    balance: "0.00",
+    name: "Cash Flow",
+    description: "Accumulated income",
+    icon: "cashFlowWallet",
+  },
+];

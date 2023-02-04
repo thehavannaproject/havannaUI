@@ -32,6 +32,7 @@ const SideBar = () => {
     {
       id: 2,
       title: "My Properties",
+      icon: "home",
       titleMenu: [
         {
           icon: "home",
@@ -46,6 +47,7 @@ const SideBar = () => {
     {
       id: 3,
       title: "Wallet",
+      icon: "wallet",
       titleMenu: [
         {
           icon: "receiptAdd",
@@ -73,6 +75,7 @@ const SideBar = () => {
     {
       id: 4,
       title: "Account",
+      icon: "Union",
       titleMenu: [
         {
           icon: "walletAdd",
