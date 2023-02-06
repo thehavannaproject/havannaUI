@@ -9,6 +9,7 @@ const SideBar = () => {
         <div className="border-b-2">
           <Image src={Logo} width={172} />
         </div>
+
         <div className="mt-[130px] ml-10">
           <p className="mt-10">Dashboard</p>
           <p className="mt-8">My Properties</p>
