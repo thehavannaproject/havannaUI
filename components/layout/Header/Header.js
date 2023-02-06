@@ -26,8 +26,8 @@ const Header = ({ isDark = false }) => {
             </div>
           </div>
           <div className={`hidden md:flex font-mulish text-16 font-bold ${isDark ? "text-white" : "text-primary"}`}>
-            <NavItem className=" smallLaptop:mr-6 tablet:mr-4 !flex !justify-center !items-center" title="Log in" url="/auth/login" />
-            <NavItem className="bg-HavannaGreen-primary text-white px-6 rounded-lg !flex !justify-center !items-center" title="Create an account" url="auth//sign-up" />
+            <NavItem className=" smallLaptop:mr-6 tablet:mr-4 !flex !justify-center !items-center" title="Log in" url="#" />
+            <NavItem className="bg-HavannaGreen-primary text-white px-6 rounded-lg !flex !justify-center !items-center" title="Create an account" url="#" />
           </div>
         </div>
       </div>
