@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import Icon from "@atoms/Icons";
 
@@ -38,7 +39,7 @@ const SideBar = () => {
           icon: "home",
           name: "Home",
           //   key: DashboardMenu.GET_STARTED,
-          link: "/dashboard",
+          link: "/dashboard/PropertiesDashboard",
           isVisible: false,
         },
       ],
@@ -104,14 +105,18 @@ const SideBar = () => {
 
   return (
     <>
-      <div className=" h-screen">
-        <div className="border-b-2 py-4 pl-6">
-          <Image src={Logo} width={172} />
+      <div className=" h-screen border-r-[1.5px]">
+        <div className="border-b-[1.5px] py-4 pl-6">
+          <Link href="/">
+            <a>
+              <Image src={Logo} width={172} />
+            </a>
+          </Link>
         </div>
         <div className="mt-[130px] mx-6 text-20">
           {SideBarData.map((data, index) => (
-            <div className=" " key={index}>
-              <div className={`  px-6 cursor-pointer py-4 mt-10 flex text-HavannaGreen-primary justify-between ${data.link ? "bg-green-50 border-l-4  border-l-[#0E5854] " : ""}`}>
+            <div className="hover:bg-green-50 border-l-4  hover:border-l-[#0E5854] " key={index}>
+              <div className={` px-6 cursor-pointer py-4 mt-10 flex text-HavannaGreen-primary justify-between ${data.link ? " " : ""}`}>
                 <p>{data.title}</p>
                 <Icon name={data.icon} />
               </div>
