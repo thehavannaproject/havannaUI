@@ -12,7 +12,7 @@ import MobileHeader from "./MobileHeader";
 const Header = ({ isDark = false }) => {
   return (
     <>
-      <div className="hidden tablet:block relative font-mulish px-4 py-3 tablet:px-10 tablet:py-5 smallLaptop:px-[120px] smallLaptop:py-8">
+      <div className="hidden bg-HavannaGreen-light tablet:sticky tablet:w-full tablet:top-0 tablet:z-50 tablet:block relative font-mulish px-4 py-3 tablet:px-10 tablet:py-5 smallLaptop:px-[120px] smallLaptop:py-8">
         <div className=" tablet:flex tablet:justify-between">
           <CustomLink destination="/">
             <span className="sr-only">Havanna</span>

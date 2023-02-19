@@ -53,6 +53,9 @@ module.exports = {
           100: "#F3FCFB",
           600: "#0E5854",
         },
+        HavannaBlack: {
+          primary: "#3B3F42",
+        },
       },
     },
   },

@@ -3,7 +3,7 @@ import * as Animate from "react-reveal";
 
 const WhySection = () => {
   return (
-    <section className="px-5 smallLaptop:px-[120px] py-[60px] bg-HavannaGreen-light font-mulish mt-[58px]">
+    <section className="px-5 text-HavannaBlack-primary smallLaptop:px-[120px] py-[60px] bg-HavannaGreen-light font-mulish mt-[58px]">
       <div className="">
         <div className="tablet:w-1/2">
           <Animate.Fade bottom>
@@ -16,10 +16,16 @@ const WhySection = () => {
             </p>
           </Animate.Fade>
         </div>
-        <div className="mt-6 tablet:grid tablet:grid-cols-2 smallLaptop:grid-cols-4 tablet:gap-4">
+        <div className="mt-6 tablet:grid tablet:grid-cols-2 smallLaptop:flex smallLaptop:flex-wrap  smallLaptop:mr-4">
           {CardContent.map((data, index) => (
-            <div className="mt-6 " key={index}>
-              <Card customClass="p-6" description={data.description} icon={data.icon} iconClass="mb-6 tablet:mt-10" title={data.title} />
+            <div className="mt-6 mr-[26px]" key={index}>
+              <Card
+                customClass="p-6 text-HavannaBlack-primary smallLaptop:h-[440px] smallLaptop:!w-[352px]  bigLaptop:!w-[352px] bigLaptop:!h-[440px]"
+                description={data.description}
+                icon={data.icon}
+                iconClass="mb-6 tablet:mt-10"
+                title={data.title}
+              />
             </div>
           ))}
         </div>
