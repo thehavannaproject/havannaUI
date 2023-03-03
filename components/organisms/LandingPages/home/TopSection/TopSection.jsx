@@ -12,11 +12,11 @@ const TopSection = () => {
         <div className="tablet:flex tablet:justify-between ">
           <div className="smallLaptop:mr-10">
             <Animate.Fade bottom>
-              <h1 className="text-36 smallLaptop:text-[50px] bigLatop:text-[60px] smallLaptop:leading-[60px] bigLaptop:leading-[72px] font-extrabold text-HavannaGreen-primary leading-[44px] text-center tablet:text-left">
+              <h1 className="text-36 smallLaptop:text-[50px] font-mulish bigLatop:text-[60px] smallLaptop:leading-[60px] bigLaptop:leading-[72px] font-extrabold text-HavannaGreen-primary leading-[44px] text-center tablet:text-left">
                 Now, <span className="text-HavannaGreen-secondary">everyone</span> can <span className="text-HavannaGreen-secondary">invest</span> in real estate.
               </h1>
               <p className="pt-6 text-14 font-medium text-center tablet:text-left leading-5 tablet:text-16 tablet:leading-6">
-                With as low as 20,000 naira, you can co-own income producing real estate assets and earn rental income.
+                With as low as 10,000 naira, you can co-own income producing real estate assets and earn rental income.
               </p>
               <div className="flex justify-center tablet:justify-start mt-10">
                 <CustomButton customClass="w-[328px] h-[48px] rounded-[8px] text-white bg-HavannaGreen-primary" icon="arrowRight" iconClass="ml-3 mt-1" title="Explore now" />

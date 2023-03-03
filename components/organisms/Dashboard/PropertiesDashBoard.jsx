@@ -2,12 +2,9 @@ import React from "react";
 
 import Icon from "@atoms/Icons";
 
-
-
 // import CustomTable from "../../atoms/CustomTable/CustomTable";
 
 const PropertiesDashBoard = () => {
-
   return (
     <div>
       <section className="bg-HavannaGreen-light font-mulish pl-8 pr-[46px] pb-[91px]">
@@ -18,7 +15,6 @@ const PropertiesDashBoard = () => {
               <div className="relative">
                 <input className="w-[380px] h-[52px] rounded-[4x] border-2 pl-4 absolute border-[#8F8F8F]   " placeholder="All Propeties" type="text" />
                 <Icon className="ml-[340px] absolute mt-6  " name="angleDown" />
-
               </div>
               <div className="relative">
                 <input className="w-[380px] h-[52px] rounded-[4x] border-2 pl-12 border-[#8F8F8F]   " placeholder="Search" type="text" />
@@ -43,17 +39,19 @@ const PropertiesDashBoard = () => {
                   <th>Duration</th>
                 </tr>
               </thead>
-              <tbody>{Properties.map((data, index) =>
-                <tr className="h-16 py-4 border-t-[1.5px] border-[#8F8F8F]  font-medium text-16 leading-6" key={index} >
-                  <td className="pr-5" >{data.Name}</td>
-                  <td>{data.AssetType}</td>
-                  <td>{data.Cost}</td>
-                  <td>{data.SlotPrice}</td>
-                  <td>{data.Slot}</td>
-                  <td>{data.Roi}</td>
-                  <td>{data.Duration}</td>
-                </tr>
-              )}</tbody>
+              <tbody>
+                {Properties.map((data, index) => (
+                  <tr className="h-16 py-4 border-t-[1.5px] border-[#8F8F8F]  font-medium text-16 leading-6" key={index}>
+                    <td className="pr-5">{data.Name}</td>
+                    <td>{data.AssetType}</td>
+                    <td>{data.Cost}</td>
+                    <td>{data.SlotPrice}</td>
+                    <td>{data.Slot}</td>
+                    <td>{data.Roi}</td>
+                    <td>{data.Duration}</td>
+                  </tr>
+                ))}
+              </tbody>
             </table>
           </div>
           <div className="flex justify-end pt-8  gap-4 cursor-pointer ">
@@ -63,13 +61,16 @@ const PropertiesDashBoard = () => {
             <p className="w-8 h-8 rounded-[32px] text-HavannaGreen-secondary border-2 border-current text-center hover:bg-HavannaGreen-secondary hover:text-white   ">3</p>
             <p className="w-8 h-8 rounded-[32px] text-HavannaGreen-secondary border-2 border-current text-center hover:bg-HavannaGreen-secondary hover:text-white   ">...</p>
             <p className="w-8 h-8 rounded-[32px] text-HavannaGreen-secondary border-2 border-current text-center hover:bg-HavannaGreen-secondary hover:text-white   ">10</p>
-            <p><Icon className=" w-[4.73px] h-[10.56px] text-center mt-2 " name="PaginationArrowRight" /></p>
-
+            <p>
+              <Icon className=" w-[4.73px] h-[10.56px] text-center mt-2 " name="PaginationArrowRight" />
+            </p>
           </div>
-          <div className="mt-7 "><button className="w-[300px] rounded-lg h-[54px] bg-HavannaGreen-primary text-white ">Explore  more properties </button></div>
+          <div className="mt-7 ">
+            <button className="w-[300px] rounded-lg h-[54px] bg-HavannaGreen-primary text-white ">Explore more properties </button>
+          </div>
         </div>
-      </section >
-    </div >
+      </section>
+    </div>
   );
 };
 export default PropertiesDashBoard;

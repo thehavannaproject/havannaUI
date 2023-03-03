@@ -118,6 +118,9 @@ const SignIn = () => {
                       type="password"
                     />
                   </div>
+                  <div className="mt-3 text-HavannaGreen-primary font-mulish font-medium text-14 leading-[18px] flex justify-end cursor-pointer ">
+                    <p>Forgot password?</p>
+                  </div>
                 </div>
                 <div className="mt-10 ">
                   <Button customClass=" text-4 h-[46px] text-white bg-[#0B4340] text-center tablet:text-16 font-bold !w-full rounded-md" isLoading={loading} title=" Log In" />

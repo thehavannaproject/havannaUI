@@ -19,10 +19,10 @@ const Header = ({ isDark = false }) => {
             <Image alt="Havanna" src={isDark ? LogoWhite : Logo} />
           </CustomLink>
           <div className=" tablet:block mt-3">
-            <div className={`tablet:flex tablet:gap-8 smallLaptop:gap-16  font-mulish text-16 font-bold  ${isDark ? "text-white" : "text-primary"}`}>
-              <NavItem title="Invest" url="/invest" />
-              <NavItem title="About Us" url="/about-us" />
-              <NavItem title="Blog" url="/blog" />
+            <div className={`tablet:flex tablet:gap-8  smallLaptop:gap-16  font-mulish text-16 font-bold  ${isDark ? "text-white" : "text-primary"}`}>
+              <NavItem className="hover:text-HavannaGreen-tertiaryMain" title="Invest" url="/invest" />
+              <NavItem className="hover:text-HavannaGreen-tertiaryMain" title="About Us" url="/about-us" />
+              <NavItem className="hover:text-HavannaGreen-tertiaryMain" title="Blog" url="/blog" />
             </div>
           </div>
           <div className={`hidden md:flex font-mulish text-16 font-bold ${isDark ? "text-white" : "text-primary"}`}>
