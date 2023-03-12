@@ -1,4 +1,5 @@
 /* Faq Dropdown toggle */
+
 .dropdown-faq-title::after,
 .dropdown-faq-title::before {
   content: "";

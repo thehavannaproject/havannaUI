@@ -6,7 +6,7 @@ import opportunity2 from "@images/homepage/opportunity2.png";
 
 const OpportunitySection = () => {
   return (
-    <section className="font-mulish px-5 tablet:px-[120px] py-[60px] bg-HavannaGreen-light">
+    <section className="font-mulish px-5 text-HavannaBlack-primary tablet:px-[120px] py-[60px] bg-HavannaGreen-light">
       <div className="smallLaptop:flex">
         <Animate.Fade bottom>
           <div className=" smallLaptop:flex smallLaptop:justify-center smallLaptop:items-center">

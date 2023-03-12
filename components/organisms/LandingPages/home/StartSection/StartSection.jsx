@@ -8,7 +8,7 @@ import image from "@images/homepage/Image.png";
 
 const StartSection = () => {
   return (
-    <section className="py-[58px] tablet:py-[112px] tablet:px-[120px] font-mulish px-5">
+    <section className="py-[58px] text-HavannaBlack-primary tablet:py-[112px] tablet:px-[120px] font-mulish px-5">
       <div className="tablet:flex tablet:flex-row-reverse">
         <div className="tablet:ml-[92px] tablet:w-1/2 tablet:flex tablet:items-center tablet:justify-center">
           <div className="">

@@ -129,7 +129,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="text-light-green pb-28 lg:pb-32 text-center w-full text-sm lg:text-sm-15 flex flex-col lg:flex-row justify-center">
+        <div className="text-light-green pb-28 lg:pb-[76px] text-center w-full text-sm lg:text-sm-15 flex flex-col lg:flex-row justify-center">
           <p>© {new Date().getFullYear()} havanna. All rights reserved.</p>
           <p className="px-5 hidden lg:block">|</p>
           <p>Privacy Policy | Terms of Use</p>

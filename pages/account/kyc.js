@@ -1,11 +1,11 @@
 import DashboardLayout from "@components/layout/DashboardLayout/DashboardLayout";
-import MainDashboard from "@components/organisms/Dashboard/Dashboard/MainDashboard";
+import Account from "@components/organisms/Dashboard/Account/Account";
 
 const Dashboard = () => {
   return (
     <div>
       <DashboardLayout>
-        <MainDashboard />
+        <Account />
       </DashboardLayout>
     </div>
   );

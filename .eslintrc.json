@@ -23,6 +23,7 @@
           "module",
           "/^@components/",
           "/^@hooks/",
+          "/^@styles/",
           "/^@graphql/",
           "/^@schemas/",
           "/^@dto/",

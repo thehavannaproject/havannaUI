@@ -1,117 +1,70 @@
 import Image from "next/image";
+import Link from "next/link";
+// import { useRouter } from "next/router";
+
+import CustomLink from "@components/atoms/CustomLink/CustomLink";
 
 import Icon from "@atoms/Icons";
 
 import Logo from "@images/logo/logo-dark.svg";
 
 const SideBar = () => {
+  // const router = useRouter();
+  // const routerName=router.pathname
+
   const SideBarData = [
     {
       id: 1,
       title: "Dashboard",
-      link: "#",
+      link: "/dashboard",
       icon: "dashboard",
-      titleMenu: [
-        {
-          icon: "stopWatch",
-          name: "Get Started",
-          //   key: DashboardMenu.GET_STARTED,
-          link: "/dashboard/get-started",
-          //   isVisible: !merchantData?.merchantGetStores?.data[0]?.isApproved || storeStat?.storeStats?.data?.products?.total === 0,
-        },
-        {
-          icon: "shield",
-          name: "Complete KYC",
-          //   key: DashboardMenu.KYC,
-          link: "/dashboard/kyc",
-          //   isVisible: !merchantData?.merchantGetStores?.data[0]?.isApproved,
-        },
-      ],
+      //
+
       //   isVisible: !merchantData?.merchantGetStores?.data[0]?.isApproved || storeStat?.storeStats?.data?.products?.total === 0,
     },
     {
       id: 2,
       title: "My Properties",
-      titleMenu: [
-        {
-          icon: "home",
-          name: "Home",
-          //   key: DashboardMenu.GET_STARTED,
-          link: "/dashboard",
-          isVisible: false,
-        },
-      ],
+      icon: "home",
+      link: "/dashboard/propertiesDashboard",
       isVisible: false,
     },
     {
       id: 3,
       title: "Wallet",
-      titleMenu: [
-        {
-          icon: "receiptAdd",
-          name: "Add Products",
-          //   key: DashboardMenu.ADD_PRODUCT,
-          link: "/dashboard/add-product",
-          isVisible: true,
-        },
-        {
-          icon: "receiptEdit",
-          name: "Manage Products",
-          link: "/dashboard/manage-product",
-          isVisible: true,
-        },
-        {
-          icon: "receiptEdit",
-          name: "Manage Bookings",
-          link: "/dashboard/manage-bookings",
-          isVisible: true,
-        },
-      ],
+      icon: "wallet",
+      link: "/",
       isVisible: true,
     },
 
     {
       id: 4,
       title: "Account",
-      titleMenu: [
-        {
-          icon: "walletAdd",
-          name: "Fund Wallet",
-          key: "",
-          link: "#",
-          isVisible: false,
-        },
-        {
-          icon: "arrowUpDown",
-          name: "View Transactions",
-          link: "/dashboard/wallet/view-transactions",
-          isVisible: true,
-        },
-        {
-          icon: "walletMinus",
-          name: "Withdrawal",
-          key: "",
-          link: "#",
-          isVisible: false,
-        },
-      ],
+      icon: "Union",
+      link: "/account/kyc",
       isVisible: true,
     },
   ];
 
   return (
     <>
-      <div className=" h-screen">
-        <div className="border-b-2 py-4 pl-6">
-          <Image src={Logo} width={172} />
+      <div className=" h-screen border-r-[1.5px]">
+        <div className="border-b-[1.5px] py-4 pl-6">
+          <Link href="/">
+            <a>
+              <Image src={Logo} width={172} />
+            </a>
+          </Link>
         </div>
         <div className="mt-[130px] mx-6 text-20">
           {SideBarData.map((data, index) => (
-            <div className=" " key={index}>
-              <div className={`  px-6 cursor-pointer py-4 mt-10 flex text-HavannaGreen-primary justify-between ${data.link ? "bg-green-50 border-l-4  border-l-[#0E5854] " : ""}`}>
-                <p>{data.title}</p>
-                <Icon name={data.icon} />
-              </div>
+            <div className="hover:bg-green-50 border-l-4  hover:border-l-[#0E5854] " key={index}>
+              <CustomLink destination={data.link}>
+                <div className={` px-6 cursor-pointer py-4 mt-10 flex text-HavannaGreen-primary justify-between ${data.link ? " " : ""}`}>
+                  <p>{data.title}</p>
+                  <Icon name={data.icon} />
+                </div>
+              </CustomLink>
             </div>
           ))}
         </div>

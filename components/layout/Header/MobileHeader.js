@@ -22,8 +22,8 @@ const MobileHeader = ({ isDark = false }) => {
             <span />
           </label>
           <label className="close" htmlFor="active" />
-          <div className="wrapper bg-white">
-            <ul>
+          <div className="wrapper ">
+            <ul className="">
               <li>
                 <NavItem title="Invest" url="/products/buy" />
               </li>
@@ -33,11 +33,11 @@ const MobileHeader = ({ isDark = false }) => {
               <li>
                 <NavItem title="Blog" url="/company" />
               </li>
-              <li>
-                <NavItem title="Investment Club" url="https://t.me/havannaclub" />
+              <li className="">
+                <NavItem title="Log In" url="/auth/login" />
               </li>
               <li>
-                <NavItem title="Create an Account" url="/" />
+                <NavItem title="Create an Account" url="/auth/sign-up" />
               </li>
             </ul>
           </div>
