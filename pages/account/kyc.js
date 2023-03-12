@@ -1,12 +1,11 @@
 import DashboardLayout from "@components/layout/DashboardLayout/DashboardLayout";
-
-import PropertiesDashBoard from "../../components/organisms/Dashboard/Properties/PropertiesDashBoard";
+import Account from "@components/organisms/Dashboard/Account/Account";
 
 const Dashboard = () => {
   return (
     <div>
       <DashboardLayout>
-        <PropertiesDashBoard />
+        <Account />
       </DashboardLayout>
     </div>
   );

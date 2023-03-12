@@ -12,7 +12,7 @@ import MobileHeader from "./MobileHeader";
 const Header = ({ isDark = false }) => {
   return (
     <>
-      <div className="hidden tablet:block relative font-mulish px-4 py-3 tablet:px-10 tablet:py-5 smallLaptop:px-[120px] smallLaptop:py-8">
+      <div className="hidden bg-HavannaGreen-light tablet:sticky tablet:w-full tablet:top-0 tablet:z-50 tablet:block relative font-mulish px-4 py-3 tablet:px-10 tablet:py-5 smallLaptop:px-[120px] smallLaptop:py-8">
         <div className=" tablet:flex tablet:justify-between">
           <CustomLink destination="/">
             <span className="sr-only">Havanna</span>
@@ -27,7 +27,7 @@ const Header = ({ isDark = false }) => {
           </div>
           <div className={`hidden md:flex font-mulish text-16 font-bold ${isDark ? "text-white" : "text-primary"}`}>
             <NavItem className=" smallLaptop:mr-6 tablet:mr-4 !flex !justify-center !items-center" title="Log in" url="/auth/login" />
-            <NavItem className="bg-HavannaGreen-primary text-white px-6 rounded-lg !flex !justify-center !items-center" title="Create an account" url="auth//sign-up" />
+            <NavItem className="bg-HavannaGreen-primary text-white px-6 rounded-lg !flex !justify-center !items-center" title="Create an account" url="/auth/sign-up" />
           </div>
         </div>
       </div>

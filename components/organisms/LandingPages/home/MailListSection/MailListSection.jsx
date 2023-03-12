@@ -55,10 +55,6 @@ const MailListSection = () => {
     <>
       <section className="bg-HavannaGreen-primary text-white font-mulish py-[60px] px-5">
         <div className="">
-          <Animate.Fade bottom>
-            <h2 className="text-center leading-8 font-bold text-24">Get Priority access when we launch</h2>
-          </Animate.Fade>
-
           <div className="mt-8">
             <ToastContainer />
             <Formik
@@ -73,7 +69,10 @@ const MailListSection = () => {
               {() => (
                 <Form>
                   <div>
-                    <div className="tablet:w-[50%] tablet:m-auto">
+                    <div className="tablet:w-[40%] tablet:m-auto">
+                      <Animate.Fade bottom>
+                        <h2 className=" leading-8 font-bold text-24">Get Priority access when we launch</h2>
+                      </Animate.Fade>
                       <div className="tablet:mt-8 rounded-md">
                         <div>
                           <label className="text-12" htmlFor="fullname">

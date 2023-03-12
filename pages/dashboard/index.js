@@ -1,5 +1,5 @@
 import DashboardLayout from "@components/layout/DashboardLayout/DashboardLayout";
-import MainDashboard from "@components/organisms/Dashboard/MainDashboard";
+import MainDashboard from "@components/organisms/Dashboard/Dashboard/MainDashboard";
 
 const Dashboard = () => {
   return (

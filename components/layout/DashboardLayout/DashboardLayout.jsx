@@ -4,10 +4,10 @@ import SideBar from "./SideBar";
 const DashboardLayout = ({ children }) => {
   return (
     <div className="flex ">
-      <div className="min-w-[20%]">
+      <div className="smallLaptop:min-w-[25%] bigLaptop:min-w-[20%]">
         <SideBar />
       </div>
-      <div className="min-w-[80%]">
+      <div className="smallLaptop:min-w-[75%] bigLaptop:min-w-[80%]">
         <NavBar />
         {children}
       </div>
