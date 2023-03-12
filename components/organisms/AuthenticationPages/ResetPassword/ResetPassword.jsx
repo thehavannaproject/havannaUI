@@ -54,10 +54,10 @@ const ResetPassword = () => {
     <section
       className={` smallLaptop:pt-28 min-h-screen  pt-20 smallLaptop:pb-32 px-4 tablet:px-0
        font-mulish
-     smallLaptop:bg-HavannaGreen-primary  bg-HavannaGreen-light`}
+     smallLaptop:bg-HavannaGreen-primary bg-HavannaGreen-light`}
     >
-      <div className="  ">
-        <div className="smallLaptop:flex hidden  justify-center">
+      <div className=" ">
+        <div className="smallLaptop:flex hidden justify-center">
           <Link href="/">
             <a>
               <span className="sr-only">Havanna</span>
@@ -69,7 +69,7 @@ const ResetPassword = () => {
           <div
             className=" smallLaptop:bg-white tablet:mt-[154px] py-[60px] mt-8 
             rounded-[20px] tablet:rounded-[32px] h-[600px]
-             w-full tablet:w-[800px] bigLaptop:px-[120px] smallLaptop:px-[5%] tablet:px-[10%] px-[5%]  "
+             w-full tablet:w-[800px] bigLaptop:px-[120px] smallLaptop:px-[5%] tablet:px-[10%] px-[5%]"
           >
             <ToastContainer />
             <Formik
@@ -92,7 +92,7 @@ const ResetPassword = () => {
                     </div>
                     <div className="mt-4 ">
                       <FormikCustomInput
-                        className={`rounded-md w-full h-[46px] mt-2 border-2 font-medium font-mulish text-16 leading-6  `}
+                        className={`rounded-md w-full h-[46px] mt-2 border-2 font-medium font-mulish text-16 leading-6 `}
                         id="email"
                         inputClassName="placeholder:text-14 outline-none placeholder:text-citiGray-300 "
                         name="email"
