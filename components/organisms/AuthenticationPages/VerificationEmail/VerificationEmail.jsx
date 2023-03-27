@@ -13,7 +13,7 @@ const VerificationEmail = () => {
      smallLaptop:bg-HavannaGreen-primary bg-HavannaGreen-light`}
     >
       <div className="  ">
-        <div className=" hidden smallLaptop:block justify-between mx-auto ">
+        <div className=" hidden smallLaptop:block justify-between text-center mt-20 mx-auto ">
           <Link href="/">
             <a>
               <span className="sr-only">Havanna</span>
@@ -27,7 +27,7 @@ const VerificationEmail = () => {
           >
             <div className="font-mulish text-center items-center   ">
               <h1 className="font-bold text-[32px] mb-3 leading-10 ">Verify your email</h1>
-              <p className="font-medium text-base mb-7 pt-3 leading-6 text-center ">A verification email has been sent to your email address, (abimbolawilliams@gmail.com). </p>
+              <p className="font-medium text-base mb-7 pt-3 leading-6 text-center ">A verification email has been sent to your email address, . </p>
               <Icon className="items-center flex justify-center   " name="envelope" />
             </div>
           </div>

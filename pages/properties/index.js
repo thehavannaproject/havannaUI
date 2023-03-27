@@ -2,7 +2,7 @@ import DashboardLayout from "@components/layout/DashboardLayout/DashboardLayout"
 
 import PropertiesDashBoard from "../../components/organisms/Dashboard/Properties/PropertiesDashBoard";
 
-const Dashboard = () => {
+const index = () => {
   return (
     <div>
       <DashboardLayout>
@@ -11,5 +11,4 @@ const Dashboard = () => {
     </div>
   );
 };
-
-export default Dashboard;
+export default index;

@@ -44,7 +44,7 @@ const SignIn = () => {
       },
     })
       .then((response) => {
-        response;
+        localStorage.setItem("token", response.data.data.token);
         setLoading(false);
         router.push("/dashboard");
       })
@@ -132,7 +132,7 @@ const SignIn = () => {
                     />
                   </div>
                   <div className="mt-3 text-HavannaGreen-primary font-mulish font-medium text-14 leading-[18px] flex justify-end cursor-pointer ">
-                    <CustomLink destination="/auth/reset-password">Forgot Password?</CustomLink>
+                    <CustomLink destination="/auth/forgot-password">Forgot Password?</CustomLink>
                   </div>
                 </div>
                 <div className="mt-10 ">

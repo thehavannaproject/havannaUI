@@ -1,11 +1,11 @@
 import DashboardLayout from "@components/layout/DashboardLayout/DashboardLayout";
-import Account from "@components/organisms/Dashboard/Account/Account";
+import Wallet from "@components/organisms/Dashboard/Wallet/Wallet";
 
 const Dashboard = () => {
   return (
     <div>
       <DashboardLayout>
-        <Account />
+        <Wallet />
       </DashboardLayout>
     </div>
   );

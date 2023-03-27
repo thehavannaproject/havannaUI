@@ -1,7 +1,7 @@
 import ResetPassword from "@components/organisms/AuthenticationPages/ResetPassword/ResetPassword";
 
-const ResetPassword_ = () => {
+const resetPassword = () => {
   return <ResetPassword />;
 };
 
-export default ResetPassword_;
+export default resetPassword;

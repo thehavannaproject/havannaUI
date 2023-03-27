@@ -23,7 +23,6 @@ const SignupSchema = Yup.object().shape({
   firstName: Yup.string().required("This field is compulsory"),
   lastName: Yup.string().required("This field is compulsory"),
   email: Yup.string().email("Invalid email").required("This field is compulsory"),
-  phoneNumber: Yup.number().min(11).required("This field is compulsory"),
   password: Yup.string()
     .min(5)
     .max(50, "Too Long!")
@@ -48,7 +47,6 @@ const SignUp = () => {
         firstName: values.firstName,
         lastName: values.lastName,
         emailAddress: values.email,
-        phoneNumber: values.phoneNumber.toString(),
         password: values.password,
       },
     })
@@ -116,7 +114,6 @@ const SignUp = () => {
                 firstName: "",
                 lastName: "",
                 email: "",
-                phoneNumber: "",
                 password: "",
               }}
               onSubmit={handleSubmit}
@@ -170,21 +167,7 @@ const SignUp = () => {
                       type="email"
                     />
                   </div>
-                  <div className="mt-4">
-                    <label className="font-bold text-base" htmlFor="">
-                      Phone Number
-                    </label>
-                    <FormikCustomInput
-                      className={`rounded-md w-full h-[46px] mt-2 
-                        border-2 `}
-                      id="phoneNumber"
-                      inputClassName="placeholder:text-14 outline-none 
-                         placeholder:text-citiGray-300 "
-                      name="phoneNumber"
-                      placeholder="Phone Number"
-                      type="number"
-                    />
-                  </div>
+
                   <div className="mt-4">
                     <label className="font-bold text-base" htmlFor="">
                       Password

@@ -1,1 +1,1 @@
-export const baseUrl = "https://havannaapi.azurewebsites.net";
+export const baseUrl = "https://havannadevapi.azurewebsites.net";

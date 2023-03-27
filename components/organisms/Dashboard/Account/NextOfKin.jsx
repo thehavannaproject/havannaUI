@@ -2,48 +2,41 @@ import { Form, Formik } from "formik";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import Icon from "@components/atoms/Icons";
-import { setProfile } from "@components/store/Account";
+import { setNextOfKin } from "@components/store/Account";
 
 import Button from "@atoms/CustomButton/CustomButton";
 import FormikCustomInput from "@atoms/CustomInput/FormikCustomInput";
 
-const PersonalInformation = ({ setActiveTab }) => {
+const NextOfKin = ({ setActiveTab }) => {
   const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
-  const { profile } = useSelector((state) => state.Account);
-  console.log(profile);
+  const { nextOfKin } = useSelector((state) => state.Account);
+  console.log(nextOfKin);
   const handleSubmit = (values) => {
     setLoading(true);
-    setActiveTab(1);
-    dispatch(setProfile(values));
+    setActiveTab(2);
+    dispatch(setNextOfKin(values));
     console.log(values);
   };
+
   return (
     <section className="font-mulish bg-HavannaGreen-light px-6 h-full ">
+      {/* <h1 className=" font-bold text-24 leading-8 text-[#3B3F42] items-center pt-8 mb-10 ">My Account</h1> */}
       <div className="smallLaptop:w-[840px]  bg-white py-6 rounded-xl shadow-xl">
-        <div className="flex justify-center items-center flex-col">
-          <Icon name="userProfile" />
-          <p className="font-bold text-16 leading-[22px] mt-[10px]">Upload your profile picture</p>
-        </div>
-        <h1 className="font-bold text-20 leading-[26px] mt-10 smallLaptop:pl-11">Personal Information</h1>
-
         <Formik
           initialValues={{
-            firstName: profile.firstName || "",
-            lastName: profile.lastName || "",
-            email: profile.email || "",
-            phoneNumber: profile.phoneNumber || "",
-            gender: profile.gender || "",
-            occupation: profile.occupation || "",
-            date: profile.date || "",
-            address: profile.address || "",
+            firstName: nextOfKin.firstName || "",
+            lastName: nextOfKin.lastName || "",
+            email: nextOfKin.email || "",
+            phoneNumber: nextOfKin.phoneNumber || "",
+            relationship: nextOfKin.relationship || "",
+            gender: nextOfKin.gender || "",
           }}
           onSubmit={handleSubmit}
         >
           {(values) => (
-            <Form className="smallLaptop:flex flex-wrap smallLaptop:pl-11 px-3 mt-6 gap-8">
+            <Form className="smallLaptop:flex flex-wrap smallLaptop:pl-11 px-3 gap-8">
               <div className="smallLaptop:grid items-center grid-cols-2 gap-8">
                 <div className="mt-4 ">
                   <label className="font-bold text-base" htmlFor="">
@@ -57,7 +50,6 @@ const PersonalInformation = ({ setActiveTab }) => {
                          placeholder:text-citiGray-300 "
                     name="firstName"
                     placeholder="First Name"
-                    required
                     type="text"
                   />
                 </div>
@@ -109,71 +101,35 @@ const PersonalInformation = ({ setActiveTab }) => {
                     type="number"
                   />
                 </div>
-
                 <div className="mt-4 ">
                   <label className="font-bold text-base" htmlFor="">
-                    Occupation
+                    Relationship
                   </label>
                   <FormikCustomInput
                     className={`rounded-[4px] smallLaptop:w-[360px] h-[60px] mt-2 
                         border-2  `}
-                    id="occupation"
+                    id="relationship"
                     inputClassName="placeholder:text-14 outline-none
                          placeholder:text-citiGray-300 "
-                    name="occupation"
-                    placeholder="Lawyer"
+                    name="relationship"
+                    placeholder="Sister"
                     required
                     type="text"
                   />
                 </div>
-                <div className="mt-4 ">
-                  <label className="font-bold text-base" htmlFor="">
-                    Date of Birth
-                  </label>
-                  <FormikCustomInput
-                    className={`rounded-[4px] smallLaptop:w-[360px] h-[60px] mt-2 
-                        border-2  `}
-                    id="date"
-                    inputClassName="placeholder:text-14 outline-none
-                         placeholder:text-citiGray-300 "
-                    name="date"
-                    placeholder="date"
-                    required
-                    type="date"
-                  />
-                </div>
-                <div className="mt-4 ">
-                  <label className="font-bold text-base" htmlFor="">
-                    Address
-                  </label>
-                  <FormikCustomInput
-                    className={`rounded-[4px] smallLaptop:w-[360px] h-[60px] mt-2 
-                        border-2  `}
-                    id="address"
-                    inputClassName="placeholder:text-14 outline-none
-                         placeholder:text-citiGray-300 "
-                    name="address"
-                    placeholder="25,Idowu Street,Yaba,Lagos"
-                    required
-                    type="text"
-                  />
-                </div>
-                <div className=" mt-8">
-                  <h1>Gender</h1>
-                  <div className="flex">
-                    <div>
-                      <label className="">Male</label>
-                      <FormikCustomInput name="gender" required type="radio" value={values.gender} />
-                    </div>
-                    <div>
-                      <label className="">Female</label>
-                      <FormikCustomInput name="gender" required type="radio" value={values.gender} />
-                    </div>
+                <div className="flex">
+                  <div>
+                    <label className="">Male</label>
+                    <FormikCustomInput name="gender" required type="radio" value={values.gender} />
+                  </div>
+                  <div>
+                    <label className="">Female</label>
+                    <FormikCustomInput name="gender" required type="radio" value={values.gender} />
                   </div>
                 </div>
               </div>
               <p className="mt-[52px]">Need to change any information?Contact us</p>
-              <div className="mt-10 mb-24">
+              <div className="mt-10 mb-10">
                 <Button customClass="rounded-[8px] smallLaptop:w-[360px] w-[100%]  text-white h-[58px] bg-HavannaGreen-primary " isLoading={loading} title=" Next" />
               </div>
             </Form>
@@ -183,5 +139,4 @@ const PersonalInformation = ({ setActiveTab }) => {
     </section>
   );
 };
-
-export default PersonalInformation;
+export default NextOfKin;

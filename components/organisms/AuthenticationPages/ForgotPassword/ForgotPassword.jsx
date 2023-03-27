@@ -3,12 +3,11 @@ import { Form, Formik } from "formik";
 import { useRouter } from "next/dist/client/router";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import * as Yup from "yup";
 
 import Icon from "@components/atoms/Icons";
-import { REGEX } from "@components/shared/libs/helpers.js";
 
 import Button from "@atoms/CustomButton/CustomButton";
 import FormikCustomInput from "@atoms/CustomInput/FormikCustomInput";
@@ -21,48 +20,36 @@ import { baseUrl } from "../../../../config";
 import "react-toastify/dist/ReactToastify.css";
 
 const signInSchema = Yup.object().shape({
-  newPassword: Yup.string().min(5).max(50, "Too Long!").matches(REGEX.password, { message: "please create a stronger password" }).required("This field is compulsory"),
-  confirmPassword: Yup.string().min(5).max(50, "Too Long!").matches(REGEX.password, { message: "please create a stronger password" }).required("This field is compulsory"),
+  email: Yup.string().email("Invalid email").required("This field is compulsory"),
 });
 
-const ResetPassword = () => {
+const ForgotPassword = () => {
   const [loading, setLoading] = useState(false);
-  const [email, setEmail] = useState("");
-  const [token, setToken] = useState("");
 
   const router = useRouter();
-
-  useEffect(() => {
-    setEmail(localStorage.getItem("email"));
-    setToken(localStorage.getItem("token"));
-  }, []);
 
   const handleSubmit = (values) => {
     setLoading(true);
 
     axios({
       method: "POST",
-      url: `${baseUrl}/account/reset-password`,
+      url: `${baseUrl}/account/forgot-password?email=${values.email}`,
       headers: {
         "Content-Type": "application/json",
       },
-      data: {
-        emailAddress: email,
-        token: token,
-        newPassword: values.newPassword,
-        confirmPassword: values.confirmPassword,
-      },
     })
       .then((response) => {
-        response;
+        localStorage.setItem("token", response.data.data.token);
         setLoading(false);
-        router.push("/auth/login");
+        router.push("/auth/reset-password");
       })
       .catch((error) => {
         setLoading(false);
         error;
-        toast(`oops something went wrong `);
+        toast(`Email is not found `);
       });
+
+    localStorage.setItem("email", values.email);
   };
 
   return (
@@ -95,8 +82,7 @@ const ResetPassword = () => {
             <ToastContainer />
             <Formik
               initialValues={{
-                newPassword: "",
-                confirmPassword: "",
+                email: "",
               }}
               onSubmit={handleSubmit}
               validationSchema={signInSchema}
@@ -115,21 +101,11 @@ const ResetPassword = () => {
                     <div className="mt-4 ">
                       <FormikCustomInput
                         className={`rounded-md w-full h-[46px] mt-2 border-2 font-medium font-mulish text-16 leading-6 `}
-                        id="newPassword"
+                        id="email"
                         inputClassName="placeholder:text-14 outline-none placeholder:text-citiGray-300 "
-                        name="newPassword"
-                        placeholder="New Password"
-                        type="password"
-                      />
-                    </div>
-                    <div className="mt-4 ">
-                      <FormikCustomInput
-                        className={`rounded-md w-full h-[46px] mt-2 border-2 font-medium font-mulish text-16 leading-6 `}
-                        id="confirmpassword"
-                        inputClassName="placeholder:text-14 outline-none placeholder:text-citiGray-300 "
-                        name="confirmPassword"
-                        placeholder="Confirm Password"
-                        type="password"
+                        name="email"
+                        placeholder="Email address"
+                        type="email"
                       />
                     </div>
                   </div>
@@ -137,8 +113,7 @@ const ResetPassword = () => {
                     <Button
                       customClass=" text-4 h-[46px] text-white bg-[#0B4340] text-center tablet:text-16 font-bold !w-full rounded-md"
                       isLoading={loading}
-                      title="Submit "
-                      type="submit"
+                      title="Submit email "
                     />
                   </div>
                 </Form>
@@ -151,4 +126,4 @@ const ResetPassword = () => {
   );
 };
 
-export default ResetPassword;
+export default ForgotPassword;
