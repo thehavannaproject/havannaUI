@@ -1,9 +1,8 @@
 import { useState } from "react";
 
 import AccountTier from "./AccountTier";
-import NextOfKin from "./NextOfKin";
 import PersonalInformation from "./PersonalInformation";
-import Security from "./Security";
+import Security from "./Security/Security";
 
 const index = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -16,16 +15,11 @@ const index = () => {
     },
     {
       id: 1,
-      name: "Next Of Kin",
-      component: <NextOfKin setActiveTab={setActiveTab} />,
-    },
-    {
-      id: 2,
       name: "Account Tier",
       component: <AccountTier />,
     },
     {
-      id: 3,
+      id: 2,
       name: "Security",
       component: <Security />,
     },

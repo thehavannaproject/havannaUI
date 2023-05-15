@@ -24,11 +24,19 @@ const SideBar = () => {
     },
     {
       id: 2,
-      title: "My Properties",
-      icon: "home",
-      link: "/properties",
+      title: "Portfolio",
+      icon: "unionDashboard",
+      link: "/portfolio",
       isVisible: false,
-      name: "properties",
+      name: "portfolio",
+    },
+    {
+      id: 4,
+      title: "Listing",
+      icon: "listing",
+      link: "/listing/listing",
+      isVisible: true,
+      name: "listing",
     },
     {
       id: 3,
@@ -47,14 +55,6 @@ const SideBar = () => {
       isVisible: true,
       name: "account",
     },
-    {
-      id: 4,
-      title: "KYC",
-      icon: "Key",
-      link: "/kyc/kyc",
-      isVisible: true,
-      name: "kyc",
-    },
   ];
 
   return (
@@ -63,13 +63,13 @@ const SideBar = () => {
         <div className="border-b-[1px] py-4 pl-6">
           <Link href="/">
             <a>
-              <Image src={Logo} width={172} />
+              <Image height={38} src={Logo} width={128.29} />
             </a>
           </Link>
         </div>
         <div className=" mx-6 text-20">
           {SideBarData.map((data, index) => (
-            <div className={`hover:bg-green-50    ${routerName.includes(data.name) ? "bg-green-50 border-l-4 border-l-[#0E5854] " : ""} `} key={index}>
+            <div className={`hover:bg-green-50 ${routerName.includes(data.name) ? "bg-green-50 border-l-4 border-l-[#0E5854] " : ""} `} key={index}>
               <CustomLink destination={data.link}>
                 <div className={` px-6 cursor-pointer py-4 mt-6 h-[58px] flex text-HavannaGreen-primary justify-between `}>
                   <p>{data.title}</p>

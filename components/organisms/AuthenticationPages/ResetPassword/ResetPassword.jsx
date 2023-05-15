@@ -56,7 +56,7 @@ const ResetPassword = () => {
       .then((response) => {
         response;
         setLoading(false);
-        router.push("/auth/login");
+        router.push("/auth/reset-comfirmation");
       })
       .catch((error) => {
         setLoading(false);
@@ -133,6 +133,7 @@ const ResetPassword = () => {
                       />
                     </div>
                   </div>
+
                   <div className="mt-10 ">
                     <Button
                       customClass=" text-4 h-[46px] text-white bg-[#0B4340] text-center tablet:text-16 font-bold !w-full rounded-md"

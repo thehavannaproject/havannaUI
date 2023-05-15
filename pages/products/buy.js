@@ -5,14 +5,14 @@ import DownloadSection from "@components/organisms/LandingPages/home/downloadSec
 import FaqsSection from "@components/organisms/LandingPages/home/FaqsSection/Faq";
 import BuyTopSection from "@components/organisms/products/buyTopSection";
 import HowItWorksBuySection from "@components/organisms/products/components/howItWorksBuySection";
-import PropertiesSection from "@components/organisms/products/components/propertiesSection";
+// import PropertiesSection from "@components/organisms/products/components/propertiesSection";
 
 const Buy = () => {
   return (
     <BaseLayout>
       <BuyTopSection />
       <HowItWorksBuySection />
-      <PropertiesSection />
+      {/* <PropertiesSection /> */}
       <FaqsSection />
       <DownloadSection />
     </BaseLayout>

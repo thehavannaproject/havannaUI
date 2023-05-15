@@ -1,6 +1,6 @@
 import propertiesImg from "@images/investsvg/propertiesImg.svg";
 
-export const propertiesDatas = [
+export const ListingProperties = [
   {
     AssetType: "Edala Homes",
     location: "Surulere, Lagos, Nigeria.",

@@ -1,11 +1,11 @@
 import DashboardLayout from "@components/layout/DashboardLayout/DashboardLayout";
-import KycVerification from "@components/organisms/Dashboard/Kyc/KycVerification";
+import InvestNow from "@components/organisms/Dashboard/Listing/InvestNow";
 
 const index = () => {
   return (
     <div>
       <DashboardLayout>
-        <KycVerification />
+        <InvestNow />
       </DashboardLayout>
     </div>
   );

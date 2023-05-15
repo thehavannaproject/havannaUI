@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 
-import CustomToggle from "../../../atoms/CustomToggle/CustomToggle";
+import CustomToggle from "../../../../atoms/CustomToggle/CustomToggle";
+import PasswordUpdate from "./PasswordUpdate";
+import PinSet from "./PinSet";
 
 const Security = () => {
+  const [show, setShow] = useState(false);
+  const [passwordUpdates, SetPasswordUpdates] = useState(false);
+
+  const handleSetClick = () => {
+    setShow(true);
+  };
+
+  const handlePassword = () => {
+    SetPasswordUpdates(true);
+  };
+
   return (
     <section>
       <div className="pl-10 font-mulish ">
@@ -36,9 +49,24 @@ const Security = () => {
               <p className="font-medium text-16 leading-[22px] ">Update your password</p>
             </div>
             <div>
-              <p className="font-bold text-18 leading-6">Update</p>
+              <p className="font-bold text-18 cursor-pointer leading-6" onClick={handlePassword}>
+                Update
+              </p>
             </div>
           </div>
+          <div className="pb-[60px] flex justify-between pt-[52px]">
+            <div>
+              <h1 className="font-bold text-20 leading-[26px] ">Transaction PIN</h1>
+              <p className="font-medium text-16 leading-[22px] ">Set your transaction pin.</p>
+            </div>
+            <div>
+              <p className="font-bold text-18 cursor-pointer leading-6" onClick={handleSetClick}>
+                Set
+              </p>
+            </div>
+          </div>
+          <div>{show && <PinSet setShow={setShow} />}</div>
+          <div>{passwordUpdates && <PasswordUpdate SetPasswordUpdates={SetPasswordUpdates} />}</div>
         </div>
       </div>
     </section>

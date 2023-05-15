@@ -1,14 +1,14 @@
 import DashboardLayout from "@components/layout/DashboardLayout/DashboardLayout";
-import Wallet from "@components/organisms/Dashboard/Wallet";
+import Listing from "@components/organisms/Dashboard/Listing/Listing";
 
-const Dashboard = () => {
+const index = () => {
   return (
     <div>
       <DashboardLayout>
-        <Wallet />
+        <Listing />
       </DashboardLayout>
     </div>
   );
 };
 
-export default Dashboard;
+export default index;
