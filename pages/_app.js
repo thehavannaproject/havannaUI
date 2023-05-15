@@ -3,6 +3,9 @@ import Head from "next/head";
 import Router from "next/router";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
+import { Provider } from "react-redux";
+
+import store from "../components/store";
 
 //Binding events.
 Router.events.on("routeChangeStart", () => NProgress.start());
@@ -23,7 +26,9 @@ function MyApp({ Component, pageProps }) {
         <link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png" />
         <link href="/site.webmanifest" rel="manifest" />
       </Head>
-      <Component {...pageProps} />
+      <Provider store={store}>
+        <Component {...pageProps} />
+      </Provider>
     </>
   );
 }

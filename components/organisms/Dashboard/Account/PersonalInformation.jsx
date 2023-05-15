@@ -1,65 +1,126 @@
 import axios from "axios";
+import { baseUrl } from "config";
 import { Form, Formik } from "formik";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
-import * as Yup from "yup";
+import React, { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 import Icon from "@components/atoms/Icons";
-// import { REGEX } from "@components/shared/libs/helpers.js";
+import { setProfile } from "@components/store/Account";
 
 import Button from "@atoms/CustomButton/CustomButton";
 import FormikCustomInput from "@atoms/CustomInput/FormikCustomInput";
-// import CustomLink from "@atoms/CustomLink/CustomLink";
 
-import { baseUrl } from "../../../../config";
-
-const SignupSchema = Yup.object().shape({
-  firstName: Yup.string().required("This field is compulsory"),
-  lastName: Yup.string().required("This field is compulsory"),
-  email: Yup.string().email("Invalid email").required("This field is compulsory"),
-  phoneNumber: Yup.number().min(11).required("This field is compulsory"),
-});
 const PersonalInformation = () => {
   const [loading, setLoading] = useState(false);
-  const [gender, setGender] = useState("");
+
+  const dispatch = useDispatch();
+  const { profile } = useSelector((state) => state.Account);
+  const { user } = useSelector((state) => state.Auth);
+
+  const firstName = user?.customerName?.split(" ")[0];
+
+  const handleSubmit = (values) => {
+    setOpen(true);
+    dispatch(setProfile(values));
+    console.log(values);
+  };
 
   const router = useRouter();
 
-  function handleGenderChange(event) {
-    setGender(event.target.value);
-  }
+  const [reference, setRefernce] = useState("");
+  const [open, setOpen] = useState(false);
+  const [otp, setOtp] = useState(["", "", "", "", "", ""]);
+  const refs = Array(6)
+    .fill()
+    .map(() => useRef());
+  const [phoneNumber, setPhoneNumber] = useState("234");
 
-  const handleSubmit = (values) => {
+  const mergeOtp = otp.join("");
+
+  const handleOtpChange = (index, event) => {
+    const newOtp = [...otp];
+    newOtp[index] = event.target.value;
+    setOtp(newOtp);
+
+    if (event.target.value !== "" && index < newOtp.length - 1) {
+      refs[index + 1].current.focus();
+    }
+  };
+
+  useEffect(() => {
+    setRefernce(localStorage.getItem("reference"));
+  }, []);
+
+  const handleVerify = () => {
     setLoading(true);
     axios({
       method: "POST",
-      url: `${baseUrl}/account/register`,
+      url: `${baseUrl}/account/verify-otp`,
       headers: {
         "Content-Type": "application/json",
       },
       data: {
-        firstName: values.firstName,
-        lastName: values.lastName,
-        emailAddress: values.email,
-        phoneNumber: values.phoneNumber.toString(),
-        password: values.password,
+        verification_code: mergeOtp,
+        verification_reference: reference,
       },
     })
       .then((response) => {
+        response;
         setLoading(false);
-        toast(`${response.data.message}. Please verify your email via link sent to your email.`);
-        router.push("/auth/login");
+        router.push("/dashboard");
       })
-      .catch((error) => {
+      .catch(() => {
+        toast.error(`OTP is incorrect`);
         setLoading(false);
-        console.log(error);
-        toast(`${error.response.data.message} `);
       });
   };
+
+  const handleSend = () => {
+    axios({
+      method: "POST",
+      url: `${baseUrl}/account/send-otp`,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: {
+        customer_mobile_number: phoneNumber,
+        customer_email_address: user.emailAddress,
+        first_name: firstName,
+      },
+    })
+      .then((response) => {
+        localStorage.setItem("reference", response.data.data.reference);
+        router.push("");
+      })
+      .catch(() => {
+        toast.error("OTP could not be sent");
+      });
+  };
+
+  useEffect(() => {
+    if (phoneNumber.length > 12) {
+      handleSend();
+    }
+  }, [phoneNumber]);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const validateDateOfBirth = (value) => {
+    const dateOfBirth = new Date(value);
+    const ageDiffMs = Date.now() - dateOfBirth.getTime();
+    const ageDate = new Date(ageDiffMs);
+    const age = Math.abs(ageDate.getUTCFullYear() - 1970);
+    if (age < 18) {
+      return "You must be at least 18 years old";
+    }
+  };
+
   return (
-    <section className="font-mulish bg-HavannaGreen-light px-6 ">
-      <h1 className=" font-bold text-24 leading-8 text-[#3B3F42] items-center pt-8 mb-10 ">My Account</h1>
+    <section className="font-mulish bg-HavannaGreen-light px-6 h-full ">
       <div className="smallLaptop:w-[840px]  bg-white py-6 rounded-xl shadow-xl">
         <div className="flex justify-center items-center flex-col">
           <Icon name="userProfile" />
@@ -67,18 +128,30 @@ const PersonalInformation = () => {
         </div>
         <h1 className="font-bold text-20 leading-[26px] mt-10 smallLaptop:pl-11">Personal Information</h1>
 
-        <ToastContainer />
         <Formik
           initialValues={{
-            firstName: "",
-            lastName: "",
-            email: "",
-            phoneNumber: "",
+            firstName: profile.firstName || "",
+            lastName: profile.lastName || "",
+            email: profile.email || "",
+            phoneNumber: profile.phoneNumber || phoneNumber,
+            gender: profile.gender || "",
+            occupation: profile.occupation || "",
+            date: profile.date || "",
+            address: profile.address || "",
           }}
           onSubmit={handleSubmit}
-          validationSchema={SignupSchema}
+          validate={(values) => {
+            const errors = {};
+
+            // validate date of birth
+            if (values.date && validateDateOfBirth(values.date)) {
+              errors.date = validateDateOfBirth(values.date);
+            }
+
+            return errors;
+          }}
         >
-          {() => (
+          {(values) => (
             <Form className="smallLaptop:flex flex-wrap smallLaptop:pl-11 px-3 mt-6 gap-8">
               <div className="smallLaptop:grid items-center grid-cols-2 gap-8">
                 <div className="mt-4 ">
@@ -93,10 +166,10 @@ const PersonalInformation = () => {
                          placeholder:text-citiGray-300 "
                     name="firstName"
                     placeholder="First Name"
+                    required
                     type="text"
                   />
                 </div>
-
                 <div className="mt-4 ">
                   <label className="font-bold text-base" htmlFor="">
                     Last Name
@@ -109,6 +182,7 @@ const PersonalInformation = () => {
                          placeholder:text-citiGray-300 "
                     name="lastName"
                     placeholder="Last Name"
+                    required
                     type="text"
                   />
                 </div>
@@ -124,6 +198,7 @@ const PersonalInformation = () => {
                          placeholder:text-citiGray-300 "
                     name="email"
                     placeholder="Your Email"
+                    required
                     type="email"
                   />
                 </div>
@@ -137,9 +212,32 @@ const PersonalInformation = () => {
                     id="phoneNumber"
                     inputClassName="placeholder:text-14 outline-none 
                          placeholder:text-citiGray-300 "
+                    maxLength={13}
                     name="phoneNumber"
-                    placeholder="+234**********"
+                    onChange={(e) => {
+                      setPhoneNumber(e.target.value);
+                    }}
+                    placeholder="234**********"
+                    required
                     type="number"
+                    value={phoneNumber}
+                  />
+                </div>
+
+                <div className="mt-4 ">
+                  <label className="font-bold text-base" htmlFor="">
+                    Occupation
+                  </label>
+                  <FormikCustomInput
+                    className={`rounded-[4px] smallLaptop:w-[360px] h-[60px] mt-2 
+                        border-2  `}
+                    id="occupation"
+                    inputClassName="placeholder:text-14 outline-none
+                         placeholder:text-citiGray-300 "
+                    name="occupation"
+                    placeholder="Lawyer"
+                    required
+                    type="text"
                   />
                 </div>
 
@@ -152,9 +250,10 @@ const PersonalInformation = () => {
                         border-2  `}
                     id="date"
                     inputClassName="placeholder:text-14 outline-none
-                         placeholder:text-citiGray-300 "
+                     placeholder:text-citiGray-300 "
                     name="date"
-                    placeholder="date"
+                    placeholder="Date of Birth"
+                    required
                     type="date"
                   />
                 </div>
@@ -168,106 +267,108 @@ const PersonalInformation = () => {
                     id="address"
                     inputClassName="placeholder:text-14 outline-none
                          placeholder:text-citiGray-300 "
-                    name="Address"
+                    name="address"
                     placeholder="25,Idowu Street,Yaba,Lagos"
+                    required
                     type="text"
                   />
                 </div>
                 <div className=" mt-8">
-                  <h1>Gender</h1>
-                  <label className="">
-                    <input checked={gender === "male"} className="text-HavannaGreen-primary" onChange={handleGenderChange} type="radio" value="male" />
-                    Male
-                  </label>
-                  <label className="pl-[26px]">
-                    <input checked={gender === "female"} className="text-HavannaGreen-primary" onChange={handleGenderChange} type="radio" value="female" />
-                    Female
-                  </label>
+                  <h1 className="font-bold text-16 leading-[22px] ">Gender</h1>
+                  <div className="flex">
+                    <div>
+                      <label className="">Male</label>
+                      <FormikCustomInput name="gender" required type="radio" value={values.gender} />
+                    </div>
+                    <div>
+                      <label className="">Female</label>
+                      <FormikCustomInput name="gender" required type="radio" value={values.gender} />
+                    </div>
+                  </div>
                 </div>
               </div>
-
-              <div className="grid grid-cols-2 gap-8">
-                <div className="mt-4 ">
-                  <label className="font-bold text-base" htmlFor="">
-                    First Name
-                  </label>
-                  <FormikCustomInput
-                    className={`rounded-[4px] smallLaptop:w-[360px] h-[60px] mt-2 
-                        border-2  `}
-                    id="firstName"
-                    inputClassName="placeholder:text-14 outline-none
-                         placeholder:text-citiGray-300 "
-                    name="firstName"
-                    placeholder="First Name"
-                    type="text"
-                  />
-                </div>
-
-                <div className="mt-4 ">
-                  <label className="font-bold text-base" htmlFor="">
-                    Last Name
-                  </label>
-                  <FormikCustomInput
-                    className={`rounded-[4px] smallLaptop:w-[360px] h-[60px] mt-2 
-                        border-2  `}
-                    id="lastName"
-                    inputClassName="placeholder:text-14 outline-none
-                         placeholder:text-citiGray-300 "
-                    name="lastName"
-                    placeholder="Last Name"
-                    type="text"
-                  />
-                </div>
-                <div className="mt-4 ">
-                  <label className="font-bold text-base" htmlFor="">
-                    Email Address
-                  </label>
-                  <FormikCustomInput
-                    className={`rounded-[4px] smallLaptop:w-[360px] h-[60px] mt-2 
-                        border-2  `}
-                    id="email"
-                    inputClassName="placeholder:text-14 outline-none
-                         placeholder:text-citiGray-300 "
-                    name="email"
-                    placeholder="Your Email"
-                    type="email"
-                  />
-                </div>
-                <div className="mt-4">
-                  <label className="font-bold text-base" htmlFor="">
-                    Phone Number
-                  </label>
-                  <FormikCustomInput
-                    className={`rounded-[4px] smallLaptop:w-[360px] h-[60px] mt-2 
-                        border-2 `}
-                    id="phoneNumber"
-                    inputClassName="placeholder:text-14 outline-none 
-                         placeholder:text-citiGray-300 "
-                    name="phoneNumber"
-                    placeholder="Phone Number"
-                    type="number"
-                  />
-                </div>
-                <div className=" mt-8">
-                  <h1>Gender</h1>
-                  <label className="">
-                    <input checked={gender === "male"} className="text-HavannaGreen-primary" onChange={handleGenderChange} type="radio" value="male" />
-                    Male
-                  </label>
-                  <label className="pl-[26px]">
-                    <input checked={gender === "female"} className="text-HavannaGreen-primary" onChange={handleGenderChange} type="radio" value="female" />
-                    Female
-                  </label>
-                </div>
-              </div>
-
               <div className="mt-10 mb-24">
-                <Button customClass="rounded-[8px] smallLaptop:w-[360px] w-[100%]  text-white h-[58px] bg-HavannaGreen-primary " isLoading={loading} title=" Save changes" />
+                <Button customClass="rounded-[8px] smallLaptop:w-[240px] w-[100%]  text-white h-[58px] bg-HavannaGreen-primary " isLoading={loading} title=" Save information" />
               </div>
             </Form>
           )}
         </Formik>
       </div>
+      {open && (
+        <div className="fixed top-0 left-0 right-0 bottom-0 z-50 flex items-center justify-center" style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
+          <div className="bg-slate-400 ">
+            <div className="bg-white w-[532px] px-11 py-10  rounded-xl font-mulish shadow-xl ">
+              <Icon className="flex cursor-pointer justify-end" name="otpCancel" onClick={handleClose} />
+              <h1 className=" ">Enter OTP Code</h1>
+              <p className="mt-3 mb-[30px]">Enter the OTP code sent to your number.</p>
+              <Formik
+                initialValues={{
+                  otp: "",
+                }}
+                onSubmit={handleSubmit}
+              >
+                {() => (
+                  <Form>
+                    <div className="flex gap-4 text-[40px] justify-center  ">
+                      <input
+                        className="border-2 w-[60px] h-[60px] rounded-lg text-center"
+                        maxLength={1}
+                        name="otp"
+                        onChange={(e) => handleOtpChange(0, e)}
+                        ref={refs[0]}
+                        type="number"
+                      />
+                      <input
+                        className="border-2 w-[60px] h-[60px] rounded-lg text-center"
+                        maxLength={1}
+                        name="otp1"
+                        onChange={(e) => handleOtpChange(1, e)}
+                        ref={refs[1]}
+                        type="number"
+                      />
+                      <input
+                        className="border-2 w-[60px] h-[60px] rounded-lg text-center"
+                        maxLength={1}
+                        name="otp2"
+                        onChange={(e) => handleOtpChange(2, e)}
+                        ref={refs[2]}
+                        type="number"
+                      />
+                      <input
+                        className="border-2 w-[60px] h-[60px] rounded-lg text-center"
+                        maxLength={1}
+                        name="otp3"
+                        onChange={(e) => handleOtpChange(3, e)}
+                        ref={refs[3]}
+                        type="number"
+                      />
+                      <input
+                        className="border-2 w-[60px] h-[60px] rounded-lg text-center"
+                        maxLength={1}
+                        name="otp4"
+                        onChange={(e) => handleOtpChange(4, e)}
+                        ref={refs[4]}
+                        type="number"
+                      />
+                      <input
+                        className="border-2 w-[60px] h-[60px] rounded-lg text-center"
+                        maxLength={1}
+                        name="otp5"
+                        onChange={(e) => handleOtpChange(5, e)}
+                        ref={refs[5]}
+                        type="number"
+                      />
+                    </div>
+                  </Form>
+                )}
+              </Formik>
+              <Button className="bg-HavannaGreen-primary text-white w-full h-[58px] rounded-lg mt-10 mb-[72px] " isLoading={loading} onClick={handleVerify}>
+                Verify Otp
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

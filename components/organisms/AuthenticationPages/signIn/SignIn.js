@@ -6,8 +6,10 @@ import Link from "next/link";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import * as Yup from "yup";
+import { useDispatch } from "react-redux";
 
 import { REGEX } from "@components/shared/libs/helpers.js";
+import { setCurrentUser } from "@components/store/Auth";
 
 import Button from "@atoms/CustomButton/CustomButton";
 import FormikCustomInput from "@atoms/CustomInput/FormikCustomInput";
@@ -28,6 +30,7 @@ const SignIn = () => {
   const [loading, setLoading] = useState(false);
 
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const handleSubmit = (values) => {
     setLoading(true);
@@ -44,7 +47,8 @@ const SignIn = () => {
       },
     })
       .then((response) => {
-        response;
+        localStorage.setItem("token", response.data.data.token);
+        dispatch(setCurrentUser(response.data.data));
         setLoading(false);
         router.push("/dashboard");
       })
@@ -132,7 +136,7 @@ const SignIn = () => {
                     />
                   </div>
                   <div className="mt-3 text-HavannaGreen-primary font-mulish font-medium text-14 leading-[18px] flex justify-end cursor-pointer ">
-                    <CustomLink destination="/auth/reset-password">Forgot Password?</CustomLink>
+                    <CustomLink destination="/auth/forgot-password">Forgot Password?</CustomLink>
                   </div>
                 </div>
                 <div className="mt-10 ">

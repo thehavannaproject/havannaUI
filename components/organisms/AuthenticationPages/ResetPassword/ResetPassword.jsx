@@ -3,12 +3,16 @@ import { Form, Formik } from "formik";
 import { useRouter } from "next/dist/client/router";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import * as Yup from "yup";
 
+import Icon from "@components/atoms/Icons";
+import { REGEX } from "@components/shared/libs/helpers.js";
+
 import Button from "@atoms/CustomButton/CustomButton";
 import FormikCustomInput from "@atoms/CustomInput/FormikCustomInput";
+import CustomLink from "@atoms/CustomLink/CustomLink";
 
 import Logo from "@images/svg/Logo.svg";
 
@@ -17,46 +21,63 @@ import { baseUrl } from "../../../../config";
 import "react-toastify/dist/ReactToastify.css";
 
 const signInSchema = Yup.object().shape({
-  email: Yup.string().email("Invalid email").required("This field is compulsory"),
+  newPassword: Yup.string().min(5).max(50, "Too Long!").matches(REGEX.password, { message: "please create a stronger password" }).required("This field is compulsory"),
+  confirmPassword: Yup.string().min(5).max(50, "Too Long!").matches(REGEX.password, { message: "please create a stronger password" }).required("This field is compulsory"),
 });
 
 const ResetPassword = () => {
   const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [token, setToken] = useState("");
 
   const router = useRouter();
+
+  useEffect(() => {
+    setEmail(localStorage.getItem("email"));
+    setToken(localStorage.getItem("token"));
+  }, []);
 
   const handleSubmit = (values) => {
     setLoading(true);
 
     axios({
       method: "POST",
-      url: `${baseUrl}/account/login`,
+      url: `${baseUrl}/account/reset-password`,
       headers: {
         "Content-Type": "application/json",
       },
       data: {
-        emailAddress: values.email,
+        emailAddress: email,
+        token: token,
+        newPassword: values.newPassword,
+        confirmPassword: values.confirmPassword,
       },
     })
       .then((response) => {
         response;
         setLoading(false);
-        router.push("/dashboard");
+        router.push("/auth/reset-comfirmation");
       })
       .catch((error) => {
         setLoading(false);
         error;
-        toast(`Email is not found `);
+        toast(`oops something went wrong `);
       });
   };
 
   return (
     <section
-      className={` smallLaptop:pt-28 min-h-screen  pt-20 smallLaptop:pb-32 px-4 tablet:px-0
+      className={` smallLaptop:pt-28 min-h-screen  pt-[31px] smallLaptop:pb-32 tablet:px-0
        font-mulish
      smallLaptop:bg-HavannaGreen-primary bg-HavannaGreen-light`}
     >
       <div className=" ">
+        <div className="pl-[30px] smallLaptop:hidden">
+          <CustomLink destination="/auth/login">
+            {" "}
+            <Icon name="vectorStroke" />{" "}
+          </CustomLink>
+        </div>
         <div className="smallLaptop:flex hidden justify-center">
           <Link href="/">
             <a>
@@ -69,12 +90,13 @@ const ResetPassword = () => {
           <div
             className=" smallLaptop:bg-white tablet:mt-[154px] py-[60px] mt-8 
             rounded-[20px] tablet:rounded-[32px] h-[600px]
-             w-full tablet:w-[800px] bigLaptop:px-[120px] smallLaptop:px-[5%] tablet:px-[10%] px-[5%]"
+             w-full tablet:w-[800px] bigLaptop:px-[120px] px-6 smallLaptop:px-[5%] tablet:px-[10%]"
           >
             <ToastContainer />
             <Formik
               initialValues={{
-                email: "",
+                newPassword: "",
+                confirmPassword: "",
               }}
               onSubmit={handleSubmit}
               validationSchema={signInSchema}
@@ -93,19 +115,31 @@ const ResetPassword = () => {
                     <div className="mt-4 ">
                       <FormikCustomInput
                         className={`rounded-md w-full h-[46px] mt-2 border-2 font-medium font-mulish text-16 leading-6 `}
-                        id="email"
+                        id="newPassword"
                         inputClassName="placeholder:text-14 outline-none placeholder:text-citiGray-300 "
-                        name="email"
-                        placeholder="Email address"
-                        type="email"
+                        name="newPassword"
+                        placeholder="New Password"
+                        type="password"
+                      />
+                    </div>
+                    <div className="mt-4 ">
+                      <FormikCustomInput
+                        className={`rounded-md w-full h-[46px] mt-2 border-2 font-medium font-mulish text-16 leading-6 `}
+                        id="confirmpassword"
+                        inputClassName="placeholder:text-14 outline-none placeholder:text-citiGray-300 "
+                        name="confirmPassword"
+                        placeholder="Confirm Password"
+                        type="password"
                       />
                     </div>
                   </div>
+
                   <div className="mt-10 ">
                     <Button
                       customClass=" text-4 h-[46px] text-white bg-[#0B4340] text-center tablet:text-16 font-bold !w-full rounded-md"
                       isLoading={loading}
-                      title="Submit email "
+                      title="Submit "
+                      type="submit"
                     />
                   </div>
                 </Form>
