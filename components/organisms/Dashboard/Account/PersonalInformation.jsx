@@ -1,19 +1,33 @@
-import axios from "axios";
-import { baseUrl } from "config";
-import { Form, Formik } from "formik";
-import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Form, Formik } from "formik";
+import axios from "axios";
+import { baseUrl } from "config";
 import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 import Icon from "@components/atoms/Icons";
 import { setProfile } from "@components/store/Account";
-
 import Button from "@atoms/CustomButton/CustomButton";
 import FormikCustomInput from "@atoms/CustomInput/FormikCustomInput";
 
+
 const PersonalInformation = () => {
   const [loading, setLoading] = useState(false);
+  const [profilePicture, setProfilePicture] = useState(null);
+
+
+  const handleProfilePictureUpload = (event) => {
+    const file = event.target.files[0];
+    setProfilePicture(file);
+  };
+
+  const handleSubmit = (values) => {
+    setOpen(true);
+    dispatch(setProfile({ ...values, profilePicture }));
+    console.log(values);
+  };
+
 
   const dispatch = useDispatch();
   const { profile } = useSelector((state) => state.Account);
@@ -21,11 +35,7 @@ const PersonalInformation = () => {
 
   const firstName = user?.customerName?.split(" ")[0];
 
-  const handleSubmit = (values) => {
-    setOpen(true);
-    dispatch(setProfile(values));
-    console.log(values);
-  };
+
 
   const router = useRouter();
 
@@ -122,10 +132,21 @@ const PersonalInformation = () => {
   return (
     <section className="font-mulish bg-HavannaGreen-light px-6 h-full ">
       <div className="smallLaptop:w-[840px]  bg-white py-6 rounded-xl shadow-xl">
-        <div className="flex justify-center items-center flex-col">
-          <Icon name="userProfile" />
-          <p className="font-bold text-16 leading-[22px] mt-[10px]">Upload your profile picture</p>
+        <div className="flex justify-center items-center">
+          <div className="items-center grid place-items-center">
+            {profilePicture ? (
+              <img alt="Profile Picture" className="rounded-full w-24 h-24" src={URL.createObjectURL(profilePicture)} />
+            ) : (
+              <Icon className="w-24 h-24" name="userProfile" />
+            )}
+            <input accept=".png, .jpeg, .jpg" className="mt-10" onChange={handleProfilePictureUpload} type="file" />
+            <p className="font-bold text-16 leading-[22px] mt-[10px]">Upload your profile picture</p>
+          </div>
         </div>
+
+
+
+
         <h1 className="font-bold text-20 leading-[26px] mt-10 smallLaptop:pl-11">Personal Information</h1>
 
         <Formik
