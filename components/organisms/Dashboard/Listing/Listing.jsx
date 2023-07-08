@@ -34,16 +34,16 @@ const Index = () => {
   };
 
   return (
-    <section className="bg-[#F3FCFB] pb-[120px] bigLaptop:px-[120px]">
+    <section className="bg-[#F3FCFB] w-full pb-[120px] p-8 ">
       <div className="">
         <h1 className="font-mulish font-bold text-[36px] leading-[44px] text-black pl-8 bigLaptop:mt-[100px] pt-10 ">Listing</h1>
       </div>
 
-      <div className="grid grid-cols-1 tablet:grid-cols-2 smallLaptop:grid-cols-3 gap-6 smallLaptop:gap-16 bigLaptop:gap-[84px] px-[22px] pt-11 bigLaptop:pt-[120px] ">
+      <div className=" grid bigLaptop:grid-cols-3 smallLaptop:grid-cols-2 smallLaptop:gap-10">
         {currentProperties.map((property, index) => (
-          <div className="shadow-xl  rounded-[20px]" key={index}>
+          <div className=" " key={index}>
             <CustomLink destination="/listing/investpage">
-              <InvestPropertyCard className="p-4" property={property} />
+              <InvestPropertyCard className="shadow-lg p-6 " property={property} />
             </CustomLink>
           </div>
         ))}
@@ -59,9 +59,8 @@ const Index = () => {
         </button>
         {pageNumbers.map((number) => (
           <button
-            className={`mx-2 py-2 px-5 rounded-full border ${
-              currentPage === number ? "bg-HavannaGreen-secondary text-white" : "bg-white border-2 border-HavannaGreen-secondary text-[#3B3F42]"
-            }`}
+            className={`mx-2 py-2 px-5 rounded-full border ${currentPage === number ? "bg-HavannaGreen-secondary text-white" : "bg-white border-2 border-HavannaGreen-secondary text-[#3B3F42]"
+              }`}
             key={number}
             onClick={() => paginate(number)}
           >

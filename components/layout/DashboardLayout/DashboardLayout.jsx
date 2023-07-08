@@ -1,8 +1,13 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
-import NavBar from "./NavBar";
+// import axios from "axios";
+// import { baseUrl } from "config";
+// import { useDispatch } from "react-redux";
+// import { setCurrentUser } from "@components/store/Auth";
+import { getUserDetails } from "@components/Api";
 import SideBar from "./SideBar";
+import NavBar from "./NavBar";
 
 const DashboardLayout = ({ children }) => {
   const router = useRouter();
@@ -14,16 +19,23 @@ const DashboardLayout = ({ children }) => {
     }
   }, []);
 
+   useEffect(() => {
+    getUserDetails(localStorage.getItem("userEmail")).then((data) =>{ console.log(data); sessionStorage.setItem("userDetails", JSON.stringify(data))})
+  }, []);
+
+  
+
+
   return (
     <div className="flex ">
-      <div className="smallLaptop:w-[23%]">
+      <div className=" smallLaptop:min-w-[21%] ">
         <SideBar />
       </div>
-      <div className="w-[77%] ">
-        <div className="fixed w-[77%] bg-HavannaGreen-light">
+      <div className="smallLaptop:min-w-[79%] ">
+        <div className="fixed smallLaptop:min-w-[79%]  bg-HavannaGreen-light">
           <NavBar />
         </div>
-        <div className="bg-HavannaGreen-light mt-20 h-full">{children}</div>
+        <div className="bg-HavannaGreen-light h-full mt-20">{children}</div>
       </div>
     </div>
   );

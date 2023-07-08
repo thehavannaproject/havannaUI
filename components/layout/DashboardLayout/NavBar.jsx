@@ -1,21 +1,27 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
 import CustomLink from "@components/atoms/CustomLink/CustomLink";
-
 import Icon from "@atoms/Icons";
 
 const NavBar = () => {
+  const [display, setDisplay] = useState();
+  const [userDetails, setUserDetails] = useState({});
+
   const router = useRouter();
 
-  const [display, setDisplay] = useState();
+    useEffect(() => {
+      const userDetails = JSON.parse(sessionStorage.getItem("userDetails"));
+      setUserDetails(userDetails);
+    }, []);
 
   const date = new Date();
   const year = date.toLocaleString("default", { dateStyle: "full" });
+
+
   return (
     <>
-      <div className="flex justify-between relative bg-white pl-6 pr-[36px] py-5 border-b-[1px]">
-        <p className="flex justify-center text-16 items-center text-HavannaGreen-300 font-bold">{year} </p>
+      <div className="flex smallLaptop:h-[80px] justify-between relative bg-white z-20 pl-6 pr-[36px] py-5 shadow-md  border-b-[1px]">
+        <p className="flex justify-center text-16 items-center text-HavannaGreen-300">{year} </p>
         <div className="flex">
           <Icon className="mr-[45px] pt-3" name="bell" />
           <div
@@ -25,7 +31,7 @@ const NavBar = () => {
             }}
           >
             <Icon name="user" />
-            <p className="pt-3 ml-2">Bimbo Oni </p>
+            <p className="pt-3 ml-2">{userDetails.firstName + " " + userDetails.lastName}</p>
             <Icon className="mt-5 ml-3 " name="angleDown" />
           </div>
         </div>

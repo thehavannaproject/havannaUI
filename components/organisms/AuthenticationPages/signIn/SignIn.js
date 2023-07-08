@@ -6,10 +6,8 @@ import Link from "next/link";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import * as Yup from "yup";
-import { useDispatch } from "react-redux";
 
 import { REGEX } from "@components/shared/libs/helpers.js";
-import { setCurrentUser } from "@components/store/Auth";
 
 import Button from "@atoms/CustomButton/CustomButton";
 import FormikCustomInput from "@atoms/CustomInput/FormikCustomInput";
@@ -30,7 +28,6 @@ const SignIn = () => {
   const [loading, setLoading] = useState(false);
 
   const router = useRouter();
-  const dispatch = useDispatch();
 
   const handleSubmit = (values) => {
     setLoading(true);
@@ -48,7 +45,7 @@ const SignIn = () => {
     })
       .then((response) => {
         localStorage.setItem("token", response.data.data.token);
-        dispatch(setCurrentUser(response.data.data));
+        localStorage.setItem("userEmail", response.data.data.emailAddress);
         setLoading(false);
         router.push("/dashboard");
       })

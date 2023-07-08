@@ -114,7 +114,7 @@ const MailListSection = () => {
                           />
                         </div>
                       </div>
-                      <div className="mt-8 tablet:mt-8 tablet:w-1/2 tablet:m-auto">
+                      <div className="mt-8 tablet:mt-8 tablet:w-full tablet:m-auto">
                         <Button
                           customClass="text-12 text-white border h-[46px] bg-[#0B4340] text-center tablet:text-16 font-bold !w-full rounded-md"
                           isLoading={loading}

@@ -59,7 +59,7 @@ const SideBar = () => {
 
   return (
     <>
-      <div className=" h-fill border-r-[1px]  ">
+      <div className=" w-full fixed max-w-[21%] border-r-[1px]">
         <div className="border-b-[1px] py-4 pl-6">
           <Link href="/">
             <a>
@@ -73,14 +73,14 @@ const SideBar = () => {
               <CustomLink destination={data.link}>
                 <div className={` px-6 cursor-pointer py-4 mt-6 h-[58px] flex text-HavannaGreen-primary justify-between `}>
                   <p>{data.title}</p>
-                  <Icon name={data.icon} />
+                  <Icon className="text-black" fill={routerName.includes(data.name) ? "#0E5854" : "#6B7276" } name={data.icon} />
                 </div>
               </CustomLink>
             </div>
           ))}
 
           <div
-            className="smallLaptop:mt-[120px] mt-[460px] flex gap-[131.5px] font-mulish"
+            className="smallLaptop:mt-[50px] mt-[50px] ml-6 flex gap-[101.5px] font-mulish"
             onClick={() => {
               localStorage.removeItem("token");
               router.push("/auth/login");
