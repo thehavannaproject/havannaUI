@@ -1,19 +1,24 @@
 import BalanceCard from "@blocks/DashBoardCard/BalanceCard";
 import React from "react";
+import { useSelector } from "react-redux";
 
 const MainDashboard = () => {
+
+
+  const { user } = useSelector((state) => (state.Auth))
+
   return (
     <section className="font-mulish pt-[38px] pl-8 pr-[46px] bg-HavannaGreen-light h-full  ">
       <div className="smallLaptop:flex  justify-between pb-[46px]">
         <div>
-          <h1 className="font-bold text-24 leading-8">Hello Bimbo!</h1>
+          <h1 className="font-bold text-24 leading-8">Hello {user.firstName}!</h1>
           <p className="font-normal text-16 leading-6 mb-4 ">Maintain and grow your investments here.</p>
         </div>
         <div>
           <button className="bg-HavannaGreen-primary text-white w-[200px] h-[52px] rounded-lg ">Add money +</button>
         </div>
       </div>
-      <div className="text-white font-mulish smallLaptop:flex-wrap smallLaptop:flex gap-[35px] pb-[60px]    ">
+      <div className="text-white font-mulish smallLaptop:flex gap-[10px] pb-[60px]    ">
         {BalanceCardData.map((data, index) => (
           <div className="" key={index}>
             <BalanceCard description={data.description} icon={data.icon} price={data.balance} title={data.name} />

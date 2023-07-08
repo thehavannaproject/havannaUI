@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Form, Formik } from "formik";
 import axios from "axios";
 import { baseUrl } from "config";
@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 
 import Icon from "@components/atoms/Icons";
-import { setProfile } from "@components/store/Account";
+// import { setProfile } from "@components/store/Account";
 import Button from "@atoms/CustomButton/CustomButton";
 import FormikCustomInput from "@atoms/CustomInput/FormikCustomInput";
 
@@ -15,30 +15,10 @@ import FormikCustomInput from "@atoms/CustomInput/FormikCustomInput";
 const PersonalInformation = () => {
   const [loading, setLoading] = useState(false);
   const [profilePicture, setProfilePicture] = useState(null);
-
-
-  const handleProfilePictureUpload = (event) => {
-    const file = event.target.files[0];
-    setProfilePicture(file);
-  };
-
-  const handleSubmit = (values) => {
-    setOpen(true);
-    dispatch(setProfile({ ...values, profilePicture }));
-    console.log(values);
-  };
-
-
-  const dispatch = useDispatch();
-  const { profile } = useSelector((state) => state.Account);
+  // const dispatch = useDispatch();
   const { user } = useSelector((state) => state.Auth);
-
-  const firstName = user?.customerName?.split(" ")[0];
-
-
-
+  // const firstName = user?.customerName?.split(" ")[0];
   const router = useRouter();
-
   const [reference, setRefernce] = useState("");
   const [open, setOpen] = useState(false);
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
@@ -48,6 +28,12 @@ const PersonalInformation = () => {
   const [phoneNumber, setPhoneNumber] = useState("234");
 
   const mergeOtp = otp.join("");
+
+
+  const handleProfilePictureUpload = (event) => {
+    const file = event.target.files[0];
+    setProfilePicture(file);
+  };
 
   const handleOtpChange = (index, event) => {
     const newOtp = [...otp];
@@ -63,7 +49,11 @@ const PersonalInformation = () => {
     setRefernce(localStorage.getItem("reference"));
   }, []);
 
-  const handleVerify = () => {
+  // const handleOtp = () => {
+  //   console.log("anything");
+  // }
+
+  const handleOtp = () => {
     setLoading(true);
     axios({
       method: "POST",
@@ -79,15 +69,20 @@ const PersonalInformation = () => {
       .then((response) => {
         response;
         setLoading(false);
-        router.push("/dashboard");
+        if (response.data === "invalid token") {
+          toast.error(`OTP is incorrect`);
+          setLoading(false)
+        }
+        else {
+          router.push("/dashboard");
+        }
       })
       .catch(() => {
-        toast.error(`OTP is incorrect`);
         setLoading(false);
       });
   };
 
-  const handleSend = () => {
+  const handleSubmit = (values) => {
     axios({
       method: "POST",
       url: `${baseUrl}/account/send-otp`,
@@ -97,23 +92,32 @@ const PersonalInformation = () => {
       data: {
         customer_mobile_number: phoneNumber,
         customer_email_address: user.emailAddress,
-        first_name: firstName,
+        first_name: values.firstName,
       },
     })
       .then((response) => {
         localStorage.setItem("reference", response.data.data.reference);
-        router.push("");
+        setOpen(true);
+        // dispatch(setProfile({ ...values, profilePicture }));
       })
       .catch(() => {
         toast.error("OTP could not be sent");
       });
   };
 
-  useEffect(() => {
-    if (phoneNumber.length > 12) {
-      handleSend();
-    }
-  }, [phoneNumber]);
+  // const handleSubmit = (values) => {
+  //   if (values) {
+  //     handleSend();
+  //     setOpen(true);
+  //   }
+  //   dispatch(setProfile({ ...values, profilePicture }));
+  // };
+
+  // useEffect(() => {
+  //   if (phoneNumber.length > 12) {
+  //     handleSend();
+  //   }
+  // }, [phoneNumber]);
 
   const handleClose = () => {
     setOpen(false);
@@ -151,14 +155,14 @@ const PersonalInformation = () => {
 
         <Formik
           initialValues={{
-            firstName: profile.firstName || "",
-            lastName: profile.lastName || "",
-            email: profile.email || "",
-            phoneNumber: profile.phoneNumber || phoneNumber,
-            gender: profile.gender || "",
-            occupation: profile.occupation || "",
-            date: profile.date || "",
-            address: profile.address || "",
+            firstName: user.firstName || "",
+            lastName: user.lastName || "",
+            email: user.emailAddress || "",
+            phoneNumber: user.phoneNumber || phoneNumber,
+            gender: user.gender || "",
+            occupation: user.occupation || "",
+            date: user.dateOfBirth || "",
+            address: user.address || "",
           }}
           onSubmit={handleSubmit}
           validate={(values) => {
@@ -326,7 +330,7 @@ const PersonalInformation = () => {
                 initialValues={{
                   otp: "",
                 }}
-                onSubmit={handleSubmit}
+                onSubmit={handleOtp}
               >
                 {() => (
                   <Form>
@@ -383,7 +387,7 @@ const PersonalInformation = () => {
                   </Form>
                 )}
               </Formik>
-              <Button className="bg-HavannaGreen-primary text-white w-full h-[58px] rounded-lg mt-10 mb-[72px] " isLoading={loading} onClick={handleVerify}>
+              <Button customClass="bg-HavannaGreen-primary text-white w-full h-[58px] rounded-lg mt-10 mb-[72px] " isLoading={loading} onClick={handleOtp} >
                 Verify Otp
               </Button>
             </div>

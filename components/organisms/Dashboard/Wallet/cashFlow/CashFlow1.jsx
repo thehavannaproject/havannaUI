@@ -13,7 +13,7 @@ const CashFlow1 = () => {
           </div>
           <div className="flex justify-center gap-[9.34px] border-b-2 border-HavannaGreen-secondary w-[33%] m-auto">
             <Icon className="mt-8 " name="naira" />
-            <h1 className=" mt-6 font-bold text-center text-36 leading-[44px]  ">30,000.00</h1>
+            <h1 className=" mt-6 font-bold text-center text-[#4F5457] text-36 leading-[44px]  ">30,000.00</h1>
           </div>
         </div>
         <h1 className="font-bold text-20 leading-[26px] pl-6 mt-[60px]">Recent Transactions</h1>

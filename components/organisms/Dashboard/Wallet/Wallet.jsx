@@ -22,12 +22,14 @@ const Wallet = () => {
     };
   }, []);
 
+  
+
   const handleButtonClick = () => {
     setIsModalOpen(true);
   };
 
   return (
-    <div className="bg-HavannaGreen-light h-full relative">
+    <div className="bg-HavannaGreen-light h-full w-full relative">
       <section className=" font-mulish">
         <hr className="" />
         <div className=" bg-white w-[900px] h-[551px] mx-[4%] shadow-xl rounded-xl mt-[52px] mb-[342px] text-center">
@@ -36,7 +38,7 @@ const Wallet = () => {
               <h1 className="text-[#4F5457] font-bold text-24 leading-8 ">Wallet Balance</h1>
               <Icon className="" name="eyeIconSolid" />
             </div>
-            <h1 className=" mt-6 font-bold text-36 leading-[44px]  ">N 0.00</h1>
+            <h1 className=" mt-6 font-bold text-36 leading-[44px] text-[#4F5457]  ">N 0.00</h1>
             <hr className="w-[25%]  border-HavannaGreen-secondary m-auto border" />
           </div>
           <p className="font-medium mt-[120px] text-20 leading-[26px] text-[#3B3F42]">You don’t have any recent transaction</p>
