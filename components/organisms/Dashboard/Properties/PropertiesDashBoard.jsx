@@ -48,11 +48,11 @@ const PropertiesDashBoard = () => {
                 <Icon className="w-[18px] h-[18px] pl-[15px] absolute top-4 " name="search" />
               </div>
             </div>
-            <div>
+            <div className="mt-4">
               <button className="bg-HavannaGreen-primary w-[200px] h-[52px] rounded-lg text-white tablet:mt- mb-10 bigLaptop:  ">Search</button>
             </div>
           </div>
-          <div className="border-[1.5px] rounded-xl bg-white border-[#8F8F8F]">
+          <div className="border-[1.5px] rounded-xl bg-white px-2 border-[#8F8F8F]">
             <h1 className="px-5 pt-10 pb-9">All Properties</h1>
             <table className=" w-full px-4  cursor-pointer shadow-xl  ">
               <thead className="">

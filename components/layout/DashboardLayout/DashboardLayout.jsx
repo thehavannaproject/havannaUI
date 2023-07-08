@@ -16,7 +16,7 @@ const DashboardLayout = ({ children }) => {
 
   return (
     <div className="flex ">
-      <div className="smallLaptop:min-w-[23%]">
+      <div className="smallLaptop:w-[23%]">
         <SideBar />
       </div>
       <div className="w-[77%] ">
