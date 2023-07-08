@@ -19,7 +19,7 @@ const DashboardLayout = ({ children }) => {
     }
   }, []);
 
-   useEffect(() => {
+  useEffect(() => {
     getUserDetails(localStorage.getItem("userEmail")).then((data) =>{ console.log(data); sessionStorage.setItem("userDetails", JSON.stringify(data))})
   }, []);
 

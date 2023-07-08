@@ -7,14 +7,15 @@ import Icon from "@components/atoms/Icons";
 import CustomButton from "@components/atoms/CustomButton/CustomButton";
 
 const FundWallet = ({ setIsModalOpen }) => {
-  const [amount, setAmount] = useState(0)
+  const [amount, setAmount] = useState(null)
+  
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
 
   const config = {
     reference: (new Date()).getTime().toString(),
-    email: "user@example.com",
+    email: localStorage.getItem("userEmail"),
     amount: amount * 100, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
     publicKey: 'pk_test_1d9326aed821f7d3fade951742ab65b0070de23d',
   };
@@ -54,7 +55,7 @@ const FundWallet = ({ setIsModalOpen }) => {
                          placeholder:text-citiGray-300 "
                         name="amount"
                         onChange={(e) => setAmount(e.target.value)}
-                        placeholder="Enter amount e.g 5,000"
+                        placeholder="Enter amount e.g 5000"
                         required
                         type="number"
                         value={amount}

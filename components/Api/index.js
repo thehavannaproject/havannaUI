@@ -11,6 +11,24 @@ export const getUserDetails = async (email) => {
     }
 };
 
+export const sendPhoneOtp = async (data) => {
+    try {
+        const response = await axios.post(`${baseUrl}/account/send-otp`, data)
+        return response.data.data;
+    } catch (error) {
+        return error;
+    }
+};
+
+export const verifyPhoneOtp = async (data) => {
+    try {
+        const response = await axios.post(`${baseUrl}/account/verify-otp`, data)
+        return response.data.data;
+    } catch (error) {
+        return error;
+    }
+};
+
 export const getAllTransactionHistory = async (id) => {
     try {
         const response = await axios.post(`${baseUrl}/transactions/history?customerId=${id}`)
