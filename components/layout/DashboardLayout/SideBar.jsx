@@ -59,7 +59,7 @@ const SideBar = () => {
 
   return (
     <>
-      <div className=" h-fill fixed max-w-[23%] border-r-[1px]  ">
+      <div className=" w-full fixed max-w-[21%] border-r-[1px]">
         <div className="border-b-[1px] py-4 pl-6">
           <Link href="/">
             <a>

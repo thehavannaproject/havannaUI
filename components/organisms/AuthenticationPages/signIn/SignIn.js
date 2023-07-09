@@ -45,7 +45,7 @@ const SignIn = () => {
     })
       .then((response) => {
         localStorage.setItem("token", response.data.data.token);
-        localStorage.setItem("userEmail", values.email)
+        localStorage.setItem("userEmail", response.data.data.emailAddress);
         setLoading(false);
         router.push("/dashboard");
       })

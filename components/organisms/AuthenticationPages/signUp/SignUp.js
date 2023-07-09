@@ -58,7 +58,7 @@ const SignUp = () => {
       .catch((error) => {
         setLoading(false);
         console.log(error);
-        toast(`${error.response.data.message} `);
+        toast(`${error.response.data.description} `);
       });
   };
 

@@ -74,7 +74,7 @@ const PropertiesDashBoard = () => {
               </button>
             </div>
           </div>
-          <div className="border-[1.5px] rounded-xl bg-white border-[#8F8F8F]">
+          <div className="border-[1.5px] rounded-xl bg-white px-2 border-[#8F8F8F]">
             <h1 className="px-5 pt-10 pb-9">All Properties</h1>
             <table className="w-full cursor-pointer shadow-xl">
               <thead className="">

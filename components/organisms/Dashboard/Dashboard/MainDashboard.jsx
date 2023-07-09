@@ -1,17 +1,46 @@
 import BalanceCard from "@blocks/DashBoardCard/BalanceCard";
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { getCustomerWallet } from "@components/Api";
 
 const MainDashboard = () => {
+  const [userDetails, setUserDetails] = useState({});
+  const [wallet, setWallet] = useState([]);
+
+  useEffect(() => {
+    const userDetails = JSON.parse(sessionStorage.getItem("userDetails"));
+    setUserDetails(userDetails);
+  }, []);
+
+  useEffect(() => {
+    getCustomerWallet(userDetails.id).then((data) =>{if(data) { setWallet(data);} });
+  }, []);
 
 
-  const { user } = useSelector((state) => (state.Auth))
-
+  const BalanceCardData = [
+  {
+    balance:  `₦${wallet[0]?.availableBalance.toLocaleString()}`,
+    name: "Wallet Balance",
+    description: "Total money in your wallet",
+    icon: "wallet2",
+  },
+  {
+    balance: "0.00",
+    name: "Properties Value",
+    description: "Total worth of your properties",
+    icon: "propertiesWallet",
+  },
+  {
+    balance:  `₦${wallet[0]?.availableBalance.toLocaleString()}`,
+    name: "Cash Flow",
+    description: "Accumulated income",
+    icon: "cashFlowWallet",
+  },
+];
   return (
     <section className="font-mulish pt-[38px] pl-8 pr-[46px] bg-HavannaGreen-light h-full  ">
       <div className="smallLaptop:flex  justify-between pb-[46px]">
         <div>
-          <h1 className="font-bold text-24 leading-8">Hello {user.firstName}!</h1>
+          <h1 className="font-bold text-24 leading-8">Hello {userDetails?.firstName}!</h1>
           <p className="font-normal text-16 leading-6 mb-4 ">Maintain and grow your investments here.</p>
         </div>
         <div>
@@ -39,23 +68,4 @@ const MainDashboard = () => {
 
 export default MainDashboard;
 
-const BalanceCardData = [
-  {
-    balance: "0.00",
-    name: "Wallet Balance",
-    description: "Total money in your wallet",
-    icon: "wallet2",
-  },
-  {
-    balance: "0.00",
-    name: "Properties Value",
-    description: "Total worth of your properties",
-    icon: "propertiesWallet",
-  },
-  {
-    balance: "0.00",
-    name: "Cash Flow",
-    description: "Accumulated income",
-    icon: "cashFlowWallet",
-  },
-];
+

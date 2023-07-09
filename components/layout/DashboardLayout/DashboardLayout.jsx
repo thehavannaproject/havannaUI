@@ -1,17 +1,16 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
-import axios from "axios";
-import { baseUrl } from "config";
-import { useDispatch } from "react-redux";
-import { setCurrentUser } from "@components/store/Auth";
+// import axios from "axios";
+// import { baseUrl } from "config";
+// import { useDispatch } from "react-redux";
+// import { setCurrentUser } from "@components/store/Auth";
+import { getUserDetails } from "@components/Api";
 import SideBar from "./SideBar";
 import NavBar from "./NavBar";
 
 const DashboardLayout = ({ children }) => {
   const router = useRouter();
-  const dispatch = useDispatch();
-
 
   useEffect(() => {
     const Token = localStorage.getItem("token");
@@ -20,23 +19,12 @@ const DashboardLayout = ({ children }) => {
     }
   }, []);
 
-  
   useEffect(() => {
-    const userEmail = localStorage.getItem("userEmail");
-    axios({
-      method: "GET",
-      url: `${baseUrl}/account/customer/details/${userEmail}`,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => {
-        dispatch(setCurrentUser(response.data.data));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    getUserDetails(localStorage.getItem("userEmail")).then((data) =>{ console.log(data); sessionStorage.setItem("userDetails", JSON.stringify(data))})
   }, []);
+
+  
+
 
   return (
     <div className="flex ">
