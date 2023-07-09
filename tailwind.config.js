@@ -51,10 +51,14 @@ module.exports = {
           light: "#F3FCFB",
           tertiaryMain: "#F1BC00",
           100: "#F3FCFB",
+          300: "#6B7276",
           600: "#0E5854",
         },
         HavannaBlack: {
           primary: "#3B3F42",
+        },
+        HavannaRed: {
+          primary: "#B82323",
         },
       },
     },

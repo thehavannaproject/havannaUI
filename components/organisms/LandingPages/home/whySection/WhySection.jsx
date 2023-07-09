@@ -3,29 +3,24 @@ import * as Animate from "react-reveal";
 
 const WhySection = () => {
   return (
-    <section className="px-5 text-HavannaBlack-primary smallLaptop:px-[120px] py-[60px] bg-HavannaGreen-light font-mulish mt-[58px]">
+    <section className="px-5 tablet:px-[120px] py-[60px] bg-HavannaGreen-light font-mulish mt-[58px]">
       <div className="">
         <div className="tablet:w-1/2">
           <Animate.Fade bottom>
             <h2 className="text-24 tablet:text-36 leading-8 text-HavannaGreen-primary text-center tablet:text-left font-bold tablet:leading-[44px]">
               Why Real Estate Asset Slots <span className="text-HavannaGreen-tertiaryMain">(REAS)</span>?
             </h2>
-            <p className="mt-4 font-medium leading-5 tablet:leading-6 text-center tablet:text-left pb-4">
+            <p className="mt-4 font-medium leading-6 tablet:leading-6 text-center text-16 tablet:text-left pb-4">
               Real Estate Asset Slots (REAS) are units of real estate assets such as income-producing residential or industrial properties, high-growth lands, and ongoing or
               proposed estate development projects.
             </p>
           </Animate.Fade>
         </div>
-        <div className="mt-6 tablet:grid tablet:grid-cols-2 smallLaptop:flex smallLaptop:flex-wrap  smallLaptop:mr-4">
+
+        <div className="mt-6 tablet:grid tablet:grid-cols-2  smallLaptop:grid-cols-4 tablet:gap-4">
           {CardContent.map((data, index) => (
-            <div className="mt-6 mr-[26px]" key={index}>
-              <Card
-                customClass="p-6 text-HavannaBlack-primary smallLaptop:h-[440px] smallLaptop:!w-[352px]  bigLaptop:!w-[352px] bigLaptop:!h-[440px]"
-                description={data.description}
-                icon={data.icon}
-                iconClass="mb-6 tablet:mt-10"
-                title={data.title}
-              />
+            <div className="mt-6 text-14 leading-5  " key={index}>
+              <Card customClass="p-6 h-[44]" description={data.description} icon={data.icon} iconClass="mb-6 tablet:mt-10" title={data.title} />
             </div>
           ))}
         </div>
@@ -51,7 +46,7 @@ const CardContent = [
   },
   {
     icon: "cardIcon3",
-    title: "Diversify without limits",
+    title: "Diversification",
     description:
       "Shield yourself from highly volatile investments and diversify your portfolio with real estate. We offer you the opportunity to diversify your investment to various asset classes.",
   },

@@ -18,11 +18,12 @@
       "error",
       {
         // useful thing to note: For every new absolute path added in tsconf.json, add the respective path here in the same order also to ensure consistency
-        "newlinesBetween": "always",
+        // "newlinesBetween": "always",
         "groups": [
           "module",
           "/^@components/",
           "/^@hooks/",
+          "/^@styles/",
           "/^@graphql/",
           "/^@schemas/",
           "/^@dto/",
@@ -38,8 +39,7 @@
           "/^@skeletons/",
           "/^@modals/",
           ["parent", "sibling", "index"]
-        ],
-        "alphabetize": { "order": "asc", "ignoreCase": true }
+        ]
       }
     ],
     "react/jsx-sort-props": [

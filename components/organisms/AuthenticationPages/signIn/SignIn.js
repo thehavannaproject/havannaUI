@@ -44,7 +44,8 @@ const SignIn = () => {
       },
     })
       .then((response) => {
-        response;
+        localStorage.setItem("token", response.data.data.token);
+        localStorage.setItem("userEmail", response.data.data.emailAddress);
         setLoading(false);
         router.push("/dashboard");
       })
@@ -56,9 +57,13 @@ const SignIn = () => {
   };
 
   return (
-    <section className={`pt-14 smallLaptop:pt-28  pb-28 smallLaptop:pb-32 px-4 tablet:px-0 font-mulish bg-HavannaGreen-primary`}>
+    <section
+      className={`smallLaptop:pt-28 min-h-screen  pt-20 smallLaptop:pb-32 px-4 tablet:px-0
+       font-mulish
+     smallLaptop:bg-HavannaGreen-primary  bg-HavannaGreen-light`}
+    >
       <div className="  ">
-        <div className="flex justify-center">
+        <div className="smallLaptop:flex hidden justify-center">
           <Link href="/">
             <a>
               <span className="sr-only">Havanna</span>
@@ -68,9 +73,9 @@ const SignIn = () => {
         </div>
 
         <div
-          className=" bg-white tablet:mt-[154px] mt-8 
+          className=" smallLaptop:bg-white tablet:mt-[154px] mt-8 
             rounded-[20px] tablet:m-auto tablet:rounded-[32px]
-             w-full tablet:w-[60%] px-[120px]  "
+             w-full tablet:w-[60%] smallLaptop:px-[120px]   "
         >
           <ToastContainer />
           <Formik
@@ -83,11 +88,20 @@ const SignIn = () => {
           >
             {() => (
               <Form>
-                <div className="m-auto justify-center items-center  ">
+                <div className="   ">
                   <div className="flex justify-center">
                     <div>
-                      <h1 className="font-bold text-[32px] pt-10 text-center   ">Welcome back</h1>
-                      <p className="font-medium text-base pt-3 pb-16  ">Log in to your account and start investing.</p>
+                      <h1
+                        className=" text-center font-bold text-[28px] leading-9 
+                        pt-10 text-[#3B3F42] "
+                      >
+                        Welcome back
+                      </h1>
+
+                      <p className="font-medium text-base pt-3 pb-16 hidden smallLaptop:block leading-5   ">Log in to your account and start investing.</p>
+                      <p className="smallLaptop:hidden font-mulish font-medium pt-3 leading-5 items-center text-center ">
+                        Log in to your account and start investing with <span className="text-HavannaGreen-tertiaryMain">Havanna</span>
+                      </p>
                     </div>
                   </div>
 
@@ -118,6 +132,9 @@ const SignIn = () => {
                       type="password"
                     />
                   </div>
+                  <div className="mt-3 text-HavannaGreen-primary font-mulish font-medium text-14 leading-[18px] flex justify-end cursor-pointer ">
+                    <CustomLink destination="/auth/forgot-password">Forgot Password?</CustomLink>
+                  </div>
                 </div>
                 <div className="mt-10 ">
                   <Button customClass=" text-4 h-[46px] text-white bg-[#0B4340] text-center tablet:text-16 font-bold !w-full rounded-md" isLoading={loading} title=" Log In" />
@@ -126,7 +143,7 @@ const SignIn = () => {
                   <div className=" pb-20 flex">
                     Don’t have an account?&nbsp;
                     <span className="font-bold text-base text-HavannaGreen-primary">
-                      <CustomLink destination="sign-up">Create an account</CustomLink>
+                      <CustomLink destination="/auth/sign-up">Create an account</CustomLink>
                     </span>
                   </div>
                 </div>

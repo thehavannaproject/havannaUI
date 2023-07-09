@@ -105,7 +105,7 @@ const MailListSection = () => {
                             Phone Number
                           </label>
                           <FormikCustomInput
-                            className={`rounded-md w-full h-[46px] mt-2 border`}
+                            className={`rounded-md w-full h-[46px] tablet:mt-6 border`}
                             id="phoneNumber"
                             inputClassName="placeholder:text-14 outline-none  placeholder:text-citiGray-300 "
                             name="phoneNumber"

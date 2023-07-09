@@ -5,7 +5,7 @@ import React from "react";
  * @return {React.Component} Icon component
  */
 
-const Icon = ({ name, className, ...props }) => {
+const Icon = ({ name, className, onClick,fill, ...props }) => {
   if (name === "") {
     return null;
   }
@@ -14,8 +14,8 @@ const Icon = ({ name, className, ...props }) => {
     const Image = require(`./stock/${name}`).default;
     if (Image) {
       return (
-        <div className={className}>
-          <Image aria-label={name} {...props} />
+        <div className={className} onClick={onClick}>
+          <Image aria-label={name} fill={fill}  {...props}  />
         </div>
       );
     }

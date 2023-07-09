@@ -1,19 +1,5 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": false,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
     "baseUrl": ".",
     "paths": {
       //These will be updated accordingly in future..These are just to accomodate absolute imports around the application.
@@ -31,17 +17,5 @@
       "@images/*": ["public/images/*"],
       "@modals/*": ["skeletons/*"]
     }
-  },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "components/atoms/Icons/stock/eyeIcon.jsx",
-    "components/atoms/Icons/stock/eyeIcon.jsx",
-    "components/blocks/card/OpportunityCard.jsx",
-    "components/blocks/card/OpportunityCard.jsx",
-    "components/shared/libs/helpers.js",
-    "components/shared/libs/helpers.js"
-  ],
-  "exclude": ["node_modules"]
+  }
 }
