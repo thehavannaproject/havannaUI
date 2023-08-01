@@ -49,6 +49,9 @@ const NavBar = () => {
               className="flex gap-3 mt-5 cursor-pointer "
               onClick={() => {
                 localStorage.removeItem("token");
+                sessionStorage.removeItem("userDetails");
+                localStorage.removeItem("reference");
+                localStorage.removeItem("userEmail");
                 router.push("/auth/login");
               }}
             >
