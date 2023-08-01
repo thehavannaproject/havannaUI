@@ -22,7 +22,7 @@ const PropertiesDashBoard = () => {
 
   return (
     <div>
-      <section className="font-mulish pl-8 pr-[46px] pb-[91px]">
+      <section className="font-mulish pl-8 pr-[46px] pb-[91px] ">
         <div>
           <h1 className="text-24 leading-8 font-bold text-HavannaGreen-primary pt-8">My Properties</h1>
           <div className="pt-8 bigLaptop:flex justify-between  ">

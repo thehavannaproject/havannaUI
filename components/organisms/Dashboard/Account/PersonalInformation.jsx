@@ -132,7 +132,7 @@ const PersonalInformation = () => {
             return errors;
           }}
         >
-          {() => (
+          {(//../) => (
             <Form className="smallLaptop:flex flex-wrap smallLaptop:pl-11 px-3 mt-6 gap-8">
               <div className="smallLaptop:grid items-center grid-cols-2 gap-8">
                 <div className="mt-4 ">
@@ -196,9 +196,12 @@ const PersonalInformation = () => {
                     required
                     type="number"
                   />
-                  <p className="absolute right-2 top-1/2 bg-HavannaGreen-primary text-white px-4 py-1 rounded-md" onClick={sendOtp}>
-                    Verify
-                  </p>
+                  {userDetails.phoneNumberVerificationStatus === false ? (
+                    <p className="absolute right-2 top-1/2 bg-HavannaGreen-primary text-white px-4 py-1 rounded-md" onClick={sendOtp}>
+                      Verify
+                    </p>
+                  ) : <div>Verified</div>}
+                  
                 </div>
 
                 <div className="mt-4 ">
