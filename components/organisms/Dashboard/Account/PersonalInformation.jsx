@@ -98,9 +98,9 @@ const PersonalInformation = () => {
             {profilePicture ? (
               <img alt="Profile Picture" className="rounded-full w-24 h-24" src={URL.createObjectURL(profilePicture)} />
             ) : (
-              <Icon className="w-24 h-24" name="userProfile" />
+              <Icon className="w-24 h-24 mb-4" name="userProfile" />
             )}
-            <input accept=".png, .jpeg, .jpg" className="mt-10" onChange={handleProfilePictureUpload} type="file" />
+            <input accept=".png, .jpeg, .jpg" className="mt-10"  onChange={handleProfilePictureUpload} type="file" />
             <p className="font-bold text-16 leading-[22px] mt-[10px]">Upload your profile picture</p>
           </div>
         </div>

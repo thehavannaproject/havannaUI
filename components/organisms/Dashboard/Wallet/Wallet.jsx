@@ -8,6 +8,7 @@ const Wallet = () => {
   const modalRef = useRef(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [hide, setHide] = useState(true);
   const [wallet, setWallet] = useState([]);
 
   const [userDetails, setUserDetails] = useState({});
@@ -48,9 +49,9 @@ const Wallet = () => {
           <div className="">
             <div className="flex gap-[25.64px] justify-center pt-6">
               <h1 className="text-[#4F5457] font-bold text-24 leading-8 ">Wallet Balance</h1>
-              <Icon className="" name="eyeIconSolid" />
+              <Icon name="eyeIconSolid" onClick={() => setHide(!hide)} />
             </div>
-            {loading ? <Skeleton className="w-[227px] h-9 m-auto"/>  : (<h1 className=" mt-6 font-bold text-36 leading-[44px] text-[#4F5457]  ">₦ {wallet[0]?.availableBalance.toLocaleString()}</h1>)}
+            {loading ? <Skeleton className="w-[227px] h-9 m-auto"/>  : (<div>{hide && <h1 className=" mt-6 font-bold text-36 leading-[44px] text-[#4F5457]  ">₦ {wallet[0]?.availableBalance.toLocaleString()}</h1>}</div>)}
             
             <hr className="w-[25%]  border-HavannaGreen-secondary m-auto border" />
           </div>
