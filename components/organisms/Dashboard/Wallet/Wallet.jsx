@@ -34,7 +34,12 @@ const Wallet = () => {
 
   useEffect(() => {
     setLoading(true);
-    getCustomerWallet(userDetails.id).then((data) =>{if(data) {setLoading(false); setWallet(data);} });
+    getCustomerWallet(userDetails.id).then((data) => {
+      if (data) {
+        setLoading(false);
+        setWallet(data);
+      }
+    });
   }, []);
 
   const handleButtonClick = () => {
@@ -51,8 +56,12 @@ const Wallet = () => {
               <h1 className="text-[#4F5457] font-bold text-24 leading-8 ">Wallet Balance</h1>
               <Icon name="eyeIconSolid" onClick={() => setHide(!hide)} />
             </div>
-            {loading ? <Skeleton className="w-[227px] h-9 m-auto"/>  : (<div>{hide && <h1 className=" mt-6 font-bold text-36 leading-[44px] text-[#4F5457]  ">₦ {wallet[0]?.availableBalance.toLocaleString()}</h1>}</div>)}
-            
+            {loading ? (
+              <Skeleton className="w-[227px] h-9 m-auto" />
+            ) : (
+              <div>{hide && <h1 className=" mt-6 font-bold text-36 leading-[44px] text-[#4F5457]  ">₦ {wallet[0]?.availableBalance.toLocaleString()}</h1>}</div>
+            )}
+
             <hr className="w-[25%]  border-HavannaGreen-secondary m-auto border" />
           </div>
           <p className="font-medium mt-[120px] text-20 leading-[26px] text-[#3B3F42]">You don’t have any recent transaction</p>

@@ -32,7 +32,6 @@ function MyApp({ Component, pageProps }) {
         <Component {...pageProps} />
       </Provider>
       <ToastContainer hideProgressBar={true} />
-
     </>
   );
 }

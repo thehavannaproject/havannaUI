@@ -7,17 +7,16 @@ import Icon from "@components/atoms/Icons";
 import CustomButton from "@components/atoms/CustomButton/CustomButton";
 
 const WithdrawFund = ({ setWithdraw }) => {
-  const [amount, setAmount] = useState(0)
+  const [amount, setAmount] = useState(0);
   const handleCloseModal = () => {
     setWithdraw(false);
   };
 
-
   const config = {
-    reference: (new Date()).getTime().toString(),
+    reference: new Date().getTime().toString(),
     email: "user@example.com",
     amount: amount * 100, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
-    publicKey: 'pk_test_1d9326aed821f7d3fade951742ab65b0070de23d',
+    publicKey: "pk_test_1d9326aed821f7d3fade951742ab65b0070de23d",
   };
 
   // you can call this function anything
@@ -29,11 +28,10 @@ const WithdrawFund = ({ setWithdraw }) => {
   // you can call this function anything
   const onClose = () => {
     // implementation for  whatever you want to do when the Paystack dialog closed.
-    console.log('closed')
-  }
+    console.log("closed");
+  };
 
   const initializePayment = usePaystackPayment(config);
-
 
   return (
     <div className="fixed top-0 left-0 right-0 bottom-0 z-50 flex items-center justify-center" style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
@@ -61,7 +59,6 @@ const WithdrawFund = ({ setWithdraw }) => {
                         required
                         type="number"
                         value={amount}
-
                       />
                     </div>
                     <div className="mt-8">
@@ -85,9 +82,14 @@ const WithdrawFund = ({ setWithdraw }) => {
                   <button className="h-[60px] border-2 w-full rounded-md mt-4 flex justify-center items-center m-auto ">
                     <Icon name="paystack" />
                   </button>
-                  <CustomButton customClass=" h-[60px] w-full mt-[52px] rounded-lg bg-HavannaGreen-primary text-white mb-5 " onClick={() => {
-                    initializePayment(onSuccess, onClose)
-                  }} title="Withdraw Money" type="submit" />
+                  <CustomButton
+                    customClass=" h-[60px] w-full mt-[52px] rounded-lg bg-HavannaGreen-primary text-white mb-5 "
+                    onClick={() => {
+                      initializePayment(onSuccess, onClose);
+                    }}
+                    title="Withdraw Money"
+                    type="submit"
+                  />
                 </div>
               </div>
             </div>

@@ -1,4 +1,3 @@
-
 import HomePage from "@components/organisms/LandingPages/home/HomePage/HomePage";
 import BaseLayout from "@layout/BaseLayout/BaseLayout";
 

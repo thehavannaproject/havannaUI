@@ -28,7 +28,7 @@ const TransactionHistory = () => {
     <>
       <h1 className="font-bold text-20 leading-[26px] pl-6 mt-[60px] text-HavannaBlack-primary">Recent Transactions</h1>
       {loading ? (
-        <Skeleton className="h-[200px] w-full"/>
+        <Skeleton className="h-[200px] w-full" />
       ) : (
         <div>
           {transHistory.map((transact, index) => (

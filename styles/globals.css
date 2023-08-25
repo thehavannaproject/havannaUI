@@ -74,5 +74,21 @@
     @apply text-xl;
   }
 }
+.wallet-bg {
+  background-image: url(../public/images/svg/walletbg.svg);
+  background-repeat: no-repeat;
+}
+.card-shadow {
+  box-shadow: 0px 6px 30px 0px rgba(0, 0, 0, 0.08);
+}
 
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
 @import "./main.css";

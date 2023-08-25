@@ -1,13 +1,13 @@
-import axios from "axios";
 import { Form, Formik } from "formik";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import * as Yup from "yup";
 
 import { REGEX } from "@components/shared/libs/helpers.js";
+import { CreateUser } from "@components/Api";
 
 import Button from "@atoms/CustomButton/CustomButton";
 import FormikCustomInput from "@atoms/CustomInput/FormikCustomInput";
@@ -15,14 +15,10 @@ import CustomLink from "@atoms/CustomLink/CustomLink";
 
 import Logo from "@images/svg/Logo.svg";
 
-import { baseUrl } from "../../../../config";
-
-import "react-toastify/dist/ReactToastify.css";
-
 const SignupSchema = Yup.object().shape({
   firstName: Yup.string().required("This field is compulsory"),
   lastName: Yup.string().required("This field is compulsory"),
-  email: Yup.string().email("Invalid email").required("This field is compulsory"),
+  emailAddress: Yup.string().email("Invalid email").required("This field is compulsory"),
   password: Yup.string()
     .min(5)
     .max(50, "Too Long!")
@@ -37,19 +33,7 @@ const SignUp = () => {
 
   const handleSubmit = (values) => {
     setLoading(true);
-    axios({
-      method: "POST",
-      url: `${baseUrl}/account/register`,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: {
-        firstName: values.firstName,
-        lastName: values.lastName,
-        emailAddress: values.email,
-        password: values.password,
-      },
-    })
+    CreateUser(values)
       .then((response) => {
         setLoading(false);
         toast(`${response.data.message}. Please verify your email via link sent to your email.`);
@@ -108,12 +92,11 @@ const SignUp = () => {
                 </p>
               </div>
             </div>
-            <ToastContainer />
             <Formik
               initialValues={{
                 firstName: "",
                 lastName: "",
-                email: "",
+                emailAddress: "",
                 password: "",
               }}
               onSubmit={handleSubmit}
@@ -162,7 +145,7 @@ const SignUp = () => {
                       id="email"
                       inputClassName="placeholder:text-14 outline-none
                          placeholder:text-citiGray-300 "
-                      name="email"
+                      name="emailAddress"
                       placeholder="Your Email"
                       type="email"
                     />

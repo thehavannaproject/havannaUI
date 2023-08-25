@@ -1,23 +1,23 @@
 import { Form, Formik } from "formik";
 import React, { useState } from "react";
-import { usePaystackPayment } from 'react-paystack';
+import { usePaystackPayment } from "react-paystack";
 
 import FormikCustomInput from "@components/atoms/CustomInput/FormikCustomInput";
 import Icon from "@components/atoms/Icons";
 import CustomButton from "@components/atoms/CustomButton/CustomButton";
 
 const FundWallet = ({ setIsModalOpen }) => {
-  const [amount, setAmount] = useState(null)
-  
+  const [amount, setAmount] = useState(null);
+
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
 
   const config = {
-    reference: (new Date()).getTime().toString(),
+    reference: new Date().getTime().toString(),
     email: localStorage.getItem("userEmail"),
     amount: amount * 100, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
-    publicKey: 'pk_test_1d9326aed821f7d3fade951742ab65b0070de23d',
+    publicKey: "pk_test_1d9326aed821f7d3fade951742ab65b0070de23d",
   };
 
   // you can call this function anything
@@ -29,8 +29,8 @@ const FundWallet = ({ setIsModalOpen }) => {
   // you can call this function anything
   const onClose = () => {
     // implementation for  whatever you want to do when the Paystack dialog closed.
-    console.log('closed')
-  }
+    console.log("closed");
+  };
 
   const initializePayment = usePaystackPayment(config);
 
@@ -52,7 +52,7 @@ const FundWallet = ({ setIsModalOpen }) => {
                         border-2  `}
                         id="amount"
                         inputClassName="placeholder:text-14 outline-none
-                         placeholder:text-citiGray-300 "
+                         placeholder:text-[#ADADAD] "
                         name="amount"
                         onChange={(e) => setAmount(e.target.value)}
                         placeholder="Enter amount e.g 5000"
@@ -67,9 +67,14 @@ const FundWallet = ({ setIsModalOpen }) => {
                     <div className="h-[60px] border-2 w-full rounded-md mt-4 flex justify-center items-center m-auto ">
                       <Icon name="paystack" />
                     </div>
-                    <CustomButton customClass=" h-[60px] w-full mt-[52px] rounded-lg bg-HavannaGreen-primary text-white mb-5 " onClick={() => {
-                      initializePayment(onSuccess, onClose)
-                    }} title="Pay" type="submit"/>
+                    <CustomButton
+                      customClass=" h-[60px] w-full mt-[52px] rounded-lg bg-HavannaGreen-primary text-white mb-5 "
+                      onClick={() => {
+                        initializePayment(onSuccess, onClose);
+                      }}
+                      title="Pay"
+                      type="submit"
+                    />
                   </div>
                 </div>
               </div>

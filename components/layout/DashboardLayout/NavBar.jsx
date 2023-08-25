@@ -5,22 +5,21 @@ import Icon from "@atoms/Icons";
 
 const NavBar = () => {
   const [display, setDisplay] = useState();
-  const [userDetails, setUserDetails] = useState({});
+  const [, setUserDetails] = useState({});
 
   const router = useRouter();
 
-    useEffect(() => {
-      const userDetails = JSON.parse(sessionStorage.getItem("userDetails"));
-      setUserDetails(userDetails);
-    }, []);
+  useEffect(() => {
+    const userDetails = JSON.parse(sessionStorage.getItem("userDetails"));
+    setUserDetails(userDetails);
+  }, []);
 
   const date = new Date();
   const year = date.toLocaleString("default", { dateStyle: "full" });
 
-
   return (
     <>
-      <div className="flex smallLaptop:h-[80px] justify-between relative bg-white !z-[999] pl-6 pr-[36px] py-5 shadow-md  border-b-[1px]">
+      <div className="flex h-[80px] z-50 justify-between relative bg-white pl-6 pr-[36px] py-5 border">
         <p className="flex justify-center text-16 items-center text-HavannaGreen-300">{year} </p>
         <div className="flex">
           <Icon className="mr-[45px] pt-3" name="bell" />
@@ -31,7 +30,8 @@ const NavBar = () => {
             }}
           >
             <Icon name="user" />
-            <p className="pt-3 ml-2">{userDetails.firstName + " " + userDetails.lastName}</p>
+            {/* <p className="pt-3 ml-2">{userDetails.firstName + " " + userDetails.lastName}</p> */}
+            <p className="pt-3 ml-2">Giffy Onyinye</p>
             <Icon className="mt-5 ml-3 " name="angleDown" />
           </div>
         </div>

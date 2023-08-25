@@ -59,8 +59,9 @@ const Index = () => {
         </button>
         {pageNumbers.map((number) => (
           <button
-            className={`mx-2 py-2 px-5 rounded-full border ${currentPage === number ? "bg-HavannaGreen-secondary text-white" : "bg-white border-2 border-HavannaGreen-secondary text-[#3B3F42]"
-              }`}
+            className={`mx-2 py-2 px-5 rounded-full border ${
+              currentPage === number ? "bg-HavannaGreen-secondary text-white" : "bg-white border-2 border-HavannaGreen-secondary text-[#3B3F42]"
+            }`}
             key={number}
             onClick={() => paginate(number)}
           >
