@@ -5,8 +5,8 @@ import React from "react";
  * @param {Object} props Component props
  * @return {React.Component} React component
  */
-const SVG = () => (
-  <svg fill="none" height="18" viewBox="0 0 22 18" width="22" xmlns="http://www.w3.org/2000/svg">
+const SVG = (fill, props) => (
+  <svg fill="none" height="18" viewBox="0 0 22 18" width="22" xmlns="http://www.w3.org/2000/svg" {...props}>
     <path d="M3.5 0.75C1.84315 0.75 0.5 2.09315 0.5 3.75V4.5H21.5V3.75C21.5 2.09315 20.1569 0.75 18.5 0.75H3.5Z" fill="#6B7276" />
     <path
       clipRule="evenodd"

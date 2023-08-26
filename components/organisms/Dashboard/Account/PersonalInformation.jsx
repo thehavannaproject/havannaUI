@@ -1,35 +1,20 @@
-import axios from "axios";
-import { baseUrl } from "config";
-import { Form, Formik } from "formik";
-import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { Form, Formik } from "formik";
 import { toast } from "react-toastify";
-
+// import { useRouter } from "next/router";
+import moment from "moment";
 import Icon from "@components/atoms/Icons";
-import { setProfile } from "@components/store/Account";
-
+import { sendPhoneOtp, verifyPhoneOtp } from "@components/Api";
+import CustomModal from "@components/atoms/CustomModal/CustomModal";
 import Button from "@atoms/CustomButton/CustomButton";
 import FormikCustomInput from "@atoms/CustomInput/FormikCustomInput";
+import CustomButton from "@atoms/CustomButton/CustomButton";
 
 const PersonalInformation = () => {
   const [loading, setLoading] = useState(false);
-
-  const dispatch = useDispatch();
-  const { profile } = useSelector((state) => state.Account);
-  const { user } = useSelector((state) => state.Auth);
-
-  const firstName = user?.customerName?.split(" ")[0];
-
-  const handleSubmit = (values) => {
-    setOpen(true);
-    dispatch(setProfile(values));
-    console.log(values);
-  };
-
-  const router = useRouter();
-
-  const [reference, setRefernce] = useState("");
+  const [profilePicture, setProfilePicture] = useState(null);
+  const [userDetails, setUserDetails] = useState({});
+  // const router = useRouter();
   const [open, setOpen] = useState(false);
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const refs = Array(6)
@@ -39,75 +24,10 @@ const PersonalInformation = () => {
 
   const mergeOtp = otp.join("");
 
-  const handleOtpChange = (index, event) => {
-    const newOtp = [...otp];
-    newOtp[index] = event.target.value;
-    setOtp(newOtp);
-
-    if (event.target.value !== "" && index < newOtp.length - 1) {
-      refs[index + 1].current.focus();
-    }
-  };
-
   useEffect(() => {
-    setRefernce(localStorage.getItem("reference"));
+    const userDetails = JSON.parse(sessionStorage.getItem("userDetails"));
+    setUserDetails(userDetails);
   }, []);
-
-  const handleVerify = () => {
-    setLoading(true);
-    axios({
-      method: "POST",
-      url: `${baseUrl}/account/verify-otp`,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: {
-        verification_code: mergeOtp,
-        verification_reference: reference,
-      },
-    })
-      .then((response) => {
-        response;
-        setLoading(false);
-        router.push("/dashboard");
-      })
-      .catch(() => {
-        toast.error(`OTP is incorrect`);
-        setLoading(false);
-      });
-  };
-
-  const handleSend = () => {
-    axios({
-      method: "POST",
-      url: `${baseUrl}/account/send-otp`,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: {
-        customer_mobile_number: phoneNumber,
-        customer_email_address: user.emailAddress,
-        first_name: firstName,
-      },
-    })
-      .then((response) => {
-        localStorage.setItem("reference", response.data.data.reference);
-        router.push("");
-      })
-      .catch(() => {
-        toast.error("OTP could not be sent");
-      });
-  };
-
-  useEffect(() => {
-    if (phoneNumber.length > 12) {
-      handleSend();
-    }
-  }, [phoneNumber]);
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   const validateDateOfBirth = (value) => {
     const dateOfBirth = new Date(value);
@@ -119,39 +39,100 @@ const PersonalInformation = () => {
     }
   };
 
+  const handleOtpChange = (index, event) => {
+    const newOtp = [...otp];
+    newOtp[index] = event.target.value;
+    setOtp(newOtp);
+    if (event.target.value !== "" && index < newOtp.length - 1) {
+      refs[index + 1].current.focus();
+    }
+  };
+
+  const handleProfilePictureUpload = (event) => {
+    const file = event.target.files[0];
+    setProfilePicture(file);
+  };
+
+  const sendOtp = () => {
+    if (phoneNumber.length === 13) {
+      const data = {
+        customer_mobile_number: phoneNumber,
+        customer_email_address: userDetails.emailAddress,
+        first_name: userDetails.firstName,
+      };
+      setOpen(true);
+      sendPhoneOtp(data).then((response) => {
+        toast.success("OTP sent successfully");
+        localStorage.setItem("reference", response.reference);
+      });
+    }
+  };
+
+  const handleOtp = () => {
+    setLoading(true);
+    const data = {
+      verification_code: mergeOtp,
+      verification_reference: localStorage.getItem("reference"),
+    };
+    verifyPhoneOtp(data)
+      .then((response) => {
+        response === "invalid token" ? toast.error("Sorry, couldn't verify OTP at the moment, Please try again later") : toast.success("OTP verification is successful");
+        setLoading(false);
+      })
+      .finally(() => setOpen(false));
+  };
+
+  const handleSubmit = (values) => {
+    if (userDetails.phoneNumberVerificationStatus === false) {
+      toast.error("Please verify phone number to proceed.");
+    } else {
+      console.log(values);
+    }
+  };
+
   return (
     <section className="font-mulish bg-HavannaGreen-light px-6 h-full ">
       <div className="smallLaptop:w-[840px]  bg-white py-6 rounded-xl shadow-xl">
-        <div className="flex justify-center items-center flex-col">
-          <Icon name="userProfile" />
-          <p className="font-bold text-16 leading-[22px] mt-[10px]">Upload your profile picture</p>
+        <div className="flex justify-center items-center">
+          <div className="items-center grid place-items-center">
+            {profilePicture ? (
+              <img alt="Profile Picture" className="rounded-full w-24 h-24" src={URL.createObjectURL(profilePicture)} />
+            ) : (
+              <Icon className="w-24 h-24 mb-4" name="userProfile" />
+            )}
+            <input accept=".png, .jpeg, .jpg" className="mt-10" onChange={handleProfilePictureUpload} type="file" />
+            <p className="font-bold text-16 leading-[22px] mt-[10px]">Upload your profile picture</p>
+          </div>
         </div>
+
         <h1 className="font-bold text-20 leading-[26px] mt-10 smallLaptop:pl-11">Personal Information</h1>
 
         <Formik
+          enableReinitialize
           initialValues={{
-            firstName: profile.firstName || "",
-            lastName: profile.lastName || "",
-            email: profile.email || "",
-            phoneNumber: profile.phoneNumber || phoneNumber,
-            gender: profile.gender || "",
-            occupation: profile.occupation || "",
-            date: profile.date || "",
-            address: profile.address || "",
+            firstName: userDetails?.firstName || "",
+            lastName: userDetails?.lastName || "",
+            email: userDetails?.emailAddress || "",
+            phoneNumber: userDetails.phoneNumberVerificationStatus === false ? phoneNumber : userDetails.phoneNumber,
+            gender: userDetails?.gender || "",
+            occupation: userDetails?.occupation || "",
+            date: moment(userDetails?.dateOfBirth).format("yyyy-MM-DD") || "",
+            address: userDetails?.address || "",
           }}
           onSubmit={handleSubmit}
           validate={(values) => {
             const errors = {};
-
             // validate date of birth
             if (values.date && validateDateOfBirth(values.date)) {
               errors.date = validateDateOfBirth(values.date);
             }
-
+            if (values.phoneNumber.length > 13 || values.phoneNumber.length < 13) {
+              errors.phoneNumber = "Phone number is invalid";
+            }
             return errors;
           }}
         >
-          {(values) => (
+          {(//../) => (
             <Form className="smallLaptop:flex flex-wrap smallLaptop:pl-11 px-3 mt-6 gap-8">
               <div className="smallLaptop:grid items-center grid-cols-2 gap-8">
                 <div className="mt-4 ">
@@ -159,11 +140,9 @@ const PersonalInformation = () => {
                     First Name
                   </label>
                   <FormikCustomInput
-                    className={`rounded-[4px] smallLaptop:w-[360px] h-[60px] mt-2 
-                        border-2  `}
+                    className={`rounded-[4px] smallLaptop:w-[360px] h-[60px] mt-2 border-2  `}
                     id="firstName"
-                    inputClassName="placeholder:text-14 outline-none
-                         placeholder:text-citiGray-300 "
+                    inputClassName="placeholder:text-14 outline-none"
                     name="firstName"
                     placeholder="First Name"
                     required
@@ -179,7 +158,7 @@ const PersonalInformation = () => {
                         border-2  `}
                     id="lastName"
                     inputClassName="placeholder:text-14 outline-none
-                         placeholder:text-citiGray-300 "
+                        "
                     name="lastName"
                     placeholder="Last Name"
                     required
@@ -195,23 +174,19 @@ const PersonalInformation = () => {
                         border-2  `}
                     id="email"
                     inputClassName="placeholder:text-14 outline-none
-                         placeholder:text-citiGray-300 "
+                        "
                     name="email"
                     placeholder="Your Email"
                     required
                     type="email"
                   />
                 </div>
-                <div className="mt-4">
-                  <label className="font-bold text-base" htmlFor="">
-                    Phone Number
-                  </label>
+                <div className="mt-4 relative z-[1]">
+                  <label className="font-bold text-base">Phone Number</label>
                   <FormikCustomInput
-                    className={`rounded-[4px] smallLaptop:w-[360px] h-[60px] mt-2 
-                        border-2 `}
+                    className={`rounded-[4px] smallLaptop:w-[360px] h-[60px] mt-2 border-2 `}
                     id="phoneNumber"
-                    inputClassName="placeholder:text-14 outline-none 
-                         placeholder:text-citiGray-300 "
+                    inputClassName="placeholder:text-14 outline-none"
                     maxLength={13}
                     name="phoneNumber"
                     onChange={(e) => {
@@ -220,8 +195,13 @@ const PersonalInformation = () => {
                     placeholder="234**********"
                     required
                     type="number"
-                    value={phoneNumber}
                   />
+                  {userDetails.phoneNumberVerificationStatus === false ? (
+                    <p className="absolute right-2 top-1/2 bg-HavannaGreen-primary text-white px-4 py-1 rounded-md" onClick={sendOtp}>
+                      Verify
+                    </p>
+                  ) : <div>Verified</div>}
+                  
                 </div>
 
                 <div className="mt-4 ">
@@ -233,7 +213,7 @@ const PersonalInformation = () => {
                         border-2  `}
                     id="occupation"
                     inputClassName="placeholder:text-14 outline-none
-                         placeholder:text-citiGray-300 "
+                        "
                     name="occupation"
                     placeholder="Lawyer"
                     required
@@ -250,7 +230,7 @@ const PersonalInformation = () => {
                         border-2  `}
                     id="date"
                     inputClassName="placeholder:text-14 outline-none
-                     placeholder:text-citiGray-300 "
+                    "
                     name="date"
                     placeholder="Date of Birth"
                     required
@@ -266,7 +246,7 @@ const PersonalInformation = () => {
                         border-2  `}
                     id="address"
                     inputClassName="placeholder:text-14 outline-none
-                         placeholder:text-citiGray-300 "
+                        "
                     name="address"
                     placeholder="25,Idowu Street,Yaba,Lagos"
                     required
@@ -277,12 +257,12 @@ const PersonalInformation = () => {
                   <h1 className="font-bold text-16 leading-[22px] ">Gender</h1>
                   <div className="flex">
                     <div>
-                      <label className="">Male</label>
-                      <FormikCustomInput name="gender" required type="radio" value={values.gender} />
+                      <label>Male</label>
+                      <FormikCustomInput name="gender" required type="radio"  />
                     </div>
                     <div>
-                      <label className="">Female</label>
-                      <FormikCustomInput name="gender" required type="radio" value={values.gender} />
+                      <label>Female</label>
+                      <FormikCustomInput  name="gender" required type="radio" />
                     </div>
                   </div>
                 </div>
@@ -294,81 +274,82 @@ const PersonalInformation = () => {
           )}
         </Formik>
       </div>
-      {open && (
-        <div className="fixed top-0 left-0 right-0 bottom-0 z-50 flex items-center justify-center" style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
-          <div className="bg-slate-400 ">
-            <div className="bg-white w-[532px] px-11 py-10  rounded-xl font-mulish shadow-xl ">
-              <Icon className="flex cursor-pointer justify-end" name="otpCancel" onClick={handleClose} />
-              <h1 className=" ">Enter OTP Code</h1>
-              <p className="mt-3 mb-[30px]">Enter the OTP code sent to your number.</p>
-              <Formik
-                initialValues={{
-                  otp: "",
-                }}
-                onSubmit={handleSubmit}
-              >
-                {() => (
-                  <Form>
-                    <div className="flex gap-4 text-[40px] justify-center  ">
-                      <input
-                        className="border-2 w-[60px] h-[60px] rounded-lg text-center"
-                        maxLength={1}
-                        name="otp"
-                        onChange={(e) => handleOtpChange(0, e)}
-                        ref={refs[0]}
-                        type="number"
-                      />
-                      <input
-                        className="border-2 w-[60px] h-[60px] rounded-lg text-center"
-                        maxLength={1}
-                        name="otp1"
-                        onChange={(e) => handleOtpChange(1, e)}
-                        ref={refs[1]}
-                        type="number"
-                      />
-                      <input
-                        className="border-2 w-[60px] h-[60px] rounded-lg text-center"
-                        maxLength={1}
-                        name="otp2"
-                        onChange={(e) => handleOtpChange(2, e)}
-                        ref={refs[2]}
-                        type="number"
-                      />
-                      <input
-                        className="border-2 w-[60px] h-[60px] rounded-lg text-center"
-                        maxLength={1}
-                        name="otp3"
-                        onChange={(e) => handleOtpChange(3, e)}
-                        ref={refs[3]}
-                        type="number"
-                      />
-                      <input
-                        className="border-2 w-[60px] h-[60px] rounded-lg text-center"
-                        maxLength={1}
-                        name="otp4"
-                        onChange={(e) => handleOtpChange(4, e)}
-                        ref={refs[4]}
-                        type="number"
-                      />
-                      <input
-                        className="border-2 w-[60px] h-[60px] rounded-lg text-center"
-                        maxLength={1}
-                        name="otp5"
-                        onChange={(e) => handleOtpChange(5, e)}
-                        ref={refs[5]}
-                        type="number"
-                      />
-                    </div>
-                  </Form>
-                )}
-              </Formik>
-              <Button className="bg-HavannaGreen-primary text-white w-full h-[58px] rounded-lg mt-10 mb-[72px] " isLoading={loading} onClick={handleVerify}>
-                Verify Otp
-              </Button>
-            </div>
+      <CustomModal visibility={open}>
+        <div>
+          <div className="bg-white text-HavannaBlack-primary px-11 py-10  rounded-xl font-mulish shadow-xl ">
+            <Icon className="flex cursor-pointer justify-end" name="otpCancel" onClick={() => setOpen(false)} />
+            <h1 className=" ">Enter OTP Code</h1>
+            <p className="mt-3 mb-[30px]">Enter the OTP code sent to your number.</p>
+            <Formik
+              initialValues={{
+                otp: "",
+              }}
+              onSubmit={handleOtp}
+            >
+              {() => (
+                <Form>
+                  <div className="flex gap-4 text-[40px] justify-center  ">
+                    <input
+                      className="border-2 w-[60px] h-[60px] rounded-lg text-center"
+                      maxLength={1}
+                      name="otp"
+                      onChange={(e) => handleOtpChange(0, e)}
+                      ref={refs[0]}
+                      type="number"
+                    />
+                    <input
+                      className="border-2 w-[60px] h-[60px] rounded-lg text-center"
+                      maxLength={1}
+                      name="otp1"
+                      onChange={(e) => handleOtpChange(1, e)}
+                      ref={refs[1]}
+                      type="number"
+                    />
+                    <input
+                      className="border-2 w-[60px] h-[60px] rounded-lg text-center"
+                      maxLength={1}
+                      name="otp2"
+                      onChange={(e) => handleOtpChange(2, e)}
+                      ref={refs[2]}
+                      type="number"
+                    />
+                    <input
+                      className="border-2 w-[60px] h-[60px] rounded-lg text-center"
+                      maxLength={1}
+                      name="otp3"
+                      onChange={(e) => handleOtpChange(3, e)}
+                      ref={refs[3]}
+                      type="number"
+                    />
+                    <input
+                      className="border-2 w-[60px] h-[60px] rounded-lg text-center"
+                      maxLength={1}
+                      name="otp4"
+                      onChange={(e) => handleOtpChange(4, e)}
+                      ref={refs[4]}
+                      type="number"
+                    />
+                    <input
+                      className="border-2 w-[60px] h-[60px] rounded-lg text-center"
+                      maxLength={1}
+                      name="otp5"
+                      onChange={(e) => handleOtpChange(5, e)}
+                      ref={refs[5]}
+                      type="number"
+                    />
+                  </div>
+                </Form>
+              )}
+            </Formik>
+            <CustomButton
+              customClass="!text-white bg-HavannaGreen-primary text-white w-full h-[58px] rounded-lg mt-10 mb-[72px] "
+              isLoading={loading}
+              onClick={handleOtp}
+              title="Verify Otp"
+            />
           </div>
         </div>
-      )}
+      </CustomModal>
     </section>
   );
 };

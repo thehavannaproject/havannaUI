@@ -1,54 +1,34 @@
-import axios from "axios";
 import { Form, Formik } from "formik";
 import { useRouter } from "next/dist/client/router";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import * as Yup from "yup";
-import { useDispatch } from "react-redux";
-
 import { REGEX } from "@components/shared/libs/helpers.js";
-import { setCurrentUser } from "@components/store/Auth";
-
+import { SignInUser } from "@components/Api";
 import Button from "@atoms/CustomButton/CustomButton";
 import FormikCustomInput from "@atoms/CustomInput/FormikCustomInput";
 import CustomLink from "@atoms/CustomLink/CustomLink";
-
 import Logo from "@images/svg/Logo.svg";
 
-import { baseUrl } from "../../../../config";
-
-import "react-toastify/dist/ReactToastify.css";
-
 const signInSchema = Yup.object().shape({
-  email: Yup.string().email("Invalid email").required("This field is compulsory"),
+  emailAddress: Yup.string().email("Invalid email").required("This field is compulsory"),
   password: Yup.string().min(5).max(50, "Too Long!").matches(REGEX.password, { message: "please create a stronger password" }).required("This field is compulsory"),
 });
 
 const SignIn = () => {
   const [loading, setLoading] = useState(false);
 
+  
   const router = useRouter();
-  const dispatch = useDispatch();
 
   const handleSubmit = (values) => {
     setLoading(true);
-
-    axios({
-      method: "POST",
-      url: `${baseUrl}/account/login`,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: {
-        emailAddress: values.email,
-        password: values.password,
-      },
-    })
+    SignInUser(values)
       .then((response) => {
         localStorage.setItem("token", response.data.data.token);
-        dispatch(setCurrentUser(response.data.data));
+        localStorage.setItem("userEmail", response.data.data.emailAddress);
         setLoading(false);
         router.push("/dashboard");
       })
@@ -80,10 +60,9 @@ const SignIn = () => {
             rounded-[20px] tablet:m-auto tablet:rounded-[32px]
              w-full tablet:w-[60%] smallLaptop:px-[120px]   "
         >
-          <ToastContainer />
           <Formik
             initialValues={{
-              email: "",
+              emailAddress: "",
               password: "",
             }}
             onSubmit={handleSubmit}
@@ -91,7 +70,7 @@ const SignIn = () => {
           >
             {() => (
               <Form>
-                <div className="   ">
+                <div>
                   <div className="flex justify-center">
                     <div>
                       <h1
@@ -115,8 +94,8 @@ const SignIn = () => {
                     <FormikCustomInput
                       className={`rounded-md w-full h-[46px] mt-2 border-2  `}
                       id="email"
-                      inputClassName="placeholder:text-14 outline-none placeholder:text-citiGray-300 "
-                      name="email"
+                      inputClassName="placeholder:text-14 outline-none"
+                      name="emailAddress"
                       placeholder="Your Email"
                       type="email"
                     />
@@ -129,7 +108,7 @@ const SignIn = () => {
                     <FormikCustomInput
                       className={`rounded-md w-full h-[46px] mt-2 border-2 `}
                       id="password"
-                      inputClassName="placeholder:text-14 outline-none  placeholder:text-citiGray-300 "
+                      inputClassName="placeholder:text-14 outline-none"
                       name="password"
                       placeholder="Password"
                       type="password"

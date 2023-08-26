@@ -39,8 +39,7 @@
           "/^@skeletons/",
           "/^@modals/",
           ["parent", "sibling", "index"]
-        ],
-        "alphabetize": { "ignoreCase": true }
+        ]
       }
     ],
     "react/jsx-sort-props": [

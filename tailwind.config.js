@@ -56,6 +56,11 @@ module.exports = {
         },
         HavannaBlack: {
           primary: "#3B3F42",
+          neutral: "#4F5457",
+          neutral50: "#6B7276",
+        },
+        HavannaRed: {
+          primary: "#B82323",
         },
       },
     },

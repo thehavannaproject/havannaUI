@@ -34,16 +34,16 @@ const Index = () => {
   };
 
   return (
-    <section className="bg-[#F3FCFB] pb-[120px] bigLaptop:px-[120px]">
+    <section className="bg-[#F3FCFB] w-full pb-[120px] p-8 ">
       <div className="">
         <h1 className="font-mulish font-bold text-[36px] leading-[44px] text-black pl-8 bigLaptop:mt-[100px] pt-10 ">Listing</h1>
       </div>
 
-      <div className="grid grid-cols-1 tablet:grid-cols-2 smallLaptop:grid-cols-3 gap-6 smallLaptop:gap-16 bigLaptop:gap-[84px] px-[22px] pt-11 bigLaptop:pt-[120px] ">
+      <div className=" grid bigLaptop:grid-cols-3 mt-4 smallLaptop:grid-cols-2 smallLaptop:gap-10">
         {currentProperties.map((property, index) => (
-          <div className="shadow-xl  rounded-[20px]" key={index}>
+          <div className=" " key={index}>
             <CustomLink destination="/listing/investpage">
-              <InvestPropertyCard className="p-4" property={property} />
+              <InvestPropertyCard className="shadow-lg p-6 " property={property} />
             </CustomLink>
           </div>
         ))}

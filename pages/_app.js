@@ -4,6 +4,8 @@ import Router from "next/router";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 import { Provider } from "react-redux";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import store from "../components/store";
 
@@ -29,6 +31,7 @@ function MyApp({ Component, pageProps }) {
       <Provider store={store}>
         <Component {...pageProps} />
       </Provider>
+      <ToastContainer hideProgressBar={true} />
     </>
   );
 }

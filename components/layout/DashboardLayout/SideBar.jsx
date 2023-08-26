@@ -34,7 +34,7 @@ const SideBar = () => {
       id: 4,
       title: "Listing",
       icon: "listing",
-      link: "/listing/listing",
+      link: "/listing",
       isVisible: true,
       name: "listing",
     },
@@ -59,28 +59,28 @@ const SideBar = () => {
 
   return (
     <>
-      <div className=" h-fill border-r-[1px]  ">
-        <div className="border-b-[1px] py-4 pl-6">
+      <div className="fixed w-[19%] border bg-white h-screen">
+        <div className="border-b-[1px] py-4 pl-3 smallLaptop:pl-6">
           <Link href="/">
             <a>
               <Image height={38} src={Logo} width={128.29} />
             </a>
           </Link>
         </div>
-        <div className=" mx-6 text-20">
+        <div className="mx-2 smallLaptop:mx-6 smallLaptop:text-20">
           {SideBarData.map((data, index) => (
             <div className={`hover:bg-green-50 ${routerName.includes(data.name) ? "bg-green-50 border-l-4 border-l-[#0E5854] " : ""} `} key={index}>
               <CustomLink destination={data.link}>
-                <div className={` px-6 cursor-pointer py-4 mt-6 h-[58px] flex text-HavannaGreen-primary justify-between `}>
+                <div className={`px-3 smallLaptop:px-6 cursor-pointer py-4 mt-6 h-[58px] flex text-HavannaGreen-primary justify-between`}>
                   <p>{data.title}</p>
-                  <Icon name={data.icon} />
+                  <Icon className="text-black" fill={routerName.includes(data.name) ? "#0E5854" : "#6B7276"} name={data.icon} />
                 </div>
               </CustomLink>
             </div>
           ))}
 
           <div
-            className="smallLaptop:mt-[120px] mt-[460px] flex gap-[131.5px] font-mulish"
+            className="mt-[50px] ml-6 flex justify-between font-mulish"
             onClick={() => {
               localStorage.removeItem("token");
               router.push("/auth/login");

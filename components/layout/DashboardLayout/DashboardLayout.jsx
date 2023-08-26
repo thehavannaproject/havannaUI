@@ -1,31 +1,47 @@
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 import { useEffect } from "react";
 
-import NavBar from "./NavBar";
+// import axios from "axios";
+// import { baseUrl } from "config";
+// import { useDispatch } from "react-redux";
+// import { setCurrentUser } from "@components/store/Auth";
+import { getUserDetails } from "@components/Api";
 import SideBar from "./SideBar";
+import NavBar from "./NavBar";
 
 const DashboardLayout = ({ children }) => {
-  const router = useRouter();
+  // const router = useRouter();
+
+  // useEffect(() => {
+  //   const Token = localStorage.getItem("token");
+  //   if (!Token) {
+  //     router.push("/auth/login");
+  //   }
+  // }, []);
 
   useEffect(() => {
-    const Token = localStorage.getItem("token");
-    if (!Token) {
-      router.push("/auth/login");
-    }
+    getUserDetails(localStorage.getItem("userEmail")).then((data) => {
+      console.log(data);
+      sessionStorage.setItem("userDetails", JSON.stringify(data));
+    });
   }, []);
 
   return (
-    <div className="flex ">
-      <div className="smallLaptop:min-w-[23%]">
-        <SideBar />
-      </div>
-      <div className="w-[77%] ">
-        <div className="fixed w-[77%] bg-HavannaGreen-light">
-          <NavBar />
+    <>
+      <div className="hidden tablet:block">
+        <div className="flex">
+          <div className="w-[19%] ">
+            <SideBar />
+          </div>
+          <div className="w-[81%]">
+            <div className="sticky  top-0 z-50 w-full ">
+              <NavBar />
+            </div>
+            <div className=" bg-HavannaGreen-light ">{children}</div>
+          </div>
         </div>
-        <div className="bg-HavannaGreen-light mt-20 h-full">{children}</div>
       </div>
-    </div>
+    </>
   );
 };
 
