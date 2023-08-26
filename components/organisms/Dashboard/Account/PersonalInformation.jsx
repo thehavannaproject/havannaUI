@@ -132,7 +132,7 @@ const PersonalInformation = () => {
             return errors;
           }}
         >
-          {(values) => (
+          {(//../) => (
             <Form className="smallLaptop:flex flex-wrap smallLaptop:pl-11 px-3 mt-6 gap-8">
               <div className="smallLaptop:grid items-center grid-cols-2 gap-8">
                 <div className="mt-4 ">
@@ -196,9 +196,12 @@ const PersonalInformation = () => {
                     required
                     type="number"
                   />
-                  <p className="absolute right-2 top-1/2 bg-HavannaGreen-primary text-white px-4 py-1 rounded-md" onClick={sendOtp}>
-                    Verify
-                  </p>
+                  {userDetails.phoneNumberVerificationStatus === false ? (
+                    <p className="absolute right-2 top-1/2 bg-HavannaGreen-primary text-white px-4 py-1 rounded-md" onClick={sendOtp}>
+                      Verify
+                    </p>
+                  ) : <div>Verified</div>}
+                  
                 </div>
 
                 <div className="mt-4 ">
@@ -254,12 +257,12 @@ const PersonalInformation = () => {
                   <h1 className="font-bold text-16 leading-[22px] ">Gender</h1>
                   <div className="flex">
                     <div>
-                      <label className="">Male</label>
-                      <FormikCustomInput checked={userDetails.gender === "Male" ? true : false} name="gender" required type="radio" value={values.gender} />
+                      <label>Male</label>
+                      <FormikCustomInput name="gender" required type="radio"  />
                     </div>
                     <div>
-                      <label className="">Female</label>
-                      <FormikCustomInput checked={userDetails.gender === "Female" ? true : false} name="gender" required type="radio" value={values.gender} />
+                      <label>Female</label>
+                      <FormikCustomInput  name="gender" required type="radio" />
                     </div>
                   </div>
                 </div>

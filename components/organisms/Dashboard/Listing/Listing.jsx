@@ -39,7 +39,7 @@ const Index = () => {
         <h1 className="font-mulish font-bold text-[36px] leading-[44px] text-black pl-8 bigLaptop:mt-[100px] pt-10 ">Listing</h1>
       </div>
 
-      <div className=" grid bigLaptop:grid-cols-3 smallLaptop:grid-cols-2 smallLaptop:gap-10">
+      <div className=" grid bigLaptop:grid-cols-3 mt-4 smallLaptop:grid-cols-2 smallLaptop:gap-10">
         {currentProperties.map((property, index) => (
           <div className=" " key={index}>
             <CustomLink destination="/listing/investpage">

@@ -5,6 +5,7 @@ import React from "react";
 import FormikCustomInput from "@components/atoms/CustomInput/FormikCustomInput";
 import CustomLink from "@components/atoms/CustomLink/CustomLink";
 import Icon from "@components/atoms/Icons";
+import CustomButton from "@components/atoms/CustomButton/CustomButton";
 
 const InvestNow = () => {
   const router = useRouter();
@@ -31,7 +32,7 @@ const InvestNow = () => {
           </div>
           <div className="flex justify-center gap-[9.33px] mt-6">
             <Icon className="mt-[11px]" name="naira" />
-            <p className="font-bold text-36 leading-[44px]  ">100,000.00</p>
+            <p className="font-bold text-36 leading-[44px] text-[#4F5457]  ">100,000.00</p>
           </div>
           <div className="flex justify-center">
             <hr className="border-[1.5px] w-[227px]  border-HavannaGreen-secondary" />
@@ -107,12 +108,10 @@ const InvestNow = () => {
 
                 <CustomLink destination="/listing/transactionsummary">
                   <div>
-                    <button
-                      className={`rounded-[4px] smallLaptop:w-[100%] h-[60px] mt-[60px] 
-                          text-white bg-HavannaGreen-primary `}
-                    >
-                      Continue
-                    </button>
+                    <CustomButton
+                      customClass={`rounded-[4px] smallLaptop:w-[100%] h-[60px] mt-[60px] 
+                          text-white bg-HavannaGreen-primary `} title="Continue"
+                    />
                   </div>
                 </CustomLink>
               </Form>
