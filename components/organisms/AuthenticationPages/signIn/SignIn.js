@@ -34,7 +34,7 @@ const SignIn = () => {
 
     axios({
       method: "POST",
-      url: `${baseUrl}/account/login`,
+      url: `${baseUrl}/api/Auth/login`,
       headers: {
         "Content-Type": "application/json",
       },
