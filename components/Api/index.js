@@ -3,7 +3,7 @@ import { baseUrl } from "config";
 
 export const SignInUser = async (data) => {
   try {
-    const response = await axios.post(`${baseUrl}/account/login`, data);
+    const response = await axios.post(`${baseUrl}/api/Auth/login`, data);
     return response.data;
   } catch (error) {
     return error;
@@ -11,7 +11,7 @@ export const SignInUser = async (data) => {
 };
 export const CreateUser = async (data) => {
   try {
-    const response = await axios.post(`${baseUrl}/account/login`, data);
+    const response = await axios.post(`${baseUrl}/api/Customer`, data);
     return response.data;
   } catch (error) {
     return error;
