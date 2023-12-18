@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const baseUrl = "http://havannagroup-001-site1.itempurl.com";
+export const baseUrl = "https://havannagroup-001-site1.itempurl.com";
 
 export const api = axios.create({
   baseURL: baseUrl,
