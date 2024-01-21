@@ -17,9 +17,9 @@ const QuickActions = () => {
             Fund Wallet
           </p>
         </div>
-        <div className="bg-white card-shadow w-[178px] flex gap-3 p-4 rounded-lg">
+        <div className="bg-white card-shadow w-[178px] flex justify-between p-4 rounded-lg">
           <Icon name="buildingYellow" />
-          <CustomLink className="text-14 text-[#6B7276]" destination="/listing">
+          <CustomLink className="!text-14 text-[#6B7276]" destination="/listing">
             See Listings
           </CustomLink>
         </div>

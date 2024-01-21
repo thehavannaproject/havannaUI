@@ -7,12 +7,12 @@ import Account from "@organisms/Dashboard/Account";
 const index = () => {
   return (
     <>
-      <div>
+      <div className="hidden tablet:block">
         <DashboardLayout>
           <Account />
         </DashboardLayout>
       </div>
-      <div>
+      <div className="tablet:hidden">
         <DashboardMobileLayout title="Account">
           <MobileAccount />
         </DashboardMobileLayout>

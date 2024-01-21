@@ -6,7 +6,8 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
 import { REGEX } from "@components/shared/libs/helpers.js";
-import { SignInUser } from "@components/Api";
+import { SignInUser } from "@components/api";
+import { AuthService } from "@components/api/auth";
 import Button from "@atoms/CustomButton/CustomButton";
 import FormikCustomInput from "@atoms/CustomInput/FormikCustomInput";
 import CustomLink from "@atoms/CustomLink/CustomLink";
@@ -18,24 +19,28 @@ const signInSchema = Yup.object().shape({
 });
 
 const SignIn = () => {
+  const authService = new AuthService();
   const [loading, setLoading] = useState(false);
 
-  
   const router = useRouter();
 
   const handleSubmit = (values) => {
     setLoading(true);
     SignInUser(values)
       .then((response) => {
-        localStorage.setItem("token", response.data.data.token);
-        localStorage.setItem("userEmail", response.data.data.emailAddress);
-        setLoading(false);
-        router.push("/dashboard");
+        if (response.responseCode === 200) {
+          authService.encodeData(response.data, "ud");
+          router.push("/dashboard");
+          setLoading(false);
+        } else {
+          toast.warn(response.response.data.data, { theme: "colored" });
+          setLoading(false);
+        }
       })
       .catch((error) => {
         setLoading(false);
         error;
-        toast(`Email or password is incorrect `);
+        toast.error(`Something went wrong. Try again later`, { theme: "colored" });
       });
   };
 
@@ -114,8 +119,10 @@ const SignIn = () => {
                       type="password"
                     />
                   </div>
-                  <div className="mt-3 text-HavannaGreen-primary font-mulish font-medium text-14 leading-[18px] flex justify-end cursor-pointer ">
-                    <CustomLink destination="/auth/forgot-password">Forgot Password?</CustomLink>
+                  <div className="mt-3  text-HavannaGreen-primary font-mulish font-medium text-14 flex justify-end  ">
+                    <CustomLink customClass="cursor-pointer" destination="/auth/forgot-password">
+                      Forgot Password?
+                    </CustomLink>
                   </div>
                 </div>
                 <div className="mt-10 ">

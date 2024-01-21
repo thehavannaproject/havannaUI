@@ -6,12 +6,12 @@ import MobileWallet from "@components/organisms/Dashboard/Wallet/Mobile";
 const Dashboard = () => {
   return (
     <>
-      <div>
+      <div className="hidden tablet:block">
         <DashboardLayout>
           <Wallet />
         </DashboardLayout>
       </div>
-      <div>
+      <div className="tablet:hidden">
         <DashboardMobileLayout title="Wallet">
           <MobileWallet />
         </DashboardMobileLayout>

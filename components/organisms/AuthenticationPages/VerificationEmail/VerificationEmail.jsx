@@ -1,11 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { useRouter } from "next/router";
 import Icon from "@components/atoms/Icons";
 
 import Logo from "@images/svg/Logo.svg";
 
 const VerificationEmail = () => {
+  const router = useRouter();
+  const email = router?.query?.email;
+
   return (
     <section
       className={`  min-h-screen justify-center flex smallLaptop:pb-32 tablet:px-0 px-6
@@ -27,7 +31,7 @@ const VerificationEmail = () => {
           >
             <div className="font-mulish text-center items-center   ">
               <h1 className="font-bold text-[32px] mb-3 leading-10 ">Verify your email</h1>
-              <p className="font-medium text-base mb-7 pt-3 leading-6 text-center ">A verification email has been sent to your email address, . </p>
+              <p className="font-medium text-base mb-7 pt-3 leading-6 text-center ">A verification email has been sent to your email address, {email} </p>
               <Icon className="items-center flex justify-center   " name="envelope" />
             </div>
           </div>

@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import moment from "moment";
 import { UserIcon } from "@heroicons/react/24/solid";
 import Icon from "@components/atoms/Icons";
-import { sendPhoneOtp, verifyPhoneOtp } from "@components/Api";
+import { sendPhoneOtp, verifyPhoneOtp } from "@components/api";
 import CustomModal from "@components/atoms/CustomModal/CustomModal";
 import Button from "@atoms/CustomButton/CustomButton";
 import FormikCustomInput from "@atoms/CustomInput/FormikCustomInput";
@@ -25,7 +25,7 @@ const MyProfile = () => {
   const mergeOtp = otp.join("");
 
   useEffect(() => {
-    const userDetails = JSON.parse(sessionStorage.getItem("userDetails"));
+    const userDetails = JSON.parse(localStorage.getItem("userDetails"));
     setUserDetails(userDetails);
   }, []);
 
@@ -90,7 +90,7 @@ const MyProfile = () => {
     }
   };
   return (
-    <div className="font-mulish">
+    <div className="font-mulish smallLaptop:hidden">
       <div>
         <div className="flex justify-center items-center mt-8">
           <div className="">
@@ -112,7 +112,7 @@ const MyProfile = () => {
             firstName: userDetails?.firstName || "",
             lastName: userDetails?.lastName || "",
             email: userDetails?.emailAddress || "",
-            phoneNumber: userDetails.phoneNumberVerificationStatus === false ? phoneNumber : userDetails.phoneNumber,
+            phoneNumber: userDetails?.phoneNumberVerificationStatus === false ? phoneNumber : userDetails?.phoneNumber,
             gender: userDetails?.gender || "",
             occupation: userDetails?.occupation || "",
             date: moment(userDetails?.dateOfBirth).format("yyyy-MM-DD") || "",
@@ -242,7 +242,7 @@ const MyProfile = () => {
                   <div className="flex gap-6 mt-[10px]">
                     <div className="flex gap-1">
                       <FormikCustomInput
-                        checked={userDetails.gender === "Male" ? true : false}
+                        checked={userDetails?.gender === "Male" ? true : false}
                         className="!h-5"
                         container="!px-0"
                         name="gender"
@@ -254,7 +254,7 @@ const MyProfile = () => {
                     </div>
                     <div className="flex gap-1">
                       <FormikCustomInput
-                        checked={userDetails.gender === "Female" ? true : false}
+                        checked={userDetails?.gender === "Female" ? true : false}
                         className="!h-5"
                         container="!px-0"
                         name="gender"
@@ -345,7 +345,7 @@ const MyProfile = () => {
               )}
             </Formik>
             <CustomButton
-              customClass="!text-white bg-HavannaGreen-primary text-white w-full h-[58px] rounded-lg mt-10 mb-[72px] "
+              customClass="!text-white cursor-pointer bg-HavannaGreen-primary text-white w-full h-[58px] rounded-lg mt-10 mb-[72px] "
               isLoading={loading}
               onClick={handleOtp}
               title="Verify Otp"

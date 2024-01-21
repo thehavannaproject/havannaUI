@@ -16,7 +16,7 @@ const MobileNavBar = ({ title }) => {
           <SettingFilled className="mt-1 ml-1 text-HavannaGreen-600" />{" "}
           <p className="text-HavannaBlack-neutral text-16 font-mulish" onClick={() => router.push("/account")}>
             Profile
-          </p>{" "}
+          </p>
         </div>
       ),
       key: "1",

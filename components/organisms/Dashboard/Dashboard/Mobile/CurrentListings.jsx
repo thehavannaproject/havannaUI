@@ -8,7 +8,7 @@ const CurrentListings = () => {
     <div className="mt-10 font-mulish mb-16">
       <div className="flex justify-between">
         <p className="text-[#3B3F42] text-14 font-bold">Current Listings</p>
-        <CustomLink customClass="text-14 text-[#39876B] font-medium" destination="#">
+        <CustomLink customClass="text-14 text-[#39876B] font-medium" destination="/listing">
           See More
         </CustomLink>
       </div>

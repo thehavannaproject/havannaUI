@@ -58,6 +58,7 @@ module.exports = {
           primary: "#3B3F42",
           neutral: "#4F5457",
           neutral50: "#6B7276",
+          neutral20: "#3B3F42",
         },
         HavannaRed: {
           primary: "#B82323",

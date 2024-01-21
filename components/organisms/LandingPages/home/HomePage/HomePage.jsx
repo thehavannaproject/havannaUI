@@ -5,7 +5,7 @@ import MailListingSection from "@components/organisms/LandingPages/home/MailList
 // import OpportunitySection from "@components/organisms/LandingPages/home/OpportunitySection/OpportunitySection";
 import StartSection from "@components/organisms/LandingPages/home/StartSection/StartSection";
 import TopSection from "@components/organisms/LandingPages/home/TopSection/TopSection";
-import WhySection from "@components/organisms/LandingPages/home/whySection/WhySection";
+import WhySection from "@components/organisms/LandingPages/home/WhySection/WhySection";
 
 import HavannaProvision from "../HavannaProvision/HavannaProvision";
 

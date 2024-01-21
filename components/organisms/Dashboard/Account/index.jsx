@@ -34,10 +34,10 @@ const index = () => {
               <div
                 className={` ${
                   data.id === activeTab ? "border-b-HavannaGreen-secondary text-HavannaGreen-secondary border-b-4 " : ""
-                }  pb-6 border-b-HavannaGreen-secondary text-HavannaGreen-secondary`}
+                }  pb-2 border-b-HavannaGreen-secondary text-HavannaGreen-secondary`}
               >
                 <p
-                  className="pb-6 text-[22px]"
+                  className="pb-2 text-[22px]"
                   onClick={() => {
                     setActiveTab(data.id);
                   }}

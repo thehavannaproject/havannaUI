@@ -40,3 +40,17 @@ export const Status = {
 //   SUCCESS = "success",
 //   INFO = "info",
 // }
+
+export function maskEmail(email) {
+  const atIndex = email?.indexOf("@");
+  const dotIndex = email?.indexOf(".");
+
+  if (atIndex !== -1 && dotIndex !== -1) {
+    const maskedEmail = email?.substring(0, 1) + "*".repeat(atIndex - 1) + email?.substring(atIndex, atIndex + 1) + "*".repeat(dotIndex - atIndex - 1) + email?.substring(dotIndex);
+
+    return maskedEmail;
+  } else {
+    // Handle invalid email format
+    return email;
+  }
+}

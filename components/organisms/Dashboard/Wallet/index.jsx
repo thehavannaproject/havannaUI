@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import CashFlow from "./cashFlow/CashFlow";
+// import CashFlow from "./cashFlow/CashFlow";
 import Wallet from "./Wallet";
 
 const index = () => {
@@ -8,7 +8,7 @@ const index = () => {
 
   return (
     <div>
-      <div className=" ">
+      <div className=" font-mulish">
         <div className={`  flex  justify-around pt-10  `}>
           {walletOption.map((wallet, index) => (
             <div
@@ -18,8 +18,9 @@ const index = () => {
               }}
             >
               <div
-                className={` ${wallet.id === activeTab ? "border-b-HavannaGreen-secondary text-HavannaGreen-secondary border-b-4 " : ""}  pb-6 border-b-HavannaGreen-secondary 
-cursor-pointer text-HavannaGreen-secondary`}
+                className={` ${
+                  wallet.id === activeTab ? "border-b-HavannaGreen-secondary text-HavannaGreen-secondary border-b-4 " : ""
+                }  pb-2 border-b-HavannaGreen-secondary cursor-pointer text-HavannaGreen-secondary`}
               >
                 <h1 className=" font-bold text-22 leading-[28px]">{wallet.name}</h1>
               </div>
@@ -43,7 +44,7 @@ const walletOption = [
   },
   {
     id: 1,
-    name: "Cashflow",
-    component: <CashFlow />,
+    name: "Returns",
+    component: <Wallet type="returns" />,
   },
 ];

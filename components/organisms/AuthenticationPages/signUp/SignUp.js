@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import * as Yup from "yup";
 
 import { REGEX } from "@components/shared/libs/helpers.js";
-import { CreateUser } from "@components/Api";
+import { CreateUser } from "@components/api";
 
 import Button from "@atoms/CustomButton/CustomButton";
 import FormikCustomInput from "@atoms/CustomInput/FormikCustomInput";
@@ -35,14 +35,22 @@ const SignUp = () => {
     setLoading(true);
     CreateUser(values)
       .then((response) => {
-        setLoading(false);
-        toast(`${response.data.message}. Please verify your email via link sent to your email.`);
-        router.push("/auth/verify-email");
+        if (response.responseCode === 200) {
+          toast.success(`Account created successfully.`, { theme: "colored" });
+          router.push({
+            pathname: "/auth/verify-email",
+            query: { email: values.emailAddress },
+          });
+          setLoading(false);
+        } else {
+          toast.warn(`${response.errorMessage}`, { theme: "colored" });
+          setLoading(false);
+        }
       })
       .catch((error) => {
         setLoading(false);
         console.log(error);
-        toast(`${error.response.data.description} `);
+        toast.error(`An error occurred. Please try again later`, { theme: "colored" });
       });
   };
 

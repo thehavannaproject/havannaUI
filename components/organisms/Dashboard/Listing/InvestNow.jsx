@@ -110,7 +110,8 @@ const InvestNow = () => {
                   <div>
                     <CustomButton
                       customClass={`rounded-[4px] smallLaptop:w-[100%] h-[60px] mt-[60px] 
-                          text-white bg-HavannaGreen-primary `} title="Continue"
+                          text-white bg-HavannaGreen-primary `}
+                      title="Continue"
                     />
                   </div>
                 </CustomLink>

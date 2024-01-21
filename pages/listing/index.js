@@ -6,12 +6,12 @@ import MobileListing from "@components/organisms/Dashboard/Listing/Mobile";
 const index = () => {
   return (
     <>
-      <div>
+      <div className="hidden tablet:block">
         <DashboardLayout>
           <Listing />
         </DashboardLayout>
       </div>
-      <div>
+      <div className="tablet:hidden">
         <DashboardMobileLayout title="Listing">
           <MobileListing />
         </DashboardMobileLayout>

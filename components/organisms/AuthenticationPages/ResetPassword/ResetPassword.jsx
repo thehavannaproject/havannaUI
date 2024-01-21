@@ -16,7 +16,7 @@ import CustomLink from "@atoms/CustomLink/CustomLink";
 
 import Logo from "@images/svg/Logo.svg";
 
-import { baseUrl } from "../../../../config";
+import { baseUrl } from "../../../../interceptor";
 
 import "react-toastify/dist/ReactToastify.css";
 

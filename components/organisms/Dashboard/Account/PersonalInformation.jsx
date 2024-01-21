@@ -2,18 +2,23 @@ import React, { useEffect, useRef, useState } from "react";
 import { Form, Formik } from "formik";
 import { toast } from "react-toastify";
 // import { useRouter } from "next/router";
+import { UserIcon } from "@heroicons/react/24/solid";
 import moment from "moment";
 import Icon from "@components/atoms/Icons";
-import { sendPhoneOtp, verifyPhoneOtp } from "@components/Api";
+import { getCustomerProfile, sendPhoneOtp, verifyPhoneOtp } from "@components/api";
 import CustomModal from "@components/atoms/CustomModal/CustomModal";
+import { AuthService } from "@components/api/auth";
 import Button from "@atoms/CustomButton/CustomButton";
 import FormikCustomInput from "@atoms/CustomInput/FormikCustomInput";
 import CustomButton from "@atoms/CustomButton/CustomButton";
 
 const PersonalInformation = () => {
   const [loading, setLoading] = useState(false);
+  const authService = new AuthService();
+  const userDetails = authService.getDetails("ud");
   const [profilePicture, setProfilePicture] = useState(null);
-  const [userDetails, setUserDetails] = useState({});
+  const [customerProfile, setCustomerProfile] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   // const router = useRouter();
   const [open, setOpen] = useState(false);
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
@@ -21,12 +26,16 @@ const PersonalInformation = () => {
     .fill()
     .map(() => useRef());
   const [phoneNumber, setPhoneNumber] = useState("234");
+  const fileInputRef = useRef(null);
 
   const mergeOtp = otp.join("");
 
   useEffect(() => {
-    const userDetails = JSON.parse(sessionStorage.getItem("userDetails"));
-    setUserDetails(userDetails);
+    getCustomerProfile(userDetails?.customerId)
+      .then((response) => {
+        setCustomerProfile(response);
+      })
+      .catch((error) => console.log(error));
   }, []);
 
   const validateDateOfBirth = (value) => {
@@ -49,8 +58,29 @@ const PersonalInformation = () => {
   };
 
   const handleProfilePictureUpload = (event) => {
-    const file = event.target.files[0];
-    setProfilePicture(file);
+    const selectedFile = event.target.files[0];
+    if (selectedFile) {
+      const allowedExtensions = ["image/jpg", "image/jpeg", "image/png"];
+      const maxSizeInBytes = 1 * 1024 * 1024; // 5MB
+      const fileExtension = selectedFile.type;
+      if (allowedExtensions.includes(fileExtension.toLowerCase()) && selectedFile.size < maxSizeInBytes) {
+        setProfilePicture(selectedFile);
+      }
+      if (selectedFile.size > maxSizeInBytes) {
+        toast.warn("File size exceeds the maximum limit (5MB). Please select a smaller file.", { theme: "colored" });
+      }
+      if (!allowedExtensions.includes(fileExtension.toLowerCase())) {
+        toast.warn("Unsupported file type. Please select a JPG, JPEG, or PNG file.", { theme: "colored" });
+        return;
+      }
+    }
+  };
+
+  const handleIconClick = () => {
+    // Programmatically trigger the file input click event
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
   };
 
   const sendOtp = () => {
@@ -83,10 +113,11 @@ const PersonalInformation = () => {
   };
 
   const handleSubmit = (values) => {
-    if (userDetails.phoneNumberVerificationStatus === false) {
-      toast.error("Please verify phone number to proceed.");
+    console.log(values);
+    if (customerProfile?.phoneNumberVerified === false) {
+      toast.error("Please verify phone number to proceed.", { theme: "colored" });
     } else {
-      console.log(values);
+      setIsLoading(true);
     }
   };
 
@@ -94,14 +125,18 @@ const PersonalInformation = () => {
     <section className="font-mulish bg-HavannaGreen-light px-6 h-full ">
       <div className="smallLaptop:w-[840px]  bg-white py-6 rounded-xl shadow-xl">
         <div className="flex justify-center items-center">
-          <div className="items-center grid place-items-center">
-            {profilePicture ? (
-              <img alt="Profile Picture" className="rounded-full w-24 h-24" src={URL.createObjectURL(profilePicture)} />
-            ) : (
-              <Icon className="w-24 h-24 mb-4" name="userProfile" />
-            )}
-            <input accept=".png, .jpeg, .jpg" className="mt-10" onChange={handleProfilePictureUpload} type="file" />
-            <p className="font-bold text-16 leading-[22px] mt-[10px]">Upload your profile picture</p>
+          <div>
+            <div className="w-fit m-auto">
+              {profilePicture ? (
+                <img alt="Profile Picture" className="rounded-full border w-24 h-24" onClick={handleIconClick} src={URL.createObjectURL(profilePicture)} />
+              ) : (
+                <div className="rounded-full border w-24 h-24 bg-[#DFE1E2] text-HavannaBlack-neutral50 flex justify-center items-center" onClick={handleIconClick}>
+                  <UserIcon width={72} />
+                </div>
+              )}
+            </div>
+            <input accept=".png, .jpeg, .jpg" className="mt-10 hidden" onChange={handleProfilePictureUpload} ref={fileInputRef} type="file" />
+            <p className="font-bold text-16 leading-[22px] mt-[10px] text-center">Upload your profile picture</p>
           </div>
         </div>
 
@@ -110,14 +145,14 @@ const PersonalInformation = () => {
         <Formik
           enableReinitialize
           initialValues={{
-            firstName: userDetails?.firstName || "",
-            lastName: userDetails?.lastName || "",
-            email: userDetails?.emailAddress || "",
-            phoneNumber: userDetails.phoneNumberVerificationStatus === false ? phoneNumber : userDetails.phoneNumber,
-            gender: userDetails?.gender || "",
-            occupation: userDetails?.occupation || "",
-            date: moment(userDetails?.dateOfBirth).format("yyyy-MM-DD") || "",
-            address: userDetails?.address || "",
+            firstName: customerProfile?.firstName || "",
+            lastName: customerProfile?.lastName || "",
+            email: customerProfile?.emailAddress || "",
+            phoneNumber: customerProfile?.phoneNumberVerified === false ? phoneNumber : customerProfile?.phoneNumber,
+            gender: customerProfile?.gender || "",
+            occupation: customerProfile?.occupation || "",
+            date: moment(customerProfile?.dateOfBirth).format("yyyy-MM-DD") || "",
+            address: customerProfile?.address || "",
           }}
           onSubmit={handleSubmit}
           validate={(values) => {
@@ -132,7 +167,8 @@ const PersonalInformation = () => {
             return errors;
           }}
         >
-          {(//../) => (
+          {
+            //../) => (
             <Form className="smallLaptop:flex flex-wrap smallLaptop:pl-11 px-3 mt-6 gap-8">
               <div className="smallLaptop:grid items-center grid-cols-2 gap-8">
                 <div className="mt-4 ">
@@ -196,12 +232,15 @@ const PersonalInformation = () => {
                     required
                     type="number"
                   />
-                  {userDetails.phoneNumberVerificationStatus === false ? (
+                  {customerProfile?.phoneNumberVerified === false ? (
                     <p className="absolute right-2 top-1/2 bg-HavannaGreen-primary text-white px-4 py-1 rounded-md" onClick={sendOtp}>
                       Verify
                     </p>
-                  ) : <div>Verified</div>}
-                  
+                  ) : customerProfile?.phoneNumberVerified === true ? (
+                    <div className="absolute right-2 top-1/2 bg-HavannaGreen-primary text-white px-4 py-1 rounded-md">Verified</div>
+                  ) : (
+                    ""
+                  )}
                 </div>
 
                 <div className="mt-4 ">
@@ -258,20 +297,20 @@ const PersonalInformation = () => {
                   <div className="flex">
                     <div>
                       <label>Male</label>
-                      <FormikCustomInput name="gender" required type="radio"  />
+                      <FormikCustomInput className="accent-HavannaGreen-secondary" name="gender" required type="radio" />
                     </div>
                     <div>
                       <label>Female</label>
-                      <FormikCustomInput  name="gender" required type="radio" />
+                      <FormikCustomInput className="accent-HavannaGreen-secondary" name="gender" required type="radio" />
                     </div>
                   </div>
                 </div>
               </div>
               <div className="mt-10 mb-24">
-                <Button customClass="rounded-[8px] smallLaptop:w-[240px] w-[100%]  text-white h-[58px] bg-HavannaGreen-primary " isLoading={loading} title=" Save information" />
+                <Button customClass="rounded-[8px] smallLaptop:w-[240px] w-[100%]  text-white h-[58px] bg-HavannaGreen-primary " isLoading={isLoading} title=" Save information" />
               </div>
             </Form>
-          )}
+          }
         </Formik>
       </div>
       <CustomModal visibility={open}>

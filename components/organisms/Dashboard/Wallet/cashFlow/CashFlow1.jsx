@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import Icon from "@components/atoms/Icons";
-import { getCustomerWallet } from "@components/Api";
+import { getCustomerWallet } from "@components/api";
 import TransactionHistory from "../TransactionHistory";
 
 const CashFlow1 = () => {
@@ -9,7 +9,7 @@ const CashFlow1 = () => {
   const [userDetails, setUserDetails] = useState({});
 
   useEffect(() => {
-    const userDetails = JSON.parse(sessionStorage.getItem("userDetails"));
+    const userDetails = JSON.parse(localStorage.getItem("userDetails"));
     setUserDetails(userDetails);
   }, []);
 

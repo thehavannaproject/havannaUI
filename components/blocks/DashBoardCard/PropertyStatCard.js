@@ -2,9 +2,9 @@ import React from "react";
 
 import Icon from "@atoms/Icons";
 
-const BalanceCard = ({ balance, title, description, icon }) => {
+const PropertyStatCard = ({ balance, title, description, icon }) => {
   return (
-    <div className="bg-HavannaGreen-secondary wallet-bg px-5 py-[54px] rounded-xl shadow-md">
+    <div className="bg-white wallet-bg px-5 py-[54px] rounded-xl shadow-md">
       <div>
         <p className="font-bold text-24 leading-8 mb-5">{balance}</p>
         <div>
@@ -19,4 +19,4 @@ const BalanceCard = ({ balance, title, description, icon }) => {
   );
 };
 
-export default BalanceCard;
+export default PropertyStatCard;

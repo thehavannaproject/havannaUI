@@ -11,7 +11,7 @@ const InvestmentForm = () => {
   const [showSummary, setShowSummary] = useState(false);
   return (
     <>
-      <div className="px-6 font-mulish">
+      <div className="font-mulish">
         <div className="wallet-bg text-white  bg-HavannaGreen-secondary h-[142px] rounded-lg mt-5">
           <div className="flex gap-3 items-center pt-5 ml-3">
             <Icon name="mobileWallet" />

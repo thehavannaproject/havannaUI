@@ -27,7 +27,13 @@ const MobileNavItems = ({ onClose }) => {
               ))}
             </div>
           </div>
-          <div className="mb-[80px] py-4 flex gap-3">
+          <div
+            className="mb-[80px] py-4 flex gap-3"
+            onClick={() => {
+              localStorage.clear();
+              router.push("/auth/login");
+            }}
+          >
             <ArrowRightOnRectangleIcon width={20} />
             <p>Logout</p>
           </div>

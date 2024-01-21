@@ -1,4 +1,3 @@
-import axios from "axios";
 import { Form, Formik } from "formik";
 import { useRouter } from "next/dist/client/router";
 import Image from "next/image";
@@ -6,19 +5,18 @@ import Link from "next/link";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import * as Yup from "yup";
+import { forgotPassword } from "@components/api";
 
 import Icon from "@components/atoms/Icons";
 
 import Button from "@atoms/CustomButton/CustomButton";
 import FormikCustomInput from "@atoms/CustomInput/FormikCustomInput";
+
 import CustomLink from "@atoms/CustomLink/CustomLink";
 
 import Logo from "@images/svg/Logo.svg";
 
-import { baseUrl } from "../../../../config";
-
 import "react-toastify/dist/ReactToastify.css";
-
 const signInSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("This field is compulsory"),
 });
@@ -30,31 +28,24 @@ const ForgotPassword = () => {
 
   const handleSubmit = (values) => {
     setLoading(true);
-
-    axios({
-      method: "POST",
-      url: `${baseUrl}/account/forgot-password?email=${values.email}`,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => {
-        localStorage.setItem("token", response.data.data.token);
+    forgotPassword(values.email)
+      .then((res) => {
         setLoading(false);
-        router.push("/auth/reset-password");
+        if (res.success == true) {
+          router.push({ pathname: "/auth/pin-verify-email", query: { email: values.email } });
+        } else {
+          toast.error(res.errorMessage, { theme: "colored" });
+        }
       })
       .catch((error) => {
+        console.log(error);
         setLoading(false);
-        error;
-        toast(`Email is not found `);
       });
-
-    localStorage.setItem("email", values.email);
   };
 
   return (
     <section
-      className={` smallLaptop:pt-28 min-h-screen  pt-[31px] smallLaptop:pb-32 tablet:px-0
+      className={` smallLaptop:pt-28 min-h-screen   pt-[31px] smallLaptop:pb-32 tablet:px-0
        font-mulish
      smallLaptop:bg-HavannaGreen-primary bg-HavannaGreen-light`}
     >
@@ -77,7 +68,7 @@ const ForgotPassword = () => {
           <div
             className=" smallLaptop:bg-white tablet:mt-[154px] py-[60px] mt-8 
             rounded-[20px] tablet:rounded-[32px] h-[600px]
-             w-full tablet:w-[800px] bigLaptop:px-[120px] px-6 smallLaptop:px-[5%] tablet:px-[10%]"
+             w-full tablet:w-[800px] smallLaptop:px-[120px] px-6  tablet:px-[10%]"
           >
             <ToastContainer />
             <Formik

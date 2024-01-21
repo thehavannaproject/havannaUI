@@ -9,10 +9,11 @@ import ConfirmAmount from "./ConfirmAmount";
 
 const FundWallet = () => {
   const [showConfirmAmount, setShowConfirmAmount] = useState(false);
+  const [amount_, setAmount_] = useState("");
 
   return (
     <div className="font-mulish text-[#4F5457] px-6 pt-8">
-      <Formik initialValues={{ amount: "" }}>
+      <Formik initialValues={{ amount: "" }} onSubmit={(values) => setAmount_(values.amount)}>
         {() => (
           <Form>
             <div>
@@ -48,7 +49,7 @@ const FundWallet = () => {
       <CustomModal cardClassName="h-screen" visibility={showConfirmAmount}>
         <MenuHeader onClose={() => setShowConfirmAmount(false)} title="Confirm Amount">
           <div className="bg-white h-screen">
-            <ConfirmAmount transactionName="pay" />
+            <ConfirmAmount amount={amount_} transactionName="pay" />
           </div>
         </MenuHeader>
       </CustomModal>

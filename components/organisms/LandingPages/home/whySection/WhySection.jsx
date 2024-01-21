@@ -17,10 +17,10 @@ const WhySection = () => {
           </Animate.Fade>
         </div>
 
-        <div className="mt-6 tablet:grid tablet:grid-cols-2  smallLaptop:grid-cols-4 tablet:gap-4">
+        <div className="mt-6 flex justify-between gap-[26px]">
           {CardContent.map((data, index) => (
-            <div className="mt-6 text-14 leading-5  " key={index}>
-              <Card customClass="p-6 h-[44]" description={data.description} icon={data.icon} iconClass="mb-6 tablet:mt-10" title={data.title} />
+            <div className="mt-6 text-14 leading-5" key={index}>
+              <Card customClass="p-6" description={data.description} icon={data.icon} iconClass="mb-6 tablet:mt-10" title={data.title} />
             </div>
           ))}
         </div>

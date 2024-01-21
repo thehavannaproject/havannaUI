@@ -5,25 +5,19 @@ import { useEffect } from "react";
 // import { baseUrl } from "config";
 // import { useDispatch } from "react-redux";
 // import { setCurrentUser } from "@components/store/Auth";
-import { getUserDetails } from "@components/Api";
+import { useRouter } from "next/router";
+// import { getUserDetails } from "@components/api";
 import SideBar from "./SideBar";
 import NavBar from "./NavBar";
 
 const DashboardLayout = ({ children }) => {
-  // const router = useRouter();
-
-  // useEffect(() => {
-  //   const Token = localStorage.getItem("token");
-  //   if (!Token) {
-  //     router.push("/auth/login");
-  //   }
-  // }, []);
+  const router = useRouter();
 
   useEffect(() => {
-    getUserDetails(localStorage.getItem("userEmail")).then((data) => {
-      console.log(data);
-      sessionStorage.setItem("userDetails", JSON.stringify(data));
-    });
+    const Token = localStorage.getItem("ud");
+    if (!Token) {
+      router.push("/auth/login");
+    }
   }, []);
 
   return (
@@ -37,7 +31,7 @@ const DashboardLayout = ({ children }) => {
             <div className="sticky  top-0 z-50 w-full ">
               <NavBar />
             </div>
-            <div className=" bg-HavannaGreen-light ">{children}</div>
+            <div className=" bg-HavannaGreen-light">{children}</div>
           </div>
         </div>
       </div>

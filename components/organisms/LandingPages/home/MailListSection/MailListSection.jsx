@@ -9,7 +9,7 @@ import * as Yup from "yup";
 import Button from "@atoms/CustomButton/CustomButton";
 import FormikCustomInput from "@atoms/CustomInput/FormikCustomInput";
 
-import { baseUrl } from "../../../../../config";
+import { baseUrl } from "../../../../../interceptor";
 import "react-toastify/dist/ReactToastify.css";
 
 const SignupSchema = Yup.object().shape({
