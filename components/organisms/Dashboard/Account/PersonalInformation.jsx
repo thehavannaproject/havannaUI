@@ -4,8 +4,9 @@ import { toast } from "react-toastify";
 // import { useRouter } from "next/router";
 import { UserIcon } from "@heroicons/react/24/solid";
 import moment from "moment";
+import { ImSpinner3 } from "react-icons/im";
 import Icon from "@components/atoms/Icons";
-import { getCustomerProfile, sendPhoneOtp, verifyPhoneOtp } from "@components/api";
+import { customerCompleteProfile, getCustomerProfile, sendPhoneOtp, verifyPhoneOtp } from "@components/api";
 import CustomModal from "@components/atoms/CustomModal/CustomModal";
 import { AuthService } from "@components/api/auth";
 import Button from "@atoms/CustomButton/CustomButton";
@@ -18,8 +19,9 @@ const PersonalInformation = () => {
   const userDetails = authService.getDetails("ud");
   const [profilePicture, setProfilePicture] = useState(null);
   const [customerProfile, setCustomerProfile] = useState(null);
+  const [reference, setReference] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  // const router = useRouter();
+  const [isPhoneVerified, setIsPhoneVerified] = useState(false);
   const [open, setOpen] = useState(false);
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const refs = Array(6)
@@ -29,6 +31,8 @@ const PersonalInformation = () => {
   const fileInputRef = useRef(null);
 
   const mergeOtp = otp.join("");
+
+  console.log(isPhoneVerified);
 
   useEffect(() => {
     getCustomerProfile(userDetails?.customerId)
@@ -77,24 +81,36 @@ const PersonalInformation = () => {
   };
 
   const handleIconClick = () => {
-    // Programmatically trigger the file input click event
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
   };
 
   const sendOtp = () => {
+    setLoading(true);
     if (phoneNumber.length === 13) {
       const data = {
         customer_mobile_number: phoneNumber,
-        customer_email_address: userDetails.emailAddress,
-        first_name: userDetails.firstName,
+        customer_email_address: customerProfile.emailAddress,
+        first_name: customerProfile?.firstName,
       };
-      setOpen(true);
-      sendPhoneOtp(data).then((response) => {
-        toast.success("OTP sent successfully");
-        localStorage.setItem("reference", response.reference);
-      });
+      sendPhoneOtp(data)
+        .then((response) => {
+          console.log(response);
+          if (response.responseCode === 200) {
+            toast.success("OTP sent successfully", { theme: "colored" });
+            setReference(response.data.reference);
+            setLoading(false);
+            setOpen(true);
+          } else {
+            setLoading(false);
+            toast.error("Something went wrong, Try again", { theme: "colored" });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          setLoading(false);
+        });
     }
   };
 
@@ -102,27 +118,62 @@ const PersonalInformation = () => {
     setLoading(true);
     const data = {
       verification_code: mergeOtp,
-      verification_reference: localStorage.getItem("reference"),
+      verification_reference: reference,
     };
     verifyPhoneOtp(data)
       .then((response) => {
-        response === "invalid token" ? toast.error("Sorry, couldn't verify OTP at the moment, Please try again later") : toast.success("OTP verification is successful");
+        console.log(response);
+        if (response.responseCode === 200) {
+          toast.success("OTP verification is successful", { theme: "colored" });
+          setIsPhoneVerified(true);
+          setOpen(false);
+        } else {
+          toast.error("Sorry, couldn't verify OTP, Please try again later", { theme: "colored" });
+        }
         setLoading(false);
       })
-      .finally(() => setOpen(false));
+      .catch(() => {
+        setOpen(false);
+        toast.error("Something went wrong, Try again later");
+      });
   };
+  console.log(isPhoneVerified);
 
   const handleSubmit = (values) => {
-    console.log(values);
-    if (customerProfile?.phoneNumberVerified === false) {
-      toast.error("Please verify phone number to proceed.", { theme: "colored" });
-    } else {
+    let data = new FormData()
+
+    data.append('CustomerId', userDetails?.customerId);
+    data.append('PhoneNumber', values.phoneNumber); 
+    data.append('DateOfBirth', values.date); 
+    data.append('PhoneNumberVerified', true); 
+    data.append('Address', values.address); 
+    data.append('Occupation', values.occupation); 
+    data.append('Gender', values.gender); 
+    data.append('ProfilePicture', profilePicture); 
+    if ((isPhoneVerified || customerProfile?.phoneNumberVerified) && profilePicture) {
       setIsLoading(true);
+      customerCompleteProfile(data)
+        .then((res) => {
+          if(res.ResponseCode === true) {
+
+            toast.success("Profile completed successfully", { theme: "colored" });
+            setIsLoading(false);
+          } 
+        })
+        .catch((error) => console.log(error));
+      console.log(values);
+    } else {
+      if(!profilePicture) {
+        toast.error("Please upload a profile picture", {theme: "colored"})
+      } else {
+
+        toast.error("Please verify phone number to proceed.", { theme: "colored" });
+      }
     }
   };
 
   return (
-    <section className="font-mulish bg-HavannaGreen-light px-6 h-full ">
+    <section className="font-mulish bg-HavannaGreen-light px-6 h-full flex justify-center items-center ">
       <div className="smallLaptop:w-[840px]  bg-white py-6 rounded-xl shadow-xl">
         <div className="flex justify-center items-center">
           <div>
@@ -167,8 +218,7 @@ const PersonalInformation = () => {
             return errors;
           }}
         >
-          {
-            //../) => (
+          {() => (
             <Form className="smallLaptop:flex flex-wrap smallLaptop:pl-11 px-3 mt-6 gap-8">
               <div className="smallLaptop:grid items-center grid-cols-2 gap-8">
                 <div className="mt-4 ">
@@ -232,14 +282,12 @@ const PersonalInformation = () => {
                     required
                     type="number"
                   />
-                  {customerProfile?.phoneNumberVerified === false ? (
-                    <p className="absolute right-2 top-1/2 bg-HavannaGreen-primary text-white px-4 py-1 rounded-md" onClick={sendOtp}>
-                      Verify
-                    </p>
-                  ) : customerProfile?.phoneNumberVerified === true ? (
+                  {isPhoneVerified || customerProfile?.phoneNumberVerified ? (
                     <div className="absolute right-2 top-1/2 bg-HavannaGreen-primary text-white px-4 py-1 rounded-md">Verified</div>
                   ) : (
-                    ""
+                    <p className="absolute right-2 top-1/2 bg-HavannaGreen-primary text-white px-4 py-1 rounded-md" onClick={sendOtp}>
+                      {loading ? <ImSpinner3 className="animate-spin flex justify-center items-center " /> : "Verify"}
+                    </p>
                   )}
                 </div>
 
@@ -297,11 +345,11 @@ const PersonalInformation = () => {
                   <div className="flex">
                     <div>
                       <label>Male</label>
-                      <FormikCustomInput className="accent-HavannaGreen-secondary" name="gender" required type="radio" />
+                      <FormikCustomInput className="accent-HavannaGreen-secondary" name="gender" required type="radio" value="male" />
                     </div>
                     <div>
                       <label>Female</label>
-                      <FormikCustomInput className="accent-HavannaGreen-secondary" name="gender" required type="radio" />
+                      <FormikCustomInput className="accent-HavannaGreen-secondary" name="gender" required type="radio" value="female" />
                     </div>
                   </div>
                 </div>
@@ -310,10 +358,10 @@ const PersonalInformation = () => {
                 <Button customClass="rounded-[8px] smallLaptop:w-[240px] w-[100%]  text-white h-[58px] bg-HavannaGreen-primary " isLoading={isLoading} title=" Save information" />
               </div>
             </Form>
-          }
+          )}
         </Formik>
       </div>
-      <CustomModal visibility={open}>
+      <CustomModal toggleVisibility={sendOtp} visibility={open}>
         <div>
           <div className="bg-white text-HavannaBlack-primary px-11 py-10  rounded-xl font-mulish shadow-xl ">
             <Icon className="flex cursor-pointer justify-end" name="otpCancel" onClick={() => setOpen(false)} />

@@ -1,23 +1,38 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import CustomLink from "@components/atoms/CustomLink/CustomLink";
 import CustomPagination from "@components/atoms/CustomPagination/CustomPagination";
 import MenuHeader from "@components/layout/DashboardLayout/MenuHeader";
 import CustomModal from "@components/atoms/CustomModal/CustomModal";
+import { getCustomerPortfolio } from "@components/api";
+import { AuthService } from "@components/api/auth";
 
 const MobilePorfolio = () => {
+  const authService = new AuthService();
   const [currentPage, setCurrentPage] = useState(0);
   const [showNextPage, setShowNextPage] = useState(false);
+  const [porfolio, setPortfolio] = useState([]);
+  const userDetails = authService.getDetails("ud");
+
   const handlePageChange = (selectedPage) => {
     setCurrentPage(selectedPage);
   };
+
+  useEffect(() => {
+    getCustomerPortfolio(userDetails?.customerId)
+      .then((response) => setPortfolio(response.properties))
+      .catch((error) => console.log(error));
+  }, []);
+
+  console.log(porfolio);
+
   return (
     <div className="font-mulish mt-6">
       <p className="text-20 font-bold text-[#3B3F42]">My Portfolio</p>
       <div className="flex gap-3 border mt-[18px] px-3 py-[14px] rounded-lg bg-[#F5F5F5]">
         <MagnifyingGlassIcon color="#ADADAD" width={18} />
-        <input className="outline-none bg-[#F5F5F5] text-14" placeholder="Search by property name or type" />
+        <input className="outline-none bg-[#F5F5F5] text-14 w-full" placeholder="Search by property name or type" />
       </div>
       <div className="h-full mt-32 hidden">
         <p className="text-[#ADADAD] text-[18px] text-center">No investment in your portfolio.</p>

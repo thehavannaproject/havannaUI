@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { CaretDownFilled, MenuOutlined, SettingFilled } from "@ant-design/icons";
 import { Dropdown } from "antd";
 import Icon from "@components/atoms/Icons";
+import CustomLink from "@components/atoms/CustomLink/CustomLink";
 import MobileNavItems from "./MobileNavItems";
 
 const MobileNavBar = ({ title }) => {
@@ -24,7 +25,7 @@ const MobileNavBar = ({ title }) => {
     {
       label: (
         <div className="flex gap-[14px] mr-5 mb-4">
-          <Icon name="mobileLogout" /> <p className="text-HavannaBlack-neutral text-16 font-mulish">Logout</p>{" "}
+          <Icon name="mobileLogout" /> <CustomLink customClass="text-HavannaBlack-neutral text-16 font-mulish" destination="/auth/login">Logout</CustomLink>{" "}
         </div>
       ),
       key: "2",

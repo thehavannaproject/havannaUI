@@ -8,18 +8,13 @@ import EmptyState from "@components/atoms/EmptyState/EmptyState";
 import FundWallet from "../Wallet/FundWallet";
 
 const MainDashboard = () => {
-  const [userDetails, setUserDetails] = useState({});
+  const authService = new AuthService();
+  const userDetails = authService.getDetails("ud");
   const [wallet, setWallet] = useState({});
   const [portfolio, setPorfolio] = useState({});
   const [showFundModal, setShowFundModal] = useState(false);
-  const authService = new AuthService();
 
-  useEffect(() => {
-    const userDetails = authService.getDetails("ud");
-    setUserDetails(userDetails);
-  }, []);
-
-  useEffect(() => {
+  useEffect(() =>  {
     getCustomerWallet(userDetails?.customerId)
       .then((data) => {
         if (data) {
@@ -27,7 +22,9 @@ const MainDashboard = () => {
         }
       })
       .catch((error) => console.log(error));
+  }, []);
 
+  useEffect(() => {
     getCustomerPortfolio(userDetails?.customerId)
       .then((data) => {
         if (data) {
@@ -37,21 +34,22 @@ const MainDashboard = () => {
       .catch((error) => console.log(error));
   }, []);
 
+
   const BalanceCardData = [
     {
-      balance: wallet?.availableBalance ? `₦ ${wallet?.availableBalance?.toLocaleString()}` : "₦ ",
+      balance: wallet?.availableBalance ? `₦ ${parseFloat(wallet?.availableBalance)?.toLocaleString()}` : "₦ ",
       name: "Wallet Balance",
       description: "Total money in your wallet",
       icon: "wallet2",
     },
     {
-      balance: "₦ 0",
+      balance: wallet?.availableBalance ? `₦ ${parseFloat(wallet?.availableBalance)?.toLocaleString()}` : "₦ ",
       name: "Properties Value",
       description: "Total worth of your properties",
       icon: "propertiesWallet",
     },
     {
-      balance: wallet?.availableBalance ? `₦ ${wallet?.availableBalance?.toLocaleString()}` : "₦ ",
+      balance: wallet?.availableBalance ? `₦ ${parseFloat(wallet?.availableBalance)?.toLocaleString()}` : "₦ ",
       name: "Cash Flow",
       description: "Accumulated income",
       icon: "cashFlowWallet",

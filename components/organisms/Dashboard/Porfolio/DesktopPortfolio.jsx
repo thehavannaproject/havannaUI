@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 // import ReactPaginate from "react-paginate";
-// import { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/solid";
 import CustomLink from "@components/atoms/CustomLink/CustomLink";
 import Icon from "@components/atoms/Icons";
@@ -13,6 +13,7 @@ import CustomModal from "@components/atoms/CustomModal/CustomModal";
 import useClickOutside from "@components/shared/hooks";
 
 const DesktopPortfolio = () => {
+  const router = useRouter();
   const [totalPages, setTotalPages] = useState(0);
   const [propName, setPropName] = useState("");
   const [porfolio, setPortfolio] = useState([]);
@@ -140,7 +141,7 @@ const DesktopPortfolio = () => {
           <div className=" flex justify-center items-center rounded-xl h-screen  ">
             <div>
               <p className="font-bold text-24 leading-[26px] text-HavannaBlack-neutral20 ">No Investment in your portfolio</p>
-              <button className="bg-HavannaGreen-primary text-white rounded-lg w-full font-bold text-16 h-[54px] mt-6 ">Invest</button>
+              <button className="bg-HavannaGreen-primary text-white rounded-lg w-full font-bold text-16 h-[54px] mt-6" onClick={() => router.push("/listing")}>Invest</button>
             </div>
           </div>
         ) : (
@@ -158,7 +159,6 @@ const DesktopPortfolio = () => {
                       value={propName}
                     />
 
-                    {/* <Icon className="cursor-pointer absolute right-0 top-6 pr-3 " name="angleDown" /> */}
                     {showDropdown ? (
                       <ChevronUpIcon className="cursor-pointer absolute right-0 top-5 pr-3 " width={30} />
                     ) : (

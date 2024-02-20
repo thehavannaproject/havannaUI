@@ -1,4 +1,3 @@
-import axios from "axios";
 import { Form, Formik } from "formik";
 import { useRouter } from "next/dist/client/router";
 import Image from "next/image";
@@ -10,13 +9,12 @@ import * as Yup from "yup";
 import Icon from "@components/atoms/Icons";
 import { REGEX } from "@components/shared/libs/helpers.js";
 
+import { ResetUserPassword } from "@components/api";
 import Button from "@atoms/CustomButton/CustomButton";
 import FormikCustomInput from "@atoms/CustomInput/FormikCustomInput";
 import CustomLink from "@atoms/CustomLink/CustomLink";
 
 import Logo from "@images/svg/Logo.svg";
-
-import { baseUrl } from "../../../../interceptor";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -39,21 +37,14 @@ const ResetPassword = () => {
 
   const handleSubmit = (values) => {
     setLoading(true);
+    const data = {
+      emailAddress: email,
+      token: token,
+      newPassword: values.newPassword,
+      confirmPassword: values.confirmPassword,
+    };
 
-    axios({
-      method: "POST",
-      url: `${baseUrl}/account/reset-password`,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: {
-        emailAddress: email,
-        token: token,
-        newPassword: values.newPassword,
-        confirmPassword: values.confirmPassword,
-      },
-    })
-      .then((response) => {
+    ResetUserPassword(data).then((response) => {
         response;
         setLoading(false);
         router.push("/auth/reset-comfirmation");

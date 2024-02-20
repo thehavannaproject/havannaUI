@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { api } from "../../interceptor";
 
 export const SignInUser = async (data) => {
@@ -28,6 +29,17 @@ export const forgotPassword = async (data) => {
   }
 };
 
+export const ResetUserPassword = async (data) => {
+  if (data) {
+    try {
+      const response = await api.post(`/api/auth/reset-password`);
+      return response.data;
+    } catch (error) {
+      return error;
+    }
+  }
+};
+
 export const getUserDetails = async (email) => {
   try {
     const response = await api.get(`/api/customer?customerId=${email}`);
@@ -39,8 +51,8 @@ export const getUserDetails = async (email) => {
 
 export const sendPhoneOtp = async (data) => {
   try {
-    const response = await api.post(`/account/send-otp`, data);
-    return response.data.data;
+    const response = await api.post(`/request-otp`, data);
+    return response.data;
   } catch (error) {
     return error;
   }
@@ -49,7 +61,7 @@ export const sendPhoneOtp = async (data) => {
 export const verifyPhoneOtp = async (data) => {
   try {
     const response = await api.post(`/account/verify-otp`, data);
-    return response.data.data;
+    return response.data;
   } catch (error) {
     return error;
   }
@@ -97,6 +109,22 @@ export const getCustomerProfile = async (id) => {
   }
 };
 
+export const customerCompleteProfile = async (data) => {
+
+  if(data) {
+    try {
+      const response = await api.post(`/api/customer/complete-profile`, data, {
+        headers: "mutlipart/form-data"
+      });
+      console.log(response)
+      return response.data
+    } catch(error) {
+      toast.error(error.response.data.ErrorMessage, {theme: "colored"})
+      return error
+    }
+  }
+}
+
 export const createTransaction = async (data) => {
   if (data) {
     try {
@@ -105,5 +133,23 @@ export const createTransaction = async (data) => {
     } catch (error) {
       return error;
     }
+  }
+};
+
+export const getAllListings = async () => {
+    try {
+      const response = await api.get(`/api/listings/all`);
+      return response.data.data;
+    } catch (error) {
+      return error;
+    }
+};
+
+export const GetListingById = async (listingId) => {
+  try {
+    const response = await api.get(`/api/listings?listingId=${listingId}`);
+    return response.data.data;
+  } catch (error) {
+    return error;
   }
 };

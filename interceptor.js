@@ -10,7 +10,7 @@ export const api = axios.create({
   baseURL: NEXT_PUBLIC_API_BASE_DEV_URL,
   headers: {
     // 'Content-Type': 'application/json',
-    "Content-Type": "application/json",
+    // "Content-Type": "application/json",
   },
 });
 

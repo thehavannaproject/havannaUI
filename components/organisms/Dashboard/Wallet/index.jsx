@@ -40,7 +40,7 @@ const walletOption = [
   {
     id: 0,
     name: "Wallet",
-    component: <Wallet />,
+    component: <Wallet type="fund"/>,
   },
   {
     id: 1,

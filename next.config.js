@@ -3,12 +3,16 @@
 // eslint-disable-next-line no-undef
 module.exports = {
   reactStrictMode: true,
+  images: {
+    domains: ['res.cloudinary.com'],
+  },
   webpack: (
     config,
     {
       // buildId, dev, isServer, defaultLoaders,
       webpack,
-    }
+    },
+   
   ) => {
     // Note: we provide webpack above so you should not `require` it
     // Perform customizations to webpack config
@@ -19,6 +23,7 @@ module.exports = {
         "window.jQuery": "jquery",
       })
     );
+   
     // Important: return the modified config
 
     return config;

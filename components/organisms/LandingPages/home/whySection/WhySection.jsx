@@ -3,9 +3,9 @@ import * as Animate from "react-reveal";
 
 const WhySection = () => {
   return (
-    <section className="px-5 tablet:px-[120px] py-[60px] bg-HavannaGreen-light font-mulish mt-[58px]">
+    <section className="px-5 bigLaptop:px-[120px] py-[60px] bg-HavannaGreen-light font-mulish mt-[58px]">
       <div className="">
-        <div className="tablet:w-1/2">
+        <div className="bigLaptop:w-1/2">
           <Animate.Fade bottom>
             <h2 className="text-24 tablet:text-36 leading-8 text-HavannaGreen-primary text-center tablet:text-left font-bold tablet:leading-[44px]">
               Why Real Estate Asset Slots <span className="text-HavannaGreen-tertiaryMain">(REAS)</span>?
@@ -17,9 +17,9 @@ const WhySection = () => {
           </Animate.Fade>
         </div>
 
-        <div className="mt-6 flex justify-between gap-[26px]">
+        <div className="mt-6 grid tablet:grid-cols-2 smallLaptop:grid-cols-3 border bigLaptop:grid-cols-4">
           {CardContent.map((data, index) => (
-            <div className="mt-6 text-14 leading-5" key={index}>
+            <div className="mt-6 text-14 leading-5 flex justify-center items-center" key={index}>
               <Card customClass="p-6" description={data.description} icon={data.icon} iconClass="mb-6 tablet:mt-10" title={data.title} />
             </div>
           ))}

@@ -47,7 +47,7 @@ const MobileDashboard = () => {
               <div>
                 <h1 className="text-14 font-bold">Wallet Balance</h1>
                 <p className="text-12 font-normal mt-1">Total money in your wallet</p>
-                <p className="mt-2 text-20 font-bold">{wallet?.availableBalance ? `₦ ${wallet?.availableBalance?.toLocaleString()}` : "₦ "}</p>
+                <p className="mt-2 text-20 font-bold">{wallet?.availableBalance ? `₦ ${parseFloat(wallet?.availableBalance)?.toLocaleString()}` : "₦ "}</p>
               </div>
             </div>
           </div>
@@ -57,7 +57,7 @@ const MobileDashboard = () => {
               <div>
                 <h1 className="text-14 font-bold">Wallet Balance</h1>
                 <p className="text-12 font-normal mt-1">Total money in your wallet</p>
-                <p className="mt-2 text-20 font-bold">{wallet?.availableBalance ? `₦ ${wallet?.availableBalance?.toLocaleString()}` : "₦ "}</p>
+                <p className="mt-2 text-20 font-bold">{wallet?.availableBalance ? `₦ ${parseFloat(wallet?.availableBalance)?.toLocaleString()}` : "₦ "}</p>
               </div>
             </div>
           </div>

@@ -1,23 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import CustomLink from "@components/atoms/CustomLink/CustomLink";
+import { toast } from "react-toastify";
 import Icon from "@components/atoms/Icons";
 import InvestPropertyCard from "@components/blocks/investPropertyCard/index";
 
-import { ListingProperties } from "./ListingProperties";
+import { getAllListings } from "@components/api";
 
 const Index = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [properties, setProperties] = useState([]);
   const [propertiesPerPage] = useState(6);
 
   const indexOfLastProperty = currentPage * propertiesPerPage;
   const indexOfFirstProperty = indexOfLastProperty - propertiesPerPage;
-  const currentProperties = ListingProperties.slice(indexOfFirstProperty, indexOfLastProperty);
+  const currentProperties = properties.slice(indexOfFirstProperty, indexOfLastProperty);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(ListingProperties.length / propertiesPerPage); i++) {
+  for (let i = 1; i <= Math.ceil(properties.length / propertiesPerPage); i++) {
     pageNumbers.push(i);
   }
 
@@ -33,18 +34,27 @@ const Index = () => {
     }
   };
 
+  const getListings = () => {
+    getAllListings()
+      .then((res) => setProperties(res))
+      .catch(() => toast.error("Error fetching Listings"));
+  };
+
+  useEffect(() => {
+    getListings();
+  }, []);
+
+
   return (
     <section className="bg-[#F3FCFB] w-full pb-[120px] p-8 ">
       <div className="">
-        <h1 className="font-mulish font-bold text-[36px] leading-[44px] text-black pl-8 bigLaptop:mt-[100px] pt-10 ">Listing</h1>
+        <h1 className="font-mulish font-bold text-[36px] leading-[44px] text-black pl-8  pt-10 ">Listing</h1>
       </div>
 
-      <div className=" grid bigLaptop:grid-cols-3 mt-4 smallLaptop:grid-cols-2 smallLaptop:gap-10">
+      <div className="grid grid-cols-3 gap-x-2 gap-y-10 border">
         {currentProperties.map((property, index) => (
-          <div className=" " key={index}>
-            <CustomLink destination="/listing/investpage">
-              <InvestPropertyCard className="shadow-lg p-6 " property={property} />
-            </CustomLink>
+          <div key={index}>
+              <InvestPropertyCard className="shadow-lg p-6" property={property} />
           </div>
         ))}
       </div>

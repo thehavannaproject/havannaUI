@@ -1,5 +1,6 @@
-import Image from "next/image";
+// import Image from "next/image";
 import React from "react";
+import {useRouter} from 'next/router';
 
 import Icon from "@components/atoms/Icons";
 // import PropertiesImg from "@images/investsvg/propertiesImg.svg";
@@ -14,14 +15,16 @@ const Row = ({ name, value }) => {
 };
 
 const investPropertyCard = ({ property, className }) => {
+  const router = useRouter();
   return (
-    <div className={`cursor-pointer rounded-xl bg-white ${className} `}>
+    <div className={`rounded-xl relative bg-white font-mulish h-[574px] w-[360px] ${className} `}>
       <div className=" ">
-        <Image alt="Property" className="relative z-20" src={property?.Image} />
+        <p className="absolute top-10 bg-white left-10 px-3 py-1 rounded-xl text-HavannaBlack-neutral20 text-12 font-medium">{property?.availableSlot} Slots Available</p>
+        <img alt="Property" className="h-[320px] object-cover" src={property?.listingImage?.imageUrl} />
       </div>
       <div className="mt-6">
         <div className="text-[22px] font-bold leading-[28px]">
-          <Row value={property?.AssetType} />
+          <Row value={property?.name} />
         </div>
         <div className="font-bold text-[#6B7276] text-18 leading-6">
           <Row value={property?.location} />
@@ -33,8 +36,8 @@ const investPropertyCard = ({ property, className }) => {
       </div>
 
       <div className="mt-8 flex justify-between ">
-        <button className="bg-HavannaGreen-primary text-white font-mulish font-bold text-14 leading-[18px] rounded-lg w-[140px] h-[58px] mobile:h-12">Invest now</button>
-        <button className="bg-white border-2 border-HavannaGreen-primary text-HavannaGreen-primary font-mulish font-bold text-14 leading-[18px] rounded-lg w-[140px] h-[58px] mobile:h-12">
+        <button className="bg-HavannaGreen-primary text-white font-mulish font-bold text-14 leading-[18px] rounded-lg w-[140px] h-[58px] mobile:h-12" >Invest now</button>
+        <button className="bg-white border-2 border-HavannaGreen-primary text-HavannaGreen-primary font-mulish font-bold text-14 leading-[18px] rounded-lg w-[140px] h-[58px] mobile:h-12" onClick={() => router.push(`/listing/${property?.listingDetails?.listingId}`)}>
           Read more
         </button>
       </div>

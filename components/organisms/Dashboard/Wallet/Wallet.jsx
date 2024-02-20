@@ -6,14 +6,15 @@ import { getAllTransactionHistory, getCustomerWallet } from "@components/api";
 import Skeleton from "@components/atoms/Skeleton";
 import { AuthService } from "@components/api/auth";
 import FundWallet from "./FundWallet";
-import TransactionHistory from "./TransactionHistory";
 import WithdrawFund from "./cashFlow/WithdrawFund";
+import MiniTransactionHistory from "./TransactionHistory/MiniTransactionHistory";
 
 const Wallet = ({ type }) => {
   const authService = new AuthService();
   const userDetails = authService.getDetails("ud");
   const modalRef = useRef(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [withdrawModal, setWithdrawModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const [hide, setHide] = useState(true);
   const [wallet, setWallet] = useState([]);
@@ -110,7 +111,7 @@ const Wallet = ({ type }) => {
                 </div>
               </div>
             ) : (
-              <TransactionHistory transHistory={tranHistory} />
+              <MiniTransactionHistory transHistory={tranHistory} />
             )}
           </div>
           <div className="py-10 px-11 bg-white mt-[52px] shadow-xl rounded-xl h-fit mr-11 font-mulish">
@@ -137,7 +138,7 @@ const Wallet = ({ type }) => {
               <div className="flex justify-center items-center mt-8">
                 <button
                   className="text-16  items-center h-[52px] rounded-lg gap-3 flex justify-center w-[300px] font-bold leading-6 font-mulish text-HavannaGreen-primary border-[3px] border-HavannaGreen-primary"
-                  onClick={handleButtonClick}
+                  onClick={() => setWithdrawModal(true)}
                 >
                   <p>Withdraw money</p>
                   <BanknotesIcon width={24} />
@@ -148,7 +149,7 @@ const Wallet = ({ type }) => {
         </div>
 
         {isModalOpen && <FundWallet isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />}
-        {isModalOpen && <WithdrawFund isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />}
+        {withdrawModal && <WithdrawFund isModalOpen={withdrawModal} setIsModalOpen={setWithdrawModal} />}
       </section>
     </div>
   );
