@@ -208,7 +208,7 @@ const DesktopPortfolio = () => {
             <div className="mt-7">
               <CustomLink
                 customClass="w-[300px] h-[54px] font-bold text-16 leading-[22px] flex justify-center items-center  rounded-lg text-white bg-HavannaGreen-primary "
-                destination="/listing/listing"
+                destination="/listing"
               >
                 Explore more properties
               </CustomLink>

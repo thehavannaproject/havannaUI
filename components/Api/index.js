@@ -153,3 +153,15 @@ export const GetListingById = async (listingId) => {
     return error;
   }
 };
+
+export const ListingInvestment = async (data) => {
+  if(data) {
+    try {
+      const response = await api.post(`/api/Investment`, data);
+      return response.data.data;
+    } catch (error) {
+      return error;
+    }
+  }
+
+} 

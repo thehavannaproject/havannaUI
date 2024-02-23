@@ -5,6 +5,7 @@ import { getCustomerPortfolio, getCustomerWallet } from "@components/api";
 import PropertyStatCard from "@components/blocks/DashBoardCard/PropertyStatCard";
 import { AuthService } from "@components/api/auth";
 import EmptyState from "@components/atoms/EmptyState/EmptyState";
+import CustomLink from "@components/atoms/CustomLink/CustomLink";
 import FundWallet from "../Wallet/FundWallet";
 
 const MainDashboard = () => {
@@ -83,7 +84,7 @@ const MainDashboard = () => {
         <div>
           <div className="flex justify-between mb-10">
             <p className="font-bold text-[22px] text-HavannaBlack-neutral20 ">Properties</p>
-            <p className="font-bold text-16 text-HavannaGreen-primary cursor-pointer">See all</p>
+            <CustomLink customClass="font-bold text-16 text-HavannaGreen-primary cursor-pointer" destination="/portfolio">See all</CustomLink>
           </div>
           <div className="bg-white hidden text-center h-[400px] rounded-xl shadow-lg pt-[150px] mb-[149px] ">
             <p className="font-bold text-20 leading-[26px] text-HavannaBlack-neutral20 ">You dont own any properties yet.</p>
@@ -91,7 +92,7 @@ const MainDashboard = () => {
           </div>
         </div>
         {portfolio?.properties?.length > 0 ? (
-          <div className="">
+          <div>
             <div className="font-mulish grid gap-5 tablet:grid-cols-2 desktop:grid-cols-3 pb-[60px]">
               <PropertyStatCard balance="2" description="Total properties invested in" icon="homeFilled" title="Properties" />
               <PropertyStatCard balance="5" description="Total number of slots bought" icon="keyFilled" title="Slot Bought" />

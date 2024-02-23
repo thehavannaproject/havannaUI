@@ -48,10 +48,10 @@ const Index = () => {
   return (
     <section className="bg-[#F3FCFB] w-full pb-[120px] p-8 ">
       <div className="">
-        <h1 className="font-mulish font-bold text-[36px] leading-[44px] text-black pl-8  pt-10 ">Listing</h1>
+        <h1 className="font-mulish font-bold text-[36px] leading-[44px] text-black ">Listing</h1>
       </div>
 
-      <div className="grid grid-cols-3 gap-x-2 gap-y-10 border">
+      <div className="grid grid-cols-3 gap-x-2 gap-y-10 mt-8">
         {currentProperties.map((property, index) => (
           <div key={index}>
               <InvestPropertyCard className="shadow-lg p-6" property={property} />

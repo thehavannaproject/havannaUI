@@ -6,17 +6,34 @@ import { useEffect } from "react";
 // import { useDispatch } from "react-redux";
 // import { setCurrentUser } from "@components/store/Auth";
 import { useRouter } from "next/router";
-// import { getUserDetails } from "@components/api";
+import { getUserDetails } from "@components/api";
+import { AuthService } from "@components/api/auth";
 import SideBar from "./SideBar";
 import NavBar from "./NavBar";
 
 const DashboardLayout = ({ children }) => {
+  const authService = new AuthService();
   const router = useRouter();
+  const userDetails = authService.getDetails("ud");
 
   useEffect(() => {
-    const Token = localStorage.getItem("ud");
-    if (!Token) {
+    const authenticated = authService.hasDetails("ud");
+    if (!authenticated) {
       router.push("/auth/login");
+    }
+  }, []);
+
+  const getCustomerDetails = () => {
+    getUserDetails(userDetails?.customerId)
+      .then((res) => {
+        authService.encodeData(res, "cd");
+      })
+      .catch((error) => console.log(error));
+  };
+
+  useEffect(() => {
+    if (!authService.hasDetails("cd")) {
+      getCustomerDetails();
     }
   }, []);
 

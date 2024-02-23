@@ -36,7 +36,7 @@ const investPropertyCard = ({ property, className }) => {
       </div>
 
       <div className="mt-8 flex justify-between ">
-        <button className="bg-HavannaGreen-primary text-white font-mulish font-bold text-14 leading-[18px] rounded-lg w-[140px] h-[58px] mobile:h-12" >Invest now</button>
+        <button className="bg-HavannaGreen-primary text-white font-mulish font-bold text-14 leading-[18px] rounded-lg w-[140px] h-[58px] mobile:h-12" onClick={() => router.push({pathname: `/listing/listingInvest/${property?.listingDetails?.listingId}`})} >Invest now</button>
         <button className="bg-white border-2 border-HavannaGreen-primary text-HavannaGreen-primary font-mulish font-bold text-14 leading-[18px] rounded-lg w-[140px] h-[58px] mobile:h-12" onClick={() => router.push(`/listing/${property?.listingDetails?.listingId}`)}>
           Read more
         </button>
