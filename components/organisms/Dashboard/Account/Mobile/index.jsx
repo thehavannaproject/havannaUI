@@ -2,6 +2,7 @@ import { useState } from "react";
 import AccountTier from "./AccountTier";
 import MyProfile from "./MyProfile";
 import Security from "./Security";
+import BankAccount from "../BankAccount";
 
 const MobileAccount = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -19,6 +20,11 @@ const MobileAccount = () => {
     },
     {
       id: 2,
+      title: "Bank Account",
+      component: <BankAccount />,
+    },
+    {
+      id: 3,
       title: "Security",
       component: <Security />,
     },

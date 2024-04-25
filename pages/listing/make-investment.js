@@ -7,12 +7,12 @@ import MobileInvestForm from "@components/organisms/Dashboard/Listing/Mobile/Inv
 const index = () => {
   return (
     <div>
-      <div>
+      <div className="hidden tablet:block">
         <DashboardLayout>
           <InvestNow />
         </DashboardLayout>
       </div>
-      <div>
+      <div className="tablet:hidden">
         <DashboardMobileLayout className="px-0" title="Invest">
           <MobileInvestForm />
         </DashboardMobileLayout>

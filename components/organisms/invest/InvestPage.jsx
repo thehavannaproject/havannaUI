@@ -1,41 +1,22 @@
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import React, { useState } from "react";
 
+import { useRouter } from "next/router";
 import CustomLink from "@components/atoms/CustomLink/CustomLink";
 import Icon from "@components/atoms/Icons";
 
-import { GetListingById } from "@components/api";
-
-
-const InvestPage = () => {
+const InvestPage = ({ singleListing }) => {
   const [show, setShow] = useState(false);
-  const [singleListing, setSingleListing] = useState({});
   const router = useRouter();
-  const { propertyId } = router.query;
+  // const [singleListing, setSingleListing] = useState({});
 
-  const getListingById = () => {
-    GetListingById(propertyId)
-      .then((res) => {
-        setSingleListing(res);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const handleButtonClick = () => {
-    setShow(true);
-  };
+  // const handleButtonClick = () => {
+  //   setShow(true);
+  // };
 
   const handleCloseModal = () => {
     setShow(false);
   };
-
-  useEffect(() => {
-    getListingById();
-  }),
-    [];
 
   return (
     <section>
@@ -49,7 +30,7 @@ const InvestPage = () => {
         </div>
         <div className="flex gap-4 mt-12">
           <div className="">
-            <Image alt="propertiesImg" className="rounded-tl-2xl rounded-bl-2xl" height={340}  src={singleListing?.listingImage?.imageUrl} width={658} />
+            <Image alt="propertiesImg" className="rounded-tl-2xl rounded-bl-2xl" height={340} src={singleListing?.listingImage?.imageUrl} width={658} />
           </div>
           <div>
             <div className="flex gap-4">
@@ -71,11 +52,15 @@ const InvestPage = () => {
             </div>
             <div className=" flex gap-[70px] mt-5 justify-between">
               <div>
-                <h2 className="font-bold text-[22px] leading-7 ">Property Details</h2>
+                <div className="">
+                  <h2 className="font-bold text-[22px] leading-7 ">Property Description</h2>
+                  <p className="font-medium text-18 mt-3 leading-6 capitalize">{singleListing?.description?.toLowerCase()}</p>
+                </div>
+                <h2 className="font-bold text-[22px] leading-7 mt-8">Property Details</h2>
                 <p className="font-medium text-18 mt-3 leading-6 capitalize">{singleListing?.listingDetails?.propertyDetails?.toLowerCase()}</p>
                 <h2 className="font-bold text-[22px] mt-8 leading-7">Parties Involved</h2>
                 <p className="font-medium text-18 leading-6 mt-3 capitalize">{singleListing?.listingDetails?.partiesInvolved?.toLowerCase()}</p>
-                <h1 className="font-bold text-[22px] leading-7 mt-8">Propertiy Amenities</h1>
+                <h1 className="font-bold text-[22px] leading-7 mt-8">Propertity Amenities</h1>
                 <ul className="font-medium text-18 leading-6">
                   {singleListing?.listingDetails?.amenites?.split(",").map((item, index) => (
                     <li className="flex gap-[15px] mt-3" key={index}>
@@ -132,7 +117,11 @@ const InvestPage = () => {
                     <p className="text-HavannaGreen-secondary text-18 font-bold leading-6 capitalize">{singleListing?.listingDetails?.maximumHoldingPeriod?.toLowerCase()}</p>
                   </div>
                 </div>
-                <button className="w-full font-bold text-16 leading-[22px] h-[58px] mt-[60px] bg-HavannaGreen-primary text-white rounded-lg  " onClick={handleButtonClick}>
+                <button
+                  className="w-full font-bold text-16 leading-[22px] h-[58px] mt-[60px] bg-HavannaGreen-primary text-white rounded-lg  "
+                  // onClick={() => router.push(`/listing/listingInvest/${propertyId}`)}
+                  onClick={() => router.push(`/listing/listingInvest`)}
+                >
                   Invest now
                 </button>
                 <button className="w-full font-bold text-16 leading-[22px] h-[58px] mt-[30px] mb-11 border-[3px] border-HavannaGreen-primary text-HavannaGreen-primary rounded-lg">

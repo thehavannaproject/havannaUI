@@ -2,7 +2,8 @@ import { HomeOutlined } from "@ant-design/icons";
 import CustomLink from "@components/atoms/CustomLink/CustomLink";
 import Icon from "@components/atoms/Icons";
 
-const RecentInvestment = () => {
+const RecentInvestment = ({portfolio}) => {
+
   return (
     <div className="mt-8 font-mulish">
       <div>
@@ -20,14 +21,14 @@ const RecentInvestment = () => {
             <HomeOutlined className="text-[#39876B]" size={20} />
             <p className="text-14 font-bold">Total Investment</p>
           </div>
-          <p className="text-14 font-bold text-[#39876B]">2</p>
+          <p className="text-14 font-bold text-[#39876B]">{portfolio?.totalInvestments}</p>
         </div>
         <div className="flex justify-between border-[1.3px] border-[#D6D6D6] rounded-[4px] px-3 py-[14px] mt-4">
           <div className="flex gap-2">
             <Icon name="keyOutlined" />
             <p className="text-14 font-bold">Total Slots Bought</p>
           </div>
-          <p className="text-14 font-bold text-[#39876B]">12</p>
+          <p className="text-14 font-bold text-[#39876B]">{portfolio?.totalSlotsOwned}</p>
         </div>
       </div>
     </div>

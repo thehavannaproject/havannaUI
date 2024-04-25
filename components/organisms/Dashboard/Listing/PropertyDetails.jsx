@@ -11,7 +11,7 @@ import propertiesImg2 from "@images/investsvg/Image-2.svg";
 import propertiesImg3 from "@images/investsvg/Image-3.svg";
 import propertiesImg4 from "@images/investsvg/Image.svg";
 
-const InvestPage = () => {
+const PropertyDetails = () => {
   const router = useRouter();
 
   return (
@@ -145,4 +145,4 @@ const InvestPage = () => {
   );
 };
 
-export default InvestPage;
+export default PropertyDetails;

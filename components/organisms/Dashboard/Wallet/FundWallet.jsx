@@ -11,7 +11,7 @@ import { AuthService } from "@components/api/auth";
 import { createTransaction } from "@components/api";
 import CustomModal from "@components/atoms/CustomModal/CustomModal";
 
-const FundWallet = ({ setIsModalOpen }) => {
+const FundWallet = ({ setIsModalOpen, setShowSuccessModal }) => {
   const [amount, setAmount] = useState(null);
   const [showConfirmModal, setConfirmModal] = useState(false);
   const authService = new AuthService();
@@ -25,7 +25,7 @@ const FundWallet = ({ setIsModalOpen }) => {
   const config = {
     reference: new Date().getTime().toString(),
     email: emailAddress,
-    amount: amount * 100, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
+    amount: amount * 100, 
     publicKey: "pk_test_1d9326aed821f7d3fade951742ab65b0070de23d",
     metadata: {
       customerId,
@@ -43,16 +43,16 @@ const FundWallet = ({ setIsModalOpen }) => {
       charge: 0,
     };
     createTransaction(data)
-      .then((res) => {
-        window.location.reload();
-        toast.success("Wallet credited successfully", { theme: "colored" });
-        res;
+      .then(() => {
+          // toast.success("Wallet credited successfully", { theme: "colored" });
+          setShowSuccessModal(true)
+          handleCloseModal();
       })
       .catch((error) => {
         console.log(error);
+        handleCloseModal();
         toast.error("Transaction cannot be processed at the moment, Try again later.", { theme: "colored" });
       });
-    handleCloseModal();
   };
 
   // you can call this function anything
@@ -84,7 +84,7 @@ const FundWallet = ({ setIsModalOpen }) => {
           <div className="w-[532px] bg-white py-10 px-11 font-mulish rounded-xl shadow-md">
             <div className="flex text-HavannaBlack-neutral20">
               <ChevronLeftIcon onClick={() => setConfirmModal(false)} width={32} />
-              <p className=" text-20 font-bold">Confirm Amount N 5,000.00</p>
+              <p className=" text-20 font-bold">Confirm Amount ₦ {amount}</p>
             </div>
             <div className="mt-[35px]">
               {items.map((data, index) => (

@@ -6,6 +6,8 @@ const { NEXT_PUBLIC_API_BASE_DEV_URL } = process.env;
 // export const baseUrl = "https://havannadevapi.azurewebsites.net";
 // export const baseUrl = "https://havannagroup-001-site1.itempurl.com";
 
+console.log(NEXT_PUBLIC_API_BASE_DEV_URL)
+
 export const api = axios.create({
   baseURL: NEXT_PUBLIC_API_BASE_DEV_URL,
   headers: {

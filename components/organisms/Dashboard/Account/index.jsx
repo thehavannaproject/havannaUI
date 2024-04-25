@@ -3,6 +3,7 @@ import { useState } from "react";
 import AccountTier from "./AccountTier";
 import PersonalInformation from "./PersonalInformation";
 import Security from "./Security/Security";
+import BankAccount from "./BankAccount";
 
 const index = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -20,6 +21,11 @@ const index = () => {
     },
     {
       id: 2,
+      name: "Bank Details",
+      component: <BankAccount />,
+    },
+    {
+      id: 3,
       name: "Security",
       component: <Security />,
     },

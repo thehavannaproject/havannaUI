@@ -1,14 +1,69 @@
 // import { toast } from "react-toastify";
 // import { useRouter } from "next/router";
 import { toast } from "react-toastify";
+import { usePaystackPayment } from "react-paystack";
 import CustomButton from "@components/atoms/CustomButton/CustomButton";
+import { AuthService } from "@components/api/auth";
+import { createTransaction } from "@components/api";
+
 // import { AuthService } from "@components/api/auth";
 
-const ConfirmAmount = ({ transactionName, amount, showModal, setIsModalOpen }) => {
+const ConfirmAmount = ({ transactionName, amount, setIsModalOpen }) => {
   // const router = useRouter();
   // const authService = new AuthService();
   // const customerId = authService.getDetails("ud").customerId;
   // const emailAddress = authService.getDetails("ud").emailAddress;
+  // const [showConfirmModal, setConfirmModal] = useState(false);
+  const authService = new AuthService();
+  const customerId = authService.getDetails("ud").customerId;
+  const emailAddress = authService.getDetails("ud").emailAddress;
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const config = {
+    reference: new Date().getTime().toString(),
+    email: emailAddress,
+    amount: amount * 100, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
+    publicKey: "pk_test_1d9326aed821f7d3fade951742ab65b0070de23d",
+    metadata: {
+      customerId,
+    },
+  };
+
+  // you can call this function anything
+  const onSuccess = (reference) => {
+    // Implementation for whatever you want to do with reference and after success call.
+    const data = {
+      customerId: customerId,
+      transactionReference: reference.reference,
+      type: 0,
+      amount: amount,
+      charge: 0,
+    };
+    createTransaction(data)
+      .then(() => {
+          // toast.success("Wallet credited successfully", { theme: "colored" });
+          // setShowSuccessModal(true)
+          handleCloseModal();
+      })
+      .catch((error) => {
+        console.log(error);
+        handleCloseModal();
+        toast.error("Transaction cannot be processed at the moment, Try again later.", { theme: "colored" });
+      });
+  };
+
+  // you can call this function anything
+  const onClose = () => {
+    // implementation for  whatever you want to do when the Paystack dialog closed.
+    console.log("closed");
+  };
+
+  const initializePayment = usePaystackPayment(config);
+
+
 
   return (
     <div className="font-mulish pt-7 px-6">
@@ -46,9 +101,9 @@ const ConfirmAmount = ({ transactionName, amount, showModal, setIsModalOpen }) =
           <CustomButton
             customClass=" h-[60px] w-full mt-[52px] rounded-lg bg-HavannaGreen-primary text-white mb-5 "
             onClick={() => {
-              toast.success("Your transaction is being processed and you will be notified via email or sms once your wallet is credited.", { theme: "colored" });
-              showModal(false);
-              setIsModalOpen(false);
+              // toast.success("Your transaction is being processed and you will be notified via email or sms once your wallet is credited.", { theme: "colored" });
+              // showModal(false);
+              initializePayment(onSuccess, onClose)
             }}
             title={`${transactionName === "withdraw" ? "Withdraw" : "Pay"} ₦ ${amount.toLocaleString()}`}
             type="submit"

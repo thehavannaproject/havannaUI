@@ -37,9 +37,8 @@ const SignIn = () => {
           setLoading(false);
         }
       })
-      .catch((error) => {
+      .catch(() => {
         setLoading(false);
-        error;
         toast.error(`Something went wrong. Try again later`, { theme: "colored" });
       });
   };

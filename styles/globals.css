@@ -1,6 +1,7 @@
 /* HAVANNA Default Settings */
 
 @import url("https://fonts.googleapis.com/css2?family=Mulish&display=swap");
+@import "./main.css";
 
 :root {
   /*Default  Color */
@@ -97,4 +98,47 @@
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
-@import "./main.css";
+
+.loader {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  background: inherit;
+  overflow: hidden;
+}
+
+#path {
+  stroke: #ffffff;
+  stroke-width: 1px;
+  stroke-dasharray: 1470;
+  animation: 3s draw ease-in-out forwards infinite;
+}
+
+/* .nav ul li[data-v-5f278f48]{
+  display: none !important;
+} */
+/* .nav-item-card {
+  display: none !important;
+} */
+
+@keyframes draw {
+  0% {
+    fill-opacity: 0.1;
+    stroke-dashoffset: 1470;
+    stroke: #ffffff;
+  }
+  50% {
+    fill-opacity: 0;
+    stroke: #ffffff
+  }
+  100% {
+    stroke-dashoffset: 1;
+    stroke: none;
+  }
+}

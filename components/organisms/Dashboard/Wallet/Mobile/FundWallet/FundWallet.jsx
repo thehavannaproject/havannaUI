@@ -19,7 +19,7 @@ const FundWallet = () => {
             <div>
               <label className="text-14 font-bold">Enter Amount</label>
               <FormikCustomInput
-                className={`rounded-[4px] smallLaptop:w-[100%] h-[48px] mt-2 
+                className={`rounded-[4px] w-full h-[48px] mt-2 
                         border-2  `}
                 id="amount"
                 inputClassName="placeholder:text-14 outline-none
@@ -46,10 +46,10 @@ const FundWallet = () => {
         )}
       </Formik>
 
-      <CustomModal cardClassName="h-screen" visibility={showConfirmAmount}>
+      <CustomModal cardClassName="h-screen w-full" visibility={showConfirmAmount}>
         <MenuHeader onClose={() => setShowConfirmAmount(false)} title="Confirm Amount">
           <div className="bg-white h-screen">
-            <ConfirmAmount amount={amount_} transactionName="pay" />
+            <ConfirmAmount amount={amount_} setIsModalOpen={showConfirmAmount} transactionName="pay" />
           </div>
         </MenuHeader>
       </CustomModal>

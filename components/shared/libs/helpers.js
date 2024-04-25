@@ -54,3 +54,7 @@ export function maskEmail(email) {
     return email;
   }
 }
+
+export function replaceFirstZero(phoneNumber) {
+  return phoneNumber.replace(/^0/, '234');
+}

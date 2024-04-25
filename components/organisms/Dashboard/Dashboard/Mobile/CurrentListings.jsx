@@ -1,9 +1,24 @@
-import Image from "next/image";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import CustomLink from "@components/atoms/CustomLink/CustomLink";
-import investImage from "@images/investImage.png";
-import investImage2 from "@images/investImage2.png";
+import { getAllListings } from "@components/api";
 
 const CurrentListings = () => {
+  const [listing, setListing] = useState([]);
+
+  const getListings = () => {
+    getAllListings()
+      .then((res) => {
+        setListing(res.listings);
+      })
+      .catch(() => toast.error("Error fetching Listings"));
+  };
+
+  useEffect(() => {
+    getListings();
+  }, []);
+
+  console.log(listing);
   return (
     <div className="mt-10 font-mulish mb-16">
       <div className="flex justify-between">
@@ -12,37 +27,38 @@ const CurrentListings = () => {
           See More
         </CustomLink>
       </div>
-      {currentListing.map((item, index) => (
-        <div className="mt-4 mb-8" key={index}>
-          <Image alt="Property" src={item.image} />
-          <h6 className="text-16 font-bold text-[#3B3F42] mt-3">{item.name}</h6>
-          <p className="text-14 text-[#6B7276] mt-1">{item.location}</p>
-          <p className="font-bold text-16 text-[#3B3F42] mt-2">₦ {item.price} per slot</p>
-          <CustomLink customClass="bg-HavannaGreen-primary rounded-md text-14 font-bold w-fit mt-4 !text-white py-3 px-8" destination="/lsiting/make-investment">
-            Invest Now
-          </CustomLink>
-        </div>
-      ))}
+
+      <div className="sm:flex gap-4">
+        {listing?.slice(0, 2).map((item, index) => (
+          <div className="mt-4 mb-8- relative" key={index}>
+            <div>
+              <p className="absolute top-4 bg-white left-4 px-3 py-1 rounded-xl text-HavannaBlack-neutral20 text-10 font-medium">{item?.availableSlot} Slots Available</p>
+              <img alt="Property" className="h-[320px] object-cover w-full" src={item?.listingImage?.imageUrl} />
+            </div>
+
+            <h6 className="text-16 font-bold text-[#3B3F42] mt-3">{item?.name || "N/A"}</h6>
+            <p className="text-14 text-[#6B7276] mt-1">{item.listingDetails.location || "N/A"}</p>
+            <p className="font-bold text-16 text-[#3B3F42] mt-2">₦ {item.Cost || 0} per slot</p>
+            <div className="flex justify-between">
+              <CustomLink
+                customClass="bg-HavannaGreen-primary rounded-[4px] text-14 font-bold  mt-4 !text-white h-[42px] w-[100px] text-center flex justify-center items-center"
+                destination={`/listing/make-investment?listingId=${item?.listingDetails?.listingId}`}
+              >
+                Invest Now
+              </CustomLink>
+              <CustomLink
+                customClass="border-[1.5px] border-HavannaGreen-primary rounded-[4px] text-14 font-bold  mt-4 !text-HavannaGreen-primary h-[42px] w-[100px] text-center flex justify-center items-center"
+                destination={`/listing/${item?.listingDetails?.listingId}`}
+              >
+                See More
+              </CustomLink>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
 
 export default CurrentListings;
 
-export const currentListing = [
-  {
-    id: 0,
-    image: investImage,
-    name: "Edala Homes",
-    location: "Ogunlana Drive, Surulere, Lagos, Nigeria.",
-    price: "80,000",
-  },
-
-  {
-    id: 1,
-    image: investImage2,
-    name: "Edala Homes",
-    location: "Ogunlana Drive, Surulere, Lagos, Nigeria.",
-    price: "80,000",
-  },
-];

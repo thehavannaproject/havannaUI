@@ -18,19 +18,20 @@ const InvestNow = () => {
   const [wallet, setWallet] = useState([]);
   const [singleListing, setSingleListing] = useState({});
   const [hide, setHide] = useState(true);
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   const investPropertySchema = Yup.object().shape({
-    slotCount: Yup.string().max(3).required("This field is compulsory").test(
-      "slotCount",
-      "Number of slots entered is greater than available slots",
-      (value) => { setCount(parseInt(value)); return parseInt(value) <= singleListing?.availableSlot;},
-    ),
-    amount: Yup.string().required("This field is compulsory").test(
-      "amount",
-      "You have insufficient funds in your wallet",
-      (value) => parseFloat(value) <= wallet?.availableBalance
-    ),
+    slotCount: Yup.number()
+      .min(1, "Slot count must be greater than 0")
+      .max(100, "Slot count cannot exceed 100")
+      .required("This field is compulsory")
+      .test("slotCount", "Number of slots entered is greater than available slots", (value) => {
+        setCount(parseInt(value));
+        return parseInt(value) <= singleListing?.availableSlot;
+      }),
+    amount: Yup.string()
+      .required("This field is compulsory")
+      .test("amount", "You have insufficient funds in your wallet", (value) => parseFloat(value) <= wallet?.availableBalance),
   });
 
   const { propertyId } = router.query;
@@ -62,10 +63,11 @@ const InvestNow = () => {
 
   const handleSubmit = (values) => {
     router.push({
-      pathname: '/listing/transactionsummary', // Replace with your target page
-      query: {propertyId:propertyId, data: JSON.stringify(values) },
-    })
-  }
+      pathname: "/listing/transactionsummary",
+      query: { propertyId: propertyId, data: JSON.stringify(values) },
+    });
+  };
+
 
   return (
     <section>
@@ -114,7 +116,12 @@ const InvestNow = () => {
           </div>
 
           <div className="mt-[60px]">
-            <Formik enableReinitialize initialValues={{ propertyName: singleListing?.name, slotPrice: 50, slotCount: count, amount: (count * 50 || 0) }} onSubmit={(values) => handleSubmit(values)} validationSchema={investPropertySchema}>
+            <Formik
+              enableReinitialize
+              initialValues={{ propertyName: singleListing?.name, slotPrice: 50, slotCount: count, amount: count * 50 || 0 }}
+              onSubmit={(values) => handleSubmit(values)}
+              validationSchema={investPropertySchema}
+            >
               {({ values }) => (
                 <Form className="px-10">
                   <div className="mt-4 ">
@@ -164,6 +171,7 @@ const InvestNow = () => {
                       placeholder="Enter how many slots e.g 10"
                       required
                       type="number"
+                      value={values.slotCount}
                     />
                   </div>
                   <div className="mt-4 ">
@@ -184,13 +192,13 @@ const InvestNow = () => {
                   </div>
 
                   {/* <CustomLink destination="/listing/transactionsummary"> */}
-                    <div>
-                      <CustomButton
-                        customClass={`rounded-[4px] smallLaptop:w-[100%] h-[60px] mt-[60px] 
+                  <div>
+                    <CustomButton
+                      customClass={`rounded-[4px] smallLaptop:w-[100%] h-[60px] mt-[60px] 
                           text-white bg-HavannaGreen-primary `}
-                        title="Continue"
-                      />
-                    </div>
+                      title="Continue"
+                    />
+                  </div>
                   {/* </CustomLink> */}
                 </Form>
               )}

@@ -1,45 +1,71 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
+import OtpInput from "react-otp-input";
 import Icon from "@components/atoms/Icons";
 import TransactionSuccessfulModal from "@components/atoms/TransactionSuccessfulModal";
 import { AuthService } from "@components/api/auth";
-import { ListingInvestment } from "@components/api";
+import { ListingInvestment, getCustomerPortfolio } from "@components/api";
 import CustomButton from "@components/atoms/CustomButton/CustomButton";
+import CustomModal from "@components/atoms/CustomModal/CustomModal";
+
 
 const TransactionSummary = () => {
   const router = useRouter();
   const authService = new AuthService();
-  const customerDetails = authService.getDetails("cd");
+  const userDetails = authService.getDetails("ud");
   const [summaryData, setSummaryData] = useState({});
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const { propertyId, data } = router.query;
-  console.log(customerDetails);
+  const [showModal, setShowModal] = useState(false);
+  const [otp, setOtp] = useState("");
+  const [portfolio, setPorfolio] = useState([]);
+
+  useEffect(() => {
+    getCustomerPortfolio(userDetails?.customerId)
+      .then((data) => {
+        if (data) {
+          setPorfolio(data);
+        }
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
   useEffect(() => {
     if ((propertyId, data)) {
       setSummaryData(JSON.parse(data));
     }
   }, [propertyId, data]);
-  console.log(summaryData);
 
   const makeInvestment = () => {
     setLoading(true);
-    const data = {
+    const payload = {
       listingId: propertyId,
-      portfolioId: customerDetails?.portfolio?.id,
-      customerId: customerDetails?.customerId,
-      amount: summaryData.amount,
-      unit: summaryData.slotCount,
+      portfolioId: portfolio?.id,
+      customerId: userDetails?.customerId,
+      amount: summaryData?.amount,
+      unit: summaryData?.slotCount,
+      transactionPin: otp,
+      email: userDetails?.emailAddress,
+      investmentType: 0,
     };
-    ListingInvestment(data)
+
+    ListingInvestment(payload)
       .then((res) => {
         setLoading(false)
         console.log(res);
-        setShowSuccessModal(true);
+        if(res.responseCode === 200){setShowSuccessModal(true);}
       })
       .catch((error) => {console.log(error); setLoading(false)});
   };
+
+  useEffect(() => {
+    if (otp && otp.length == 4) {
+      makeInvestment();
+    }
+  }, [otp]);
+
 
   return (
     <section>
@@ -85,11 +111,28 @@ const TransactionSummary = () => {
             <p>{summaryData?.slotCount}</p>
           </div>
           <div className="">
-            <CustomButton customClass="mt-20 h-[54px] rounded-[4px] bg-HavannaGreen-primary text-white w-full" isLoading={loading} onClick={makeInvestment} title={`Pay ${summaryData?.amount?.toLocaleString()}`}/>
+            <CustomButton customClass="mt-20 h-[54px] rounded-[4px] bg-HavannaGreen-primary text-white w-full" isLoading={loading} onClick={()=> setShowModal(true)} title={`Pay ${summaryData?.amount?.toLocaleString()}`}/>
               
           </div>
         </div>
       </div>
+      <CustomModal cardClassName="absolute bottom-0 w-full" toggleVisibility={setShowModal} visibility={showModal}>
+        <div className="w-full pt-8 bg-white text-black font-mulish h-[70vh] rounded-t-xl">
+          <p className="text-center text-18 font-bold text-[#3B3F42]">Enter your PIN code</p>
+          <OtpInput
+            containerStyle="px-6 text-20 mt-[48px] flex justify-between"
+            numInputs={4}
+            onChange={(e) => {
+              setOtp(e);
+            }}
+            renderInput={(props) => (
+              <input {...props} style={{ width: "42px", height: "42px", border: "1.3px solid #ADADAD", outline: "none", textAlign: "center", borderRadius: "4px" }} width={42} />
+            )}
+            renderSeparator={<span />}
+            value={otp}
+          />
+        </div>
+      </CustomModal>
       {showSuccessModal && <TransactionSuccessfulModal route="/listing" />}
     </section>
   );
