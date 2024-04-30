@@ -6,9 +6,9 @@ import MenuHeader from "@components/layout/DashboardLayout/MenuHeader";
 // import TransactionProcessingModal from "@components/atoms/TransactionProcessingModal";
 import FundWallet from "../../Wallet/Mobile/FundWallet/FundWallet";
 
-const QuickActions = () => {
+const QuickActions = ({setShowSuccessModal}) => {
   const [showConfirmAmount, setShowConfirmAmount] = useState(false);
-  // const [showSuccessModal, setShowSuccessModal] = useState(false);
+
   return (
     <div className="mt-6 font-mulish">
       <p className="text-[#3B3F42] text-14 font-bold">Quick Actions</p>
@@ -29,11 +29,10 @@ const QuickActions = () => {
       <CustomModal cardClassName="h-screen w-full" visibility={showConfirmAmount}>
         <MenuHeader onClose={() => setShowConfirmAmount(false)} title="Fund Wallet">
           <div className="bg-white h-screen">
-            <FundWallet />
+            <FundWallet closeModal={setShowConfirmAmount} setShowSuccessModal={setShowSuccessModal} />
           </div>
         </MenuHeader>
       </CustomModal>
-      {/* {showSuccessModal && <TransactionProcessingModal setShowSuccessModal={setShowSuccessModal} />} */}
     </div>
   );
 };

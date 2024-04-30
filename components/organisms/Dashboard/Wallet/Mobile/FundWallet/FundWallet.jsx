@@ -7,8 +7,8 @@ import CustomModal from "@components/atoms/CustomModal/CustomModal";
 import MenuHeader from "@components/layout/DashboardLayout/MenuHeader";
 import ConfirmAmount from "./ConfirmAmount";
 
-const FundWallet = () => {
-  const [showConfirmAmount, setShowConfirmAmount] = useState(false);
+const FundWallet = ({closeModal, setShowSuccessModal}) => {
+  const [showConfirmAmount, setShowConfirmAmount ] = useState(false);
   const [amount_, setAmount_] = useState("");
 
   return (
@@ -49,7 +49,7 @@ const FundWallet = () => {
       <CustomModal cardClassName="h-screen w-full" visibility={showConfirmAmount}>
         <MenuHeader onClose={() => setShowConfirmAmount(false)} title="Confirm Amount">
           <div className="bg-white h-screen">
-            <ConfirmAmount amount={amount_} setIsModalOpen={showConfirmAmount} transactionName="pay" />
+            <ConfirmAmount amount={amount_} closeModal={closeModal} setShowSuccessModal={setShowSuccessModal} transactionName="pay" />
           </div>
         </MenuHeader>
       </CustomModal>

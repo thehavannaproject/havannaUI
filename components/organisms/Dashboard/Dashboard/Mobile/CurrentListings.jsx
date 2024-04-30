@@ -18,7 +18,6 @@ const CurrentListings = () => {
     getListings();
   }, []);
 
-  console.log(listing);
   return (
     <div className="mt-10 font-mulish mb-16">
       <div className="flex justify-between">
@@ -30,7 +29,7 @@ const CurrentListings = () => {
 
       <div className="sm:flex gap-4">
         {listing?.slice(0, 2).map((item, index) => (
-          <div className="mt-4 mb-8- relative" key={index}>
+          <div className="mt-4 mb-8 relative" key={index}>
             <div>
               <p className="absolute top-4 bg-white left-4 px-3 py-1 rounded-xl text-HavannaBlack-neutral20 text-10 font-medium">{item?.availableSlot} Slots Available</p>
               <img alt="Property" className="h-[320px] object-cover w-full" src={item?.listingImage?.imageUrl} />

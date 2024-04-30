@@ -36,9 +36,9 @@ const Wallet = ({ type }) => {
 
   const getTransactionHistory = () => {
     getAllTransactionHistory(userDetails?.customerId).then((data) => {
-      if (data.responseCode == 200) {
+      if (data.result.responseCode == 200) {
         setLoading(false);
-        setTranHistory(data.data);
+        setTranHistory(data.result.data);
       } else {
         toast.error("Error fetching transaction history", { theme: "colored" });
       }
@@ -87,7 +87,7 @@ const Wallet = ({ type }) => {
               ) : (
                 <div>
                   {hide ? (
-                    <h1 className=" mt-6 font-bold text-36 leading-[44px] text-[#4F5457]  ">₦ {wallet?.availableBalance?.toLocaleString()}</h1>
+                    <h1 className=" mt-6 font-bold text-36 leading-[44px] text-[#4F5457]  ">₦ {parseFloat(wallet?.availableBalance)?.toLocaleString()}</h1>
                   ) : (
                     <p className=" mt-6 font-bold text-36 leading-[44px] text-[#4F5457]  ">******</p>
                   )}
@@ -97,7 +97,7 @@ const Wallet = ({ type }) => {
               <hr className="w-[25%]  border-HavannaGreen-secondary m-auto border" />
             </div>
 
-            {tranHistory.length === 0 ? (
+            {tranHistory?.transactionDtos?.length === 0 ? (
               <div>
                 <p className="font-medium mt-[120px] text-20 leading-[26px] text-[#3B3F42]">You don’t have any recent transaction</p>
                 <div className="flex justify-center items-center mt-10">
@@ -111,7 +111,7 @@ const Wallet = ({ type }) => {
                 </div>
               </div>
             ) : (
-              <MiniTransactionHistory transHistory={tranHistory} />
+              <MiniTransactionHistory transHistory={tranHistory?.transactionDtos} />
             )}
           </div>
           <div className="py-10 px-11 bg-white mt-[52px] shadow-xl rounded-xl h-fit mr-11 font-mulish">

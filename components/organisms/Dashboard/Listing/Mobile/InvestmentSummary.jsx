@@ -1,18 +1,20 @@
 import { useState, useEffect } from "react";
 import OtpInput from "react-otp-input";
 import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 import CustomButton from "@components/atoms/CustomButton/CustomButton";
 import CustomModal from "@components/atoms/CustomModal/CustomModal";
-import MenuHeader from "@components/layout/DashboardLayout/MenuHeader";
+// import MenuHeader from "@components/layout/DashboardLayout/MenuHeader";
 import { ListingInvestment, getCustomerPortfolio } from "@components/api";
 import { AuthService } from "@components/api/auth";
-import TransactionDetails from "./TransactionDetails";
+// import TransactionDetails from "./TransactionDetails";
 
 const InvestmentSummary = ({ investForm, listingId }) => {
+  const router = useRouter();
   const authService = new AuthService();
   const userDetails = authService.getDetails("ud");
   const [showModal, setShowModal] = useState(false);
-  const [showTransactionDetails, setShowTransactionDetails] = useState(false);
+  // const [showTransactionDetails, setShowTransactionDetails] = useState(false);
   const [otp, setOtp] = useState("");
   const [portfolio, setPorfolio] = useState([]);
 
@@ -39,8 +41,8 @@ const InvestmentSummary = ({ investForm, listingId }) => {
     };
 
     ListingInvestment(payload)
-      .then((res) => {console.log(res); if(res.responseCode === 200){setShowTransactionDetails(true)};})
-      .catch((err) => {console.log(err.response.data.errorMessage); toast.error(err.response.data.errorMessage)});
+      .then((res) => {{toast.success(res)}; router.push('/listing')})
+      .catch((err) => {toast.error(err.response.data.errorMessage)});
   };
 
   useEffect(() => {
@@ -98,13 +100,13 @@ const InvestmentSummary = ({ investForm, listingId }) => {
         </div>
       </CustomModal>
 
-      <CustomModal cardClassName="w-full" toggleVisibility={setShowTransactionDetails} visibility={showTransactionDetails}>
+      {/* <CustomModal cardClassName="w-full" toggleVisibility={setShowTransactionDetails} visibility={showTransactionDetails}>
         <MenuHeader onClose={() => setShowTransactionDetails(false)} title="Transaction Details">
           <div className="bg-white text-black px-6 pt-4 font-mulish !w-full h-screen">
             <TransactionDetails />
           </div>
         </MenuHeader>
-      </CustomModal>
+      </CustomModal> */}
     </div>
   );
 };

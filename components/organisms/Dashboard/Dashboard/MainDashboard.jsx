@@ -1,7 +1,7 @@
 import BalanceCard from "@blocks/DashBoardCard/BalanceCard";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { PlusIcon } from "@heroicons/react/24/solid";
-import { getCustomerPortfolio, getCustomerWallet } from "@components/api";
+import { useSelector } from "react-redux";
 import PropertyStatCard from "@components/blocks/DashBoardCard/PropertyStatCard";
 import { AuthService } from "@components/api/auth";
 import EmptyState from "@components/atoms/EmptyState/EmptyState";
@@ -13,48 +13,21 @@ import FundWallet from "../Wallet/FundWallet";
 const MainDashboard = () => {
   const authService = new AuthService();
   const userDetails = authService.getDetails("ud");
-  const [wallet, setWallet] = useState({});
-  const [portfolio, setPorfolio] = useState({});
   const [showFundModal, setShowFundModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
 
-  useEffect(() => {
-    getCustomerWallet(userDetails?.customerId)
-      .then((data) => {
-        if (data) {
-          setWallet(data);
-        }
-      })
-      .catch((error) => console.log(error));
-  }, [showSuccessModal]);
-
-  useEffect(() => {
-    getCustomerPortfolio(userDetails?.customerId)
-      .then((data) => {
-        if (data) {
-          setPorfolio(data);
-        }
-      })
-      .catch((error) => console.log(error));
-  }, []);
-
-  // const getTotalUnits = () => {
-  //   let totalUnits = 0;
-  //   portfolio?.properties?.forEach((property) => {
-  //     totalUnits += property.units;
-  //   });
-  //   return totalUnits;
-  // };
+  const { walletBalance } = useSelector((state) => state.Wallet);
+  const { portfolio } = useSelector((state) => state.Customer);
 
   const BalanceCardData = [
     {
-      balance: wallet?.availableBalance ? `₦ ${parseFloat(wallet?.availableBalance)?.toLocaleString()}` : "₦ 0",
+      balance: walletBalance?.availableBalance ? `₦ ${parseFloat(walletBalance?.availableBalance)?.toLocaleString()}` : "₦ 0",
       name: "Wallet Balance",
       description: "Total money in your wallet",
       icon: "wallet2",
     },
     {
-      balance: wallet?.availableBalance ? `₦ ${portfolio?.balance?.toLocaleString()}` : "₦ 0",
+      balance: walletBalance?.availableBalance ? `₦ ${portfolio?.balance?.toLocaleString()}` : "₦ 0",
       name: "Properties Value",
       description: "Total worth of your properties",
       icon: "propertiesWallet",
@@ -66,6 +39,7 @@ const MainDashboard = () => {
     //   icon: "cashFlowWallet",
     // },
   ];
+  
   return (
     <section className="font-mulish pt-[38px] pl-8 pr-[46px] ">
       <div className="smallLaptop:flex  justify-between pb-[46px]">

@@ -2,10 +2,11 @@ import { Form, Formik } from "formik";
 import { useState } from "react";
 import { CheckCircleIcon } from "@heroicons/react/24/solid";
 import * as Yup from "yup";
+import { useSelector } from "react-redux";
 import FormikCustomInput from "@components/atoms/CustomInput/FormikCustomInput";
 import CustomButton from "@components/atoms/CustomButton/CustomButton";
 import CustomModal from "@components/atoms/CustomModal/CustomModal";
-import { SetTransactionPin } from "@components/api";
+import { SetTransactionPin, UpdateTransactionPin } from "@components/api";
 import { AuthService } from "@components/api/auth";
 
 
@@ -13,7 +14,9 @@ const SetPin = () => {
   const authService = new AuthService();
   const userDetails = authService.getDetails("ud")
   const [showSuccessModal, setShowSuccessModal] = useState(false);
-  console.log(userDetails)
+  const [loading, setLoading] = useState(false);
+
+  const { profile } = useSelector((state) => state.Account);
 
   const pinSchema = Yup.object().shape({
     pin: Yup.string().min(4, "Pin must be 4 digits").max(4, "Pin cannot exceed 4 digits").required("This field is compulsory"),
@@ -23,31 +26,71 @@ const SetPin = () => {
       return value === this.parent.pin;
     }),
   });
+
   const handleSubmit = (values) => {
-    const payload = {
-      transactionPin: String(values?.pin),
-      email: userDetails?.emailAddress 
-    };
-    SetTransactionPin(payload).then((res) => {console.log(res);
-      setShowSuccessModal(true)
-    
-    }).catch((error) => {console.log(error)});
+    setLoading(true);
+
+    if (profile.transactionPinCreated) {
+      const data = {
+        oldPin: String(values?.pin),
+        newPin: String(values?.newPin),
+        confirmPin: String(values?.confirmPin),
+        email: userDetails?.emailAddress,
+      };
+      UpdateTransactionPin(data)
+        .then((res) => {
+          if (res.responseCode === 200) {
+            setShowSuccessModal(true);
+            setLoading(false);
+          }
+        })
+        .catch(() => {
+          setLoading(false);
+        });
+    } else {
+      const payload = {
+        transactionPin: String(values?.pin),
+        email: userDetails?.emailAddress,
+      };
+      SetTransactionPin(payload)
+        .then((res) => {
+          if (res.responseCode === 200) {
+            setShowSuccessModal(true);
+            setLoading(false);
+          }
+        })
+        .catch(() => {
+          setLoading(false);
+        });
+    }
   };
+
 
   return (
     <div className="font-mulish text-[#4F5457] px-6">
-      <p className="pt-5 text-14 text-[#3B3F42] font-bold">Set Your Transaction PIN</p>
+      <p className="pt-5 text-14 text-[#3B3F42] font-bold">{profile.transactionPinCreated ? "Update" : "Set"} Your Transaction PIN</p>
       <div className="mt-7">
-        <Formik initialValues={{ pin: "", confirmPin: "" }} onSubmit={(values) => handleSubmit(values)} validationSchema={pinSchema}>
+        <Formik initialValues={{ pin: "", newPin: "", confirmPin: "" }} onSubmit={(values) => handleSubmit(values)} validationSchema={pinSchema}>
           <Form>
             <div>
-              <label className="font-bold text-14">Set Pin</label>
+              <label className="font-bold text-14">{profile.transactionPinCreated ? "Old" : "Set"} Pin</label>
               <FormikCustomInput
                 className={`rounded-[4px] h-[48px] mt-3 border-2`}
                 id="pin"
                 inputClassName="placeholder:text-14 outline-none placeholder:text-citiGray-300 "
                 name="pin"
                 required
+                type="number"
+              />
+            </div>
+
+            <div className="mt-6">
+              <label className="font-bold text-14">New Pin</label>
+              <FormikCustomInput
+                className={`rounded-[4px] h-[48px] mt-3 border-2`}
+                id="newPin"
+                inputClassName="placeholder:text-14 outline-none placeholder:text-citiGray-300 "
+                name="newPin"
                 type="number"
               />
             </div>
@@ -66,7 +109,8 @@ const SetPin = () => {
               <div className="mt-10 ">
                 <CustomButton
                   customClass="rounded-[8px] smallLaptop:w-[240px] w-[100%]  text-white h-[58px] bg-HavannaGreen-primary"
-                  title=" Set Transaction PIN"
+                  isLoading={loading}
+                  title={profile.transactionPinCreated ? "Update Transaction PIN" : "Set Transaction PIN"}
                 />
               </div>
             </div>

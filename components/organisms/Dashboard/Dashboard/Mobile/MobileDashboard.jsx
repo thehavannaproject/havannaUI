@@ -1,8 +1,9 @@
 import { Carousel } from "antd";
-import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useState } from "react";
 import Icon from "@components/atoms/Icons";
 import { AuthService } from "@components/api/auth";
-import { getCustomerPortfolio, getCustomerWallet } from "@components/api";
+import TransactionProcessingModal from "@components/atoms/TransactionProcessingModal";
 import QuickActions from "./QuickActions";
 import RecentInvestment from "./RecentInvestment";
 import CurrentListings from "./CurrentListings";
@@ -10,39 +11,13 @@ import CurrentListings from "./CurrentListings";
 const MobileDashboard = () => {
   const authService = new AuthService();
   const userDetails = authService.getDetails("ud");
-  const [portfolio, setPorfolio] = useState([])
-  const [wallet, setWallet] = useState({});
 
-  useEffect(() => {
-    getCustomerWallet(userDetails?.customerId)
-      .then((data) => {
-        if (data) {
-          setWallet(data);
-        }
-      })
-      .catch((error) => console.log(error));
-
-    //  getCustomerPortfolio(userDetails?.customerId)
-    //   .then((data) => {
-    //     if (data) {
-    //       setPorfolio(data);
-    //     }
-    //   })
-    //   .catch((error) => console.log(error));
-  }, []);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
 
+  const { walletBalance } = useSelector((state) => state.Wallet);
+  const { portfolio } = useSelector((state) => state.Customer);
 
-  
-  useEffect(() => {
-    getCustomerPortfolio(userDetails?.customerId)
-      .then((data) => {
-        if (data) {
-          setPorfolio(data);
-        }
-      })
-      .catch((error) => console.log(error));
-  }, []);
   return (
     <>
       <div className="font-mulish pt-2">
@@ -63,7 +38,7 @@ const MobileDashboard = () => {
               <div>
                 <h1 className="text-14 font-bold">Wallet Balance</h1>
                 <p className="text-12 font-normal mt-1">Total money in your wallet</p>
-                <p className="mt-2 text-20 font-bold">{wallet?.availableBalance ? `₦ ${parseFloat(wallet?.availableBalance)?.toLocaleString()}` : "₦ 0"}</p>
+                <p className="mt-2 text-20 font-bold">{walletBalance?.availableBalance ? `₦ ${parseFloat(walletBalance?.availableBalance)?.toLocaleString()}` : "₦ 0"}</p>
               </div>
             </div>
           </div>
@@ -73,15 +48,17 @@ const MobileDashboard = () => {
               <div>
                 <h1 className="text-14 font-bold">Properties Value</h1>
                 <p className="text-12 font-normal mt-1">Total worth of  your properties</p>
-                <p className="mt-2 text-20 font-bold">{wallet?.availableBalance ? `₦ ${parseFloat(portfolio?.balance)?.toLocaleString()}` : "₦ 0"}</p>
+                <p className="mt-2 text-20 font-bold">{walletBalance?.availableBalance ? `₦ ${parseFloat(portfolio?.balance)?.toLocaleString()}` : "₦ 0"}</p>
               </div>
             </div>
           </div>
         </Carousel>
 
-        <QuickActions />
+        <QuickActions setShowSuccessModal={setShowSuccessModal} />
         <RecentInvestment portfolio={portfolio} />
         <CurrentListings />
+      {showSuccessModal && <TransactionProcessingModal setShowSuccessModal={setShowSuccessModal} />}
+
       </div>
     </>
   );

@@ -3,7 +3,6 @@ import { useRouter } from "next/dist/client/router";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { toast } from "react-toastify";
 import * as Yup from "yup";
 import { REGEX } from "@components/shared/libs/helpers.js";
 import { SignInUser } from "@components/api";
@@ -26,21 +25,13 @@ const SignIn = () => {
 
   const handleSubmit = (values) => {
     setLoading(true);
-    SignInUser(values)
-      .then((response) => {
-        if (response.responseCode === 200) {
-          authService.encodeData(response.data, "ud");
-          router.push("/dashboard");
-          setLoading(false);
-        } else {
-          toast.warn(response.response.data.data, { theme: "colored" });
-          setLoading(false);
-        }
-      })
-      .catch(() => {
-        setLoading(false);
-        toast.error(`Something went wrong. Try again later`, { theme: "colored" });
-      });
+    SignInUser(values).then((response) => {
+      if (response.responseCode === 200) {
+        authService.encodeData(response.data, "ud");
+        router.push("/dashboard");
+      }
+      setLoading(false);
+    });
   };
 
   return (

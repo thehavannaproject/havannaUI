@@ -11,7 +11,7 @@ const MiniTransactionHistory = ({ transHistory }) => {
         <Skeleton className="h-[200px] w-full" />
       ) : ( */}
       <div>
-        {transHistory.slice(-5).map((transact, index) => (
+        {transHistory?.slice(-5).map((transact, index) => (
           <div className="flex justify-between font-mulish mt-8 px-6" key={index}>
             <div className="flex gap-4">
               <p className={`w-4 h-4 rounded-full mt-1 ${transact.type === "Deposit" ? "bg-HavannaGreen-secondary" : "bg-HavannaRed-primary"}`} />
@@ -26,7 +26,7 @@ const MiniTransactionHistory = ({ transHistory }) => {
           </div>
         ))}
         <div className="pb-10 text-center pt-14 font-mulish">
-          {transHistory.length > 4 && <CustomLink customClass="font-bold text-16 leading-[22px] text-HavannaGreen-primary "  destination="/wallet/transaction-history">View all transactions</CustomLink>}
+          {transHistory?.length > 4 && <CustomLink customClass="font-bold text-16 leading-[22px] text-HavannaGreen-primary "  destination="/wallet/transaction-history">View all transactions</CustomLink>}
         </div>
       </div>
       {/* )} */}

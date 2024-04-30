@@ -41,8 +41,8 @@ const PinSet = ({ setShow }) => {
         .then((res) => {
           if (res.responseCode === 200) {
             setShowSuccessModal(true);
-            setLoading(false);
           }
+          setLoading(false);
         })
         .catch(() => {
           setLoading(false);
@@ -54,9 +54,9 @@ const PinSet = ({ setShow }) => {
       };
       SetTransactionPin(payload)
         .then((res) => {
+          setLoading(false);
           if (res.responseCode === 200) {
             setShowSuccessModal(true);
-            setLoading(false);
           }
         })
         .catch(() => {

@@ -123,9 +123,9 @@ const Security = () => {
         <div className="mt-8">
           <h1 className="text-16 text-[#3B3F42] font-bold">Transaction Pin </h1>
           <div className="mt-3 text-[#4F5457] text-12 flex justify-between">
-            <p>Set your transaction pin.</p>
+            <p>{profile.transactionPinCreated ? "Update" : "Set"} your transaction pin.</p>
             <p className="text-HavannaGreen-primary font-bold text-14" onClick={() => setShowSetPin(true)}>
-              Set
+              {profile.transactionPinCreated ? "Update" : "Set"}
             </p>
           </div>
         </div>

@@ -2,24 +2,23 @@
 // import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { usePaystackPayment } from "react-paystack";
+import { useDispatch } from "react-redux";
 import CustomButton from "@components/atoms/CustomButton/CustomButton";
 import { AuthService } from "@components/api/auth";
-import { createTransaction } from "@components/api";
+import { createTransaction, getCustomerWallet } from "@components/api";
+import { setWalletBalance } from "@components/store/Wallet";
 
 // import { AuthService } from "@components/api/auth";
 
-const ConfirmAmount = ({ transactionName, amount, setIsModalOpen }) => {
-  // const router = useRouter();
-  // const authService = new AuthService();
-  // const customerId = authService.getDetails("ud").customerId;
-  // const emailAddress = authService.getDetails("ud").emailAddress;
-  // const [showConfirmModal, setConfirmModal] = useState(false);
+const ConfirmAmount = ({ transactionName, amount, closeModal, setShowSuccessModal }) => {
+  const dispatch = useDispatch()
   const authService = new AuthService();
   const customerId = authService.getDetails("ud").customerId;
   const emailAddress = authService.getDetails("ud").emailAddress;
 
   const handleCloseModal = () => {
-    setIsModalOpen(false);
+    closeModal(false)
+    getCustomerWallet(customerId).then((res) => { dispatch(setWalletBalance(res))});
   };
 
   const config = {
@@ -44,8 +43,7 @@ const ConfirmAmount = ({ transactionName, amount, setIsModalOpen }) => {
     };
     createTransaction(data)
       .then(() => {
-          // toast.success("Wallet credited successfully", { theme: "colored" });
-          // setShowSuccessModal(true)
+          setShowSuccessModal(true);
           handleCloseModal();
       })
       .catch((error) => {

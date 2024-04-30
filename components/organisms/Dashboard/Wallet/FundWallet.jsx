@@ -4,14 +4,17 @@ import { usePaystackPayment } from "react-paystack";
 
 import { ChevronLeftIcon } from "@heroicons/react/24/solid";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
 import FormikCustomInput from "@components/atoms/CustomInput/FormikCustomInput";
 import Icon from "@components/atoms/Icons";
 import CustomButton from "@components/atoms/CustomButton/CustomButton";
 import { AuthService } from "@components/api/auth";
-import { createTransaction } from "@components/api";
+import { createTransaction, getCustomerWallet } from "@components/api";
 import CustomModal from "@components/atoms/CustomModal/CustomModal";
+import { setWalletBalance } from "@components/store/Wallet";
 
 const FundWallet = ({ setIsModalOpen, setShowSuccessModal }) => {
+  const dispatch = useDispatch();
   const [amount, setAmount] = useState(null);
   const [showConfirmModal, setConfirmModal] = useState(false);
   const authService = new AuthService();
@@ -44,8 +47,7 @@ const FundWallet = ({ setIsModalOpen, setShowSuccessModal }) => {
     };
     createTransaction(data)
       .then(() => {
-          // toast.success("Wallet credited successfully", { theme: "colored" });
-          setShowSuccessModal(true)
+          setShowSuccessModal(true);
           handleCloseModal();
       })
       .catch((error) => {
@@ -59,6 +61,7 @@ const FundWallet = ({ setIsModalOpen, setShowSuccessModal }) => {
   const onClose = () => {
     // implementation for  whatever you want to do when the Paystack dialog closed.
     console.log("closed");
+    getCustomerWallet(customerId).then((res) => { dispatch(setWalletBalance(res))});
   };
 
   const initializePayment = usePaystackPayment(config);

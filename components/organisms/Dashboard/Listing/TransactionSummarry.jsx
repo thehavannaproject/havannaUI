@@ -55,7 +55,7 @@ const TransactionSummary = () => {
       .then((res) => {
         setLoading(false)
         console.log(res);
-        if(res.responseCode === 200){setShowSuccessModal(true);}
+        setShowSuccessModal(true);
       })
       .catch((error) => {console.log(error); setLoading(false)});
   };

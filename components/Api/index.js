@@ -6,6 +6,7 @@ export const SignInUser = async (data) => {
     const response = await api.post(`/auth/login`, data);
     return response.data;
   } catch (error) {
+    toast.error(error.response.data.data);
     return error;
   }
 };
@@ -92,7 +93,7 @@ export const verifyPhoneNumber = async (data) => {
 
 export const getAllTransactionHistory = async (id) => {
   try {
-    const response = await api.get(`api/Transactions?customerId=${id}`);
+    const response = await api.get(`/Transactions/get-customer-transactions?customerId=${id}`);
     return response.data;
   } catch (error) {
     return error;
@@ -105,6 +106,7 @@ export const getCustomerWallet = async (id) => {
       const response = await api.get(`/wallet?customerId=${id}`);
       return response.data.data;
     } catch (error) {
+      toast.error(error.response.data.errorMessage)
       return error;
     }
   }
@@ -116,6 +118,7 @@ export const getCustomerPortfolio = async (id) => {
       const response = await api.get(`/Portfolio?customerId=${id}`);
       return response.data.data;
     } catch (error) {
+      toast.error(error.response.data.errorMessage)
       return error;
     }
   }
@@ -142,7 +145,7 @@ export const customerCompleteProfile = async (data) => {
       console.log(response)
       return response.data
     } catch(error) {
-      toast.error(error.response.data.ErrorMessage, {theme: "colored"})
+      toast.error(error.response.data.ErrorMessage)
       return error
     }
   }
@@ -164,6 +167,7 @@ export const getAllListings = async (status) => {
       const response = await api.get(`/listings/all${status ? `?status=${status}` : ""}`);
       return response.data.data;
     } catch (error) {
+      toast.error(error.response.data.ErrorMessage)
       return error;
     }
 };
