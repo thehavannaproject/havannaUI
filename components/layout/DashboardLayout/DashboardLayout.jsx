@@ -1,13 +1,9 @@
-// import { useRouter } from "next/router";
 import { useEffect } from "react";
 
-// import axios from "axios";
-// import { baseUrl } from "config";
-// import { useDispatch } from "react-redux";
-// import { setCurrentUser } from "@components/store/Auth";
+
 import { useRouter } from "next/router";
-import { getUserDetails } from "@components/api";
-import { AuthService } from "@components/api/auth";
+import { getUserDetails } from "../../api";
+import { AuthService } from "../../api/auth";
 import SideBar from "./SideBar";
 import NavBar from "./NavBar";
 

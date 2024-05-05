@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import * as Yup from "yup";
-import { forgotPassword } from "@components/api";
 
 import Icon from "@components/atoms/Icons";
 
@@ -15,6 +14,7 @@ import FormikCustomInput from "@atoms/CustomInput/FormikCustomInput";
 import CustomLink from "@atoms/CustomLink/CustomLink";
 
 import Logo from "@images/svg/Logo.svg";
+import { forgotPassword } from "../../../api";
 
 import "react-toastify/dist/ReactToastify.css";
 const signInSchema = Yup.object().shape({
