@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import OTPInput from "react-otp-input";
-import { sendPhoneOtp, verifyPhoneNumber } from "@components/api";
+import { sendPhoneOtp, verifyPhoneNumber } from "@components/shared/api";
 import { replaceFirstZero } from "@components/shared/libs/helpers";
 import CustomModal from "@components/atoms/CustomModal/CustomModal";
 import Icon from "@components/atoms/Icons";

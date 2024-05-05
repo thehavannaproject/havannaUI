@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 // import Icon from "@components/atoms/Icons";
 import InvestPropertyCard from "@components/blocks/investPropertyCard/index";
 
-import { getAllListings } from "@components/api";
+import { getAllListings } from "@components/shared/api";
 import CustomPagination from "@components/atoms/CustomPagination/CustomPagination";
 import CustomLogoLoader from "@components/atoms/CustomLogoLoader";
 

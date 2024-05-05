@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import * as Yup from "yup";
 
 import { REGEX } from "@components/shared/libs/helpers.js";
-import { CreateUser } from "@components/api";
+import { CreateUser } from "@components/shared/api";
 
 import Button from "@atoms/CustomButton/CustomButton";
 import FormikCustomInput from "@atoms/CustomInput/FormikCustomInput";

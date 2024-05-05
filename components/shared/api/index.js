@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-import { api } from "../../interceptor";
+import { api } from "../../../interceptor";
 
 export const SignInUser = async (data) => {
   try {

@@ -4,8 +4,8 @@ import { useRouter } from "next/router";
 import OtpInput from "react-otp-input";
 import Icon from "@components/atoms/Icons";
 import TransactionSuccessfulModal from "@components/atoms/TransactionSuccessfulModal";
-import { AuthService } from "@components/api/auth";
-import { ListingInvestment, getCustomerPortfolio } from "@components/api";
+import { AuthService } from "@components/shared/api/auth";
+import { ListingInvestment, getCustomerPortfolio } from "@components/shared/api";
 import CustomButton from "@components/atoms/CustomButton/CustomButton";
 import CustomModal from "@components/atoms/CustomModal/CustomModal";
 

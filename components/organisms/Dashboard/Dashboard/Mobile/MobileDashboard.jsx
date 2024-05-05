@@ -2,7 +2,7 @@ import { Carousel } from "antd";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import Icon from "@components/atoms/Icons";
-import { AuthService } from "@components/api/auth";
+import { AuthService } from "@components/shared/api/auth";
 import TransactionProcessingModal from "@components/atoms/TransactionProcessingModal";
 import QuickActions from "./QuickActions";
 import RecentInvestment from "./RecentInvestment";

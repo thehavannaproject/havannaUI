@@ -6,8 +6,8 @@ import { useSelector } from "react-redux";
 import FormikCustomInput from "@components/atoms/CustomInput/FormikCustomInput";
 import CustomButton from "@components/atoms/CustomButton/CustomButton";
 import CustomModal from "@components/atoms/CustomModal/CustomModal";
-import { SetTransactionPin, UpdateTransactionPin } from "@components/api";
-import { AuthService } from "@components/api/auth";
+import { SetTransactionPin, UpdateTransactionPin } from "@components/shared/api";
+import { AuthService } from "@components/shared/api/auth";
 
 
 const SetPin = () => {

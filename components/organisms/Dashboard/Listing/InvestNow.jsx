@@ -7,8 +7,8 @@ import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
 import FormikCustomInput from "@components/atoms/CustomInput/FormikCustomInput";
 import Icon from "@components/atoms/Icons";
 import CustomButton from "@components/atoms/CustomButton/CustomButton";
-import { GetListingById, getCustomerWallet } from "@components/api";
-import { AuthService } from "@components/api/auth";
+import { GetListingById, getCustomerWallet } from "@components/shared/api";
+import { AuthService } from "@components/shared/api/auth";
 
 const InvestNow = () => {
   const router = useRouter();

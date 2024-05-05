@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import * as Yup from "yup";
-import { forgotPassword } from "@components/api";
+import { forgotPassword } from "@components/shared/api";
 
 import Icon from "@components/atoms/Icons";
 

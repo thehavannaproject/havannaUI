@@ -7,7 +7,7 @@ import CustomModal from "@components/atoms/CustomModal/CustomModal";
 import MenuHeader from "@components/layout/DashboardLayout/MenuHeader";
 import Icon from "@components/atoms/Icons";
 import CustomButton from "@components/atoms/CustomButton/CustomButton";
-import { sendPhoneOtp, verifyPhoneNumber } from "@components/api";
+import { sendPhoneOtp, verifyPhoneNumber } from "@components/shared/api";
 import { replaceFirstZero } from "@components/shared/libs/helpers";
 import UpdatePassword from "./UpdatePassword";
 import SetPin from "./SetPin";

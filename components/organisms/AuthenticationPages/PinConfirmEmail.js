@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import Icon from "@components/atoms/Icons";
-import { forgotPassword, verifyPhoneOtp } from "@components/api";
+import { forgotPassword, verifyPhoneOtp } from "@components/shared/api";
 import { maskEmail } from "@components/shared/libs/helpers";
 import CustomLink from "@atoms/CustomLink/CustomLink";
 import Logo from "@images/svg/Logo.svg";

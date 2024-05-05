@@ -9,7 +9,7 @@ import * as Yup from "yup";
 import Icon from "@components/atoms/Icons";
 import { REGEX } from "@components/shared/libs/helpers.js";
 
-import { ResetUserPassword } from "@components/api";
+import { ResetUserPassword } from "@components/shared/api";
 import Button from "@atoms/CustomButton/CustomButton";
 import FormikCustomInput from "@atoms/CustomInput/FormikCustomInput";
 import CustomLink from "@atoms/CustomLink/CustomLink";

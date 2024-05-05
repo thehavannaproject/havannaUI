@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { getCustomerProfile } from "@components/api";
-import { AuthService } from "@components/api/auth";
+import { getCustomerProfile } from "@components/shared/api";
+import { AuthService } from "@components/shared/api/auth";
 import DashboardLayout from "@components/layout/DashboardLayout/DashboardLayout";
 import DashboardMobileLayout from "@components/layout/DashboardLayout/DashboardMobileLayout";
 import MobileAccount from "@components/organisms/Dashboard/Account/Mobile";

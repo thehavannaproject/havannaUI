@@ -7,8 +7,8 @@ import Icon from "@components/atoms/Icons";
 import CustomButton from "@components/atoms/CustomButton/CustomButton";
 import MenuHeader from "@components/layout/DashboardLayout/MenuHeader";
 import CustomModal from "@components/atoms/CustomModal/CustomModal";
-import { GetListingById, getCustomerWallet } from "@components/api";
-import { AuthService } from "@components/api/auth";
+import { GetListingById, getCustomerWallet } from "@components/shared/api";
+import { AuthService } from "@components/shared/api/auth";
 import InvestmentSummary from "./InvestmentSummary";
 
 

@@ -4,8 +4,8 @@ import { toast } from "react-toastify";
 import { usePaystackPayment } from "react-paystack";
 import { useDispatch } from "react-redux";
 import CustomButton from "@components/atoms/CustomButton/CustomButton";
-import { AuthService } from "@components/api/auth";
-import { createTransaction, getCustomerWallet } from "@components/api";
+import { AuthService } from "@components/shared/api/auth";
+import { createTransaction, getCustomerWallet } from "@components/shared/api";
 import { setWalletBalance } from "@components/store/Wallet";
 
 // import { AuthService } from "@components/api/auth";

@@ -8,8 +8,8 @@ import { useDispatch } from "react-redux";
 import FormikCustomInput from "@components/atoms/CustomInput/FormikCustomInput";
 import Icon from "@components/atoms/Icons";
 import CustomButton from "@components/atoms/CustomButton/CustomButton";
-import { AuthService } from "@components/api/auth";
-import { createTransaction, getCustomerWallet } from "@components/api";
+import { AuthService } from "@components/shared/api/auth";
+import { createTransaction, getCustomerWallet } from "@components/shared/api";
 import CustomModal from "@components/atoms/CustomModal/CustomModal";
 import { setWalletBalance } from "@components/store/Wallet";
 

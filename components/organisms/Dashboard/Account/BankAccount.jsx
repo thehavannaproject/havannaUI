@@ -6,8 +6,8 @@ import FormikCustomInput from "@components/atoms/CustomInput/FormikCustomInput";
 import CustomButton from "@components/atoms/CustomButton/CustomButton";
 import CustomModal from "@components/atoms/CustomModal/CustomModal";
 import BalanceCard from "@components/blocks/DashBoardCard/BalanceCard";
-import { AddBankInfo, BankAccountNameEnquiry, GetAllBanks } from "@components/api";
-import { AuthService } from "@components/api/auth";
+import { AddBankInfo, BankAccountNameEnquiry, GetAllBanks } from "@components/shared/api";
+import { AuthService } from "@components/shared/api/auth";
 
 const BankAccount = () => {
   const authService = new AuthService();

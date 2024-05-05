@@ -4,8 +4,8 @@ import { useState } from "react";
 import FormikCustomInput from "@components/atoms/CustomInput/FormikCustomInput";
 import CustomButton from "@components/atoms/CustomButton/CustomButton";
 import CustomModal from "@components/atoms/CustomModal/CustomModal";
-import { AuthService } from "@components/api/auth";
-import { UpdateUserPassword } from "@components/api";
+import { AuthService } from "@components/shared/api/auth";
+import { UpdateUserPassword } from "@components/shared/api";
 import { REGEX } from "@components/shared/libs/helpers";
 
 const UpdatePassword = () => {

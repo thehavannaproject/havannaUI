@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { GetListingById } from "@components/api";
+import { GetListingById } from "@components/shared/api";
 import DashboardLayout from "@components/layout/DashboardLayout/DashboardLayout";
 import DashboardMobileLayout from "@components/layout/DashboardLayout/DashboardMobileLayout";
 import PropertyDetails from "@components/organisms/Dashboard/Listing/Mobile/PropertyDetails";

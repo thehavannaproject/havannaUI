@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { PlusIcon } from "@heroicons/react/24/solid";
 import { useSelector } from "react-redux";
 import PropertyStatCard from "@components/blocks/DashBoardCard/PropertyStatCard";
-import { AuthService } from "@components/api/auth";
+import { AuthService } from "@components/shared/api/auth";
 import EmptyState from "@components/atoms/EmptyState/EmptyState";
 import CustomLink from "@components/atoms/CustomLink/CustomLink";
 import Icon from "@components/atoms/Icons";

@@ -5,8 +5,8 @@ import { useRouter } from "next/router";
 import CustomButton from "@components/atoms/CustomButton/CustomButton";
 import CustomModal from "@components/atoms/CustomModal/CustomModal";
 // import MenuHeader from "@components/layout/DashboardLayout/MenuHeader";
-import { ListingInvestment, getCustomerPortfolio } from "@components/api";
-import { AuthService } from "@components/api/auth";
+import { ListingInvestment, getCustomerPortfolio } from "@components/shared/api";
+import { AuthService } from "@components/shared/api/auth";
 // import TransactionDetails from "./TransactionDetails";
 
 const InvestmentSummary = ({ investForm, listingId }) => {

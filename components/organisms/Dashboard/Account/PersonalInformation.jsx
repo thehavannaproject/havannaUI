@@ -4,8 +4,8 @@ import { toast } from "react-toastify";
 import { UserIcon } from "@heroicons/react/24/solid";
 import moment from "moment";
 import { useSelector } from "react-redux";
-import { customerCompleteProfile } from "@components/api";
-import { AuthService } from "@components/api/auth";
+import { customerCompleteProfile } from "@components/shared/api";
+import { AuthService } from "@components/shared/api/auth";
 import Button from "@atoms/CustomButton/CustomButton";
 import FormikCustomInput from "@atoms/CustomInput/FormikCustomInput";
 

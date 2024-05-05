@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import CustomLink from "@components/atoms/CustomLink/CustomLink";
-import { getAllListings } from "@components/api";
+import { getAllListings } from "@components/shared/api";
 
 const AllListing = ({ status }) => {
   const [listing, setListing] = useState([]);

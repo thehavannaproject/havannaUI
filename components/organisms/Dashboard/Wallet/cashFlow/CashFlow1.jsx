@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import Icon from "@components/atoms/Icons";
-import { getCustomerWallet } from "@components/api";
+import { getCustomerWallet } from "@components/shared/api";
 import TransactionHistory from "../TransactionHistory";
 
 const CashFlow1 = () => {

@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import DashboardLayout from "@components/layout/DashboardLayout/DashboardLayout";
 import DashboardMobileLayout from "@components/layout/DashboardLayout/DashboardMobileLayout";
 import MobilePorfolio from "@components/organisms/Dashboard/Porfolio/MobilePorfolio";
-import { getCustomerPortfolio } from "@components/api";
-import { AuthService } from "@components/api/auth";
+import { getCustomerPortfolio } from "@components/shared/api";
+import { AuthService } from "@components/shared/api/auth";
 import DesktopPortfolio from "../../components/organisms/Dashboard/Porfolio/DesktopPortfolio";
 
 const index = () => {

@@ -6,8 +6,8 @@ import { CheckCircleIcon } from "@heroicons/react/24/solid";
 import { useSelector } from "react-redux";
 import FormikCustomInput from "@components/atoms/CustomInput/FormikCustomInput";
 import Icon from "@components/atoms/Icons";
-import { SetTransactionPin, UpdateTransactionPin } from "@components/api";
-import { AuthService } from "@components/api/auth";
+import { SetTransactionPin, UpdateTransactionPin } from "@components/shared/api";
+import { AuthService } from "@components/shared/api/auth";
 import CustomModal from "@components/atoms/CustomModal/CustomModal";
 import CustomButton from "@components/atoms/CustomButton/CustomButton";
 
