@@ -2,8 +2,8 @@ import { useEffect } from "react";
 
 
 import { useRouter } from "next/router";
-import { getUserDetails } from "../../api";
-import { AuthService } from "../../api/auth";
+import { getUserDetails } from "@components/api";
+import { AuthService } from "@components/api/auth";
 import SideBar from "./SideBar";
 import NavBar from "./NavBar";
 

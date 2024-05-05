@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import { FaCaretDown } from "react-icons/fa";
 import { UserIcon } from "@heroicons/react/24/solid";
 import CustomLink from "@components/atoms/CustomLink/CustomLink";
+import { AuthService } from "@components/api/auth";
 import useClickOutside from "@components/shared/hooks";
 import Icon from "@atoms/Icons";
-import { AuthService } from "../../api/auth";
 
 const NavBar = () => {
   const [display, setDisplay] = useState(false);
