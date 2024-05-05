@@ -61,7 +61,6 @@ const InvestmentForm = () => {
   useEffect(() => {
     getListingById();
   }, [listingId]);
-  console.log(singleListing);
 
   return (
     <>
@@ -86,7 +85,6 @@ const InvestmentForm = () => {
               amount: count * 100 || 0 
             }}
             onSubmit={(values) => {
-              console.log(values);
               setInvestForm(values)
               setShowSummary(true);
             }}

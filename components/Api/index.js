@@ -142,7 +142,6 @@ export const customerCompleteProfile = async (data) => {
       const response = await api.post(`/customer/complete-profile`, data, {
         headers: "mutlipart/form-data"
       });
-      console.log(response)
       return response.data
     } catch(error) {
       toast.error(error.response.data.ErrorMessage)

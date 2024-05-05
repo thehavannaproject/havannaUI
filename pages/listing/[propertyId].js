@@ -10,7 +10,6 @@ const index = () => {
   const [singleListing, setSingleListing] = useState([]);
   const router = useRouter();
   const { propertyId } = router.query;
-  console.log(propertyId)
 
   const getListingById = () => {
     GetListingById(propertyId)
