@@ -8,14 +8,14 @@ import TopSection from "@components/organisms/LandingPages/home/TopSection/TopSe
 // import WhySection from "@components/organisms/LandingPages/home/WhySection/WhySection";
 
 import HavannaProvision from "../HavannaProvision/HavannaProvision";
-import WhySection from "../WhySection/WhySection";
+// import WhySection from "../WhySection/WhySection";
 
 const HomePage = () => {
   return (
     <div>
       <TopSection />
       <HavannaProvision />
-      <WhySection />
+      {/* <WhySection /> */}
       <StartSection />
       {/* <OpportunitySection /> */}
       <FutureSection />
