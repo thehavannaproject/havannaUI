@@ -3,12 +3,12 @@ import AllTransactionHistory from "./AllTransactionHistory";
 import CreditHistory from "./CreditHistory";
 import DebitHistory from "./DebitHistory";
 
-const TransactionHistory = () => {
+const TransactionHistory = ({tranHistory}) => {
   const [activeTab, setActiveTab] = useState(0);
   const transactionHistory = [
-    { id: 0, title: "All", component: <AllTransactionHistory /> },
-    { id: 1, title: "Credit", component: <CreditHistory /> },
-    { id: 2, title: "Debit", component: <DebitHistory /> },
+    { id: 0, title: "All", component: <AllTransactionHistory tranHistory={tranHistory} /> },
+    { id: 1, title: "Credit", component: <CreditHistory tranHistory={tranHistory} /> },
+    { id: 2, title: "Debit", component: <DebitHistory tranHistory={tranHistory}/> },
   ];
   return (
     <>

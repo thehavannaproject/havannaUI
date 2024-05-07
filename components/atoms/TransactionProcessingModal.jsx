@@ -12,7 +12,7 @@ const TransactionProcessingModal = ({ setShowSuccessModal }) => {
         <CustomButton
           customClass="bg-HavannaGreen-primary mt-24 flex font-bold text-16 justify-center items-center text-white w-full tablet:w-[684px] h-[58px] rounded-lg "
           onClick={() => setShowSuccessModal(false)}
-          title="Return to dashboard"
+          title="Go Back"
         />
       </div>
     </div>

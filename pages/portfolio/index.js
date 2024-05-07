@@ -38,7 +38,7 @@ const index = () => {
         </DashboardLayout>
       </div>
       <div className="tablet:hidden">
-        <DashboardMobileLayout>
+        <DashboardMobileLayout title="Portfolio">
           <MobilePorfolio loading={loading} porfolio={porfolio}/>
         </DashboardMobileLayout>
       </div>

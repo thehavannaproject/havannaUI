@@ -154,8 +154,9 @@ export const createTransaction = async (data) => {
   if (data) {
     try {
       const response = await api.post(`/transactions`, data);
-      return response.data.data;
+      return response.data;
     } catch (error) {
+      toast.error(error.response.data.ErrorMessage, { theme: "colored" });
       return error;
     }
   }

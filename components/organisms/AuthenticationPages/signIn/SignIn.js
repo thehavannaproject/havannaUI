@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import * as Yup from "yup";
-import { REGEX } from "@components/shared/libs/helpers.js";
+// import { REGEX } from "@components/shared/libs/helpers.js";
 import { SignInUser } from "@components/shared/api";
 import { AuthService } from "@components/shared/api/auth";
 import Button from "@atoms/CustomButton/CustomButton";
@@ -14,7 +14,7 @@ import Logo from "@images/svg/Logo.svg";
 
 const signInSchema = Yup.object().shape({
   emailAddress: Yup.string().email("Invalid email").required("This field is compulsory"),
-  password: Yup.string().min(5).max(50, "Too Long!").matches(REGEX.password, { message: "please create a stronger password" }).required("This field is compulsory"),
+  password: Yup.string().required("This field is compulsory"),
 });
 
 const SignIn = () => {

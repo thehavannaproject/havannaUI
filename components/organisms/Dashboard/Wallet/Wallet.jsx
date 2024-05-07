@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { BanknotesIcon, EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
-import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
 import Icon from "@components/atoms/Icons";
 import { getAllTransactionHistory, getCustomerWallet } from "@components/shared/api";
 import Skeleton from "@components/atoms/Skeleton";
 import { AuthService } from "@components/shared/api/auth";
+import { setTransactionHistory } from "@components/store/Wallet";
 import FundWallet from "./FundWallet";
 import WithdrawFund from "./cashFlow/WithdrawFund";
 import MiniTransactionHistory from "./TransactionHistory/MiniTransactionHistory";
@@ -19,6 +20,7 @@ const Wallet = ({ type }) => {
   const [hide, setHide] = useState(true);
   const [wallet, setWallet] = useState([]);
   const [tranHistory, setTranHistory] = useState([]);
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const handleClickOutsideModal = (event) => {
@@ -36,12 +38,8 @@ const Wallet = ({ type }) => {
 
   const getTransactionHistory = () => {
     getAllTransactionHistory(userDetails?.customerId).then((data) => {
-      if (data.result.responseCode == 200) {
-        setLoading(false);
-        setTranHistory(data.result.data);
-      } else {
-        toast.error("Error fetching transaction history", { theme: "colored" });
-      }
+      setTranHistory(data.result.data);
+      dispatch((setTransactionHistory(data.result.data)));
     });
   };
 

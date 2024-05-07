@@ -1,6 +1,5 @@
 // import { toast } from "react-toastify";
 // import { useRouter } from "next/router";
-import { toast } from "react-toastify";
 import { usePaystackPayment } from "react-paystack";
 import { useDispatch } from "react-redux";
 import CustomButton from "@components/atoms/CustomButton/CustomButton";
@@ -49,7 +48,6 @@ const ConfirmAmount = ({ transactionName, amount, closeModal, setShowSuccessModa
       .catch((error) => {
         console.log(error);
         handleCloseModal();
-        toast.error("Transaction cannot be processed at the moment, Try again later.", { theme: "colored" });
       });
   };
 
@@ -97,7 +95,7 @@ const ConfirmAmount = ({ transactionName, amount, closeModal, setShowSuccessModa
         </div>
         <div>
           <CustomButton
-            customClass=" h-[60px] w-full mt-[52px] rounded-lg bg-HavannaGreen-primary text-white mb-5 "
+            customClass=" h-[60px] w-full mt-[74px] rounded-lg bg-HavannaGreen-primary text-white mb-5 "
             onClick={() => {
               // toast.success("Your transaction is being processed and you will be notified via email or sms once your wallet is credited.", { theme: "colored" });
               // showModal(false);

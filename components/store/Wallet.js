@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   walletBalance: {},
+  tranHistory: []
 };
 
 const WalletState = createSlice({
@@ -12,7 +13,10 @@ const WalletState = createSlice({
     setWalletBalance: (state, action) => {
       state.walletBalance = action.payload;
     },
+    setTransactionHistory: (state, action) => {
+      state.walletBalance = action.payload;
+    },
   },
 });
-export const { setWalletBalance, setInitialState } = WalletState.actions;
+export const { setWalletBalance, setInitialState , setTransactionHistory} = WalletState.actions;
 export default WalletState.reducer;

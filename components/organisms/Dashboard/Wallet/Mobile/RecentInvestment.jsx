@@ -1,11 +1,14 @@
 import { useState } from "react";
+import moment from "moment";
 import CustomButton from "@components/atoms/CustomButton/CustomButton";
 import CustomModal from "@components/atoms/CustomModal/CustomModal";
 import MenuHeader from "@components/layout/DashboardLayout/MenuHeader";
+import EmptyState from "@components/atoms/EmptyState/EmptyState";
 import TransactionHistory from "./TransactionHistory";
 
-const RecentInvestment = () => {
+const RecentInvestment = ({tranHistory}) => {
   const [showTransactionHistory, setShowTransactionHistory] = useState(false);
+
   return (
     <div className="font-mulish">
       <div>
@@ -14,44 +17,41 @@ const RecentInvestment = () => {
           <p className="text-[#6B7276] text-14 ">You don’t have any recent transations.</p>
         </div>
         <div className="mt-7">
+          {tranHistory?.transactionDtos?.length > 0 ? (
           <div>
-            <div className="flex justify-between">
-              <div className="flex gap-3 justify-center items-center">
-                <p className="w-3 h-3 rounded-full  bg-[#B82323]" />
-                <div>
-                  <p className="text-[#4F5457] text-14">Withdrawal Made</p>
-                  <p className="text-[#8F8F8F] text-12 mt-1">Fri, 06 Jan 2023, 20:09:20 GMT</p>
-                </div>
-              </div>
-              <p className="text-14 text-[#4F5457]">₦ -3,000</p>
-            </div>
-            {Array(4).fill(
-              <div className="flex justify-between mt-6">
+            {tranHistory?.transactionDtos?.slice(0, 5).map((transact,index) => (
+              <div className="flex justify-between mt-6" key={index}>
                 <div className="flex gap-3 justify-center items-center">
-                  <p className="w-3 h-3 rounded-full  bg-HavannaGreen-primary" />
+                  <p className={`w-3 h-3 rounded-full  bg-HavannaGreen-primary  ${transact.type === "Deposit" ? "bg-HavannaGreen-secondary" : "bg-HavannaRed-primary"}`} />
                   <div>
                     <p className="text-[#4F5457] text-14">Withdrawal Made</p>
-                    <p className="text-[#8F8F8F] text-12 mt-1">Fri, 06 Jan 2023, 20:09:20 GMT</p>
+                    <p className="text-[#8F8F8F] text-12 mt-1">{moment(transact.transactionDate).format("ddd, D MMM yyyy")}</p>
                   </div>
                 </div>
-                <p className="text-14 text-[#4F5457]">₦ -3,000</p>
+                <p className="text-14 text-[#4F5457]">₦ {transact.amount.toLocaleString()}</p>
               </div>
-            )}
+            ))}
           </div>
 
-          <div className="mt-8">
-            <CustomButton
-              customClass="text-14 font-bold w-full py-4 text-HavannaGreen-primary border-2 border-HavannaGreen-primary text-HavannaGreen-primary rounded-lg"
-              onClick={() => setShowTransactionHistory(true)}
-              title="View all transactions"
-            />
-          </div>
+          ) : (
+            <EmptyState description="No Transactions done yet"/>
+          )}
+
+          {tranHistory?.transactionDtos?.length > 5 && (
+            <div className="mt-8">
+              <CustomButton
+                customClass="text-14 font-bold w-full py-4 text-HavannaGreen-primary border-2 border-HavannaGreen-primary text-HavannaGreen-primary rounded-lg"
+                onClick={() => setShowTransactionHistory(true)}
+                title="View all transactions"
+              />
+            </div>
+          )}
         </div>
       </div>
-      <CustomModal cardClassName="h-screen" visibility={showTransactionHistory}>
+      <CustomModal cardClassName="h-screen w-full" visibility={showTransactionHistory}>
         <MenuHeader onClose={() => setShowTransactionHistory(false)} title="Transaction History">
           <div className="bg-white h-screen">
-            <TransactionHistory />
+            <TransactionHistory tranHistory={tranHistory} />
           </div>
         </MenuHeader>
       </CustomModal>

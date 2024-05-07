@@ -166,7 +166,7 @@ const BankAccount = () => {
 
       <div>
         <CustomModal toggleVisibility={setDeleteModal} visibility={deleteModal}>
-          <div className="w-[523px] bg-white py-10 px-11 font-mulish rounded-xl">
+          <div className="w-full bg-white py-10 px-11 font-mulish rounded-xl">
             <h1 className="text-20 font-bold text-HavannaBlack-neutral20 text-center">Delete Bank Account</h1>
             <p className="mt-3 text-HavannaBlack-neutral20 font-medium text-16 text-center">Are you sure you want to delete this bank account?</p>
             <div className="grid grid-cols-2 gap-7 mt-10">

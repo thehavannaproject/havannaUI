@@ -13,11 +13,13 @@ const MobilePorfolio = ({porfolio}) => {
   const [showNextPage, setShowNextPage] = useState(false);
   const [moreDetails, setMoreDetails] = useState({});
   const [searchQuery, setSearchQuery] = useState("");
-
+  const [subset, setSubset] = useState(null);
+  const [filteredProperties, setFilteredProperties] = useState(null);
+  
   const itemsPerPage = 5;
   const startIndex = currentPage * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const subset = porfolio?.slice(startIndex, endIndex);
+  // let subset = porfolio?.slice(startIndex, endIndex);
 
 
   const handlePageChange = (selectedPage) => {
@@ -25,9 +27,10 @@ const MobilePorfolio = ({porfolio}) => {
   };
 
   const handleSearchQuery = () => {
+    
     if (searchQuery) {
       console.log(porfolio)
-      const filteredProperties = porfolio?.filter((item) => {
+      setFilteredProperties(porfolio?.filter((item) => {
         for (const key in item) {
           if (item.hasOwnProperty(key) && typeof item[key] === "string") {
             if (item[key].toLowerCase().includes(searchQuery)) {
@@ -36,18 +39,20 @@ const MobilePorfolio = ({porfolio}) => {
           }
         }
         return false;
-      });
+      }));
+      setSubset(filteredProperties?.slice(startIndex, endIndex))
       // eslint-disable-next-line no-param-reassign
       porfolio = filteredProperties;
       console.log(filteredProperties, "sdfj")
-    }
+    } 
+
+    return setSubset(porfolio?.slice(startIndex, endIndex))
   };
 
   useEffect(() => {
     handleSearchQuery();
-  }, [searchQuery])
+  }, [searchQuery, porfolio])
 
-  console.log(porfolio)
 
   const propertyDetails = [
     {
@@ -105,7 +110,7 @@ const MobilePorfolio = ({porfolio}) => {
       )}
 
       <div className="mt-3">
-        {subset.map((data, index) => (
+        {subset?.map((data, index) => (
           <div className="border mt-6 shadow-sm rounded-lg" key={index} onClick={() => {setShowNextPage(true); setMoreDetails(data)}}>
             <div className="flex justify-between border-b p-3">
               <div>
@@ -139,10 +144,13 @@ const MobilePorfolio = ({porfolio}) => {
             </div>
           </div>
         ))}
-      
+        {subset?.length > 0 && (
+
         <div className="mt-[52px] mb-[60px]">
-          <CustomPagination initialPage={currentPage} onChange={handlePageChange} pageCount={Math.ceil(porfolio?.length/5)} />
+          <CustomPagination initialPage={currentPage} onChange={handlePageChange} pageCount={Math.ceil(searchQuery ? filteredProperties?.length/5 : porfolio?.length/5)} />
         </div>
+        )}
+      
       </div>
       <div>
         <CustomModal cardClassName="h-screen w-full" toggleVisibility={setShowNextPage} visibility={showNextPage}>
@@ -151,7 +159,7 @@ const MobilePorfolio = ({porfolio}) => {
               <h1 className="text-20 text-[#3B3F42] font-bold">{moreDetails?.name}</h1>
               <p className="mt-[6px] text-[#6B7276] text-16">{moreDetails?.location}</p>
 
-              <div className="mt-8 card-shadow py-6 px-4 text-14 text-[#4F5457]">
+              <div className="mt-8 card-shadow rounded-lg py-6 px-4 text-14 text-[#4F5457]">
                 {propertyDetails.map((data, index) => (
                   <div className="flex justify-between py-3 border-b" key={index}>
                     <p>{data.title}</p>

@@ -91,7 +91,7 @@ const MyProfile = () => {
               )}
             </div>
             <input accept=".png, .jpeg, .jpg" className="mt-10 hidden" onChange={handleProfilePictureUpload} ref={fileInputRef} type="file" />
-            <p className="font-bold text-14  text-[#0B4340] mt-[10px]">Upload your profile picture</p>
+            <p className="font-bold text-14  text-[#0B4340] mt-[10px]" onClick={handleIconClick}>Upload your profile picture</p>
           </div>
         </div>
 
@@ -127,9 +127,9 @@ const MyProfile = () => {
                 <div className="mt-4 ">
                   <label className="font-bold text-14 text-[#3B3F42]">First Name</label>
                   <FormikCustomInput
-                    className={`rounded-[4px] h-[48px] mt-1 border-2  `}
+                    className={`rounded-[4px] h-[48px] mt-1 border border-HavannaGreen-secondary  `}
                     id="firstName"
-                    inputClassName="placeholder:text-14 outline-none placeholder:text-gray-300 "
+                    inputClassName="placeholder:text-14 outline-none placeholder:text-gray-300"
                     maxLength={20}
                     name="firstName"
                     placeholder="First Name"
@@ -142,7 +142,7 @@ const MyProfile = () => {
                   <label className="font-bold text-14 text-[#3B3F42]">Last Name</label>
                   <FormikCustomInput
                     className={`rounded-[4px] h-[48px] mt-1 
-                        border-2  `}
+                        border border-HavannaGreen-secondary `}
                     id="lastName"
                     inputClassName="placeholder:text-14 outline-none
                          placeholder:text-gray-300 "
@@ -158,7 +158,7 @@ const MyProfile = () => {
                   <label className="font-bold text-14 text-[#3B3F42]">Email Address</label>
                   <FormikCustomInput
                     className={`rounded-[4px] h-[48px] mt-2 
-                        border-2  `}
+                        border border-HavannaGreen-secondary  `}
                     id="email"
                     inputClassName="placeholder:text-14 outline-none
                          placeholder:text-gray-300 "
@@ -173,7 +173,7 @@ const MyProfile = () => {
                 <div className="mt-4 relative z-[1]">
                   <label className="font-bold text-14 text-[#3B3F42]">Phone Number</label>
                   <FormikCustomInput
-                    className={`rounded-[4px] h-[48px] mt-2 border-2 `}
+                    className={`rounded-[4px] h-[48px] mt-2 border border-HavannaGreen-secondary  `}
                     id="phoneNumber"
                     inputClassName="placeholder:text-14 outline-none placeholder:text-gray-300 "
                     maxLength={11}
@@ -197,7 +197,7 @@ const MyProfile = () => {
                   <label className="font-bold text-14 text-[#3B3F42]">Occupation</label>
                   <FormikCustomInput
                     className={`rounded-[4px] h-[48px] mt-2 
-                        border-2  `}
+                        border  border-HavannaGreen-secondary `}
                     id="occupation"
                     inputClassName="placeholder:text-14 outline-none
                          placeholder:text-gray-300 "
@@ -214,7 +214,7 @@ const MyProfile = () => {
                   <label className="font-bold text-14 text-[#3B3F42]">Date of Birth</label>
                   <FormikCustomInput
                     className={`rounded-[4px] h-[48px] mt-2 
-                        border-2  `}
+                        border border-HavannaGreen-secondary  `}
                     id="date"
                     inputClassName="placeholder:text-14 outline-none
                      placeholder:text-gray-300 "
@@ -229,7 +229,7 @@ const MyProfile = () => {
                   <label className="font-bold text-14 text-[#3B3F42]">Address</label>
                   <FormikCustomInput
                     className={`rounded-[4px] h-[48px] mt-2 
-                        border-2  `}
+                        border border-HavannaGreen-secondary`}
                     id="address"
                     inputClassName="placeholder:text-14 outline-none
                          placeholder:text-gray-300 "
@@ -275,14 +275,17 @@ const MyProfile = () => {
                   </div>
                 </div>
               </div>
+              {(!profile?.address || !profile.dateOfBirth || !profile.gender || !profile.occupation || !profile.phoneNumber) && (
+
               <div className="mt-10 ">
                 <Button customClass="rounded-[8px] smallLaptop:w-[240px] w-[100%]  text-white h-[58px] bg-HavannaGreen-primary " isLoading={loading} title=" Save information" />
               </div>
+              ) }
             </Form>
           )}
         </Formik>
         <p className="mb-24 mt-6 text-14 font-bold text-center">
-          Need to change any information? <span className="text-HavannaGreen-primary">&nbsp;Contact Us</span>
+          Need to change any information? <a href="mailto:info@havanna.com"><span className="text-HavannaGreen-primary">&nbsp;Contact Us</span></a> 
         </p>
       </div>
       {/* <CustomModal visibility={open}>

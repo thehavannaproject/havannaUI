@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
 import React from "react";
-import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
 import CustomButton from "@components/atoms/CustomButton/CustomButton";
 import CustomModal from "@components/atoms/CustomModal/CustomModal";
 import MenuHeader from "@components/layout/DashboardLayout/MenuHeader";
 import { getAllTransactionHistory, getCustomerWallet } from "@components/shared/api";
 import { AuthService } from "@components/shared/api/auth";
 import Skeleton from "@components/atoms/Skeleton";
+import { setTransactionHistory } from "@components/store/Wallet";
+import TransactionProcessingModal from "@components/atoms/TransactionProcessingModal";
 import RecentInvestment from "./RecentInvestment";
 import FundWallet from "../Mobile/FundWallet/FundWallet";
 import Withdrawal from "./Withdrawal/Withdrawal";
@@ -18,18 +20,16 @@ const MobileWallet = () => {
   const [loading, setLoading] = useState(false);
   const [hide, setHide] = useState(true);
   const [wallet, setWallet] = useState([]);
-  const [, setTranHistory] = useState([]);
+  const [tranHistory, setTranHistory] = useState([]);
   const [showFundWallet, setShowFundWallet] = useState(false);
   const [showWithdrawal, setShowWithdrawal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const dispatch = useDispatch();
 
   const getTransactionHistory = () => {
     getAllTransactionHistory(userDetails?.customerId).then((data) => {
-      if (data.responseCode == 200) {
-        setLoading(false);
-        setTranHistory(data.data);
-      } else {
-        toast.error("Error fetching transaction history", { theme: "colored" });
-      }
+      setTranHistory(data.result.data);
+      dispatch((setTransactionHistory(data.result.data)));
     });
   };
 
@@ -71,7 +71,7 @@ const MobileWallet = () => {
             ) : (
               <div>
                 {hide ? (
-                  <h1 className=" mt-3 font-bold text-24 text-[#3B3F42]  "><span className="text-[28px]">₦ </span> {wallet?.availableBalance?.toLocaleString()}</h1>
+                  <h1 className=" mt-3 font-bold text-24 text-[#3B3F42]  "><span className="text-[28px]">₦ </span> {parseFloat(wallet?.availableBalance)?.toLocaleString()}</h1>
                 ) : (
                   <p className=" mt-3 font-bold text-24 text-[#3B3F42]  ">******</p>
                 )}
@@ -99,13 +99,13 @@ const MobileWallet = () => {
         </div>
       </div>
       <div className="mt-[60px]">
-        <RecentInvestment />
+        <RecentInvestment tranHistory={tranHistory} />
       </div>
 
-      <CustomModal cardClassName="h-screen" visibility={showFundWallet}>
+      <CustomModal cardClassName="h-screen w-full" visibility={showFundWallet}>
         <MenuHeader onClose={() => setShowFundWallet(false)} title="Fund Wallet">
           <div className="bg-white h-screen">
-            <FundWallet />
+            <FundWallet closeModal={setShowFundWallet} setShowSuccessModal={setShowSuccessModal} />
           </div>
         </MenuHeader>
       </CustomModal>
@@ -117,6 +117,9 @@ const MobileWallet = () => {
           </div>
         </MenuHeader>
       </CustomModal>
+
+      {showSuccessModal && <TransactionProcessingModal setShowSuccessModal={setShowSuccessModal} />}
+
     </div>
   );
 };

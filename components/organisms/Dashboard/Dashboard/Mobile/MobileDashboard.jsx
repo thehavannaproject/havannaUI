@@ -4,6 +4,7 @@ import { useState } from "react";
 import Icon from "@components/atoms/Icons";
 import { AuthService } from "@components/shared/api/auth";
 import TransactionProcessingModal from "@components/atoms/TransactionProcessingModal";
+import CustomLink from "@components/atoms/CustomLink/CustomLink";
 import QuickActions from "./QuickActions";
 import RecentInvestment from "./RecentInvestment";
 import CurrentListings from "./CurrentListings";
@@ -24,7 +25,10 @@ const MobileDashboard = () => {
         {userDetails?.gender && (
           <div className="flex justify-center w-fit m-auto card-shadow gap-1 py-[6px] px-[10px] rounded-lg ">
             <Icon name="mobileMenu2" />
+            <CustomLink destination="/account">
+
             <p className="text-[#6B7276] text-12 font-medium">Complete setting up your profile</p>
+            </CustomLink>
           </div>
         )}
         <div className="mt-5">
