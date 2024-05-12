@@ -9,7 +9,6 @@ import CustomModal from "@components/atoms/CustomModal/CustomModal";
 import { SetTransactionPin, UpdateTransactionPin } from "@components/shared/api";
 import { AuthService } from "@components/shared/api/auth";
 
-
 const SetPin = () => {
   const authService = new AuthService();
   const userDetails = authService.getDetails("ud")
@@ -29,7 +28,6 @@ const SetPin = () => {
 
   const handleSubmit = (values) => {
     setLoading(true);
-
     if (profile.transactionPinCreated) {
       const data = {
         oldPin: String(values?.pin),
@@ -39,10 +37,12 @@ const SetPin = () => {
       };
       UpdateTransactionPin(data)
         .then((res) => {
+          console.log(res)
           if (res.responseCode === 200) {
             setShowSuccessModal(true);
             setLoading(false);
-          }
+          } 
+          setLoading(false);
         })
         .catch(() => {
           setLoading(false);
@@ -54,14 +54,18 @@ const SetPin = () => {
       };
       SetTransactionPin(payload)
         .then((res) => {
+          console.log(res)
           if (res.responseCode === 200) {
             setShowSuccessModal(true);
-            setLoading(false);
-          }
-        })
-        .catch(() => {
           setLoading(false);
-        });
+
+            }
+            setLoading(false);
+          })
+          .catch(() => {
+            setLoading(false);
+          });
+          setLoading(false);
     }
   };
 

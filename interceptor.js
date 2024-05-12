@@ -10,7 +10,6 @@ export const api = axios.create({
     // 'Content-Type': 'application/json',
   },
 });
-
 const addAuthorizationHeader = (config) => {
   const token = "SJFDJSJ";
   if (token) {

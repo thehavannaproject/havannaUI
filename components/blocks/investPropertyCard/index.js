@@ -16,7 +16,7 @@ const investPropertyCard = ({ property, className }) => {
           <p className=" font-mulish font-bold  leading-5 ">{property?.name}</p>
         </div>
         {/* <div className="font-bold text-[#6B7276] text-18 leading-6"> */}
-          <p className=" font-mulish font-bold text-[#6B7276] text-16 leading-5 mt-3 ">{property?.listingDetails?.location}</p>
+          <p className=" font-mulish font-bold text-[#6B7276] text-16 leading-5 mt-3 capitalize">{property?.listingDetails?.location.toLowerCase()}</p>
         {/* </div> */}
         {/* <div className="text-18 font-bold flex leading-[24px] "> */}
           <p className=" font-mulish font-bold mt-2 text-18 leading-5 ">₦ {property?.listingDetails?.cost || 0}</p>

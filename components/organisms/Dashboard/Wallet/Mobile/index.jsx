@@ -98,7 +98,7 @@ const MobileWallet = () => {
           </div>
         </div>
       </div>
-      <div className="mt-[60px]">
+      <div className="my-[60px]">
         <RecentInvestment tranHistory={tranHistory} />
       </div>
 
@@ -110,9 +110,9 @@ const MobileWallet = () => {
         </MenuHeader>
       </CustomModal>
 
-      <CustomModal cardClassName="h-screen" visibility={showWithdrawal}>
+      <CustomModal cardClassName="h-screen w-full" visibility={showWithdrawal}>
         <MenuHeader onClose={() => setShowWithdrawal(false)} title="Withdraw Money">
-          <div className="bg-white h-screen">
+          <div className="bg-white h-[100vh] overflow-y-auto pb-32">
             <Withdrawal />
           </div>
         </MenuHeader>

@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import AccountTier from "./AccountTier";
 import MyProfile from "./MyProfile";
 import Security from "./Security";
@@ -6,6 +7,8 @@ import BankAccount from "../BankAccount";
 
 const MobileAccount = () => {
   const [activeTab, setActiveTab] = useState(0);
+  const router = useRouter();
+  const {tab} = router.query;
 
   const listings = [
     {
@@ -30,8 +33,14 @@ const MobileAccount = () => {
     },
   ];
 
+  useEffect(() => {
+    if(tab === "security") {
+      setActiveTab(3)
+    }
+  }, [])
+
   return (
-    <div className="font-mulish mt-6">
+    <div className="font-mulish mt-6 mb-16">
       <div>
         <div className="flex gap-3 whitespace-nowrap overflow-scroll hide-scrollbar">
           {listings.map((item, index) => (

@@ -8,9 +8,9 @@ import { replaceFirstZero } from "@components/shared/libs/helpers";
 import CustomModal from "@components/atoms/CustomModal/CustomModal";
 import Icon from "@components/atoms/Icons";
 import CustomButton from "@components/atoms/CustomButton/CustomButton";
+import CustomToggle from "@components/atoms/CustomToggle/CustomToggle";
 import PinSet from "./PinSet";
 import PasswordUpdate from "./PasswordUpdate";
-import CustomToggle from "../../../../atoms/CustomToggle/CustomToggle";
 
 const Security = () => {
   const [show, setShow] = useState(false);

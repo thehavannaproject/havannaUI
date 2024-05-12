@@ -45,11 +45,11 @@ export const UpdateUserPassword = async (data) => {
   if (data) {
     try {
       const response = await api.post(`/auth/change-password`, data);
-      if(response.status === 200) {
+      if (response.status === 200) {
         return response.data;
       }
     } catch (error) {
-      toast.error(error.response.data.data)
+      toast.error(error.response.data.data);
       return error;
     }
   }
@@ -106,7 +106,7 @@ export const getCustomerWallet = async (id) => {
       const response = await api.get(`/wallet?customerId=${id}`);
       return response.data.data;
     } catch (error) {
-      toast.error(error.response.data.errorMessage)
+      toast.error(error.response.data.errorMessage);
       return error;
     }
   }
@@ -118,7 +118,7 @@ export const getCustomerPortfolio = async (id) => {
       const response = await api.get(`/Portfolio?customerId=${id}`);
       return response.data.data;
     } catch (error) {
-      toast.error(error.response.data.errorMessage)
+      toast.error(error.response.data.errorMessage);
       return error;
     }
   }
@@ -136,19 +136,18 @@ export const getCustomerProfile = async (id) => {
 };
 
 export const customerCompleteProfile = async (data) => {
-
-  if(data) {
+  if (data) {
     try {
       const response = await api.post(`/customer/complete-profile`, data, {
-        headers: "mutlipart/form-data"
+        headers: "mutlipart/form-data",
       });
-      return response.data
-    } catch(error) {
-      toast.error(error.response.data.ErrorMessage)
-      return error
+      return response.data;
+    } catch (error) {
+      toast.error(error.response.data.ErrorMessage);
+      return error;
     }
   }
-}
+};
 
 export const createTransaction = async (data) => {
   if (data) {
@@ -163,18 +162,17 @@ export const createTransaction = async (data) => {
 };
 
 export const getAllListings = async (status) => {
-    try {
-      const response = await api.get(`/listings/all${status ? `?status=${status}` : ""}`);
-      return response.data.data;
-    } catch (error) {
-      toast.error(error.response.data.ErrorMessage)
-      return error;
-    }
+  try {
+    const response = await api.get(`/listings/all${status ? `?status=${status}` : ""}`);
+    return response.data.data;
+  } catch (error) {
+    toast.error(error.response.data.ErrorMessage);
+    return error;
+  }
 };
 
 export const GetListingById = async (listingId) => {
-  if(listingId) {
-
+  if (listingId) {
     try {
       const response = await api.get(`/listings?listingId=${listingId}`);
       return response.data.data;
@@ -185,85 +183,113 @@ export const GetListingById = async (listingId) => {
 };
 
 export const ListingInvestment = async (data) => {
-  if(data) {
+  if (data) {
     try {
       const response = await api.post(`/Investment`, data);
-      if(response.status === 200) {
-      return response.data.data;
+      if (response.status === 200) {
+        return response.data.data;
       }
     } catch (error) {
-      toast.error(error.response.data.errorMessage)
+      toast.error(error.response.data.errorMessage);
       return error;
     }
   }
-
-}
+};
 
 export const SetTransactionPin = async (data) => {
-  if(data) {
+  if (data) {
     try {
       const response = await api.post(`/Customer/create-pin`, data);
-      if(response.status === 200) {
-      return response.data.data;
-    }
+      if (response.data.responseCode === 200) {
+        return response.data.data;
+      }
     } catch (error) {
-      toast.error(error.response.data.errorMessage)
+      toast.error(error.response.data.errorMessage);
       return error;
     }
   }
+};
 
-}
+export const CustomerConfig = async (data) => {
+  if (data) {
+    try {
+      const response = await api.post(`/CustomerProfile/update-profile-config`, data);
+      if (response.status === 200) {
+        return response.data.data;
+      }
+    } catch (error) {
+      toast.error(error.response.data.errorMessage);
+      return error;
+    }
+  }
+};
 
 export const UpdateTransactionPin = async (data) => {
-  if(data) {
+  if (data) {
     try {
       const response = await api.post(`/Customer/update-pin`, data);
-      if(response.status === 200) {
-      return response.data.data;
-    }
+      if (response.status === 200) {
+        return response.data.data;
+      }
     } catch (error) {
-      toast.error(error.response.data.errorMessage)
+      toast.error(error.response.data.errorMessage);
       return error;
     }
   }
-}
+};
 
 export const GetAllBanks = async () => {
-    try {
-      const response = await api.post(`/Customer/bank-list`);
-      if(response.status === 200) {
+  try {
+    const response = await api.post(`/Customer/bank-list`);
+    if (response.status === 200) {
       return response.data.data;
     }
-    } catch (error) {
-      toast.error(error.response.data.errorMessage)
-      return error;
-    }
-}
+  } catch (error) {
+    toast.error(error.response.data.errorMessage);
+    return error;
+  }
+};
 
 export const BankAccountNameEnquiry = async (data) => {
-  if(data) {
+  if (data) {
     try {
       const response = await api.post(`/Customer/name-enquiry`, data);
-      if(response.status === 200) {
-      return response.data.data;
-    }
+      if (response.status === 200) {
+        return response.data.data;
+      }
     } catch (error) {
-      toast.error(error.response.data.errorMessage)
+      toast.error(error.response.data.errorMessage);
       return error;
     }
   }
-}
+};
 
 export const AddBankInfo = async (data) => {
-  if(data) {
+  if (data) {
     try {
       const response = await api.post(`/Customer/add-bank-info`, data);
-      if(response.status === 200) {
-      return response.data.data;
-    }
+      if (response.status === 200) {
+        return response.data.data;
+      }
     } catch (error) {
-      toast.error(error.response.data.errorMessage)
+      toast.error(error.response.data.errorMessage);
       return error;
     }
   }
-}
+};
+
+export const CustomerWithdrawal = async (data) => {
+  if (data) {
+    try {
+      const response = await api.post(`/Transactions/request-withdrawal`, data);
+      console.error(response);
+      if (response.data.responseCode === 200) {
+        return response.data.data;
+      } else {
+        toast.error(response.data.errorMessage);
+      }
+    } catch (error) {
+      return error;
+    }
+  }
+};

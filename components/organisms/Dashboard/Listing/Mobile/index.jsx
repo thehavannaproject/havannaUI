@@ -6,32 +6,31 @@ import AllListing from "./AllListing";
 
 const MobileListing = () => {
   const [activeTab, setActiveTab] = useState(0);
-  const [status, setStatus] = useState(1);
+  const [status, setStatus] = useState(null);
 
   const listings = [
     {
       id: 0,
       title: "All Listings",
       component: <AllListing status={status} />,
-      name: 1
     },
     {
       id: 1,
       title: "Recent",
       component: <AllListing status={status} />,
-      name: 2
+      name: 3
     },
     {
       id: 2,
       title: "Active",
       component: <AllListing status={status} />,
-      name: 3
+      name: 1
     },
     {
       id: 3,
       title: "Sold Out",
       component: <AllListing status={status} />,
-      name: 3
+      name: 2
     },
   ];
 

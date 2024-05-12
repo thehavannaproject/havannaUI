@@ -7,8 +7,8 @@ const MobileNavItems = ({ onClose }) => {
   const router = useRouter();
   const routeName = router.pathname;
   return (
-    <div className="flex font-mulish fixed left-0 top-0 h-screen w-screen overflow-y-scroll transition-all duration-500 z-[999]">
-      <div className={` w-[65%] text-white  px-6 bg-HavannaGreen-600 `}>
+    <div className="flex font-mulish fixed left-0 top-0 bottom-0 h-screen w-screen overflow-y-scroll transition-all duration-500 z-[999]">
+      <div className={` w-[65%] text-white h-[100vh] overflow-y-scroll  px-6 bg-HavannaGreen-600 `}>
         <div className="flex flex-col justify-between h-full">
           <div>
             <div className="h-[140px] flex">

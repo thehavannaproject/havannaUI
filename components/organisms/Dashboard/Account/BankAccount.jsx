@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Field, Formik, Form } from "formik";
-import { TrashIcon } from "@heroicons/react/24/solid";
 import { useSelector } from "react-redux";
 import FormikCustomInput from "@components/atoms/CustomInput/FormikCustomInput";
 import CustomButton from "@components/atoms/CustomButton/CustomButton";
@@ -77,11 +76,11 @@ const BankAccount = () => {
             balance={profile.bankDetails.accountName}
             className="tablet:mt-[72px]"
             description={profile.bankDetails.accountNumber}
-            icon={
-              <div className="bg-white w-10 h-10 rounded-full flex justify-center items-center cursor-pointer" onClick={() => setDeleteModal(true)}>
-                <TrashIcon className=" text-HavannaGreen-secondary" width={24} />
-              </div>
-            }
+            // icon={
+            //   <div className="bg-white w-10 h-10 rounded-full flex justify-center items-center cursor-pointer" onClick={() => setDeleteModal(true)}>
+            //     <CopyFilled className=" text-HavannaGreen-secondary" width={24} />
+            //   </div>
+            // }
             title={profile.bankDetails.bankName}
           />
         </div>

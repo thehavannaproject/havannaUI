@@ -4,14 +4,10 @@ import { toast } from "react-toastify";
 import moment from "moment";
 import { UserIcon } from "@heroicons/react/24/solid";
 import { useSelector } from "react-redux";
-// import Icon from "@components/atoms/Icons";
-// import { sendPhoneOtp, verifyPhoneOtp } from "@components/api";
-// import CustomModal from "@components/atoms/CustomModal/CustomModal";
 import { customerCompleteProfile } from "@components/shared/api";
 import { AuthService } from "@components/shared/api/auth";
 import Button from "@atoms/CustomButton/CustomButton";
 import FormikCustomInput from "@atoms/CustomInput/FormikCustomInput";
-// import CustomButton from "@atoms/CustomButton/CustomButton";
 
 const MyProfile = () => {
   const authService = new AuthService();
@@ -22,7 +18,6 @@ const MyProfile = () => {
   const fileInputRef = useRef(null);
 
   const { profile } = useSelector((state) => state.Account);
-
 
   const validateDateOfBirth = (value) => {
     const dateOfBirth = new Date(value);
@@ -59,13 +54,12 @@ const MyProfile = () => {
     }
   };
 
-
   const handleSubmit = (values) => {
     if (!profilePicture) {
       toast.error("Please upload a profile picture");
     } else {
-      setLoading(true)
-      const data = new FormData()
+      setLoading(true);
+      const data = new FormData();
       data.append("CustomerId", userDetails?.customerId);
       data.append("PhoneNumber", values?.phoneNumber);
       data.append("DateOfBirth", values?.date);
@@ -74,8 +68,15 @@ const MyProfile = () => {
       data.append("Occupation", values?.occupation);
       data.append("Gender", values?.gender);
       data.append("ProfilePicture", profilePicture);
-  
-      customerCompleteProfile(data).then((res) => {toast.success(res.data, {theme: "colored"}); setLoading(false)}).catch(() => {setLoading(false)})
+
+      customerCompleteProfile(data)
+        .then((res) => {
+          toast.success(res.data, { theme: "colored" });
+          setLoading(false);
+        })
+        .catch(() => {
+          setLoading(false);
+        });
     }
   };
   return (
@@ -85,13 +86,20 @@ const MyProfile = () => {
           <div className="">
             <div className="flex justify-center items-center">
               {profilePicture || profile?.profilePictureUrl ? (
-                <img alt="Profile Picture" className="rounded-full w-[60px] h-[60px]" onClick={handleIconClick} src={profile?.profilePictureUrl || URL.createObjectURL(profilePicture)} />
+                <img
+                  alt="Profile Picture"
+                  className="rounded-full w-[60px] h-[60px]"
+                  onClick={handleIconClick}
+                  src={profile?.profilePictureUrl || URL.createObjectURL(profilePicture)}
+                />
               ) : (
                 <UserIcon className="p-[10px] rounded-full flex bg-[#F5F5F5]" color="#8F8F8F" onClick={handleIconClick} width={40} />
               )}
             </div>
             <input accept=".png, .jpeg, .jpg" className="mt-10 hidden" onChange={handleProfilePictureUpload} ref={fileInputRef} type="file" />
-            <p className="font-bold text-14  text-[#0B4340] mt-[10px]" onClick={handleIconClick}>Upload your profile picture</p>
+            <p className="font-bold text-14  text-[#0B4340] mt-[10px]" onClick={handleIconClick}>
+              Upload your profile picture
+            </p>
           </div>
         </div>
 
@@ -110,14 +118,14 @@ const MyProfile = () => {
           onSubmit={handleSubmit}
           validate={(values) => {
             const errors = {};
-           
+
             // validate date of birth
             if (values.date && validateDateOfBirth(values.date)) {
               errors.date = validateDateOfBirth(values.date);
             }
             if (!/^\d+$/.test(values.phoneNumber) || values.phoneNumber.length !== 11) {
               errors.phoneNumber = "Phone number is invalid";
-          }
+            }
             return errors;
           }}
         >
@@ -189,8 +197,9 @@ const MyProfile = () => {
                     type="text"
                     // value={values.phoneNumber}
                   />
-                    <div className="absolute right-2 top-1/2 text-HavannaGreen-primary font-semibold px-4 py-1 rounded-md">{profile?.phoneNumberVerified ? "Verified" : "Unverified"}</div>
-                 
+                  <div className="absolute right-2 top-1/2 text-HavannaGreen-primary font-semibold px-4 py-1 rounded-md">
+                    {profile?.phoneNumberVerified ? "Verified" : "Unverified"}
+                  </div>
                 </div>
 
                 <div className="mt-4 ">
@@ -224,6 +233,7 @@ const MyProfile = () => {
                     required
                     type="date"
                   />
+                  {/* <Field name="date">{({ field, form }) => <DatePicker {...field} onChange={(date) => form.setFieldValue(field.name, date)} selected={values.date} />}</Field> */}
                 </div>
                 <div className="mt-4 ">
                   <label className="font-bold text-14 text-[#3B3F42]">Address</label>
@@ -276,16 +286,18 @@ const MyProfile = () => {
                 </div>
               </div>
               {(!profile?.address || !profile.dateOfBirth || !profile.gender || !profile.occupation || !profile.phoneNumber) && (
-
-              <div className="mt-10 ">
-                <Button customClass="rounded-[8px] smallLaptop:w-[240px] w-[100%]  text-white h-[58px] bg-HavannaGreen-primary " isLoading={loading} title=" Save information" />
-              </div>
-              ) }
+                <div className="mt-10 ">
+                  <Button customClass="rounded-[8px] smallLaptop:w-[240px] w-[100%]  text-white h-[58px] bg-HavannaGreen-primary " isLoading={loading} title=" Save information" />
+                </div>
+              )}
             </Form>
           )}
         </Formik>
-        <p className="mb-24 mt-6 text-14 font-bold text-center">
-          Need to change any information? <a href="mailto:info@havanna.com"><span className="text-HavannaGreen-primary">&nbsp;Contact Us</span></a> 
+        <p className="mb-24 mt-16 text-14 font-bold text-center">
+          Need to change any information?{" "}
+          <a href="mailto:info@havanna.com">
+            <span className="text-HavannaGreen-primary">&nbsp;Contact Us</span>
+          </a>
         </p>
       </div>
       {/* <CustomModal visibility={open}>

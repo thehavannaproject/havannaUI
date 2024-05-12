@@ -34,7 +34,7 @@ const index = () => {
 
     </div>
         <div className="tablet:hidden">
-        <DashboardMobileLayout className="px-0" title="Invest">
+        <DashboardMobileLayout className="!px-0" title="Invest">
           <PropertyDetails singleListing={singleListing} />
         </DashboardMobileLayout>
       </div>

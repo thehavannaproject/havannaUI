@@ -12,7 +12,7 @@ const index = () => {
         </DashboardLayout>
       </div>
       <div className="tablet:hidden">
-        <DashboardMobileLayout title="Listing">
+        <DashboardMobileLayout title="Listings">
           <MobileListing />
         </DashboardMobileLayout>
       </div>

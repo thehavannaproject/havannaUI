@@ -1,13 +1,14 @@
-import { Switch } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import OTPInput from "react-otp-input";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 import CustomModal from "@components/atoms/CustomModal/CustomModal";
 import MenuHeader from "@components/layout/DashboardLayout/MenuHeader";
 import Icon from "@components/atoms/Icons";
 import CustomButton from "@components/atoms/CustomButton/CustomButton";
-import { sendPhoneOtp, verifyPhoneNumber } from "@components/shared/api";
+import { CustomerConfig, sendPhoneOtp, verifyPhoneNumber } from "@components/shared/api";
+import CustomToggle from "@components/atoms/CustomToggle/CustomToggle";
 import { replaceFirstZero } from "@components/shared/libs/helpers";
 import UpdatePassword from "./UpdatePassword";
 import SetPin from "./SetPin";
@@ -20,6 +21,15 @@ const Security = () => {
   const { profile } = useSelector((state) => state.Account);
   const [loading, setLoading] = useState(false);
 
+  const router = useRouter();
+  const {tab} = router.query;
+
+  useEffect(() => {
+    if(tab === "security") {
+      setShowSetPin(true)
+    }
+  }, [])
+
   const sendOtp = () => {
     if (profile.phoneNumber) {
       setShowPhoneNumber(true);
@@ -30,11 +40,15 @@ const Security = () => {
         customer_email_address: profile.emailAddress,
         first_name: profile.firstName,
       };
-      sendPhoneOtp(data).then((response) => {
-        console.log(response)
-        toast.success("OTP sent successfully");
-        localStorage.setItem("reference", response.data.reference);
-      }).catch(() => {toast.error("Something went wrong")});
+      sendPhoneOtp(data)
+        .then((response) => {
+          console.log(response);
+          toast.success("OTP sent successfully");
+          localStorage.setItem("reference", response.data.reference);
+        })
+        .catch(() => {
+          toast.error("Something went wrong");
+        });
     }
   };
 
@@ -47,7 +61,7 @@ const Security = () => {
         verification_code: otp,
         verification_reference: localStorage.getItem("reference"),
       };
-        verifyPhoneNumber(data)
+      verifyPhoneNumber(data)
         .then((response) => {
           response === "invalid token" ? toast.error("Sorry, couldn't verify OTP at the moment, Please try again later") : toast.success("OTP verification is successful");
           setLoading(false);
@@ -59,6 +73,29 @@ const Security = () => {
     }
   };
 
+  const handleConfig = (isChecked) => {
+    console.log(isChecked);
+    console.log(profile)
+    const data = {
+      customerId: profile.customerId,
+      smsNotification: isChecked,
+      emailNotification: isChecked,
+      twoFactorAuthentication: isChecked,
+    };
+    CustomerConfig(data).then((res) => console.log(res));
+  };
+
+  const handle2FA = (isChecked) => {
+    console.log(isChecked);
+    const data = {
+      customerId: profile.customerId,
+      smsNotification: isChecked,
+      emailNotification: isChecked,
+      twoFactorAuthentication: isChecked,
+    };
+    CustomerConfig(data).then((res) => console.log(res));
+  }
+
   return (
     <div className="font-mulish mt-[52px]">
       <div>
@@ -69,7 +106,6 @@ const Security = () => {
             <p>{profile.emailAddress}</p>
           </div>
           {profile?.phoneNumberVerified && (
-
             <div className="mt-3 text-[#4F5457] text-12 flex justify-between">
               <p>Phone Number</p>
               <p>{profile?.phoneNumber}</p>
@@ -91,12 +127,9 @@ const Security = () => {
           <h1 className="text-16 text-[#3B3F42] font-bold">Notification</h1>
           <div className="mt-3 text-[#4F5457] text-12 flex justify-between">
             <p>Allow and start getting notifications.</p>
-            <Switch
-              className="text-HavannaGreen-primary checked:bg-HavannaGreen-primary "
-              defaultChecked
-              onChange={(checked) => console.log(checked)}
-              style={{ background: "#0B4340" }}
-            />
+            <div>
+              <CustomToggle onToggle={(isChecked) => handleConfig(isChecked)} />
+            </div>
           </div>
         </div>
 
@@ -107,7 +140,9 @@ const Security = () => {
               <p className="font-bold">Two Factor Authentication</p>
               <p>Protect your Havanna account from unauthorized transactions.</p>
             </div>
-            <Switch className="text-HavannaGreen-primary !border" onChange={(checked) => console.log(checked)} style={{ background: "#0B4340" }} />
+            <div>
+              <CustomToggle onToggle={(isChecked) => handle2FA(isChecked)} />
+            </div>
           </div>
         </div>
         <div className="mt-8">

@@ -2,11 +2,14 @@ import { useState, useEffect } from "react";
 import OtpInput from "react-otp-input";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
 import CustomButton from "@components/atoms/CustomButton/CustomButton";
 import CustomModal from "@components/atoms/CustomModal/CustomModal";
 // import MenuHeader from "@components/layout/DashboardLayout/MenuHeader";
-import { ListingInvestment, getCustomerPortfolio } from "@components/shared/api";
+import { ListingInvestment, getCustomerPortfolio, getCustomerProfile } from "@components/shared/api";
 import { AuthService } from "@components/shared/api/auth";
+import PopUpModalTemplate from "@components/atoms/PopUpModalTemplate";
+import { setProfile } from "@components/store/Account";
 // import TransactionDetails from "./TransactionDetails";
 
 const InvestmentSummary = ({ investForm, listingId }) => {
@@ -14,9 +17,22 @@ const InvestmentSummary = ({ investForm, listingId }) => {
   const authService = new AuthService();
   const userDetails = authService.getDetails("ud");
   const [showModal, setShowModal] = useState(false);
-  // const [showTransactionDetails, setShowTransactionDetails] = useState(false);
+  const [showpopupModal, setShowPopupModal] = useState(false);
   const [otp, setOtp] = useState("");
   const [portfolio, setPorfolio] = useState([]);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    getCustomerProfile(userDetails?.customerId)
+      .then((response) => {
+        dispatch(setProfile(response));
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
+  const { profile } = useSelector((state) => state.Account);
+
+  console.log(profile)
 
   useEffect(() => {
     getCustomerPortfolio(userDetails?.customerId)
@@ -77,7 +93,7 @@ const InvestmentSummary = ({ investForm, listingId }) => {
         <div className="mt-16">
           <CustomButton
             customClass="bg-HavannaGreen-primary text-white w-full text-14 rounded-[4px]"
-            onClick={() => setShowModal(true)}
+            onClick={() => profile?.transactionPinCreated ? setShowModal(true) : setShowPopupModal(true) }
             title={`Pay ₦ ${investForm?.amount.toLocaleString()}`}
           />
         </div>
@@ -100,13 +116,11 @@ const InvestmentSummary = ({ investForm, listingId }) => {
         </div>
       </CustomModal>
 
-      {/* <CustomModal cardClassName="w-full" toggleVisibility={setShowTransactionDetails} visibility={showTransactionDetails}>
-        <MenuHeader onClose={() => setShowTransactionDetails(false)} title="Transaction Details">
+      <CustomModal cardClassName="w-full" toggleVisibility={setShowPopupModal} visibility={showpopupModal}>
           <div className="bg-white text-black px-6 pt-4 font-mulish !w-full h-screen">
-            <TransactionDetails />
+            <PopUpModalTemplate description="Set your transaction pin to continue investment" destination="/account?tab=security" linkTitle="Set Pin" title="Transaction Pin"/>
           </div>
-        </MenuHeader>
-      </CustomModal> */}
+      </CustomModal>
     </div>
   );
 };

@@ -64,7 +64,7 @@ const InvestmentForm = () => {
 
   return (
     <>
-      <div className="font-mulish">
+      <div className="font-mulish mb-20">
         <div className="wallet-bg text-white  bg-HavannaGreen-secondary h-[142px] rounded-lg mt-5">
           <div className="flex gap-3 items-center pt-5 ml-3">
             <Icon name="mobileWallet" />
@@ -79,10 +79,10 @@ const InvestmentForm = () => {
           <Formik
             enableReinitialize
             initialValues={{
-              propertyName: singleListing?.name ? singleListing?.name : "Not Avaliable",
-              slotPrice: singleListing?.listingDetails?.cost ? singleListing?.listingDetails?.cost : 100,
+              propertyName: singleListing?.name || "Not Avaliable",
+              slotPrice: singleListing?.listingDetails?.unitCost || 0,
               slotCount: count,
-              amount: count * 100 || 0 
+              amount: count * singleListing?.listingDetails?.unitCost || 0 
             }}
             onSubmit={(values) => {
               setInvestForm(values)
@@ -95,7 +95,7 @@ const InvestmentForm = () => {
                 <div>
                   <label className="font-bold text-14 text-[#3B3F42]">Property Name</label>
                   <FormikCustomInput
-                    className={`rounded-md w-full h-[48px] mt-1 border-2 font-medium font-mulish text-16 leading-6 `}
+                    className={`rounded-md w-full h-[48px] mt-1 border border-HavannaGreen-secondary font-medium font-mulish text-16 leading-6 `}
                     id="propertyName"
                     inputClassName="placeholder:text-14 outline-none "
                     name="propertyName"
@@ -107,19 +107,19 @@ const InvestmentForm = () => {
                 <div className="mt-5">
                   <label className="font-bold text-14 text-[#3B3F42]">Slot Price</label>
                   <FormikCustomInput
-                    className={`rounded-md w-full h-[48px] mt-1 border-2 font-medium font-mulish text-16 leading-6 `}
+                    className={`rounded-md w-full h-[48px] mt-1 border border-HavannaGreen-secondary font-medium font-mulish text-16 leading-6 `}
                     id="slotPrice"
                     inputClassName="placeholder:text-14 outline-none "
                     name="slotPrice"
                     readOnly
                     type="text"
-                    value={values.slotPrice}
+                    value={`₦ ${values.slotPrice.toLocaleString()}`}
                   />
                 </div>
                 <div className="mt-5">
                   <label className="font-bold text-14 text-[#3B3F42]">Number of Slot</label>
                   <FormikCustomInput
-                    className={`rounded-md w-full h-[48px] mt-1 border-2 font-medium font-mulish text-16 leading-6 `}
+                    className={`rounded-md w-full h-[48px] mt-1 border border-HavannaGreen-secondary font-medium font-mulish text-16 leading-6 `}
                     id="slotCount"
                     inputClassName="placeholder:text-14 outline-none "
                     name="slotCount"
@@ -130,13 +130,13 @@ const InvestmentForm = () => {
                 <div className="mt-5">
                   <label className="font-bold text-14 text-[#3B3F42]">Amount</label>
                   <FormikCustomInput
-                    className={`rounded-md w-full h-[48px] mt-1 border-2 font-medium font-mulish text-16 leading-6 `}
+                    className={`rounded-md w-full h-[48px] mt-1 border border-HavannaGreen-secondary font-medium font-mulish text-16 leading-6 `}
                     id="amount"
-                    inputClassName="placeholder:text-14 outline-none"
+                    inputClassName="placeholder:text-14 outline-HavannaGreen-secondar"
                     name="amount"
                     readOnly
                     type="text"
-                    value={values.amount}
+                    value={`₦ ${values.amount.toLocaleString()}`}
                   />
                 </div>
                 <div className="mt-16">
@@ -147,7 +147,6 @@ const InvestmentForm = () => {
           </Formik>
         </div>
       </div>
-
 
       <CustomModal cardClassName="w-full" toggleVisibility={setShowSummary} visibility={showSummary}>
         <MenuHeader onClose={() => setShowSummary(false)} title="Summary">
