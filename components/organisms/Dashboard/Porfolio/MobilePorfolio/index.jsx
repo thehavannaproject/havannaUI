@@ -62,7 +62,7 @@ const MobilePorfolio = ({porfolio}) => {
     {
       id: 1,
       title: "Slots Price",
-      info: moreDetails?.value,
+      info: moreDetails?.value?.toLocaleString(),
     },
     {
       id: 2,
@@ -72,7 +72,7 @@ const MobilePorfolio = ({porfolio}) => {
     {
       id: 3,
       title: "Total Investment",
-      info: "600,000",
+      info: (moreDetails?.value * moreDetails?.units).toLocaleString(),
     },
     {
       id: 4,
