@@ -29,7 +29,6 @@ const MobilePorfolio = ({porfolio}) => {
   const handleSearchQuery = () => {
     
     if (searchQuery) {
-      console.log(porfolio)
       setFilteredProperties(porfolio?.filter((item) => {
         for (const key in item) {
           if (item.hasOwnProperty(key) && typeof item[key] === "string") {
@@ -110,7 +109,7 @@ const MobilePorfolio = ({porfolio}) => {
 
       <div className="mt-3">
         {subset?.map((data, index) => (
-          <div className="border mt-6 shadow-sm rounded-lg" key={index} onClick={() => {setShowNextPage(true); setMoreDetails(data); console.log(data)}}>
+          <div className="border mt-6 shadow-sm rounded-lg" key={index} onClick={() => {setShowNextPage(true); setMoreDetails(data);}}>
             <div className="flex justify-between border-b p-3">
               <div>
                 <p className="text-[#ADADAD] text-12">Asset name</p>
@@ -156,7 +155,7 @@ const MobilePorfolio = ({porfolio}) => {
           {showNextPage && (
 
           <MenuHeader onClose={() => setShowNextPage(false)} title={moreDetails?.name}>
-            <div className="bg-white text-black px-6 pt-4 font-mulish !w-full h-screen">
+            <div className="bg-white text-black px-6 pt-4 font-mulish !w-full">
               <h1 className="text-20 text-[#3B3F42] font-bold">{moreDetails?.name}</h1>
               <p className="mt-[6px] text-[#6B7276] text-16">{moreDetails?.location}</p>
 
