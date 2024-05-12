@@ -2,6 +2,7 @@ import { Form, Formik } from "formik";
 import { useEffect, useState } from "react";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import FormikCustomInput from "@components/atoms/CustomInput/FormikCustomInput";
 import CustomButton from "@components/atoms/CustomButton/CustomButton";
 import CustomModal from "@components/atoms/CustomModal/CustomModal";
@@ -10,6 +11,7 @@ import { AuthService } from "@components/shared/api/auth";
 import { getCustomerProfile } from "@components/shared/api";
 import { setProfile } from "@components/store/Account";
 import TransactionProcessingModal from "@components/atoms/TransactionProcessingModal";
+import PopUpModalTemplate from "@components/atoms/PopUpModalTemplate";
 import ConfirmAmount from "../FundWallet/ConfirmAmount";
 
 const Withdrawal = () => {
@@ -19,6 +21,9 @@ const Withdrawal = () => {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const dispatch = useDispatch();
   const [data, setData] = useState({});
+  const [gotoAccountModal, setGotoAccountModal] = useState(false);
+
+  const { profile } = useSelector((state) => state.Account);
 
   const withdrawalSchema = Yup.object().shape({
     amount: Yup.number().min(2000, "Minimum amount to withdraw is 2000")
@@ -32,22 +37,33 @@ const Withdrawal = () => {
       .catch((error) => console.log(error));
   }, []);
 
-  const { profile } = useSelector((state) => state.Account);
 
 
   const handleWithdrawal = (values) => {
-    setShowConfirmAmount(true);
-    const data = {
-      customerId: profile.customerId,
-      amount: values.amount,
-      transactionPin: values.password,
-      email: profile.emailAddress,
-      reason: "",
-      accountNumber: profile?.bankDetails?.accountNumber,
-      accountName: profile?.bankDetails?.accountName
-    };
-    setData(data) 
+    if(profile?.bankDetails?.accountNumber) {
+      setShowConfirmAmount(true);
+      const data = {
+        customerId: profile.customerId,
+        amount: values.amount,
+        transactionPin: values.password,
+        email: profile.emailAddress,
+        reason: "",
+        accountNumber: profile?.bankDetails?.accountNumber,
+        accountName: profile?.bankDetails?.accountName
+      };
+      setData(data) 
+    } else {
+      toast.error("You have not set up your bank profile")
+    }
   };
+
+  useEffect(() => {
+    if (!profile?.phoneNumber) {
+      setGotoAccountModal(true);
+    } else {
+      setGotoAccountModal(false);
+    }
+  }, [profile?.phoneNumber])
 
   return (
     <div className="font-mulish text-[#4F5457] px-6 pt-8">
@@ -116,7 +132,11 @@ const Withdrawal = () => {
       </CustomModal>
 
       {showSuccessModal && <TransactionProcessingModal setShowSuccessModal={setShowSuccessModal}  />}
-
+      <CustomModal cardClassName="w-[348px]" toggleVisibility={() => setGotoAccountModal(true)} visibility={gotoAccountModal}>
+          <div className="bg-white text-black px-6 pt-4 flex justify-center items-center font-mulish h-[250px] rounded-lg  ">
+            <PopUpModalTemplate description="Kindly complete your account information to proceed. " destination="/account" linkTitle="Go to Account" title="Notice" />
+          </div>
+        </CustomModal>
     </div>
   );
 };

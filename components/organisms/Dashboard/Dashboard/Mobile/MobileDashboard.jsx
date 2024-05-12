@@ -1,10 +1,12 @@
 import { Carousel } from "antd";
 import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Icon from "@components/atoms/Icons";
 import { AuthService } from "@components/shared/api/auth";
 import TransactionProcessingModal from "@components/atoms/TransactionProcessingModal";
 import CustomLink from "@components/atoms/CustomLink/CustomLink";
+import CustomModal from "@components/atoms/CustomModal/CustomModal";
+import PopUpModalTemplate from "@components/atoms/PopUpModalTemplate";
 import QuickActions from "./QuickActions";
 import RecentInvestment from "./RecentInvestment";
 import CurrentListings from "./CurrentListings";
@@ -14,20 +16,29 @@ const MobileDashboard = () => {
   const userDetails = authService.getDetails("ud");
 
   const [showSuccessModal, setShowSuccessModal] = useState(false);
-
+  const [gotoAccountModal, setGotoAccountModal] = useState(false);
 
   const { walletBalance } = useSelector((state) => state.Wallet);
   const { portfolio } = useSelector((state) => state.Customer);
+  const { profile } = useSelector((state) => state.Account);
+
+
+  useEffect(() => {
+    if (!profile?.phoneNumber) {
+      setGotoAccountModal(true);
+    } else {
+      setGotoAccountModal(false);
+    }
+  }, [profile?.phoneNumber])
 
   return (
     <>
       <div className="font-mulish pt-2">
-        {userDetails?.gender && (
+        {profile?.phoneNumber && (
           <div className="flex justify-center w-fit m-auto card-shadow gap-1 py-[6px] px-[10px] rounded-lg ">
             <Icon name="mobileMenu2" />
             <CustomLink destination="/account">
-
-            <p className="text-[#6B7276] text-12 font-medium">Complete setting up your profile</p>
+              <p className="text-[#6B7276] text-12 font-medium">Complete setting up your profile</p>
             </CustomLink>
           </div>
         )}
@@ -51,7 +62,7 @@ const MobileDashboard = () => {
               <Icon name="propertiesWallet" />
               <div>
                 <h1 className="text-14 font-bold">Properties Value</h1>
-                <p className="text-12 font-normal mt-1">Total worth of  your properties</p>
+                <p className="text-12 font-normal mt-1">Total worth of your properties</p>
                 <p className="mt-2 text-20 font-bold">{walletBalance?.availableBalance ? `₦ ${parseFloat(portfolio?.balance)?.toLocaleString()}` : "₦ 0"}</p>
               </div>
             </div>
@@ -61,8 +72,12 @@ const MobileDashboard = () => {
         <QuickActions setShowSuccessModal={setShowSuccessModal} />
         <RecentInvestment portfolio={portfolio} />
         <CurrentListings />
-      {showSuccessModal && <TransactionProcessingModal setShowSuccessModal={setShowSuccessModal} />}
-
+        {showSuccessModal && <TransactionProcessingModal setShowSuccessModal={setShowSuccessModal} />}
+        <CustomModal cardClassName="w-[348px]" toggleVisibility={() => setGotoAccountModal(true)} visibility={gotoAccountModal}>
+          <div className="bg-white text-black px-6 pt-4 flex justify-center items-center font-mulish h-[250px] rounded-lg  ">
+            <PopUpModalTemplate description="Kindly complete your account information to proceed. " destination="/account" linkTitle="Go to Account" title="Notice" />
+          </div>
+        </CustomModal>
       </div>
     </>
   );

@@ -1,15 +1,28 @@
 import { Form, Formik } from "formik";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import FormikCustomInput from "@components/atoms/CustomInput/FormikCustomInput";
 import CustomButton from "@components/atoms/CustomButton/CustomButton";
 import Icon from "@components/atoms/Icons";
 import CustomModal from "@components/atoms/CustomModal/CustomModal";
 import MenuHeader from "@components/layout/DashboardLayout/MenuHeader";
+import PopUpModalTemplate from "@components/atoms/PopUpModalTemplate";
 import ConfirmAmount from "./ConfirmAmount";
 
 const FundWallet = ({closeModal, setShowSuccessModal}) => {
   const [showConfirmAmount, setShowConfirmAmount ] = useState(false);
   const [amount_, setAmount_] = useState("");
+  const [gotoAccountModal, setGotoAccountModal] = useState(false);
+
+  const { profile } = useSelector((state) => state.Account);
+
+  useEffect(() => {
+    if (!profile?.phoneNumber) {
+      setGotoAccountModal(true);
+    } else {
+      setGotoAccountModal(false);
+    }
+  }, [profile?.phoneNumber])
 
   return (
     <div className="font-mulish text-[#4F5457] px-6 pt-8">
@@ -53,6 +66,11 @@ const FundWallet = ({closeModal, setShowSuccessModal}) => {
           </div>
         </MenuHeader>
       </CustomModal>
+      <CustomModal cardClassName="w-[348px]" toggleVisibility={() => setGotoAccountModal(true)} visibility={gotoAccountModal}>
+          <div className="bg-white text-black px-6 pt-4 flex justify-center items-center font-mulish h-[250px] rounded-lg  ">
+            <PopUpModalTemplate description="Kindly complete your account information to proceed. " destination="/account" linkTitle="Go to Account" title="Notice" />
+          </div>
+        </CustomModal>
     </div>
   );
 };

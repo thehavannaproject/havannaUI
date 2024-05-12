@@ -1,7 +1,6 @@
 import { Form, Formik } from "formik";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
@@ -9,11 +8,13 @@ import * as Yup from "yup";
 import { REGEX } from "@components/shared/libs/helpers.js";
 import { CreateUser } from "@components/shared/api";
 
+import CustomModal from "@components/atoms/CustomModal/CustomModal";
 import Button from "@atoms/CustomButton/CustomButton";
 import FormikCustomInput from "@atoms/CustomInput/FormikCustomInput";
 import CustomLink from "@atoms/CustomLink/CustomLink";
 
 import Logo from "@images/svg/Logo.svg";
+import VerificationEmail from "../VerificationEmail/VerificationEmail";
 
 const SignupSchema = Yup.object().shape({
   firstName: Yup.string().required("This field is compulsory"),
@@ -28,8 +29,9 @@ const SignupSchema = Yup.object().shape({
 
 const SignUp = () => {
   const [loading, setLoading] = useState(false);
+  const [showEmailVerification, setShowEmailVerification] = useState(false);
+  const [email, setEmail] = useState("")
 
-  const router = useRouter();
 
   const handleSubmit = (values) => {
     setLoading(true);
@@ -37,10 +39,8 @@ const SignUp = () => {
       .then((response) => {
         if (response.responseCode === 200) {
           toast.success(`Account created successfully.`, { theme: "colored" });
-          router.push({
-            pathname: "/auth/verify-email",
-            query: { email: values.emailAddress },
-          });
+          setEmail(values.emailAddress);
+         setShowEmailVerification(true)
           setLoading(false);
         } else {
           toast.warn(`${response.errorMessage}`, { theme: "colored" });
@@ -197,6 +197,9 @@ const SignUp = () => {
           </div>
         </div>
       </section>
+      <CustomModal cardClassName="h-screen w-full" toggleVisibility={setShowEmailVerification} visibility={showEmailVerification}>
+        <VerificationEmail email={email}/>
+      </CustomModal> 
     </>
   );
 };

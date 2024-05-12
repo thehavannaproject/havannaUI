@@ -12,7 +12,7 @@ const RecentInvestment = ({ tranHistory }) => {
   return (
     <div className="font-mulish">
       <div>
-        <h1 className="font-bold text-14 text-[#3B3F42]">Recent Investment</h1>
+        <h1 className="font-bold text-14 text-[#3B3F42]">Recent Transaction</h1>
         <div className="hidden h-[200px] mt-3 flex justify-center items-center bg-[#F5F5F5] rounded-lg">
           <p className="text-[#6B7276] text-14 ">You don’t have any recent transations.</p>
         </div>

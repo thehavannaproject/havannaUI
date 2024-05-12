@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Form, Formik } from "formik";
 import { useRouter } from "next/router";
 import * as Yup from "yup";
+import { useSelector } from "react-redux";
 import FormikCustomInput from "@components/atoms/CustomInput/FormikCustomInput";
 import Icon from "@components/atoms/Icons";
 import CustomButton from "@components/atoms/CustomButton/CustomButton";
@@ -9,6 +10,7 @@ import MenuHeader from "@components/layout/DashboardLayout/MenuHeader";
 import CustomModal from "@components/atoms/CustomModal/CustomModal";
 import { GetListingById, getCustomerWallet } from "@components/shared/api";
 import { AuthService } from "@components/shared/api/auth";
+import PopUpModalTemplate from "@components/atoms/PopUpModalTemplate";
 import InvestmentSummary from "./InvestmentSummary";
 
 
@@ -21,6 +23,9 @@ const InvestmentForm = () => {
   const [singleListing, setSingleListing] = useState([]);
   const [count, setCount] = useState(0);
   const [investForm, setInvestForm] = useState({});
+  const [gotoAccountModal, setGotoAccountModal] = useState(false);
+
+  const { profile } = useSelector((state) => state.Account);
 
   const { listingId } = router.query;
 
@@ -61,6 +66,14 @@ const InvestmentForm = () => {
   useEffect(() => {
     getListingById();
   }, [listingId]);
+
+  useEffect(() => {
+    if (!profile?.phoneNumber) {
+      setGotoAccountModal(true);
+    } else {
+      setGotoAccountModal(false);
+    }
+  }, [profile?.phoneNumber])
 
   return (
     <>
@@ -155,6 +168,12 @@ const InvestmentForm = () => {
           </div>
         </MenuHeader>
       </CustomModal>
+
+      <CustomModal cardClassName="w-[348px]" toggleVisibility={() => setGotoAccountModal(true)} visibility={gotoAccountModal}>
+          <div className="bg-white text-black px-6 pt-4 flex justify-center items-center font-mulish h-[250px] rounded-lg  ">
+            <PopUpModalTemplate description="Kindly complete your account information to proceed. " destination="/account" linkTitle="Go to Account" title="Notice" />
+          </div>
+        </CustomModal>
     </>
   );
 };

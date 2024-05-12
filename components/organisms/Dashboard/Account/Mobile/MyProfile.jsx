@@ -259,8 +259,6 @@ const MyProfile = () => {
                         checked={values.gender === profile.gender}
                         className="!h-5 accent-HavannaGreen-secondary"
                         container="!px-0"
-                        // disabled={profile.gender}
-                        // onChange={() => setFieldValue('gender', 'Male')}
                         name="gender"
                         required
                         type="radio"
@@ -273,9 +271,7 @@ const MyProfile = () => {
                         checked={values.gender === profile.gender}
                         className="!h-5 accent-HavannaGreen-secondary"
                         container="!px-0"
-                        // disabled={profile?.gender}
                         name="gender"
-                        // onChange={() => setFieldValue('gender', 'Female')}
                         required
                         type="radio"
                         value="Female"

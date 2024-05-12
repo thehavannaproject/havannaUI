@@ -101,7 +101,7 @@ const MobilePorfolio = ({porfolio}) => {
       {porfolio.length <=0 && (
       <div className="h-full mt-32">
         <p className="text-[#ADADAD] text-[18px] text-center">No investment in your portfolio.</p>
-        <CustomLink customClass="bg-HavannaGreen-primary rounded-[4px] mt-6 font-bold py-4 text-white w-full text-center" destination="#">
+        <CustomLink customClass="bg-HavannaGreen-primary rounded-[4px] mt-6 font-bold py-4 text-white w-full text-center" destination="/listing">
           Invest
         </CustomLink>
       </div>

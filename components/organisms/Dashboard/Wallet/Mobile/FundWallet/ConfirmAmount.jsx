@@ -74,8 +74,6 @@ const ConfirmAmount = ({ transactionName, amount, closeModal, setShowSuccessModa
 
   const initializePayment = usePaystackPayment(config);
 
-console.log(withdrawalData)
-
   return (
     <div className="font-mulish pt-7 px-6">
       <div>
