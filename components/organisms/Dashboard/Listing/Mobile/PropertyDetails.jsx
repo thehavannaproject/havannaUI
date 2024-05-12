@@ -10,8 +10,8 @@ const PropertyDetails = ({ singleListing }) => {
         <Carousel dots={{ className: "!text-HavannaGreen-secondary" }}>
           {singleListing?.listingImage?.map((image, index) => (
             <div className="relative" key={index}>
-              <p className="absolute top-7 bg-white left-5 px-3 py-1 rounded-xl text-HavannaBlack-neutral20 text-12 font-medium">
-                {status === 2 ? "Sold Out" : status === 1 ? "Active" : `${singleListing?.availableSlot} Slots Available`}
+              <p className="absolute top-7 bg-white left-5 px-3 py-1 text-HavannaBlack-neutral20 text-12 font-medium">
+                {singleListing?.availableSlot === 0 ? "Sold Out" : `${singleListing?.availableSlot} Slots Available`}
               </p>
               <img alt="Property" className="h-[300px] w-full object-cover rounded-lg" src={image.imageUrl || ""} />
             </div>
