@@ -12,12 +12,10 @@ const NextOfKin = ({ setActiveTab }) => {
 
   const dispatch = useDispatch();
   const { nextOfKin } = useSelector((state) => state.Account);
-  console.log(nextOfKin);
   const handleSubmit = (values) => {
     setLoading(true);
     setActiveTab(2);
     dispatch(setNextOfKin(values));
-    console.log(values);
   };
 
   return (

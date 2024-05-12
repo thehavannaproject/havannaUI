@@ -1,15 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { AuthService } from "@components/shared/api/auth";
+import { getAllTransactionHistory } from "@components/shared/api";
 import AllTransactionHistory from "./AllTransactionHistory";
 import CreditHistory from "./CreditHistory";
 import DebitHistory from "./DebitHistory";
 
 const TransactionHistory = () => {
   const [activeTab, setActiveTab] = useState(0);
+  const authService = new AuthService();
+  const userDetails = authService.getDetails("ud");
+  const [tranHistory, setTranHistory] = useState([]);
+
+  const getTransactionHistory = () => {
+    getAllTransactionHistory(userDetails?.customerId).then((data) => {
+      setTranHistory(data.result.data);
+    });
+  };
+
+  useEffect(() => {
+    getTransactionHistory();
+  }, []);
   const transactionHistory = [
-    { id: 0, title: "All", component: <AllTransactionHistory /> },
-    { id: 1, title: "Credit", component: <CreditHistory /> },
-    { id: 2, title: "Debit", component: <DebitHistory /> },
+    { id: 0, title: "All", component: <AllTransactionHistory tranHistory={tranHistory} /> },
+    { id: 1, title: "Credit", component: <CreditHistory tranHistory={tranHistory} /> },
+    { id: 2, title: "Debit", component: <DebitHistory tranHistory={tranHistory} /> },
   ];
+
+  
   return (
     <>
       <div className="font-mulish px-6">
@@ -26,7 +43,7 @@ const TransactionHistory = () => {
             </p>
           ))}
         </div>
-        <div className="mt-7 bg-white w-[752px] px-6 py-14">{transactionHistory[activeTab].component}</div>
+        <div className="mt-7 bg-white w-[752px] px-6 py-6">{transactionHistory[activeTab].component}</div>
       </div>
     </>
   );

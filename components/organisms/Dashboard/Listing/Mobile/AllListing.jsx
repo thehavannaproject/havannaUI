@@ -40,7 +40,7 @@ const AllListing = ({ status }) => {
                         {item.listingImage.map((image, index) => (
                           <div className="relative" key={index}>
                             <p className="absolute top-7 bg-white left-5 px-3 py-1 rounded-xl text-HavannaBlack-neutral20 text-12 font-medium">
-                              {status === 2 ? "Sold Out" : status === 1 ? "Active" : `${item?.availableSlot} Slots Available`} 
+                              {status === 2 ? "Sold Out" : status === 1 ? "Active" : item?.availableSlot === 0 ? "Sold Out" : `${item?.availableSlot} Slots Available`} 
                             </p>
                             <img alt="Property" className="h-[250px] w-full object-cover rounded-lg" src={image.imageUrl || ""} />
                           </div>

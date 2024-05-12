@@ -35,7 +35,7 @@ const CurrentListings = () => {
             <Carousel dots={{ className: "!text-HavannaGreen-secondary" }}>
               {item.listingImage.map((image, index) => (
                 <div className="relative" key={index}>
-                  <p className="absolute top-7 bg-white left-5 px-3 py-1 rounded-xl text-HavannaBlack-neutral20 text-12 font-medium">{`${item?.availableSlot} Slots Available`}</p>
+                  <p className="absolute top-7 bg-white left-5 px-3 py-1 rounded-xl text-HavannaBlack-neutral20 text-12 font-medium">{item?.availableSlot === 0 ? "Sold Out" : `${item?.availableSlot} Slots Available`}</p>
                   <img alt="Property" className="h-[320px] w-full object-cover rounded-lg" src={image.imageUrl || ""} />
                 </div>
               ))}

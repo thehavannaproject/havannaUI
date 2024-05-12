@@ -40,7 +40,7 @@ const MobileAccount = () => {
   }, [])
 
   return (
-    <div className="font-mulish mt-6 mb-16">
+    <div className="font-mulish mt-6 mb-16 ">
       <div>
         <div className="flex gap-3 whitespace-nowrap overflow-scroll hide-scrollbar">
           {listings.map((item, index) => (

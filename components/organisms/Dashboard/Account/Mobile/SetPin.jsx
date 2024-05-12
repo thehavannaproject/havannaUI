@@ -37,7 +37,6 @@ const SetPin = () => {
       };
       UpdateTransactionPin(data)
         .then((res) => {
-          console.log(res)
           if (res.responseCode === 200) {
             setShowSuccessModal(true);
             setLoading(false);
@@ -54,7 +53,6 @@ const SetPin = () => {
       };
       SetTransactionPin(payload)
         .then((res) => {
-          console.log(res)
           if (res.responseCode === 200) {
             setShowSuccessModal(true);
           setLoading(false);

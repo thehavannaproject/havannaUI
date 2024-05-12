@@ -20,7 +20,7 @@ const CustomPagination = ({ forcePage, initialPage, onChange, pageCount }) => {
   return (
     <div>
       <ReactPaginate
-        activeClassName={"pagination_active   text-white bg-HavannaGreen-secondary"}
+        activeClassName={"pagination_active !text-white bg-HavannaGreen-secondary"}
         className="flex justify-center items-center gap-4"
         containerClassName={"pagination"}
         disabledClassName={"pagination_disabled"}
@@ -32,7 +32,7 @@ const CustomPagination = ({ forcePage, initialPage, onChange, pageCount }) => {
         nextLabel={<ChevronRightIcon className="text-HavannaBlack-primary" width={16} />}
         nextLinkClassName={"next_page"}
         onPageChange={(data) => handlePageChange(data.selected)}
-        pageClassName="border w-[32px] h-[32px] rounded-full border flex justify-center items-center border-HavannaGreen-secondary"
+        pageClassName="border w-[32px] h-[32px] rounded-full border text-HavannaBlack-primary flex justify-center items-center border-HavannaGreen-secondary"
         pageCount={pageCount}
         pageRangeDisplayed={0}
         // previousLabel={<p className="border px-8 py-3 text-12 rounded-[4px]">Previous</p>}

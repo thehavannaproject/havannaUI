@@ -52,7 +52,6 @@ const BankAccount = () => {
       bvnVerified: false,
     };
     AddBankInfo(payload).then((res) => {
-      console.log(res)
       if(res.responseCode === 200) {
         setIsBankAdded(true);
         setLoading(false);

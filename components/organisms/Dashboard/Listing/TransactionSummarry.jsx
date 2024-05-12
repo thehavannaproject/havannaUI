@@ -52,9 +52,8 @@ const TransactionSummary = () => {
     };
 
     ListingInvestment(payload)
-      .then((res) => {
+      .then(() => {
         setLoading(false)
-        console.log(res);
         setShowSuccessModal(true);
       })
       .catch((error) => {console.log(error); setLoading(false)});

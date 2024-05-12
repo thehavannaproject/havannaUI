@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import OTPInput from "react-otp-input";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import CustomModal from "@components/atoms/CustomModal/CustomModal";
 import MenuHeader from "@components/layout/DashboardLayout/MenuHeader";
 import Icon from "@components/atoms/Icons";
 import CustomButton from "@components/atoms/CustomButton/CustomButton";
-import { CustomerConfig, sendPhoneOtp, verifyPhoneNumber } from "@components/shared/api";
+import { CustomerConfig, getCustomerProfile, sendPhoneOtp, verifyPhoneNumber } from "@components/shared/api";
 import CustomToggle from "@components/atoms/CustomToggle/CustomToggle";
 import { replaceFirstZero } from "@components/shared/libs/helpers";
+import { setProfile } from "@components/store/Account";
 import UpdatePassword from "./UpdatePassword";
 import SetPin from "./SetPin";
 
@@ -20,21 +21,30 @@ const Security = () => {
   const [showPhoneModal, setShowPhoneNumber] = useState(false);
   const { profile } = useSelector((state) => state.Account);
   const [loading, setLoading] = useState(false);
+  const [isNotify, setIsNotify] = useState(false);
+  const [is2FA, setIs2FA] = useState(false);
+  const dispatch = useDispatch();
 
   const router = useRouter();
-  const {tab} = router.query;
+  const { tab } = router.query;
 
   useEffect(() => {
-    if(tab === "security") {
-      setShowSetPin(true)
+    if (tab === "security") {
+      setShowSetPin(true);
     }
-  }, [])
+  }, []);
+
+  const getCustomer = () => {
+    getCustomerProfile(profile?.customerId)
+    .then((response) => {
+      dispatch(setProfile(response));
+    })
+  }
 
   const sendOtp = () => {
     if (profile.phoneNumber) {
       setShowPhoneNumber(true);
       const number = replaceFirstZero("07031490388");
-      console.log(number);
       const data = {
         customer_mobile_number: number,
         customer_email_address: profile.emailAddress,
@@ -42,7 +52,6 @@ const Security = () => {
       };
       sendPhoneOtp(data)
         .then((response) => {
-          console.log(response);
           toast.success("OTP sent successfully");
           localStorage.setItem("reference", response.data.reference);
         })
@@ -55,7 +64,6 @@ const Security = () => {
   const handleOtp = () => {
     if (otp >= 6) {
       setLoading(true);
-      console.log(otp);
       const data = {
         customerId: profile.customerId,
         verification_code: otp,
@@ -73,28 +81,40 @@ const Security = () => {
     }
   };
 
+  useEffect(() => { 
+    if(profile?.accountConfig?.emailNotification && profile?.accountConfig?.emailNotification ) {
+      setIsNotify(true)
+    } else {
+      setIsNotify(false)
+    }
+  }, [])
+  useEffect(() => { 
+    if(profile?.accountConfig?.twoFactorAuthentication ) {
+      setIs2FA(true)
+    } else {
+      setIs2FA(false)
+    }
+  }, [])
+
   const handleConfig = (isChecked) => {
-    console.log(isChecked);
-    console.log(profile)
     const data = {
       customerId: profile.customerId,
       smsNotification: isChecked,
       emailNotification: isChecked,
-      twoFactorAuthentication: isChecked,
+      twoFactorAuthentication: profile?.accountConfig?.twoFactorAuthentication,
     };
-    CustomerConfig(data).then((res) => console.log(res));
+    CustomerConfig(data).then(() => {toast.success("Notification updated successfully"); getCustomer()});
   };
 
   const handle2FA = (isChecked) => {
-    console.log(isChecked);
     const data = {
       customerId: profile.customerId,
-      smsNotification: isChecked,
-      emailNotification: isChecked,
+      smsNotification: profile?.accountConfig?.smsNotification,
+      emailNotification: profile?.accountConfig?.emailNotification,
       twoFactorAuthentication: isChecked,
     };
-    CustomerConfig(data).then((res) => console.log(res));
-  }
+    CustomerConfig(data).then(() =>{toast.success("2FA updated successfully"); getCustomer()});
+  };
 
   return (
     <div className="font-mulish mt-[52px]">
@@ -128,7 +148,7 @@ const Security = () => {
           <div className="mt-3 text-[#4F5457] text-12 flex justify-between">
             <p>Allow and start getting notifications.</p>
             <div>
-              <CustomToggle onToggle={(isChecked) => handleConfig(isChecked)} />
+              <CustomToggle isOn={isNotify} onToggle={(isChecked) => handleConfig(isChecked)} setIsOn={setIsNotify} />
             </div>
           </div>
         </div>
@@ -141,7 +161,7 @@ const Security = () => {
               <p>Protect your Havanna account from unauthorized transactions.</p>
             </div>
             <div>
-              <CustomToggle onToggle={(isChecked) => handle2FA(isChecked)} />
+              <CustomToggle isOn={is2FA} onToggle={(isChecked) => handle2FA(isChecked)} setIsOn={setIs2FA} />
             </div>
           </div>
         </div>
@@ -175,7 +195,7 @@ const Security = () => {
       </CustomModal>
 
       <CustomModal cardClassName="h-screen w-full" visibility={showSetPin}>
-        <MenuHeader onClose={() => setShowSetPin(false)} title="Set Pin">
+        <MenuHeader onClose={() => setShowSetPin(false)} title={profile.transactionPinCreated ? "Update Pin" : "Set Pin"}>
           <div className="bg-white h-screen">
             <SetPin />
           </div>

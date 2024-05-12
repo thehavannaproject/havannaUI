@@ -229,7 +229,7 @@ export const UpdateTransactionPin = async (data) => {
     try {
       const response = await api.post(`/Customer/update-pin`, data);
       if (response.status === 200) {
-        return response.data.data;
+        return response.data;
       }
     } catch (error) {
       toast.error(error.response.data.errorMessage);
@@ -282,7 +282,6 @@ export const CustomerWithdrawal = async (data) => {
   if (data) {
     try {
       const response = await api.post(`/Transactions/request-withdrawal`, data);
-      console.error(response);
       if (response.data.responseCode === 200) {
         return response.data.data;
       } else {

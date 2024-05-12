@@ -32,7 +32,6 @@ const Security = () => {
     if (profile.phoneNumber) {
       setShowPhoneNumber(true);
       const number = replaceFirstZero("07031490388");
-      console.log(number);
       const data = {
         customer_mobile_number: number,
         customer_email_address: profile.emailAddress,
@@ -40,7 +39,6 @@ const Security = () => {
       };
       sendPhoneOtp(data)
         .then((response) => {
-          console.log(response);
           toast.success("OTP sent successfully");
           localStorage.setItem("reference", response.data.reference);
         })
@@ -53,7 +51,6 @@ const Security = () => {
   const handleOtp = () => {
     if (otp >= 6) {
       setLoading(true);
-      console.log(otp);
       const data = {
         customerId: profile.customerId,
         verification_code: otp,

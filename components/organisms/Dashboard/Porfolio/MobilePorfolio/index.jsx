@@ -43,7 +43,6 @@ const MobilePorfolio = ({porfolio}) => {
       setSubset(filteredProperties?.slice(startIndex, endIndex))
       // eslint-disable-next-line no-param-reassign
       porfolio = filteredProperties;
-      console.log(filteredProperties, "sdfj")
     } 
 
     return setSubset(porfolio?.slice(startIndex, endIndex))
@@ -51,7 +50,7 @@ const MobilePorfolio = ({porfolio}) => {
 
   useEffect(() => {
     handleSearchQuery();
-  }, [searchQuery, porfolio])
+  }, [searchQuery, porfolio, showNextPage])
 
 
   const propertyDetails = [
@@ -91,7 +90,7 @@ const MobilePorfolio = ({porfolio}) => {
       info: moreDetails?.holdingPeriod,
     },
   ];
-  
+
 
   return (
     <div className="font-mulish mt-6">
@@ -111,7 +110,7 @@ const MobilePorfolio = ({porfolio}) => {
 
       <div className="mt-3">
         {subset?.map((data, index) => (
-          <div className="border mt-6 shadow-sm rounded-lg" key={index} onClick={() => {setShowNextPage(true); setMoreDetails(data)}}>
+          <div className="border mt-6 shadow-sm rounded-lg" key={index} onClick={() => {setShowNextPage(true); setMoreDetails(data); console.log(data)}}>
             <div className="flex justify-between border-b p-3">
               <div>
                 <p className="text-[#ADADAD] text-12">Asset name</p>

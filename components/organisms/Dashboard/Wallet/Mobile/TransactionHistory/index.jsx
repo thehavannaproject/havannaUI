@@ -7,8 +7,8 @@ const TransactionHistory = ({tranHistory}) => {
   const [activeTab, setActiveTab] = useState(0);
   const transactionHistory = [
     { id: 0, title: "All", component: <AllTransactionHistory tranHistory={tranHistory} /> },
-    { id: 1, title: "Credit", component: <CreditHistory tranHistory={tranHistory} /> },
-    { id: 2, title: "Debit", component: <DebitHistory tranHistory={tranHistory}/> },
+    { id: 1, title: "Credit", component: <CreditHistory tranHistory={tranHistory?.transactionDtos?.filter((item) => item.type === "Deposit")} /> },
+    { id: 2, title: "Debit", component: <DebitHistory tranHistory={tranHistory?.transactionDtos?.filter((item) => item.type === "Withdrawal")}/> },
   ];
   return (
     <>

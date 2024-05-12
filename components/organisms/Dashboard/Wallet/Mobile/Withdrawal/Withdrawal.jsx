@@ -1,5 +1,6 @@
 import { Form, Formik } from "formik";
 import { useEffect, useState } from "react";
+import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import FormikCustomInput from "@components/atoms/CustomInput/FormikCustomInput";
 import CustomButton from "@components/atoms/CustomButton/CustomButton";
@@ -17,7 +18,11 @@ const Withdrawal = () => {
   const userDetails = authService.getDetails("ud");
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const dispatch = useDispatch();
-  const [data, setData] = useState({})
+  const [data, setData] = useState({});
+
+  const withdrawalSchema = Yup.object().shape({
+    amount: Yup.number().min(2000, "Minimum amount to withdraw is 2000")
+  });
 
   useEffect(() => {
     getCustomerProfile(userDetails?.customerId)
@@ -31,7 +36,6 @@ const Withdrawal = () => {
 
 
   const handleWithdrawal = (values) => {
-    console.log(values);
     setShowConfirmAmount(true);
     const data = {
       customerId: profile.customerId,
@@ -47,7 +51,7 @@ const Withdrawal = () => {
 
   return (
     <div className="font-mulish text-[#4F5457] px-6 pt-8">
-      <Formik initialValues={{ amount: "", password: "" }} onSubmit={handleWithdrawal}>
+      <Formik initialValues={{ amount: "", password: "" }} onSubmit={handleWithdrawal} validationSchema={withdrawalSchema}>
         {() => (
           <Form>
             <div>

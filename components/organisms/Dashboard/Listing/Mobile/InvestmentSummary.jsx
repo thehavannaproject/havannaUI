@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import OtpInput from "react-otp-input";
 import { toast } from "react-toastify";
-import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import CustomButton from "@components/atoms/CustomButton/CustomButton";
 import CustomModal from "@components/atoms/CustomModal/CustomModal";
@@ -10,14 +9,15 @@ import { ListingInvestment, getCustomerPortfolio, getCustomerProfile } from "@co
 import { AuthService } from "@components/shared/api/auth";
 import PopUpModalTemplate from "@components/atoms/PopUpModalTemplate";
 import { setProfile } from "@components/store/Account";
+import TransactionSuccessfulModal from "@components/atoms/TransactionSuccessfulModal";
 // import TransactionDetails from "./TransactionDetails";
 
 const InvestmentSummary = ({ investForm, listingId }) => {
-  const router = useRouter();
   const authService = new AuthService();
   const userDetails = authService.getDetails("ud");
   const [showModal, setShowModal] = useState(false);
   const [showpopupModal, setShowPopupModal] = useState(false);
+  const [transactionSuccessModal, setTransactionSuccessModal] = useState(false);
   const [otp, setOtp] = useState("");
   const [portfolio, setPorfolio] = useState([]);
   const dispatch = useDispatch();
@@ -31,8 +31,6 @@ const InvestmentSummary = ({ investForm, listingId }) => {
   }, []);
 
   const { profile } = useSelector((state) => state.Account);
-
-  console.log(profile)
 
   useEffect(() => {
     getCustomerPortfolio(userDetails?.customerId)
@@ -57,8 +55,15 @@ const InvestmentSummary = ({ investForm, listingId }) => {
     };
 
     ListingInvestment(payload)
-      .then((res) => {{toast.success(res)}; router.push('/listing')})
-      .catch((err) => {toast.error(err.response.data.errorMessage)});
+      .then((res) => {
+        {
+          toast.success(res);
+          setTransactionSuccessModal(true);
+        }
+      })
+      .catch((err) => {
+        toast.error(err.response.data.errorMessage);
+      });
   };
 
   useEffect(() => {
@@ -93,7 +98,7 @@ const InvestmentSummary = ({ investForm, listingId }) => {
         <div className="mt-16">
           <CustomButton
             customClass="bg-HavannaGreen-primary text-white w-full text-14 rounded-[4px]"
-            onClick={() => profile?.transactionPinCreated ? setShowModal(true) : setShowPopupModal(true) }
+            onClick={() => (profile?.transactionPinCreated ? setShowModal(true) : setShowPopupModal(true))}
             title={`Pay ₦ ${investForm?.amount.toLocaleString()}`}
           />
         </div>
@@ -117,10 +122,12 @@ const InvestmentSummary = ({ investForm, listingId }) => {
       </CustomModal>
 
       <CustomModal cardClassName="w-full" toggleVisibility={setShowPopupModal} visibility={showpopupModal}>
-          <div className="bg-white text-black px-6 pt-4 font-mulish !w-full h-screen">
-            <PopUpModalTemplate description="Set your transaction pin to continue investment" destination="/account?tab=security" linkTitle="Set Pin" title="Transaction Pin"/>
-          </div>
+        <div className="bg-white text-black px-6 pt-4 font-mulish !w-full h-screen">
+          <PopUpModalTemplate description="Set your transaction pin to continue investment" destination="/account?tab=security" linkTitle="Set Pin" title="Transaction Pin" />
+        </div>
       </CustomModal>
+
+      {transactionSuccessModal && <TransactionSuccessfulModal route="/listing" />}
     </div>
   );
 };

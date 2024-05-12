@@ -6,7 +6,7 @@ import MenuHeader from "@components/layout/DashboardLayout/MenuHeader";
 import EmptyState from "@components/atoms/EmptyState/EmptyState";
 import TransactionHistory from "./TransactionHistory";
 
-const RecentInvestment = ({tranHistory}) => {
+const RecentInvestment = ({ tranHistory }) => {
   const [showTransactionHistory, setShowTransactionHistory] = useState(false);
 
   return (
@@ -18,23 +18,22 @@ const RecentInvestment = ({tranHistory}) => {
         </div>
         <div className="mt-7">
           {tranHistory?.transactionDtos?.length > 0 ? (
-          <div>
-            {tranHistory?.transactionDtos?.slice(0, 5).map((transact,index) => (
-              <div className="flex justify-between mt-6" key={index}>
-                <div className="flex gap-3 justify-center items-center">
-                  <p className={`w-3 h-3 rounded-full  bg-HavannaGreen-primary  ${transact.type === "Deposit" ? "bg-HavannaGreen-secondary" : "bg-HavannaRed-primary"}`} />
-                  <div>
-                    <p className="text-[#4F5457] text-14">Withdrawal Made</p>
-                    <p className="text-[#8F8F8F] text-12 mt-1">{moment(transact.transactionDate).format("ddd, D MMM yyyy")}</p>
+            <div>
+              {tranHistory?.transactionDtos?.slice(0, 5).map((transact, index) => (
+                <div className="flex justify-between mt-6" key={index}>
+                  <div className="flex gap-3 justify-center items-center">
+                    <p className={`w-3 h-3 rounded-full  bg-HavannaGreen-primary  ${transact.type === "Deposit" ? "bg-HavannaGreen-secondary" : "bg-HavannaRed-primary"}`} />
+                    <div>
+                      <p className="text-[#4F5457] text-14">{transact?.type} Made</p>
+                      <p className="text-[#8F8F8F] text-12 mt-1">{moment(transact.transactionDate).format("ddd, D MMM yyyy")}</p>
+                    </div>
                   </div>
+                  <p className="text-14 text-[#4F5457]">{transact.type === "Withdrawal" ? `₦ -${transact.amount.toLocaleString()}` : `₦ ${transact.amount.toLocaleString()}`}</p>
                 </div>
-                <p className="text-14 text-[#4F5457]">₦ {transact.amount.toLocaleString()}</p>
-              </div>
-            ))}
-          </div>
-
+              ))}
+            </div>
           ) : (
-            <EmptyState description="No Transactions done yet"/>
+            <>{tranHistory && tranHistory.length < 0 && <EmptyState description="No Transactions done yet" />}</>
           )}
 
           {tranHistory?.transactionDtos?.length > 5 && (

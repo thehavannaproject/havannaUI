@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 
-function RoundedToggle({ onToggle, showLabel }) {
-  const [isOn, setIsOn] = useState(false);
+function RoundedToggle({ onToggle, showLabel, isOn, setIsOn }) {
 
   const handleToggle = () => {
     setIsOn(!isOn);
