@@ -89,7 +89,7 @@ const PersonalInformation = () => {
               )}
             </div>
             <input accept=".png, .jpeg, .jpg" className="mt-10 hidden" onChange={handleProfilePictureUpload} ref={fileInputRef} type="file" />
-            <p className="font-bold text-16 leading-[22px] mt-[10px] text-center">Upload your profile picture</p>
+            <p className="font-bold text-16 leading-[22px] mt-[10px] text-center" onClick={handleIconClick}>Upload your profile picture</p>
           </div>
         </div>
 
@@ -187,7 +187,7 @@ const PersonalInformation = () => {
                     //   }
                     // }}
                     placeholder="0**********"
-                    readonly={profile?.phoneNumberVerified === true ? "true" : "false"}
+                    readonly={profile?.phoneNumberVerified ? true : false}
                     required
                     type="text"
                   />
@@ -226,7 +226,7 @@ const PersonalInformation = () => {
                     "
                     name="date"
                     placeholder="Date of Birth"
-                    readonly={profile?.dateOfBirth}
+                    // readonly={profile?.dateOfBirth}
                     required
                     type="date"
                   />
@@ -254,7 +254,7 @@ const PersonalInformation = () => {
                     <div>
                       <label>Male</label>
                       <FormikCustomInput
-                        checked={values.gender === profile.gender}
+                        checked={values.gender === profile.gender ? true : false}
                         className="!h-5 accent-HavannaGreen-secondary"
                         container="!px-0"
                         // disabled={profile.gender}
@@ -268,7 +268,7 @@ const PersonalInformation = () => {
                     <div>
                       <label>Female</label>
                       <FormikCustomInput
-                        checked={values.gender === profile.gender}
+                        checked={values.gender === profile.gender ? true : false}
                         className="!h-5 accent-HavannaGreen-secondary"
                         container="!px-0"
                         // disabled={profile?.gender}
@@ -282,9 +282,12 @@ const PersonalInformation = () => {
                   </div>
                 </div>
               </div>
-              <div className="mt-10">
-                <Button customClass="rounded-[8px] smallLaptop:w-[240px] w-[100%]  text-white h-[58px] bg-HavannaGreen-primary " isLoading={loading} title=" Save information" />
-              </div>
+              {(!profile?.address || !profile.dateOfBirth || !profile.gender || !profile.occupation || !profile.phoneNumber) && (
+                <div className="mt-10">
+                  <Button customClass="rounded-[8px] smallLaptop:w-[240px] w-[100%]  text-white h-[58px] bg-HavannaGreen-primary " isLoading={loading} title=" Save information" />
+                </div>
+
+              )}
             </Form>
           )}
         </Formik>

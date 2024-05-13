@@ -5,6 +5,7 @@ import { useState } from "react";
 import CustomLink from "@components/atoms/CustomLink/CustomLink";
 import CustomPagination from "@components/atoms/CustomPagination/CustomPagination";
 import MenuHeader from "@components/layout/DashboardLayout/MenuHeader";
+import CustomModal from "@components/atoms/CustomModal/CustomModal";
 // import CustomModal from "@components/atoms/CustomModal/CustomModal";
 
 const MobilePorfolio = ({porfolio}) => {
@@ -151,11 +152,11 @@ const MobilePorfolio = ({porfolio}) => {
       
       </div>
       <div>
-        {/* <CustomModal cardClassName="h-screen w-full" toggleVisibility={setShowNextPage} visibility={showNextPage}> */}
-          {showNextPage && (
+        <CustomModal cardClassName=" w-full" toggleVisibility={setShowNextPage} visibility={showNextPage}>
+          {/* {showNextPage && ( */}
 
           <MenuHeader onClose={() => setShowNextPage(false)} title={moreDetails?.name}>
-            <div className="bg-white text-black px-6 pt-4 font-mulish !w-full">
+            <div className="bg-white text-black px-6 pt-4 font-mulish h-screen !w-full">
               <h1 className="text-20 text-[#3B3F42] font-bold">{moreDetails?.name}</h1>
               <p className="mt-[6px] text-[#6B7276] text-16">{moreDetails?.location}</p>
 
@@ -169,8 +170,8 @@ const MobilePorfolio = ({porfolio}) => {
               </div>
             </div>
           </MenuHeader>
-          )}
-        {/* </CustomModal> */}
+          {/* )} */}
+        </CustomModal>
       </div>
     </div>
   );

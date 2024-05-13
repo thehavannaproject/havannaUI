@@ -13,7 +13,7 @@ const PropertyDetails = ({ singleListing }) => {
               <p className="absolute top-7 bg-white left-5 px-3 py-1 text-HavannaBlack-neutral20 text-12 font-medium">
                 {singleListing?.availableSlot === 0 ? "Sold Out" : `${singleListing?.availableSlot} Slots Available`}
               </p>
-              <img alt="Property" className="h-[300px] w-full object-cover rounded-lg" src={image.imageUrl || ""} />
+              <img alt="Property" className="h-[300px] w-full object-cover" src={image.imageUrl || ""} />
             </div>
           ))}
         </Carousel>

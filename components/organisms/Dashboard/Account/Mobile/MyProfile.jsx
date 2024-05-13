@@ -129,7 +129,7 @@ const MyProfile = () => {
             return errors;
           }}
         >
-          {({ values }) => (
+          {() => (
             <Form className="smallLaptop:flex flex-wrap smallLaptop:pl-11 mt-6 gap-8">
               <div className="smallLaptop:grid items-center grid-cols-2 gap-8">
                 <div className="mt-4 ">
@@ -229,7 +229,7 @@ const MyProfile = () => {
                      placeholder:text-gray-300 "
                     name="date"
                     placeholder="Date of Birth"
-                    readonly={profile?.dateOfBirth}
+                    // readonly={profile?.dateOfBirth}
                     required
                     type="date"
                   />
@@ -256,7 +256,7 @@ const MyProfile = () => {
                   <div className="flex gap-6 mt-[10px]">
                     <div className="flex gap-1">
                       <FormikCustomInput
-                        checked={values.gender === profile.gender}
+                        // checked={values.gender === profile.gender ? true : false}
                         className="!h-5 accent-HavannaGreen-secondary"
                         container="!px-0"
                         name="gender"
@@ -268,7 +268,7 @@ const MyProfile = () => {
                     </div>
                     <div className="flex gap-1">
                       <FormikCustomInput
-                        checked={values.gender === profile.gender}
+                        // checked={values.gender === profile.gender ? true : false}
                         className="!h-5 accent-HavannaGreen-secondary"
                         container="!px-0"
                         name="gender"

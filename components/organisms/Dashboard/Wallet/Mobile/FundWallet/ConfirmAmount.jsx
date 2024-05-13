@@ -42,10 +42,10 @@ const ConfirmAmount = ({ transactionName, amount, closeModal, setShowSuccessModa
       amount: amount,
       charge: 0,
     };
+    handleCloseModal();
     createTransaction(data)
-      .then(() => {
-          setShowSuccessModal(true);
-          handleCloseModal();
+    .then(() => {
+        setShowSuccessModal(true);
       })
       .catch((error) => {
         console.log(error);

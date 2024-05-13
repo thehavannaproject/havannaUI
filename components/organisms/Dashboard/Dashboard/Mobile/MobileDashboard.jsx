@@ -24,7 +24,7 @@ const MobileDashboard = () => {
 
 
   useEffect(() => {
-    if (!profile?.phoneNumber) {
+    if (profile && !profile?.phoneNumber) {
       setGotoAccountModal(true);
     } else {
       setGotoAccountModal(false);
@@ -34,7 +34,7 @@ const MobileDashboard = () => {
   return (
     <>
       <div className="font-mulish pt-2">
-        {profile?.phoneNumber && (
+        {!profile?.phoneNumber && (
           <div className="flex justify-center w-fit m-auto card-shadow gap-1 py-[6px] px-[10px] rounded-lg ">
             <Icon name="mobileMenu2" />
             <CustomLink destination="/account">

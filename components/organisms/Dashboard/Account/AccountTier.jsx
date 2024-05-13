@@ -5,9 +5,9 @@ const AccountTier = () => {
     <section className="font-mulish">
       <div className="bg-white font-mulish rounded-xl pt-10 m-auto w-[880px] shadow-lg px-10 ">
         <div className="border-HavannaGreen-primary border-[4px] flex  justify-center m-auto rounded-[50px] h-[100px] w-[100px]  ">
-          <h1 className="text-HavannaGreen-primary text-center m-auto font-bold text-[44px] leading-[52px] ">0</h1>
+          <h1 className="text-HavannaGreen-primary text-center m-auto font-bold text-[44px] leading-[52px] ">1</h1>
         </div>
-        <p className="text-white bg-HavannaGreen-primary rounded-[60px] mt-4 w-32 h-8 flex justify-center items-center text-center m-auto">Light Account</p>
+        <p className="text-white bg-HavannaGreen-primary rounded-[60px] mt-4 w-32 h-8 flex justify-center items-center text-center m-auto">Tier 1</p>
         <p className="mt-16 font-bold text-24 leading-8 ">Available</p>
         <div>
           <div className="flex justify-between font-medium text-18 leading-6 mt-4 ">
