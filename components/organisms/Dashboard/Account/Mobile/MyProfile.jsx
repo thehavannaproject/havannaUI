@@ -192,7 +192,7 @@ const MyProfile = () => {
                     //   }
                     // }}
                     placeholder="0**********"
-                    readonly={profile?.phoneNumberVerified === true ? "true" : "false"}
+                    readonly={profile?.phoneNumberVerified ? true : false}
                     required
                     type="text"
                     // value={values.phoneNumber}
