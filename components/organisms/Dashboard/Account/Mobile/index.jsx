@@ -37,7 +37,7 @@ const MobileAccount = () => {
     if(tab === "security") {
       setActiveTab(3)
     }
-  }, [])
+  }, [tab])
 
   return (
     <div className="font-mulish mt-6 mb-16 ">
