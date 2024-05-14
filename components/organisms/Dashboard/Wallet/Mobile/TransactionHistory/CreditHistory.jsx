@@ -28,7 +28,7 @@ const CreditHistory = ({ tranHistory }) => {
           </div>
         ))}
       {subset?.length > 14 && (
-        <div className="mt-[52px]">
+        <div className="mt-[52px] mb-[60px]">
           <CustomPagination initialPage={currentPage} onChange={handlePageChange} pageCount={Math.ceil(tranHistory?.length / 15)} />
         </div>
       )}

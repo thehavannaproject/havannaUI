@@ -47,9 +47,16 @@ const RecentInvestment = ({ tranHistory }) => {
           )}
         </div>
       </div>
+      {/* <CustomModal cardClassName="w-full h-screen" toggleVisibility={() => setShowTransactionHistory(true)} visibility={showTransactionHistory}>
+        <MenuHeader onClose={() => setShowTransactionHistory(false)} title="Summary">
+          <div className="bg-white text-black h-screen mb-10 overflow-y-auto  font-mulish !w-full">
+            <TransactionHistory tranHistory={tranHistory} />
+          </div>
+        </MenuHeader>
+      </CustomModal> */}
       <CustomModal cardClassName="h-screen w-full" visibility={showTransactionHistory}>
         <MenuHeader onClose={() => setShowTransactionHistory(false)} title="Transaction History">
-          <div className="bg-white w-full h-[100vh] overflow-y-auto pb-24">
+          <div className="bg-white w-full h-screen overflow-auto pb-10 ">
             <TransactionHistory tranHistory={tranHistory} />
           </div>
         </MenuHeader>

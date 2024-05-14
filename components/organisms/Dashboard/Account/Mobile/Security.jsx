@@ -214,9 +214,9 @@ const Security = () => {
         </MenuHeader>
       </CustomModal>
 
-      <CustomModal toggleVisibility={setShowPhoneNumber} visibility={showPhoneModal}>
+      <CustomModal cardClassName="absolute bottom-0 w-full" toggleVisibility={setShowPhoneNumber} visibility={showPhoneModal}>
         <div>
-          <div className="bg-white text-HavannaBlack-primary px-11 py-10  rounded-xl font-mulish shadow-xl ">
+          <div className="w-full pt-8 bg-white text-black font-mulish h-[70vh] rounded-t-xl px-5">
             <Icon className="flex cursor-pointer justify-end" name="otpCancel" onClick={() => setShowPhoneNumber(false)} />
             <h1 className=" ">Enter OTP Code</h1>
             <p className="mt-3 mb-[30px]">Enter the OTP code sent to your number {profile?.phoneNumber}</p>

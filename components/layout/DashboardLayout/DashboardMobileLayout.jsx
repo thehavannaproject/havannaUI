@@ -1,5 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 import { AuthService } from "@components/shared/api/auth";
 import { setWalletBalance } from "@components/store/Wallet";
 import { getCustomerPortfolio, getCustomerProfile, getCustomerWallet } from "@components/shared/api";
@@ -11,6 +13,8 @@ const DashboardMobileLayout = ({ children, title, className }) => {
   const dispatch = useDispatch();
   const authService = new AuthService();
   const userDetails = authService.getDetails("ud");
+  const [inactiveTime, setInactiveTime] = useState(0);
+  const router = useRouter();
  
 
   const _getCustomerWallet = () => {
@@ -33,6 +37,51 @@ const DashboardMobileLayout = ({ children, title, className }) => {
     _getCustomerPortfolio();
     _getCustomerProfile();
   }, []);
+
+  const handleUserActivity = () => {
+    setInactiveTime(0);
+  };
+
+  const handleLogOut = () => {
+    localStorage.clear();
+    router.push("/");
+  };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setInactiveTime((prevInactiveTime) => prevInactiveTime + 1);
+    }, 60000); // 1 minute interval
+
+    window.addEventListener("mousemove", handleUserActivity);
+    window.addEventListener("keydown", handleUserActivity);
+
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener("mousemove", handleUserActivity);
+      window.removeEventListener("keydown", handleUserActivity);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (inactiveTime === 2) {
+      toast.warn(
+        "Hello, Are you still there?. You would be logged out in 2 mins due to inactivity",
+        { theme: "colored" }
+      );
+    } else if (inactiveTime === 3) {
+      toast.warn("Your session has timed out", { theme: "colored" });
+      setTimeout(() => {
+        handleLogOut();
+      }, 4000);
+    }
+  }, [inactiveTime]);
+
+  useEffect(() => {
+    if(!localStorage.getItem("ud")) {
+      router.push('/')
+    }
+  }, [])
+
   return (
     <>
       <div>

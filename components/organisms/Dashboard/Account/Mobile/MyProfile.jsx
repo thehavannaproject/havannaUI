@@ -4,16 +4,23 @@ import { toast } from "react-toastify";
 import moment from "moment";
 import { UserIcon } from "@heroicons/react/24/solid";
 import { useDispatch, useSelector } from "react-redux";
-import { customerCompleteProfile, getCustomerProfile } from "@components/shared/api";
+import OTPInput from "react-otp-input";
+import { customerCompleteProfile, getCustomerProfile, sendPhoneOtp, verifyPhoneNumber } from "@components/shared/api";
 import { AuthService } from "@components/shared/api/auth";
 import { setProfile } from "@components/store/Account";
-import Button from "@atoms/CustomButton/CustomButton";
+import { replaceFirstZero } from "@components/shared/libs/helpers";
+import CustomModal from "@components/atoms/CustomModal/CustomModal";
+import Icon from "@components/atoms/Icons";
 import FormikCustomInput from "@atoms/CustomInput/FormikCustomInput";
+import Button from "@atoms/CustomButton/CustomButton";
+import CustomButton from "@atoms/CustomButton/CustomButton";
 
 const MyProfile = () => {
   const authService = new AuthService();
   const userDetails = authService.getDetails("ud");
   const [loading, setLoading] = useState(false);
+  const [otp, setOtp] = useState("");
+  const [showPhoneModal, setShowPhoneNumber] = useState(false);
   const [profilePicture, setProfilePicture] = useState(null);
   const dispatch = useDispatch();
   const fileInputRef = useRef(null);
@@ -88,6 +95,59 @@ const MyProfile = () => {
         });
     }
   };
+
+  const sendOtp = () => {  
+    if (profile.phoneNumber) {
+      setShowPhoneNumber(true);
+      if(localStorage.getItem("codeSent")) {
+        toast.success("OTP has been sent ")
+        setTimeout(() => {
+          localStorage.removeItem("codeSent");
+        }, 30000);
+      } else {
+        const number = replaceFirstZero(profile?.phoneNumber);
+        const data = {
+          customer_mobile_number: number,
+          customer_email_address: profile.emailAddress,
+          first_name: profile.firstName,
+        };
+        if(!localStorage.getItem("codeSent")) {
+          sendPhoneOtp(data)
+            .then((response) => {
+              toast.success("OTP sent successfully");
+              localStorage.setItem("reference", response.data.reference);
+              localStorage.setItem("codeSent", true);
+            })
+            .catch(() => {
+              toast.error("Something went wrong");
+            });
+        }
+
+      }
+    }
+  };
+
+  const handleOtp = () => {
+    if (otp >= 6) {
+      setLoading(true);
+      const data = {
+        customerId: profile.customerId,
+        verification_code: otp,
+        verification_reference: localStorage.getItem("reference"),
+      };
+      verifyPhoneNumber(data)
+        .then((response) => {
+          response === "invalid token" ? toast.error("Sorry, couldn't verify OTP at the moment, Please try again later") : toast.success("OTP verification is successful");
+          setLoading(false);
+          localStorage.removeItem("reference");
+        })
+        .finally(() => {setShowPhoneNumber(false); _getCustomerProfile();});
+    } else {
+      toast.error("Otp field is complusory");
+    }
+  };
+
+
   return (
     <div className="font-mulish smallLaptop:hidden">
       <div>
@@ -201,13 +261,13 @@ const MyProfile = () => {
                     //   }
                     // }}
                     placeholder="0**********"
-                    readOnly={profile?.phoneNumberVerified ? true : false}
+                    readOnly={profile.phoneNumber || profile?.phoneNumberVerified ? true : false}
                     required
                     type="text"
                     // value={values.phoneNumber}
                   />
                   <div className="absolute right-2 top-1/2 text-HavannaGreen-primary font-semibold px-4 py-1 rounded-md">
-                    {profile?.phoneNumberVerified ? "Verified" : "Unverified"}
+                    {profile?.phoneNumber && profile?.phoneNumberVerified ? "Verified" : profile?.phoneNumber && !profile.phoneNumberVerified ? (<span className="cursor-pointer" onClick={sendOtp}>Verify</span>) : ""}
                   </div>
                 </div>
 
@@ -282,6 +342,31 @@ const MyProfile = () => {
             </Form>
           )}
         </Formik>
+        <CustomModal cardClassName="absolute bottom-0 w-full" toggleVisibility={setShowPhoneNumber} visibility={showPhoneModal}>
+        <div>
+          <div className="w-full pt-8 bg-white text-black font-mulish h-[70vh] rounded-t-xl px-5">
+            <Icon className="flex cursor-pointer justify-end" name="otpCancel" onClick={() => setShowPhoneNumber(false)} />
+            <h1 className=" ">Enter OTP Code</h1>
+            <p className="mt-3 mb-[30px]">Enter the OTP code sent to your number {profile?.phoneNumber}</p>
+
+            <OTPInput
+              inputStyle={{ width: "40px", height: "40px", background: "transparent", outline: "none", borderRadius: "8px", border: "1px solid black", color: "black" }}
+              numInputs={6}
+              onChange={setOtp}
+              renderInput={(props) => <input type="number"  {...props} />}
+              renderSeparator={<span className="text-gray px-0.5">-</span>}
+              value={otp}
+            />
+
+            <CustomButton
+              customClass="!text-white cursor-pointer bg-HavannaGreen-primary text-white w-full h-[58px] rounded-lg mt-10 mb-[72px] "
+              isLoading={loading}
+              onClick={handleOtp}
+              title="Verify Otp"
+            />
+          </div>
+        </div>
+      </CustomModal>
         {profile?.customerId && profile?.phoneNumber && (
           <p className="mb-24 mt-16 text-14 font-bold text-center">
             Need to change any information?{" "}
