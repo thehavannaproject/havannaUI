@@ -100,7 +100,7 @@ const InvestmentForm = () => {
             }}
             onSubmit={(values) => {
               if(!profile.phoneNumberVerified) {
-                toast.error("Please verify your phone number to continue")
+                toast.error("Your account is still pending phone number verification")
               } else {
                 setInvestForm(values)
                 setShowSummary(true);

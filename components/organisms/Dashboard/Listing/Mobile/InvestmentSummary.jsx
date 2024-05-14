@@ -54,7 +54,7 @@ const InvestmentSummary = ({ investForm, listingId }) => {
       investmentType: 0,
     };
     
-
+    
     ListingInvestment(payload)
       .then((res) => {
         console.log(res)

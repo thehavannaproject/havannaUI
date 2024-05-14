@@ -36,7 +36,7 @@ const FundWallet = ({ closeModal, setShowSuccessModal }) => {
         initialValues={{ amount: "" }}
         onSubmit={(values) => {
           if (!profile?.phoneNumberVerified) {
-            toast.error("Please verify your phone number to proceed")
+            toast.error("Your account is still pending phone number verfication.")
           } else {
             setAmount_(values.amount);
             setShowConfirmAmount(true);

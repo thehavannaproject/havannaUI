@@ -54,10 +54,10 @@ const Withdrawal = () => {
       setData(data) 
     }  else {
       if(!profile?.phoneNumberVerified) {
-      toast.error("Kindly verify your phone number to continue")
+      toast.error("Your account is still pending phone number verification")
       } else {
 
-        toast.error("Kindly set up your bank profile to continue")
+        toast.error("Your account is still pending bank profile set up.")
       }
     }
   };
