@@ -257,11 +257,11 @@ const MyProfile = () => {
                   <div className="flex gap-6 mt-[10px]">
 
                     <div className="flex gap-1">
-                        <Field className="w-4 accent-HavannaGreen-secondary" name="gender" type="radio" value="Male" />
+                        <Field className="w-4 accent-HavannaGreen-secondary" name="gender" required type="radio" value="Male" />
                       <label className="text-14 text-[#3B3F42] pl-1">Male</label>
                     </div>
                     <div className="flex gap-1">
-                        <Field className="w-4 accent-HavannaGreen-secondary" name="gender" type="radio" value="Female" />
+                        <Field className="w-4 accent-HavannaGreen-secondary" name="gender" required type="radio" value="Female" />
                       <label className="text-14 text-[#3B3F42]">Female</label>
                     </div>
                   </div>
