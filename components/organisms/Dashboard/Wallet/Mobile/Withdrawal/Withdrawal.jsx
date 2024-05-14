@@ -109,7 +109,9 @@ const Withdrawal = () => {
               </label>
               <FormikCustomInput
                 className={`rounded-[4px] relative w-full h-[60px] mt-2 border-2 outline-none `}
+                // disabled
                 name="accountNumber"
+                readOnly
                 required
                 type="text"
                 value={profile?.bankDetails?.accountNumber}
