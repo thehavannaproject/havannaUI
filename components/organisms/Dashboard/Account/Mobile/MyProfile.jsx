@@ -3,9 +3,10 @@ import { Field, Form, Formik } from "formik";
 import { toast } from "react-toastify";
 import moment from "moment";
 import { UserIcon } from "@heroicons/react/24/solid";
-import { useSelector } from "react-redux";
-import { customerCompleteProfile } from "@components/shared/api";
+import { useDispatch, useSelector } from "react-redux";
+import { customerCompleteProfile, getCustomerProfile } from "@components/shared/api";
 import { AuthService } from "@components/shared/api/auth";
+import { setProfile } from "@components/store/Account";
 import Button from "@atoms/CustomButton/CustomButton";
 import FormikCustomInput from "@atoms/CustomInput/FormikCustomInput";
 
@@ -14,7 +15,7 @@ const MyProfile = () => {
   const userDetails = authService.getDetails("ud");
   const [loading, setLoading] = useState(false);
   const [profilePicture, setProfilePicture] = useState(null);
-
+  const dispatch = useDispatch();
   const fileInputRef = useRef(null);
 
   const { profile } = useSelector((state) => state.Account);
@@ -27,6 +28,12 @@ const MyProfile = () => {
     if (age < 18) {
       return "You must be at least 18 years old";
     }
+  };
+
+  const _getCustomerProfile = () => {
+    getCustomerProfile(userDetails?.customerId).then((response) => {
+      dispatch(setProfile(response));
+    });
   };
 
   const handleProfilePictureUpload = (event) => {
@@ -55,7 +62,7 @@ const MyProfile = () => {
   };
 
   const handleSubmit = (values) => {
-    console.log(values)
+    console.log(values);
     if (!profilePicture) {
       toast.error("Please upload a profile picture");
     } else {
@@ -73,6 +80,7 @@ const MyProfile = () => {
       customerCompleteProfile(data)
         .then((res) => {
           toast.success(res.data, { theme: "colored" });
+          _getCustomerProfile();
           setLoading(false);
         })
         .catch(() => {
@@ -255,13 +263,12 @@ const MyProfile = () => {
                 <div className=" mt-4">
                   <label className="font-bold text-14 text-[#3B3F42]">Gender</label>
                   <div className="flex gap-6 mt-[10px]">
-
                     <div className="flex gap-1">
-                        <Field className="w-4 accent-HavannaGreen-secondary" name="gender" required type="radio" value="Male" />
+                      <Field className="w-4 accent-HavannaGreen-secondary" name="gender" required type="radio" value="Male" />
                       <label className="text-14 text-[#3B3F42] pl-1">Male</label>
                     </div>
                     <div className="flex gap-1">
-                        <Field className="w-4 accent-HavannaGreen-secondary" name="gender" required type="radio" value="Female" />
+                      <Field className="w-4 accent-HavannaGreen-secondary" name="gender" required type="radio" value="Female" />
                       <label className="text-14 text-[#3B3F42]">Female</label>
                     </div>
                   </div>
@@ -271,7 +278,7 @@ const MyProfile = () => {
                 <div className="mt-10 ">
                   <Button customClass="rounded-[8px] smallLaptop:w-[240px] w-[100%]  text-white h-[58px] bg-HavannaGreen-primary " isLoading={loading} title=" Save information" />
                 </div>
-              )} 
+              )}
             </Form>
           )}
         </Formik>
@@ -282,7 +289,6 @@ const MyProfile = () => {
               <span className="text-HavannaGreen-primary">&nbsp;Contact Us</span>
             </a>
           </p>
-
         )}
       </div>
     </div>
