@@ -116,7 +116,7 @@ const InvestmentSummary = ({ investForm, listingId }) => {
               setOtp(e);
             }}
             renderInput={(props) => (
-              <input {...props} style={{ width: "42px", height: "42px", border: "1.3px solid #ADADAD", outline: "none", textAlign: "center", borderRadius: "4px" }} width={42} />
+              <input type="number" {...props} style={{ width: "42px", height: "42px", border: "1.3px solid #ADADAD", outline: "none", textAlign: "center", borderRadius: "4px" }} width={42} />
             )}
             renderSeparator={<span />}
             value={otp}

@@ -225,7 +225,7 @@ const Security = () => {
               inputStyle={{ width: "40px", height: "40px", background: "transparent", outline: "none", borderRadius: "8px", border: "1px solid black", color: "black" }}
               numInputs={6}
               onChange={setOtp}
-              renderInput={(props) => <input  {...props} />}
+              renderInput={(props) => <input type="number"  {...props} />}
               renderSeparator={<span className="text-gray px-0.5">-</span>}
               value={otp}
             />
