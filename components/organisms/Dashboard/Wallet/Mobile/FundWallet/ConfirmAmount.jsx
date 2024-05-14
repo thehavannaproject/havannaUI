@@ -30,6 +30,9 @@ const ConfirmAmount = ({ transactionName, amount, closeModal, setShowSuccessModa
     metadata: {
       customerId,
     },
+    channels : [
+      'bank_transfer'
+    ]
   };
 
   // you can call this function anything
