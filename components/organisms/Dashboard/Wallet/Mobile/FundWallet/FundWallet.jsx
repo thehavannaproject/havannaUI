@@ -1,5 +1,6 @@
 import { Form, Formik } from "formik";
 import { useEffect, useState } from "react";
+import * as Yup from "yup";
 import { useSelector } from "react-redux";
 import FormikCustomInput from "@components/atoms/CustomInput/FormikCustomInput";
 import CustomButton from "@components/atoms/CustomButton/CustomButton";
@@ -14,6 +15,10 @@ const FundWallet = ({closeModal, setShowSuccessModal}) => {
   const [amount_, setAmount_] = useState("");
   const [gotoAccountModal, setGotoAccountModal] = useState(false);
 
+  const depositSchema = Yup.object().shape({
+    amount: Yup.number().min(2000, "Minimum amount to deposit is 2000").max(300000, "Maximum amount to deposit is 300000")
+  });
+
   const { profile } = useSelector((state) => state.Account);
 
   useEffect(() => {
@@ -26,7 +31,7 @@ const FundWallet = ({closeModal, setShowSuccessModal}) => {
 
   return (
     <div className="font-mulish text-[#4F5457] px-6 pt-8">
-      <Formik initialValues={{ amount: "" }} onSubmit={(values) => setAmount_(values.amount)}>
+      <Formik initialValues={{ amount: "" }} onSubmit={(values) => setAmount_(values.amount)} validationSchema={depositSchema}>
         {() => (
           <Form>
             <div>
