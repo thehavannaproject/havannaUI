@@ -56,7 +56,7 @@ const MyProfile = () => {
 
   const handleSubmit = (values) => {
     console.log(values)
-    if (!profilePicture || !profile?.profilePictureUrl) {
+    if (!profilePicture) {
       toast.error("Please upload a profile picture");
     } else {
       setLoading(true);
