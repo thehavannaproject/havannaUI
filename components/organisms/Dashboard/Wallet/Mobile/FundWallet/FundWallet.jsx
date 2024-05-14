@@ -2,6 +2,7 @@ import { Form, Formik } from "formik";
 import { useEffect, useState } from "react";
 import * as Yup from "yup";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import FormikCustomInput from "@components/atoms/CustomInput/FormikCustomInput";
 import CustomButton from "@components/atoms/CustomButton/CustomButton";
 import Icon from "@components/atoms/Icons";
@@ -10,13 +11,13 @@ import MenuHeader from "@components/layout/DashboardLayout/MenuHeader";
 import PopUpModalTemplate from "@components/atoms/PopUpModalTemplate";
 import ConfirmAmount from "./ConfirmAmount";
 
-const FundWallet = ({closeModal, setShowSuccessModal}) => {
-  const [showConfirmAmount, setShowConfirmAmount ] = useState(false);
+const FundWallet = ({ closeModal, setShowSuccessModal }) => {
+  const [showConfirmAmount, setShowConfirmAmount] = useState(false);
   const [amount_, setAmount_] = useState("");
   const [gotoAccountModal, setGotoAccountModal] = useState(false);
 
   const depositSchema = Yup.object().shape({
-    amount: Yup.number().min(2000, "Minimum amount to deposit is 2,000").max(300000, "Maximum amount to deposit is 300,000")
+    amount: Yup.number().min(2000, "Minimum amount to deposit is 2,000").max(300000, "Maximum amount to deposit is 300,000"),
   });
 
   const { profile } = useSelector((state) => state.Account);
@@ -27,11 +28,23 @@ const FundWallet = ({closeModal, setShowSuccessModal}) => {
     } else {
       setGotoAccountModal(false);
     }
-  }, [profile?.phoneNumber])
+  }, [profile?.phoneNumber]);
 
   return (
     <div className="font-mulish text-[#4F5457] px-6 pt-8">
-      <Formik initialValues={{ amount: "" }} onSubmit={(values) => {setAmount_(values.amount); setShowConfirmAmount(true)}} validationSchema={depositSchema}>
+      <Formik
+        initialValues={{ amount: "" }}
+        onSubmit={(values) => {
+          if (!profile?.phoneNumberVerified) {
+            toast.error("Please verify your phone number to proceed")
+          } else {
+            setAmount_(values.amount);
+            setShowConfirmAmount(true);
+
+          }
+        }}
+        validationSchema={depositSchema}
+      >
         {() => (
           <Form>
             <div>
@@ -72,10 +85,10 @@ const FundWallet = ({closeModal, setShowSuccessModal}) => {
         </MenuHeader>
       </CustomModal>
       <CustomModal cardClassName="w-[348px]" toggleVisibility={() => setGotoAccountModal(true)} visibility={gotoAccountModal}>
-          <div className="bg-white text-black px-6 pt-4 flex justify-center items-center font-mulish h-[250px] rounded-lg  ">
-            <PopUpModalTemplate description="Kindly complete your account information to proceed. " destination="/account" linkTitle="Go to Account" title="Notice" />
-          </div>
-        </CustomModal>
+        <div className="bg-white text-black px-6 pt-4 flex justify-center items-center font-mulish h-[250px] rounded-lg  ">
+          <PopUpModalTemplate description="Kindly complete your account information to proceed. " destination="/account" linkTitle="Go to Account" title="Notice" />
+        </div>
+      </CustomModal>
     </div>
   );
 };

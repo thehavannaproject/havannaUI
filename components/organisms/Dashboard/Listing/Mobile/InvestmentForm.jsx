@@ -3,6 +3,7 @@ import { Form, Formik } from "formik";
 import { useRouter } from "next/router";
 import * as Yup from "yup";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import FormikCustomInput from "@components/atoms/CustomInput/FormikCustomInput";
 import Icon from "@components/atoms/Icons";
 import CustomButton from "@components/atoms/CustomButton/CustomButton";
@@ -98,8 +99,12 @@ const InvestmentForm = () => {
               amount: count * singleListing?.listingDetails?.unitCost || 0 
             }}
             onSubmit={(values) => {
-              setInvestForm(values)
-              setShowSummary(true);
+              if(!profile.phoneNumberVerified) {
+                toast.error("Please verify your phone number to continue")
+              } else {
+                setInvestForm(values)
+                setShowSummary(true);
+              }
             }}
             validationSchema={investPropertySchema}
           >
