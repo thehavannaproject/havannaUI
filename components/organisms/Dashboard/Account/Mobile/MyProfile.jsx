@@ -275,12 +275,15 @@ const MyProfile = () => {
             </Form>
           )}
         </Formik>
-        <p className="mb-24 mt-16 text-14 font-bold text-center">
-          Need to change any information?{" "}
-          <a href="mailto:info@havanna.com">
-            <span className="text-HavannaGreen-primary">&nbsp;Contact Us</span>
-          </a>
-        </p>
+        {profile?.customerId && profile?.phoneNumber && (
+          <p className="mb-24 mt-16 text-14 font-bold text-center">
+            Need to change any information?{" "}
+            <a href="mailto:info@havanna.com">
+              <span className="text-HavannaGreen-primary">&nbsp;Contact Us</span>
+            </a>
+          </p>
+
+        )}
       </div>
     </div>
   );
