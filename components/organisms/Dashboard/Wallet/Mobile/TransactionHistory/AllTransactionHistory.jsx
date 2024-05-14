@@ -5,7 +5,7 @@ import CustomPagination from "@components/atoms/CustomPagination/CustomPaginatio
 const AllTransactionHistory = ({ tranHistory }) => {
   const [currentPage, setCurrentPage] = useState(0);
 
-  const itemsPerPage = 15;
+  const itemsPerPage = 10;
   const startIndex = currentPage * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   let subset = tranHistory?.transactionDtos?.slice(startIndex, endIndex);
@@ -13,6 +13,7 @@ const AllTransactionHistory = ({ tranHistory }) => {
   const handlePageChange = (selectedPage) => {
     setCurrentPage(selectedPage);
   };
+
   return (
     <div className="font-mulish">
       {subset.map((transact, index) => (
@@ -29,9 +30,9 @@ const AllTransactionHistory = ({ tranHistory }) => {
           </div>
         </>
       ))}
-      {subset?.length > 14 && (
-        <div className="mt-[52px]">
-          <CustomPagination initialPage={currentPage} onChange={handlePageChange} pageCount={Math.ceil(tranHistory?.transactionDtos?.length / 15)} />
+      {subset?.length >= 10 && (
+        <div className="mt-[52px] mb-[60px]">
+          <CustomPagination initialPage={currentPage} onChange={handlePageChange} pageCount={Math.ceil(tranHistory?.transactionDtos?.length / 10)} />
         </div>
       )}
     </div>

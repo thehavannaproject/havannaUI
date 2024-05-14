@@ -15,7 +15,8 @@ const MobilePorfolio = ({porfolio}) => {
   const [moreDetails, setMoreDetails] = useState({});
   const [searchQuery, setSearchQuery] = useState("");
   const [subset, setSubset] = useState(null);
-  const [filteredProperties, setFilteredProperties] = useState(null);
+  const [totalPage, setTotalPage] = useState(0);
+  // const [filteredProperties, setFilteredProperties] = useState(null);
   
   const itemsPerPage = 5;
   const startIndex = currentPage * itemsPerPage;
@@ -30,27 +31,26 @@ const MobilePorfolio = ({porfolio}) => {
   const handleSearchQuery = () => {
     
     if (searchQuery) {
-      setFilteredProperties(porfolio?.filter((item) => {
+      const filteredProperties = porfolio?.filter((item) => {
         for (const key in item) {
           if (item.hasOwnProperty(key) && typeof item[key] === "string") {
-            if (item[key].toLowerCase().includes(searchQuery)) {
+            if (item[key].toLowerCase().includes(searchQuery.toLocaleLowerCase())) {
               return true;
             }
           }
         }
         return false;
-      }));
-      setSubset(filteredProperties?.slice(startIndex, endIndex))
-      // eslint-disable-next-line no-param-reassign
-      porfolio = filteredProperties;
+      });
+      setTotalPage(filteredProperties.length)
+      return setSubset(filteredProperties?.slice(startIndex, endIndex));      // eslint-disable-next-line no-param-reassign
     } 
-
+    setTotalPage(porfolio?.length)
     return setSubset(porfolio?.slice(startIndex, endIndex))
   };
 
   useEffect(() => {
     handleSearchQuery();
-  }, [searchQuery, porfolio, showNextPage])
+  }, [searchQuery, porfolio, showNextPage, totalPage])
 
 
   const propertyDetails = [
@@ -90,6 +90,7 @@ const MobilePorfolio = ({porfolio}) => {
       info: moreDetails?.holdingPeriod,
     },
   ];
+
 
 
   return (
@@ -143,10 +144,10 @@ const MobilePorfolio = ({porfolio}) => {
             </div>
           </div>
         ))}
-        {subset?.length > 0 && (
+        {subset?.length >= 5 && (
 
         <div className="mt-[52px] mb-[60px]">
-          <CustomPagination initialPage={currentPage} onChange={handlePageChange} pageCount={Math.ceil(searchQuery ? filteredProperties?.length/5 : porfolio?.length/5)} />
+          <CustomPagination initialPage={currentPage} onChange={handlePageChange} pageCount={Math.ceil(totalPage/5)} />
         </div>
         )}
       

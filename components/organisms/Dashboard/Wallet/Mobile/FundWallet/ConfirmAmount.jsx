@@ -31,7 +31,7 @@ const ConfirmAmount = ({ transactionName, amount, closeModal, setShowSuccessModa
       customerId,
     },
     channels : [
-      'bank_transfer'
+      'bank', 'ussd', 'bank_transfer'
     ]
   };
 
