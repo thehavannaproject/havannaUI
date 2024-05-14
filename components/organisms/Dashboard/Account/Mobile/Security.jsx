@@ -42,22 +42,34 @@ const Security = () => {
   }
 
   const sendOtp = () => {
+    
     if (profile.phoneNumber) {
       setShowPhoneNumber(true);
-      const number = replaceFirstZero("07031490388");
-      const data = {
-        customer_mobile_number: number,
-        customer_email_address: profile.emailAddress,
-        first_name: profile.firstName,
-      };
-      sendPhoneOtp(data)
-        .then((response) => {
-          toast.success("OTP sent successfully");
-          localStorage.setItem("reference", response.data.reference);
-        })
-        .catch(() => {
-          toast.error("Something went wrong");
-        });
+      if(localStorage.getItem("codeSent")) {
+        toast.success("OTP has been sent ")
+        setTimeout(() => {
+          localStorage.removeItem("codeSent");
+        }, 30000);
+      } else {
+        const number = replaceFirstZero(profile?.phoneNumber);
+        const data = {
+          customer_mobile_number: number,
+          customer_email_address: profile.emailAddress,
+          first_name: profile.firstName,
+        };
+        if(!localStorage.getItem("codeSent")) {
+          sendPhoneOtp(data)
+            .then((response) => {
+              toast.success("OTP sent successfully");
+              localStorage.setItem("reference", response.data.reference);
+              localStorage.setItem("codeSent", true);
+            })
+            .catch(() => {
+              toast.error("Something went wrong");
+            });
+        }
+
+      }
     }
   };
 
@@ -210,11 +222,11 @@ const Security = () => {
             <p className="mt-3 mb-[30px]">Enter the OTP code sent to your number {profile?.phoneNumber}</p>
 
             <OTPInput
-              inputStyle={{ width: "60px", height: "60px", background: "transparent", outline: "none", borderRadius: "8px", border: "1px solid black", color: "black" }}
+              inputStyle={{ width: "40px", height: "40px", background: "transparent", outline: "none", borderRadius: "8px", border: "1px solid black", color: "black" }}
               numInputs={6}
               onChange={setOtp}
-              renderInput={(props) => <input {...props} />}
-              renderSeparator={<span className="text-gray px-2">-</span>}
+              renderInput={(props) => <input  {...props} />}
+              renderSeparator={<span className="text-gray px-0.5">-</span>}
               value={otp}
             />
 

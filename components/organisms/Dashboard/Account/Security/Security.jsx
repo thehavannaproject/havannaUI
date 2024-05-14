@@ -146,12 +146,13 @@ const Security = () => {
             <p className="mt-3 mb-[30px]">Enter the OTP code sent to your number {profile?.phoneNumber}</p>
 
             <OTPInput
-              inputStyle={{ width: "60px", height: "60px", background: "transparent", outline: "none", borderRadius: "8px", border: "1px solid black", color: "black" }}
+              inputStyle={{width:"60px", height:"60px", background: "transparent", outline: "none", borderRadius: "8px", border: "1px solid black", color: "black" }}
               numInputs={6}
               onChange={setOtp}
-              renderInput={(props) => <input {...props} />}
+              renderInput={(props) => <input  {...props} />}
               renderSeparator={<span className="text-gray px-2">-</span>}
               value={otp}
+              
             />
 
             <CustomButton

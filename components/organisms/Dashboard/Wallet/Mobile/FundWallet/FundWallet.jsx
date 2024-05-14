@@ -16,7 +16,7 @@ const FundWallet = ({closeModal, setShowSuccessModal}) => {
   const [gotoAccountModal, setGotoAccountModal] = useState(false);
 
   const depositSchema = Yup.object().shape({
-    amount: Yup.number().min(2000, "Minimum amount to deposit is 2000").max(300000, "Maximum amount to deposit is 300000")
+    amount: Yup.number().min(2000, "Minimum amount to deposit is 2,000").max(300000, "Maximum amount to deposit is 300,000")
   });
 
   const { profile } = useSelector((state) => state.Account);
