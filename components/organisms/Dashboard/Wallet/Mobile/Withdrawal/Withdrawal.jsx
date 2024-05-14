@@ -40,7 +40,7 @@ const Withdrawal = () => {
 
 
   const handleWithdrawal = (values) => {
-    if(profile?.bankDetails?.accountNumber) {
+    if(profile?.bankDetails?.accountNumber && profile?.phoneNumberVerified) {
       setShowConfirmAmount(true);
       const data = {
         customerId: profile.customerId,
@@ -52,8 +52,13 @@ const Withdrawal = () => {
         accountName: profile?.bankDetails?.accountName
       };
       setData(data) 
-    } else {
-      toast.error("You have not set up your bank profile")
+    }  else {
+      if(!profile?.phoneNumberVerified) {
+      toast.error("Kindly verify your phone number to continue")
+      } else {
+
+        toast.error("Kindly set up your bank profile to continue")
+      }
     }
   };
 
