@@ -49,7 +49,7 @@ const RecentInvestment = ({ tranHistory }) => {
       </div>
       <CustomModal cardClassName="h-screen w-full" visibility={showTransactionHistory}>
         <MenuHeader onClose={() => setShowTransactionHistory(false)} title="Transaction History">
-          <div className="bg-white h-[100vh] overflow-y-auto pb-24">
+          <div className="bg-white w-full h-[100vh] overflow-y-auto pb-24">
             <TransactionHistory tranHistory={tranHistory} />
           </div>
         </MenuHeader>

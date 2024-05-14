@@ -14,9 +14,8 @@ const CreditHistory = ({ tranHistory }) => {
     setCurrentPage(selectedPage);
   };
   return (
-    <div className="font-mulish overflow-y-auto">
-      {subset
-        .map((transact, index) => (
+    <div className="font-mulish">
+      {subset?.map((transact, index) => (
           <div className="flex justify-between mt-6" key={index}>
             <div className="flex gap-3 justify-center items-center">
               <p className="w-3 h-3 rounded-full  bg-HavannaGreen-primary" />

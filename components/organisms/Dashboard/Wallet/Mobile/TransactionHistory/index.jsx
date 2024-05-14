@@ -14,7 +14,7 @@ const TransactionHistory = ({tranHistory}) => {
     <>
       <div className="font-mulish px-6">
         <div className="flex text-[#8F8F8F] justify-between pt-6">
-          {transactionHistory.map((item, index) => (
+          {transactionHistory?.map((item, index) => (
             <p
               className={`w-full text-center py-[6px] text-12 ${activeTab === index ? "bg-HavannaGreen-secondary text-white" : "border border-[#8F8F8F]"}`}
               key={index}

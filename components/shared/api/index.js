@@ -153,6 +153,7 @@ export const createTransaction = async (data) => {
   if (data) {
     try {
       const response = await api.post(`/transactions`, data);
+      console.log(response)
       return response.data;
     } catch (error) {
       toast.error(error.response.data.ErrorMessage, { theme: "colored" });
@@ -187,7 +188,7 @@ export const ListingInvestment = async (data) => {
     try {
       const response = await api.post(`/Investment`, data);
       if (response.status === 200) {
-        return response.data.data;
+        return response.data;
       }
     } catch (error) {
       toast.error(error.response.data.errorMessage);

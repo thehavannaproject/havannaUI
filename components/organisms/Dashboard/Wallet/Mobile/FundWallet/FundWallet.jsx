@@ -31,7 +31,7 @@ const FundWallet = ({closeModal, setShowSuccessModal}) => {
 
   return (
     <div className="font-mulish text-[#4F5457] px-6 pt-8">
-      <Formik initialValues={{ amount: "" }} onSubmit={(values) => setAmount_(values.amount)} validationSchema={depositSchema}>
+      <Formik initialValues={{ amount: "" }} onSubmit={(values) => {setAmount_(values.amount); setShowConfirmAmount(true)}} validationSchema={depositSchema}>
         {() => (
           <Form>
             <div>
@@ -55,7 +55,7 @@ const FundWallet = ({closeModal, setShowSuccessModal}) => {
               </div>
               <CustomButton
                 customClass=" h-[60px] w-full mt-[52px] rounded-lg bg-HavannaGreen-primary text-white mb-5 "
-                onClick={() => setShowConfirmAmount(true)}
+                // onClick={() => setShowConfirmAmount(true)}
                 title="Pay"
                 type="submit"
               />

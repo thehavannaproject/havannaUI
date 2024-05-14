@@ -53,11 +53,14 @@ const InvestmentSummary = ({ investForm, listingId }) => {
       email: userDetails?.emailAddress,
       investmentType: 0,
     };
+    
 
     ListingInvestment(payload)
       .then((res) => {
-        {
-          toast.success(res);
+        console.log(res)
+        if(res.responseCode === 200) {
+          setOtp("")
+          toast.success(res.data);
           setTransactionSuccessModal(true);
         }
       })

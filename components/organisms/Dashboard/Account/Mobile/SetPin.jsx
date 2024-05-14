@@ -86,6 +86,7 @@ const SetPin = () => {
               />
             </div>
 
+            {profile?.transactionPinCreated && (
             <div className="mt-6">
               <label className="font-bold text-14">New Pin</label>
               <FormikCustomInput
@@ -96,6 +97,9 @@ const SetPin = () => {
                 type="number"
               />
             </div>
+
+            )}
+
 
             <div className="mt-6">
               <label className="font-bold text-14">Confirm Pin</label>
