@@ -201,7 +201,7 @@ export const SetTransactionPin = async (data) => {
     try {
       const response = await api.post(`/Customer/create-pin`, data);
       if (response.data.responseCode === 200) {
-        return response.data.data;
+        return response.data;
       }
     } catch (error) {
       toast.error(error.response.data.errorMessage);
