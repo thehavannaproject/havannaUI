@@ -26,7 +26,7 @@ const Withdrawal = () => {
   const { profile } = useSelector((state) => state.Account);
 
   const withdrawalSchema = Yup.object().shape({
-    amount: Yup.number().min(2000, "Minimum amount to withdraw is 2000")
+    amount: Yup.number().min(2000, "Minimum amount to withdraw is 2000").max(300000, "Maximum amount to withdraw is 300000")
   });
 
   useEffect(() => {
