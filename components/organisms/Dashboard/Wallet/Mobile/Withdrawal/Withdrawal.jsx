@@ -58,7 +58,7 @@ const Withdrawal = () => {
   };
 
   useEffect(() => {
-    if (!profile?.phoneNumber) {
+    if (profile?.customerId && !profile?.phoneNumber) {
       setGotoAccountModal(true);
     } else {
       setGotoAccountModal(false);

@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Form, Formik } from "formik";
+import { Field, Form, Formik } from "formik";
 import { toast } from "react-toastify";
 import moment from "moment";
 import { UserIcon } from "@heroicons/react/24/solid";
@@ -55,7 +55,8 @@ const MyProfile = () => {
   };
 
   const handleSubmit = (values) => {
-    if (!profilePicture) {
+    console.log(values)
+    if (!profilePicture || !profile?.profilePictureUrl) {
       toast.error("Please upload a profile picture");
     } else {
       setLoading(true);
@@ -141,7 +142,7 @@ const MyProfile = () => {
                     maxLength={20}
                     name="firstName"
                     placeholder="First Name"
-                    readonly={profile?.firstName}
+                    readOnly={profile?.firstName}
                     required
                     type="text"
                   />
@@ -157,7 +158,7 @@ const MyProfile = () => {
                     maxLength={20}
                     name="lastName"
                     placeholder="Last Name"
-                    readonly={profile?.lastName}
+                    readOnly={profile?.lastName}
                     required
                     type="text"
                   />
@@ -173,7 +174,7 @@ const MyProfile = () => {
                     maxLength={40}
                     name="email"
                     placeholder="Your Email"
-                    readonly={profile?.emailAddress}
+                    readOnly={profile?.emailAddress}
                     required
                     type="email"
                   />
@@ -192,7 +193,7 @@ const MyProfile = () => {
                     //   }
                     // }}
                     placeholder="0**********"
-                    readonly={profile?.phoneNumberVerified ? true : false}
+                    readOnly={profile?.phoneNumberVerified ? true : false}
                     required
                     type="text"
                     // value={values.phoneNumber}
@@ -213,7 +214,7 @@ const MyProfile = () => {
                     maxLength={30}
                     name="occupation"
                     placeholder="Lawyer"
-                    readonly={profile?.occupation}
+                    readOnly={profile?.occupation}
                     required
                     type="text"
                   />
@@ -233,7 +234,7 @@ const MyProfile = () => {
                     required
                     type="date"
                   />
-                  {/* <Field name="date">{({ field, form }) => <DatePicker {...field} onChange={(date) => form.setFieldValue(field.name, date)} selected={values.date} />}</Field> */}
+                  {/* <Field name="date">{({ field, form }) => <DatePicker {...field} onChange={(date) => form.setFieldValue(field.name, date)}  />}</Field> */}
                 </div>
                 <div className="mt-4 ">
                   <label className="font-bold text-14 text-[#3B3F42]">Address</label>
@@ -246,7 +247,7 @@ const MyProfile = () => {
                     maxLength={70}
                     name="address"
                     placeholder="25,Idowu Street,Yaba,Lagos"
-                    readonly={profile?.address}
+                    readOnly={profile?.address}
                     required
                     type="text"
                   />
@@ -254,28 +255,13 @@ const MyProfile = () => {
                 <div className=" mt-4">
                   <label className="font-bold text-14 text-[#3B3F42]">Gender</label>
                   <div className="flex gap-6 mt-[10px]">
+
                     <div className="flex gap-1">
-                      <FormikCustomInput
-                        // checked={values.gender === profile.gender ? true : false}
-                        className="!h-5 accent-HavannaGreen-secondary"
-                        container="!px-0"
-                        name="gender"
-                        required
-                        type="radio"
-                        value="Male"
-                      />
-                      <label className="text-14 text-[#3B3F42]">Male</label>
+                        <Field className="w-4 accent-HavannaGreen-secondary" name="gender" type="radio" value="Male" />
+                      <label className="text-14 text-[#3B3F42] pl-1">Male</label>
                     </div>
                     <div className="flex gap-1">
-                      <FormikCustomInput
-                        // checked={values.gender === profile.gender ? true : false}
-                        className="!h-5 accent-HavannaGreen-secondary"
-                        container="!px-0"
-                        name="gender"
-                        required
-                        type="radio"
-                        value="Female"
-                      />
+                        <Field className="w-4 accent-HavannaGreen-secondary" name="gender" type="radio" value="Female" />
                       <label className="text-14 text-[#3B3F42]">Female</label>
                     </div>
                   </div>
@@ -285,7 +271,7 @@ const MyProfile = () => {
                 <div className="mt-10 ">
                   <Button customClass="rounded-[8px] smallLaptop:w-[240px] w-[100%]  text-white h-[58px] bg-HavannaGreen-primary " isLoading={loading} title=" Save information" />
                 </div>
-              )}
+              )} 
             </Form>
           )}
         </Formik>
@@ -296,82 +282,6 @@ const MyProfile = () => {
           </a>
         </p>
       </div>
-      {/* <CustomModal visibility={open}>
-        <div>
-          <div className="bg-white text-HavannaBlack-primary px-11 py-10  rounded-xl font-mulish shadow-xl ">
-            <Icon className="flex cursor-pointer justify-end" name="otpCancel" onClick={() => setOpen(false)} />
-            <h1 className=" ">Enter OTP Code</h1>
-            <p className="mt-3 mb-[30px]">Enter the OTP code sent to your number.</p>
-            <Formik
-              initialValues={{
-                otp: "",
-              }}
-              onSubmit={handleOtp}
-            >
-              {() => (
-                <Form>
-                  <div className="flex gap-4 text-[40px] justify-center  ">
-                    <input
-                      className="border-2 w-[60px] h-[60px] rounded-lg text-center"
-                      maxLength={1}
-                      name="otp"
-                      onChange={(e) => handleOtpChange(0, e)}
-                      ref={refs[0]}
-                      type="number"
-                    />
-                    <input
-                      className="border-2 w-[60px] h-[60px] rounded-lg text-center"
-                      maxLength={1}
-                      name="otp1"
-                      onChange={(e) => handleOtpChange(1, e)}
-                      ref={refs[1]}
-                      type="number"
-                    />
-                    <input
-                      className="border-2 w-[60px] h-[60px] rounded-lg text-center"
-                      maxLength={1}
-                      name="otp2"
-                      onChange={(e) => handleOtpChange(2, e)}
-                      ref={refs[2]}
-                      type="number"
-                    />
-                    <input
-                      className="border-2 w-[60px] h-[60px] rounded-lg text-center"
-                      maxLength={1}
-                      name="otp3"
-                      onChange={(e) => handleOtpChange(3, e)}
-                      ref={refs[3]}
-                      type="number"
-                    />
-                    <input
-                      className="border-2 w-[60px] h-[60px] rounded-lg text-center"
-                      maxLength={1}
-                      name="otp4"
-                      onChange={(e) => handleOtpChange(4, e)}
-                      ref={refs[4]}
-                      type="number"
-                    />
-                    <input
-                      className="border-2 w-[60px] h-[60px] rounded-lg text-center"
-                      maxLength={1}
-                      name="otp5"
-                      onChange={(e) => handleOtpChange(5, e)}
-                      ref={refs[5]}
-                      type="number"
-                    />
-                  </div>
-                </Form>
-              )}
-            </Formik>
-            <CustomButton
-              customClass="!text-white cursor-pointer bg-HavannaGreen-primary text-white w-full h-[58px] rounded-lg mt-10 mb-[72px] "
-              isLoading={loading}
-              onClick={handleOtp}
-              title="Verify Otp"
-            />
-          </div>
-        </div>
-      </CustomModal> */}
     </div>
   );
 };
