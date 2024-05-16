@@ -259,7 +259,7 @@ const PersonalInformation = () => {
                     type="text"
                   />
                  
-                    <div className="absolute right-2 top-1/2 text-HavannaGreen-primary font-semibold px-4 py-1 rounded-md">{profile?.phoneNumber && !profile?.phoneNumberVerified ? "Verified" : profile?.phoneNumber && profile.phoneNumberVerified ? (<span className="cursor-pointer" onClick={sendOtp}>Verify</span>) : ""}</div>
+                    <div className="absolute right-2 top-1/2 text-HavannaGreen-primary font-semibold px-4 py-1 rounded-md">{profile?.phoneNumber && profile?.phoneNumberVerified ? "Verified" : profile?.phoneNumber && !profile.phoneNumberVerified ? (<span className="cursor-pointer" onClick={sendOtp}>Verify</span>) : ""}</div>
                   
                 </div>
 
