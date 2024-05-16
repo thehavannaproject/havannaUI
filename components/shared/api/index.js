@@ -282,11 +282,7 @@ export const CustomerWithdrawal = async (data) => {
   if (data) {
     try {
       const response = await api.post(`/Transactions/request-withdrawal`, data);
-      if (response.data.responseCode === 200) {
-        return response.data.data;
-      } else {
-        toast.error(response.data.errorMessage);
-      }
+      return response.data
     } catch (error) {
       return error;
     }

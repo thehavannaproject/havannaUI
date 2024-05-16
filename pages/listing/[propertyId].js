@@ -4,7 +4,7 @@ import { GetListingById } from "@components/shared/api";
 import DashboardLayout from "@components/layout/DashboardLayout/DashboardLayout";
 import DashboardMobileLayout from "@components/layout/DashboardLayout/DashboardMobileLayout";
 import PropertyDetails from "@components/organisms/Dashboard/Listing/Mobile/PropertyDetails";
-import InvestPage from "@components/organisms/invest/InvestPage";
+import DesktopPropertyDetails from "@components/organisms/Dashboard/Listing/DesktopPropertyDetails";
 
 const index = () => {
   const [singleListing, setSingleListing] = useState([]);
@@ -29,7 +29,7 @@ const index = () => {
     <>
     <div className="hidden tablet:block">
         <DashboardLayout>
-          <InvestPage singleListing={singleListing} />
+          <DesktopPropertyDetails singleListing={singleListing} />
         </DashboardLayout>
 
     </div>

@@ -1,22 +1,12 @@
-import Image from "next/image";
-import React, { useState } from "react";
+import React from "react";
 
-import { useRouter } from "next/router";
-import CustomLink from "@components/atoms/CustomLink/CustomLink";
+import { Carousel } from "antd";
 import Icon from "@components/atoms/Icons";
+import CustomLink from "@components/atoms/CustomLink/CustomLink";
 
-const InvestPage = ({ singleListing }) => {
-  const [show, setShow] = useState(false);
-  const router = useRouter();
-  // const [singleListing, setSingleListing] = useState({});
 
-  // const handleButtonClick = () => {
-  //   setShow(true);
-  // };
 
-  const handleCloseModal = () => {
-    setShow(false);
-  };
+const DesktopPropertyDetails = ({singleListing}) => {
 
   return (
     <section>
@@ -25,10 +15,22 @@ const InvestPage = ({ singleListing }) => {
           {/* <Icon className="mt-1" name="investArrow" /> */}
           <div>
             <h1 className="font-bold text-[28px] leading-9 ">{singleListing?.name}</h1>
-            <p className="font-medium text-18 leading-6">Ogunlana Drive, Surulere, Lagos, Nigeria.</p>
+            <p className="font-medium text-18 leading-6 capitalize">{singleListing?.listingDetails?.location.toLowerCase()}</p>
           </div>
         </div>
-        <div className="flex gap-4 mt-12">
+        <div className="relative h-[400px] border rounded-lg mt-8">
+          <Carousel autoplay dots={{ className: "!text-HavannaGreen-secondary" }}>
+            {singleListing?.listingImage?.map((image, index) => (
+              <div className="relative" key={index}>
+                <p className="absolute top-5 bg-white left-2 px-3 py-1 rounded-xl text-HavannaBlack-neutral20 text-12 font-medium">
+                  {singleListing?.availableSlot === 0 ? "Sold Out" : `${singleListing?.availableSlot} Slots Available`}
+                </p>
+                <img alt="Property" className="!h-[400px] object-cover w-full rounded-lg" src={image.imageUrl || ""} />
+              </div>
+            ))}
+          </Carousel>
+        </div>
+        {/* <div className="flex gap-4 mt-12">
           <div className="">
             <Image alt="propertiesImg" className="rounded-tl-2xl rounded-bl-2xl" height={340} src={singleListing?.listingImage?.imageUrl} width={658} />
           </div>
@@ -42,7 +44,7 @@ const InvestPage = ({ singleListing }) => {
               <Image alt="propertiesImg" height={150} src={singleListing?.listingImage?.imageUrl} width={334} />
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="flex justify-between gap-[100px] mt-12">
           <div>
             <div className="">
@@ -76,7 +78,7 @@ const InvestPage = ({ singleListing }) => {
             <div>
               <h1 className="font-bold text-HavannaGreen-secondary text-24 leading-8 mt-11 flex gap-[9.33px] text-center   ">
                 {" "}
-                <Icon className="w-[21.33px] h-6 " name="naira" /> 30,000
+                <Icon className="w-[21.33px] h-6 " name="naira" /> {singleListing?.listingDetails?.unitCost.toLocaleString()} 
               </h1>
               <p className="font-bold text-18 leading-6 ">Price per Slot</p>
 
@@ -96,7 +98,7 @@ const InvestPage = ({ singleListing }) => {
                     <p className="font-bold text-18 leading-6">Returns (ROI)</p>
                   </div>
                   <div className=" flex text-center items-center">
-                    <p className="text-HavannaGreen-secondary text-18 font-bold leading-6 ">{singleListing?.listingDetails?.returns}</p>
+                    <p className="text-HavannaGreen-secondary text-18 font-bold leading-6 ">{singleListing?.listingDetails?.projectedReturns}%</p>
                   </div>
                 </div>
                 <div className="flex justify-between gap-5 border-[1.3px] mb-4 px-[14px] shadow- border-[#D6D6D6] h-[72px] rounded-[4px]   ">
@@ -117,43 +119,13 @@ const InvestPage = ({ singleListing }) => {
                     <p className="text-HavannaGreen-secondary text-18 font-bold leading-6 capitalize">{singleListing?.listingDetails?.maximumHoldingPeriod?.toLowerCase()}</p>
                   </div>
                 </div>
-                <button
-                  className="w-full font-bold text-16 leading-[22px] h-[58px] mt-[60px] bg-HavannaGreen-primary text-white rounded-lg  "
-                  // onClick={() => router.push(`/listing/listingInvest/${propertyId}`)}
-                  onClick={() => router.push(`/listing/listingInvest`)}
-                >
-                  Invest now
-                </button>
+                <CustomLink customClass="w-full font-bold text-16 leading-[22px] h-[58px] mt-[60px] bg-HavannaGreen-primary text-white rounded-lg flex justify-center items-center  " destination={`/listing/listingInvest/${singleListing?.listingDetails?.listingId}`}>Invest Now</CustomLink>
+               
                 <button className="w-full font-bold text-16 leading-[22px] h-[58px] mt-[30px] mb-11 border-[3px] border-HavannaGreen-primary text-HavannaGreen-primary rounded-lg">
                   Download terms & conditions
                 </button>
               </div>
-              <div>
-                {show && (
-                  <div className="fixed top-0 left-0 right-0 bottom-0 z-50 flex items-center justify-center" style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
-                    <div className="bg-white rounded-lg w-[800px]">
-                      <Icon className="flex cursor-pointer justify-end pr-[19px] pt-[21px]" name="closeModal" onClick={handleCloseModal} />
-                      <div className="   px-[160px] text-center ">
-                        <h2 className="text-2xl font-bold mb-4">Welcome to Havanna</h2>
-                        <p className="text-lg mb-8">Kindly log in to continue viewing.</p>
-                        <CustomLink destination="/auth/login">
-                          <div className="mt-20 ">
-                            <button className="bg-HavannaGreen-primary text-white w-full rounded-lg h-[60px]">Log In</button>
-                          </div>
-                        </CustomLink>
-                        <div className="pt-[26px] flex justify-center ">
-                          <div className=" pb-20 flex">
-                            Don’t have an account?&nbsp;
-                            <span className="font-bold text-base text-HavannaGreen-primary">
-                              <CustomLink destination="/auth/sign-up">Create an account</CustomLink>
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
+             
             </div>
           </div>
         </div>
@@ -162,4 +134,4 @@ const InvestPage = ({ singleListing }) => {
   );
 };
 
-export default InvestPage;
+export default DesktopPropertyDetails;

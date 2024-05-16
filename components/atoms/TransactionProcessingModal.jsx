@@ -3,7 +3,7 @@ import CustomLink from "./CustomLink/CustomLink";
 
 const TransactionProcessingModal = ({setShowSuccessModal}) => {
   return (
-    <div className="h-screen w-full fixed top-0 left-0 flex justify-center items-center bg-white z-50">
+    <div className="flex justify-center items-center  ">
       <div className="flex flex-col justify-center items-center">
         <h1 className="text-24 tablet:text-[36px] text-HavannaBlack-neutral20 font-bold">Transaction Processing</h1>
         <p className="mt-6 tablet:text-[22px] text-HavannaBlack-neutral50 font-medium w-4/5 text-center">

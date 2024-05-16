@@ -1,11 +1,11 @@
 import { Form, Formik } from "formik";
 import React, { useState } from "react";
 
+import { ChevronLeftIcon } from "@heroicons/react/24/solid";
 import FormikCustomInput from "@components/atoms/CustomInput/FormikCustomInput";
 import Icon from "@components/atoms/Icons";
 import CustomButton from "@components/atoms/CustomButton/CustomButton";
 import CustomModal from "@components/atoms/CustomModal/CustomModal";
-import MenuHeader from "@components/layout/DashboardLayout/MenuHeader";
 import ConfirmAmount from "../Mobile/FundWallet/ConfirmAmount";
 
 const WithdrawFund = ({ setIsModalOpen }) => {
@@ -84,12 +84,14 @@ const WithdrawFund = ({ setIsModalOpen }) => {
         </div>
       </div>
 
-      <CustomModal cardClassName="h-screen" visibility={showConfirmAmount}>
-        <MenuHeader onClose={() => setShowConfirmAmount(false)} title="Confirm Amount">
-          <div className="bg-white h-screen">
+      <CustomModal cardClassName="w-[600px]" toggleVisibility={setShowConfirmAmount} visibility={showConfirmAmount}>
+          <div className="w-[532px] bg-white py-10 px-11 font-mulish rounded-xl shadow-md">
+          <div className="flex text-HavannaBlack-neutral20">
+              <ChevronLeftIcon onClick={() => setShowConfirmAmount(false)} width={32} />
+              <p className=" text-20 font-bold">Confirm Amount ₦ {parseFloat(amount).toLocaleString()}</p>
+            </div>
             <ConfirmAmount amount={amount} setIsModalOpen={setIsModalOpen} showModal={setShowConfirmAmount} transactionName="withdraw" />
           </div>
-        </MenuHeader>
       </CustomModal>
     </div>
   );

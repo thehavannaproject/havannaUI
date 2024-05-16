@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { ChevronLeftIcon } from "@heroicons/react/24/solid";
 import FormikCustomInput from "@components/atoms/CustomInput/FormikCustomInput";
 import CustomButton from "@components/atoms/CustomButton/CustomButton";
 import CustomModal from "@components/atoms/CustomModal/CustomModal";
@@ -130,16 +131,36 @@ const Withdrawal = () => {
         )}
       </Formik>
 
-      <CustomModal cardClassName="h-screen w-full" visibility={showConfirmAmount}>
-        <MenuHeader onClose={() => setShowConfirmAmount(false)} title="Confirm Amount">
-          <div className="bg-white h-[100vh] overflow-y-auto ">
-            <ConfirmAmount closeModal={setShowConfirmAmount} setShowSuccessModal={setShowSuccessModal} transactionName="withdraw" withdrawalData={data} />
-          </div>
-        </MenuHeader>
+      <CustomModal cardClassName="h-screen tablet:h-auto w-full tablet:w-[600px]" toggleVisibility={setShowConfirmAmount} visibility={showConfirmAmount}>
+        <div className="tablet:hidden">
+          <MenuHeader onClose={() => setShowConfirmAmount(false)} title="Confirm Amount">
+            <div className="bg-white h-[100vh] overflow-y-auto ">
+              <ConfirmAmount closeModal={setShowConfirmAmount} setShowSuccessModal={setShowSuccessModal} transactionName="withdraw" withdrawalData={data} />
+            </div>
+          </MenuHeader>
+        </div>
+        <div className="hidden tablet:block">
+
+          <div className="w-[532px] bg-white py-10 px-11 font-mulish rounded-xl shadow-md">
+          <div className="flex text-HavannaBlack-neutral20 font-mulish">
+              <ChevronLeftIcon className="cursor-pointer" onClick={() => setShowConfirmAmount(false)} width={32} />
+              <p className=" text-20 font-bold">Confirm Amount</p>
+            </div>
+              <ConfirmAmount closeModal={setShowConfirmAmount} setShowSuccessModal={setShowSuccessModal} transactionName="withdraw" withdrawalData={data} />
+            </div>
+        </div>
       </CustomModal>
 
-      {showSuccessModal && <TransactionProcessingModal setShowSuccessModal={setShowSuccessModal}  />}
-      <CustomModal cardClassName="w-[348px]" toggleVisibility={() => setGotoAccountModal(true)} visibility={gotoAccountModal}>
+      <CustomModal cardClassName="w-full h-screen" visibility={showSuccessModal}>
+        <div className="bg-white h-screen w-full flex justify-center items-center ">
+          <TransactionProcessingModal setShowSuccessModal={setShowSuccessModal}  />
+
+        </div>
+      </CustomModal>
+
+      {/* {showSuccessModal && <TransactionProcessingModal setShowSuccessModal={setShowSuccessModal}  />} */}
+
+      <CustomModal cardClassName="w-[348px] " toggleVisibility={() => setGotoAccountModal(true)} visibility={gotoAccountModal}>
           <div className="bg-white text-black px-6 pt-4 flex justify-center items-center font-mulish h-[250px] rounded-lg  ">
             <PopUpModalTemplate description="Kindly complete your account information to proceed. " destination="/account" linkTitle="Go to Account" title="Notice" />
           </div>

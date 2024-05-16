@@ -35,7 +35,7 @@ const DashboardLayout = ({ children }) => {
 
   return (
     <>
-      <div className="hidden tablet:block">
+      <div className="hidden tablet:block bg-HavannaGreen-light h-[100vh]">
         <div className="flex">
           <div className="w-[19%] ">
             <SideBar />

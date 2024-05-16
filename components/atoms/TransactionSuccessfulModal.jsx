@@ -8,7 +8,7 @@ const TransactionSuccessfulModal = ({ route }) => {
   return (
     <div>
       <CustomModal toggleVisibility={() => setShowModal(true)} visibility={showModal}>
-        <div className="bg-white h-[250px] rounded-lg ">
+        <div className="bg-white w-[600px] h-[250px] tablet:h-[400px] rounded-lg ">
 
             <div className="text-HavannaBlack-neutral20 flex justify-end p-4 cursor-pointer">
               <Link href={route}>

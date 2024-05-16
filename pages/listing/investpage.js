@@ -1,5 +1,5 @@
 import DashboardLayout from "@components/layout/DashboardLayout/DashboardLayout";
-import InvestPages from "@components/organisms/Dashboard/Listing/PropertyDetails";
+import InvestPages from "@components/organisms/Dashboard/Listing/DesktopPropertyDetails";
 
 const index = () => {
   return (

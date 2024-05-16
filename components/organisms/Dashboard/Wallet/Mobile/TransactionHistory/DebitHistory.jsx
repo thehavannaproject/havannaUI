@@ -27,7 +27,7 @@ const DebitHistory = ({ tranHistory }) => {
             <p className="text-14 text-[#4F5457]">₦ -{transact.amount.toLocaleString()}</p>
           </div>
         ))}
-        {subset?.length > 14 && (
+        {tranHistory?.length > 15 && (
         <div className="mt-[52px] mb-[60px]">
           <CustomPagination initialPage={currentPage} onChange={handlePageChange} pageCount={Math.ceil(tranHistory?.length / 15)} />
         </div>

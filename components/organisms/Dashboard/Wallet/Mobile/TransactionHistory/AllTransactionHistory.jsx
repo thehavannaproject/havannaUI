@@ -31,7 +31,7 @@ const AllTransactionHistory = ({ tranHistory }) => {
         </>
       ))}
       <div>
-        {subset?.length >= 10 && (
+        {tranHistory?.transactionDtos?.length > 15 && (
           <div className="mt-[52px] mb-[60px]">
             <CustomPagination initialPage={currentPage} onChange={handlePageChange} pageCount={Math.ceil(tranHistory?.transactionDtos?.length / 10)} />
           </div>

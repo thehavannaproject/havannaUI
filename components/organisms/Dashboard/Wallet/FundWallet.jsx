@@ -33,6 +33,9 @@ const FundWallet = ({ setIsModalOpen, setShowSuccessModal }) => {
     metadata: {
       customerId,
     },
+    channels : [
+      'bank', 'ussd', 'bank_transfer'
+    ]
   };
 
   // you can call this function anything
@@ -69,7 +72,7 @@ const FundWallet = ({ setIsModalOpen, setShowSuccessModal }) => {
     const items = [
       {
         title: "Amount to pay",
-        info: "₦ " + amount,
+        info: "₦ " + parseFloat(amount).toLocaleString(),
       },
       {
         title: "Havanna Processing fee",
@@ -82,11 +85,11 @@ const FundWallet = ({ setIsModalOpen, setShowSuccessModal }) => {
     ];
     return (
       <>
-        <CustomModal visibility={showConfirmModal}>
+        <CustomModal toggleVisibility={setConfirmModal} visibility={showConfirmModal}>
           <div className="w-[532px] bg-white py-10 px-11 font-mulish rounded-xl shadow-md">
             <div className="flex text-HavannaBlack-neutral20">
-              <ChevronLeftIcon onClick={() => setConfirmModal(false)} width={32} />
-              <p className=" text-20 font-bold">Confirm Amount ₦ {amount}</p>
+              <ChevronLeftIcon className="cursor-pointer" onClick={() => setConfirmModal(false)} width={32} />
+              <p className=" text-20 font-bold">Confirm Amount ₦ {parseFloat(amount).toLocaleString()}</p>
             </div>
             <div className="mt-[35px]">
               {items.map((data, index) => (
@@ -101,7 +104,7 @@ const FundWallet = ({ setIsModalOpen, setShowSuccessModal }) => {
               onClick={() => {
                 initializePayment(onSuccess, onClose);
               }}
-              title={`Pay ${amount}`}
+              title={`Pay ${parseFloat(amount).toLocaleString()}`}
               type="submit"
             />
           </div>

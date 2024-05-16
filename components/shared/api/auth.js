@@ -23,7 +23,7 @@ export class AuthService {
       const item = localStorage.getItem(name) ?? "";
       if (!item) {
         // AuthService.notification("Authtentication Failed", "error");
-        AuthService.logout();
+        // AuthService.logout();
         return false;
       }
       const [headerBase64, payloadBase64, signature] = item.split(".");
@@ -37,7 +37,7 @@ export class AuthService {
 
       return true;
     } catch (err) {
-      AuthService.logout();
+      // AuthService.logout();
       return false;
     }
   }

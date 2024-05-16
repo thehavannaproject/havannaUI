@@ -54,6 +54,7 @@ const TransactionSummary = () => {
     ListingInvestment(payload)
       .then(() => {
         setLoading(false)
+        setOtp("")
         setShowSuccessModal(true);
       })
       .catch((error) => {console.log(error); setLoading(false)});
@@ -115,8 +116,8 @@ const TransactionSummary = () => {
           </div>
         </div>
       </div>
-      <CustomModal cardClassName="absolute bottom-0 w-full" toggleVisibility={setShowModal} visibility={showModal}>
-        <div className="w-full pt-8 bg-white text-black font-mulish h-[70vh] rounded-t-xl">
+      <CustomModal cardClassName="w-[600px]" toggleVisibility={setShowModal} visibility={showModal}>
+        <div className="pt-8  bg-white text-black font-mulish h-[340px] rounded-xl">
           <p className="text-center text-18 font-bold text-[#3B3F42]">Enter your PIN code</p>
           <OtpInput
             containerStyle="px-6 text-20 mt-[48px] flex justify-between"

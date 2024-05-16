@@ -3,7 +3,7 @@ import React from "react";
 const AccountTier = () => {
   return (
     <section className="font-mulish">
-      <div className="bg-white font-mulish rounded-xl pt-10 m-auto w-[880px] shadow-lg px-10 ">
+      <div className="bg-white font-mulish rounded-xl pt-10 m-auto w-full smallLaptopt:w-[880px] shadow-lg px-10 ">
         <div className="border-HavannaGreen-primary border-[4px] flex  justify-center m-auto rounded-[50px] h-[100px] w-[100px]  ">
           <h1 className="text-HavannaGreen-primary text-center m-auto font-bold text-[44px] leading-[52px] ">1</h1>
         </div>

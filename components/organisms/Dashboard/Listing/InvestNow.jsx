@@ -118,7 +118,7 @@ const InvestNow = () => {
           <div className="mt-[60px]">
             <Formik
               enableReinitialize
-              initialValues={{ propertyName: singleListing?.name, slotPrice: 50, slotCount: count, amount: count * 50 || 0 }}
+              initialValues={{ propertyName: singleListing?.name, slotPrice: singleListing?.listingDetails?.unitCost, slotCount: count, amount: count * singleListing?.listingDetails?.unitCost || 0 }}
               onSubmit={(values) => handleSubmit(values)}
               validationSchema={investPropertySchema}
             >
@@ -154,8 +154,8 @@ const InvestNow = () => {
                       placeholder="Slot Price"
                       readOnly
                       required
-                      type="number"
-                      value={values.slotPrice}
+                      type="text"
+                      value={`₦ ${parseFloat(values.slotPrice).toLocaleString()}`}
                     />
                   </div>
                   <div className="mt-4 ">
@@ -187,7 +187,7 @@ const InvestNow = () => {
                       readOnly
                       required
                       type="text"
-                      value={values.amount}
+                      value={`₦ ${values.amount.toLocaleString()}`}
                     />
                   </div>
 

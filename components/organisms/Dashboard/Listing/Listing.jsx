@@ -14,7 +14,7 @@ const Index = () => {
   const [totalPages, setTotalPages] = useState(0);
   const [loading, setLoading] = useState(false);
 
-  const itemsPerPage = 2;
+  const itemsPerPage = 10;
 
   const indexOfLastProperty = currentPage * itemsPerPage;
   const indexOfFirstProperty = indexOfLastProperty - itemsPerPage;
@@ -30,7 +30,10 @@ const Index = () => {
   const getListings = () => {
     setLoading(true);
     getAllListings()
-      .then((res) => {setProperties(res.listings); setLoading(false);})
+      .then((res) => {
+        setProperties(res.listings);
+        setLoading(false);
+      })
       .catch(() => toast.error("Error fetching Listings"));
   };
 
@@ -39,41 +42,45 @@ const Index = () => {
   }, []);
 
   return (
-    <section className="bg-[#F3FCFB] w-full pb-[120px] p-8 ">
-      <div className="">
-        <h1 className="font-mulish font-bold text-[36px] leading-[44px] text-black ">Listing</h1>
-      </div>
-
+    <>
       {loading ? (
         <CustomLogoLoader />
       ) : (
-        <>
-          {currentProperties?.length > 1 ? (
-            <>
-              <div className="grid tablet:grid-cols-2 smallLaptop:grid-cols-3 gap-x-2 gap-y-10 mt-8">
-                {currentProperties.map((property, index) => (
-                  <div key={index}>
-                    <InvestPropertyCard className="shadow-lg p-6" property={property} />
-                  </div>
-                ))}
-              </div>
+        <section className="bg-[#F3FCFB] w-full pb-[120px] p-8 ">
+          <div className="">
+            <h1 className="font-mulish font-bold text-[36px] leading-[44px] text-black ">Listing</h1>
+          </div>
 
-              <div className="flex justify-end px-6  mt-10">
-                <div className="flex justify-end mt-8">
-                  <CustomPagination onChange={handlePageClick} pageCount={totalPages} />
+          <>
+            {currentProperties?.length > 1 ? (
+              <>
+                <div className="grid tablet:grid-cols-2 smallLaptop:grid-cols-3 gap-x-4 gap-y-10 mt-8">
+                  {currentProperties.map((property, index) => (
+                    <div key={index}>
+                      <InvestPropertyCard className="shadow-lg p-6" property={property} />
+                    </div>
+                  ))}
+                </div>
+                    {currentProperties.length > 10 && (
+
+                <div className="flex justify-end px-6  mt-10">
+                  <div className="flex justify-end mt-8">
+                    <CustomPagination onChange={handlePageClick} pageCount={totalPages} />
+                  </div>
+                </div>
+                    )}
+              </>
+            ) : (
+              <div className=" flex justify-center items-center rounded-xl h-screen">
+                <div>
+                  <p className="font-bold text-24 leading-[26px] text-HavannaBlack-neutral20 ">No Property listing available</p>
                 </div>
               </div>
-            </>
-          ) : (
-            <div className=" flex justify-center items-center rounded-xl h-screen">
-              <div>
-                <p className="font-bold text-24 leading-[26px] text-HavannaBlack-neutral20 ">No Property listing available</p>
-              </div>
-            </div>
-          )}
-        </>
+            )}
+          </>
+        </section>
       )}
-    </section>
+    </>
   );
 };
 

@@ -39,7 +39,7 @@ const Index = () => {
       </div>
 
       <div className="grid grid-cols-1 tablet:grid-cols-2 smallLaptop:grid-cols-3 gap-6 smallLaptop:gap-16 bigLaptop:gap-[84px] px-[22px] pt-11 bigLaptop:pt-[120px] ">
-        {currentProperties.map((property, index) => (
+        {currentProperties?.map((property, index) => (
           <div key={index}>
             <CustomLink destination="/propertyinvest">
               <InvestPropertyCard property={property} />

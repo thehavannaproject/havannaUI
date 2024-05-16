@@ -3,6 +3,7 @@
 import { usePaystackPayment } from "react-paystack";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
+import { toast } from "react-toastify";
 import CustomButton from "@components/atoms/CustomButton/CustomButton";
 import { AuthService } from "@components/shared/api/auth";
 import { CustomerWithdrawal, createTransaction, getCustomerWallet } from "@components/shared/api";
@@ -10,18 +11,21 @@ import { setWalletBalance } from "@components/store/Wallet";
 
 // import { AuthService } from "@components/api/auth";
 
-const ConfirmAmount = ({ transactionName, amount, closeModal, setShowSuccessModal,  withdrawalData }) => {
-  const dispatch = useDispatch()
+const ConfirmAmount = ({ transactionName, amount, closeModal, setShowSuccessModal, withdrawalData }) => {
+  const dispatch = useDispatch();
   const authService = new AuthService();
   const customerId = authService.getDetails("ud").customerId;
   const emailAddress = authService.getDetails("ud").emailAddress;
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   const handleCloseModal = () => {
-    closeModal(false)
-    getCustomerWallet(customerId).then((res) => { dispatch(setWalletBalance(res))});
+    closeModal(false);
+    getCustomerWallet(customerId).then((res) => {
+      dispatch(setWalletBalance(res));
+    });
   };
 
+  console.log(withdrawalData);
   const config = {
     reference: new Date().getTime().toString(),
     email: emailAddress,
@@ -30,9 +34,7 @@ const ConfirmAmount = ({ transactionName, amount, closeModal, setShowSuccessModa
     metadata: {
       customerId,
     },
-    channels : [
-      'bank', 'ussd', 'bank_transfer'
-    ]
+    channels: ["bank", "ussd", "bank_transfer"],
   };
 
   // you can call this function anything
@@ -47,29 +49,39 @@ const ConfirmAmount = ({ transactionName, amount, closeModal, setShowSuccessModa
     };
     handleCloseModal();
     createTransaction(data)
-    .then((res) => {
-      if(res.responseCode === 200) {
-        setShowSuccessModal(true);
-      }
+      .then((res) => {
+        console.log(res);
+        if (res.responseCode === 200) {
+          setShowSuccessModal(true);
+        }
       })
       .catch((error) => {
         console.log(error);
         handleCloseModal();
       });
-     
   };
 
   const handleWithdrawal = () => {
-    setLoading(true)
-      const data = {
-        customerId: withdrawalData?.customerId,
-        amount: withdrawalData?.amount,
-        transactionPin: withdrawalData?.transactionPin?.toString(),
-        email: withdrawalData?.email,
-        reason: "withdrawal",
-      };
-      CustomerWithdrawal(data).then((res) => {console.log(res);setLoading(false); handleCloseModal(); setShowSuccessModal(true)});
-  } 
+    setLoading(true);
+    const data = {
+      customerId: withdrawalData?.customerId,
+      amount: withdrawalData?.amount,
+      transactionPin: withdrawalData?.transactionPin?.toString(),
+      email: withdrawalData?.email,
+      reason: "withdrawal",
+    };
+    CustomerWithdrawal(data).then((res) => {
+      console.log(res)
+      if(res.responseCode === 200) {
+        setLoading(false);
+        handleCloseModal();
+        setShowSuccessModal(true);
+      } else  {
+        setLoading(false);
+        toast.error(res.errorMessage)
+      }
+    });
+  };
 
   // you can call this function anything
   const onClose = () => {
@@ -82,11 +94,11 @@ const ConfirmAmount = ({ transactionName, amount, closeModal, setShowSuccessModa
   return (
     <div className="font-mulish pt-7 px-6">
       <div>
-        <p className="text-center text-[18px] font-bold text-HavannaBlack-neutral mt-2">₦ {amount?.toLocaleString() || withdrawalData?.amount?.toLocaleString()}</p>
+        <p className="text-center text-[18px] font-bold text-HavannaBlack-neutral mt-2">₦ {withdrawalData?.amount?.toLocaleString() || amount?.toLocaleString()}</p>
         <div className="mt-10 text-[#ADADAD] text-14">
           <div className="flex justify-between py-4 border-b">
             <p className="text-14 text-[#ADADAD]">Amount to {transactionName} </p>
-            <p className="text-HavannaBlack-neutral text-14">₦ {amount?.toLocaleString() || withdrawalData?.amount?.toLocaleString()}</p>
+            <p className="text-HavannaBlack-neutral text-14">₦ {withdrawalData?.amount?.toLocaleString() || amount?.toLocaleString()}</p>
           </div>
           <div className="flex justify-between py-4 border-b">
             <p className="text-14 text-[#ADADAD]">Havanna processing fee</p>
@@ -106,7 +118,7 @@ const ConfirmAmount = ({ transactionName, amount, closeModal, setShowSuccessModa
               </div>
               <div className="flex justify-between align-middle py-4 border-b">
                 <p className="text-14 text-[#ADADAD]">Bank Account Name </p>
-                <p className="text-HavannaBlack-neutral text-14 text-left">{withdrawalData?.accountName}</p>
+                <p className="text-HavannaBlack-neutral text-14 text-left lowercase">{withdrawalData?.accountName}</p>
               </div>
             </div>
           )}
@@ -118,8 +130,7 @@ const ConfirmAmount = ({ transactionName, amount, closeModal, setShowSuccessModa
             onClick={() => {
               // toast.success("Your transaction is being processed and you will be notified via email or sms once your wallet is credited.", { theme: "colored" });
               // showModal(false);
-              withdrawalData?.amount ? handleWithdrawal() : initializePayment(onSuccess, onClose)
-              
+              withdrawalData?.amount ? handleWithdrawal() : initializePayment(onSuccess, onClose);
             }}
             title={`${transactionName === "withdraw" ? "Withdraw" : `Pay ₦ ${amount?.toLocaleString()}`} `}
             type="submit"

@@ -1,14 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
-import { BanknotesIcon, EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
+import { BanknotesIcon, ChevronLeftIcon, EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
 import { useDispatch } from "react-redux";
 import Icon from "@components/atoms/Icons";
 import { getAllTransactionHistory, getCustomerWallet } from "@components/shared/api";
 import Skeleton from "@components/atoms/Skeleton";
 import { AuthService } from "@components/shared/api/auth";
 import { setTransactionHistory } from "@components/store/Wallet";
+import CustomModal from "@components/atoms/CustomModal/CustomModal";
 import FundWallet from "./FundWallet";
-import WithdrawFund from "./cashFlow/WithdrawFund";
 import MiniTransactionHistory from "./TransactionHistory/MiniTransactionHistory";
+import Withdrawal from "./Mobile/Withdrawal/Withdrawal";
 
 const Wallet = ({ type }) => {
   const authService = new AuthService();
@@ -20,7 +21,7 @@ const Wallet = ({ type }) => {
   const [hide, setHide] = useState(true);
   const [wallet, setWallet] = useState([]);
   const [tranHistory, setTranHistory] = useState([]);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const handleClickOutsideModal = (event) => {
@@ -39,7 +40,7 @@ const Wallet = ({ type }) => {
   const getTransactionHistory = () => {
     getAllTransactionHistory(userDetails?.customerId).then((data) => {
       setTranHistory(data.result.data);
-      dispatch((setTransactionHistory(data.result.data)));
+      dispatch(setTransactionHistory(data.result.data));
     });
   };
 
@@ -147,7 +148,16 @@ const Wallet = ({ type }) => {
         </div>
 
         {isModalOpen && <FundWallet isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />}
-        {withdrawModal && <WithdrawFund isModalOpen={withdrawModal} setIsModalOpen={setWithdrawModal} />}
+        
+        <CustomModal cardClassName=" w-[532px]" toggleVisibility={setWithdrawModal} visibility={withdrawModal}>
+          <div className=" bg-white py-10 px-11 font-mulish rounded-xl shadow-md">
+            <div className="flex text-HavannaBlack-neutral20">
+              <ChevronLeftIcon className="cursor-pointer" onClick={() => setWithdrawModal(false)} width={32} />
+              <p className=" text-20 font-bold">Withdraw Money </p>
+            </div>
+            <Withdrawal />
+          </div>
+        </CustomModal>
       </section>
     </div>
   );

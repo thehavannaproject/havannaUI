@@ -13,7 +13,6 @@ import CustomLogoLoader from "@components/atoms/CustomLogoLoader";
 
 const DesktopPortfolio = ({ porfolio, loading }) => {
   const router = useRouter();
-  const [totalPages, setTotalPages] = useState(0);
   // const [propName, setPropName] = useState("");
 
   const [singleData, setSingleData] = useState({});
@@ -22,23 +21,44 @@ const DesktopPortfolio = ({ porfolio, loading }) => {
   // const [showDropdown, setShowDropdown] = useState(false);
   const [viewMoreModal, setViewMoreModal] = useState(false);
 
-  const itemsPerPage = 10;
+  const [subset, setSubset] = useState(null);
+  const [totalPage, setTotalPage] = useState(0);
+  // const [filteredProperties, setFilteredProperties] = useState(null);
+  
+  const itemsPerPage = 5;
   const startIndex = currentPage * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const subset = porfolio?.slice(startIndex, endIndex);
+  // let subset = porfolio?.slice(startIndex, endIndex);
 
-  // const node = useClickOutside(() => {
-  //   setShowDropdown(false);
-  // });
+
+  const handlePageChange = (selectedPage) => {
+    setCurrentPage(selectedPage);
+  };
+
+  const handleSearchQuery = () => {
+    
+    if (searchQuery) {
+      const filteredProperties = porfolio?.filter((item) => {
+        for (const key in item) {
+          // eslint-disable-next-line no-prototype-builtins
+          if (item.hasOwnProperty(key) && typeof item[key] === "string") {
+            if (item[key].toLowerCase().includes(searchQuery.toLocaleLowerCase())) {
+              return true;
+            }
+          }
+        }
+        return false;
+      });
+      setTotalPage(filteredProperties.length)
+      return setSubset(filteredProperties?.slice(startIndex, endIndex));      // eslint-disable-next-line no-param-reassign
+    } 
+    setTotalPage(porfolio?.length)
+    return setSubset(porfolio?.slice(startIndex, endIndex))
+  };
 
   useEffect(() => {
-    setTotalPages(Math.ceil(porfolio?.length / itemsPerPage));
-  }, [porfolio?.length]);
-
-  const handlePageClick = (data) => {
-    setCurrentPage(data);
-    setSearchQuery("");
-  };
+    handleSearchQuery();
+  }, [searchQuery, porfolio, viewMoreModal, totalPage])
 
   const columns = [
     {
@@ -90,51 +110,45 @@ const DesktopPortfolio = ({ porfolio, loading }) => {
     },
   ];
 
+
   const morePortfolioData = [
     {
-      name: "Investment Type",
-      data: singleData?.type === 0 && "Lease",
+      id: 0,
+      title: "Investment Type",
+      info: singleData?.type === 0 && "Lease",
     },
     {
-      name: "Slots Price",
-      data: "₦" + singleData?.value?.toLocaleString(),
+      id: 1,
+      title: "Slots Price",
+      info: singleData?.value?.toLocaleString(),
     },
     {
-      name: "Slots Purchased",
-      data: singleData?.units,
+      id: 2,
+      title: "Slots Purchased",
+      info: singleData?.units,
+    }, 
+    {
+      id: 3,
+      title: "Total Investment",
+      info: (singleData?.value * singleData?.units).toLocaleString(),
     },
     {
-      name: "Total Investment",
-      data: "₦" + singleData?.value?.toLocaleString(),
+      id: 4,
+      title: "ROI",
+      info: singleData?.propertyReturnOnInvestmentPercentage + "%",
     },
     {
-      name: "ROI",
-      data: singleData?.propertyReturnOnInvestmentPercentage + "%",
+      id: 5,
+      title: "Accummulated ROI",
+      info: singleData?.accumulatedReturnOnInvestment,
     },
     {
-      name: "Accummulated ROI",
-      data:  singleData?.accumulatedReturnOnInvestment,
-    },
-    {
-      name: "Total Holding Period",
-      data: singleData?.holdingPeriod,
+      id: 6,
+      title: "Total Holding Period",
+      info: singleData?.holdingPeriod,
     },
   ];
 
-  // if (searchQuery) {
-  //   console.log(porfolio);
-  //   const filteredProperties = porfolio?.filter((item) => {
-  //     for (const key in item) {
-  //       if (item.hasOwnProperty(key) && typeof item[key] === "string") {
-  //         if (item[key].toLowerCase().includes(searchQuery)) {
-  //           return true;
-  //         }
-  //       }
-  //     }
-  //     return false;
-  //   });
-  //   porfolio = filteredProperties;
-  // }
 
   return (
     <div>
@@ -143,7 +157,7 @@ const DesktopPortfolio = ({ porfolio, loading }) => {
           <CustomLogoLoader />
         ) : (
           <>
-            {porfolio?.length < 0 ? (
+            {subset?.length < 0 ? (
               <div className=" flex justify-center items-center rounded-xl h-screen">
                 <div>
                   <p className="font-bold text-24 leading-[26px] text-HavannaBlack-neutral20 ">No Investment in your portfolio</p>
@@ -157,39 +171,6 @@ const DesktopPortfolio = ({ porfolio, loading }) => {
                 <h1 className="text-24 leading-8 font-bold text-HavannaBlack-neutral20 pt-8">My Portfolio</h1>
                 <div className="pt-8 desktop:flex justify-end">
                   <div>
-                    {/* <div className=" w-full" onClick={() => setShowDropdown(!showDropdown)}>
-                    <div className="relative">
-                      <input
-                        className=" h-[52px] w-full outline-none border-[1.3px] pl-4 rounded  border-[#8F8F8F]"
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        placeholder="All Properties"
-                        type="text"
-                        value={propName}
-                      />
-  
-                      {showDropdown ? (
-                        <ChevronUpIcon className="cursor-pointer absolute right-0 top-5 pr-3 " width={30} />
-                      ) : (
-                        <ChevronDownIcon className="cursor-pointer absolute right-0 top-5 pr-3 " width={30} />
-                      )}
-                      {showDropdown && (
-                        <div className="absolute top-17 z-10 bg-white w-full rounded-lg" ref={node}>
-                          {porfolio.map((property, index) => (
-                            <div
-                              className="p-2 border-b cursor-pointer hover:bg-gray-50"
-                              key={index}
-                              onClick={() => {
-                                setShowDropdown(false);
-                                setPropName(property.name);
-                              }}
-                            >
-                              {property.name}
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  </div> */}
                     <div className="relative w-full">
                       <input
                         className=" h-[52px] w-[24rem] outline-none border-[1.3px] pl-12 rounded border-[#8F8F8F]"
@@ -201,17 +182,18 @@ const DesktopPortfolio = ({ porfolio, loading }) => {
                       <Icon className="absolute left-0 top-4 pl-3 " name="search" />
                     </div>
                   </div>
-                  {/* <div className="w-[40%] flex justify-end ">
-                  <CustomButton customClass="bg-HavannaGreen-primary w-[200px] h-[52px] rounded-lg text-white smallLaptop:mt-2 tablet:mt- mb-10" title="Search" />
-                </div> */}
+                  
                 </div>
                 <div className="border shadow-md pb-2 mt-10 pt-10 rounded-xl text-HavannaBlack-primary bg-white  border-[#8F8F8F]">
                   <h1 className="text-16 mb-8 px-4 font-bold">All Properties</h1>
-                  <CustomTable columns={columns} data={subset} />
+                  <CustomTable columns={columns} data={subset || []} />
                 </div>
-                <div className="flex justify-end mt-8">
-                  <CustomPagination onChange={handlePageClick} pageCount={totalPages} />
-                </div>
+                {subset >= 5 && (
+                  <div className="flex justify-end mt-8">
+                    <CustomPagination onChange={handlePageChange} pageCount={Math.ceil(totalPage/5)} />
+                  </div>
+
+                )}
                 <div className="mt-7">
                   <CustomLink
                     customClass="w-[300px] h-[54px] font-bold text-16 leading-[22px] flex justify-center items-center  rounded-lg text-white bg-HavannaGreen-primary "
@@ -233,8 +215,8 @@ const DesktopPortfolio = ({ porfolio, loading }) => {
               <div className="mt-8">
                 {morePortfolioData.map((data, index) => (
                   <div className="flex justify-between py-4 text-HavannaBlack-neutral font-medium border-b-[0.6px] border-b-[#DFE1E2] " key={index}>
-                    <p>{data.name}</p>
-                    <p>{data.data}</p>
+                    <p>{data.title}</p>
+                    <p>{data.info}</p>
                   </div>
                 ))}
               </div>
