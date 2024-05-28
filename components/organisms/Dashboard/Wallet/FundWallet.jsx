@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { usePaystackPayment } from "react-paystack";
 
 import { ChevronLeftIcon } from "@heroicons/react/24/solid";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import FormikCustomInput from "@components/atoms/CustomInput/FormikCustomInput";
 import Icon from "@components/atoms/Icons";
@@ -49,15 +49,18 @@ const FundWallet = ({ setIsModalOpen, setShowSuccessModal }) => {
       charge: 0,
     };
     createTransaction(data)
-      .then(() => {
+      .then((res) => {
+        if(res.responseCode === 200) {
           setShowSuccessModal(true);
           handleCloseModal();
+
+        }
       })
-      .catch((error) => {
-        console.log(error);
-        handleCloseModal();
-        toast.error("Transaction cannot be processed at the moment, Try again later.", { theme: "colored" });
-      });
+      // .catch((error) => {
+      //   console.log(error);
+      //   handleCloseModal();
+      //   toast.error("Transaction cannot be processed at the moment, Try again later.", { theme: "colored" });
+      // });
   };
 
   // you can call this function anything

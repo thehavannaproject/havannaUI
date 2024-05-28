@@ -80,6 +80,16 @@ const SideBar = () => {
           ))}
 
           <div
+            className={`hover:bg-HavannaGreen-light "text-HavannaBlack-neutral50"
+             `}
+          >
+              <div className={`px-3 smallLaptop:px-6 text-20 cursor-pointer font-mulish py-4 mt-6 h-[58px] flex  font-medium justify-between `}>
+              <p className="text-[#B82323]">Log out</p>
+              <Icon className="" name="vectorClose" />
+              </div>
+          </div>
+
+          {/* <div
             className="mt-[50px] ml-6 flex justify-between cursor-pointer font-mulish"
             onClick={() => {
               localStorage.clear();
@@ -88,7 +98,7 @@ const SideBar = () => {
           >
             <p className="text-[#B82323]">Log out</p>
             <Icon className="" name="vectorClose" />
-          </div>
+          </div> */}
         </div>
       </div>
     </>

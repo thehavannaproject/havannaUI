@@ -132,7 +132,7 @@ const Security = () => {
   return (
     <section>
       <div className="pl-10 font-mulish ">
-        <div className="bg-white w-full smallLaptop:w-[880px] px-10 pt-10 shadow-lg rounded-xl  ">
+        <div className="bg-white w-full tablet:w-[840px] px-10 py-10 shadow-lg rounded-xl  ">
           <h1 className="font-bold text-20 leading-[26px]">Verified Information</h1>
 
           <div className="flex justify-between pt-4">
@@ -189,9 +189,9 @@ const Security = () => {
             <h1 className="font-bold text-20 leading-[26px] ">Transaction Pin </h1>
               <div className="mt-3 text-[#4F5457] text-12 flex justify-between">
                 <p>{profile.transactionPinCreated ? "Update" : "Set"} your transaction pin.</p>
-                <p className="font-medium text-16 leading-[22px] " onClick={() => setShowSetPin(true)}>
+                {/* <p className="font-medium text-16 leading-[22px] " onClick={() => setShowSetPin(true)}>
                   {profile.transactionPinCreated ? "Update" : "Set"}
-                </p>
+                </p> */}
               </div>
             </div>
            

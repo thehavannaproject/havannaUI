@@ -7,6 +7,7 @@ import Skeleton from "@components/atoms/Skeleton";
 import { AuthService } from "@components/shared/api/auth";
 import { setTransactionHistory } from "@components/store/Wallet";
 import CustomModal from "@components/atoms/CustomModal/CustomModal";
+import TransactionProcessingModal from "@components/atoms/TransactionProcessingModal";
 import FundWallet from "./FundWallet";
 import MiniTransactionHistory from "./TransactionHistory/MiniTransactionHistory";
 import Withdrawal from "./Mobile/Withdrawal/Withdrawal";
@@ -16,6 +17,7 @@ const Wallet = ({ type }) => {
   const userDetails = authService.getDetails("ud");
   const modalRef = useRef(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [withdrawModal, setWithdrawModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const [hide, setHide] = useState(true);
@@ -67,8 +69,8 @@ const Wallet = ({ type }) => {
     <div className="bg-HavannaGreen-light relative">
       <section className=" font-mulish">
         <hr className="" />
-        <div className="flex">
-          <div className=" bg-white w-[900px] h-[580px] mx-[4%] shadow-xl rounded-xl mt-[52px] mb-[342px] text-center">
+        <div className="grid grid-cols-2 lg:flex">
+          <div className=" bg-white lg:w-[900px] h-[580px] mx-[4%] shadow-xl rounded-xl mt-[52px] mb-[342px] text-center">
             <div className="">
               <div className="flex gap-[25.64px] justify-center pt-6">
                 <h1 className="text-[#4F5457] font-bold text-24 leading-8 ">{type === "returns" ? "Returns" : "Wallet Balance"}</h1>
@@ -147,7 +149,14 @@ const Wallet = ({ type }) => {
           </div>
         </div>
 
-        {isModalOpen && <FundWallet isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />}
+        {isModalOpen && <FundWallet isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} setShowSuccessModal={setShowSuccessModal} />}
+
+        <CustomModal toggleVisibility={setShowSuccessModal} visibility={showSuccessModal}>
+          <div className=" bg-white py-10 px-11 h-screen w-full flex justify-center items-center font-mulish rounded-xl shadow-md">
+          <TransactionProcessingModal setShowSuccessModal={setShowSuccessModal} />
+          </div>
+        </CustomModal>
+
         
         <CustomModal cardClassName=" w-[532px]" toggleVisibility={setWithdrawModal} visibility={withdrawModal}>
           <div className=" bg-white py-10 px-11 font-mulish rounded-xl shadow-md">

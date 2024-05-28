@@ -133,7 +133,7 @@ const TransactionSummary = () => {
           />
         </div>
       </CustomModal>
-      {showSuccessModal && <TransactionSuccessfulModal route="/listing" />}
+      {showSuccessModal && <TransactionSuccessfulModal route="/portfolio" />}
     </section>
   );
 };

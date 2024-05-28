@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 // import ReactPaginate from "react-paginate";
 import { useRouter } from "next/router";
 // import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/solid";
+import { EyeOutlined } from "@ant-design/icons";
 import CustomLink from "@components/atoms/CustomLink/CustomLink";
 import Icon from "@components/atoms/Icons";
 import CustomTable from "@components/atoms/CustomTable/CustomTable";
@@ -102,7 +103,7 @@ const DesktopPortfolio = ({ porfolio, loading }) => {
                 setSingleData(row.data[0]);
               }}
             >
-              <Icon name="eyeSlash" />
+              <EyeOutlined className="text-20 text-HavannaGreen-secondary"/>
             </div>
           ),
         },

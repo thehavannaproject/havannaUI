@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
 
 // import CashFlow from "./cashFlow/CashFlow";
 import Wallet from "./Wallet";
 
 const index = () => {
-  const [activeTab, setActiveTab] = useState(0);
+  // const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <div>
-      <div className=" font-mulish">
+    <div className="font-mulish">
+      {/* <div className=" font-mulish">
         <div className={`  flex  justify-around pt-10  `}>
           {walletOption.map((wallet, index) => (
             <div
@@ -28,23 +28,26 @@ const index = () => {
           ))}
         </div>
       </div>
-      <hr className="" />
-      <div>{walletOption[activeTab].component}</div>
+      <hr className="" /> */}
+      {/* <div>{walletOption[activeTab].component}</div> */}
+      <div>
+      <Wallet type="fund"/>
+      </div>
     </div>
   );
 };
 
 export default index;
 
-const walletOption = [
-  {
-    id: 0,
-    name: "Wallet",
-    component: <Wallet type="fund"/>,
-  },
-  {
-    id: 1,
-    name: "Returns",
-    component: <Wallet type="returns" />,
-  },
-];
+// const walletOption = [
+//   {
+//     id: 0,
+//     name: "Wallet",
+//     component: <Wallet type="fund"/>,
+//   },
+//   {
+//     id: 1,
+//     name: "Returns",
+//     component: <Wallet type="returns" />,
+//   },
+// ];

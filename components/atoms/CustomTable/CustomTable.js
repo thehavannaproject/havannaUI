@@ -4,8 +4,8 @@ import { useTable } from "react-table";
 const CustomTable = ({ columns, data, tableClass, tHeadClass, tBodyClass, tdClass, thClass, tableBodyTrClass, tableHeadTrClass }) => {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({ columns, data });
   return (
-    <div className="overflow-scroll relative">
-      <table className={`w-full text-HavannaBlack-primary ${tableClass}`} {...getTableProps()}>
+    <div className="overflow-scroll relative hide-scrollbar">
+      <table className={`w-full text-HavannaBlack-primary font-medium ${tableClass}`} {...getTableProps()}>
         <thead className={` ${tHeadClass} bg-[#E0F8F6]`}>
           {headerGroups.map((headerGroup, index) => (
             <tr className={`${tableHeadTrClass} `} {...headerGroup.getHeaderGroupProps()} key={index}>

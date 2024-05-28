@@ -160,7 +160,7 @@ const PersonalInformation = () => {
           </div>
         </div>
 
-        <h1 className="font-bold text-20 leading-[26px] mt-10 smallLaptop:pl-11">Personal Information</h1>
+        {/* <h1 className="font-bold text-20 leading-[26px] mt-10 smallLaptop:pl-11">Personal Information</h1> */}
 
         <Formik
           enableReinitialize

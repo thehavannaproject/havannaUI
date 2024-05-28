@@ -4,15 +4,14 @@ import { Carousel } from "antd";
 import Icon from "@components/atoms/Icons";
 import CustomLink from "@components/atoms/CustomLink/CustomLink";
 
-
-
-const DesktopPropertyDetails = ({singleListing}) => {
-
+const DesktopPropertyDetails = ({ singleListing }) => {
   return (
     <section>
       <div className="  pb-28 font-mulish px-10 ">
         <div className="flex pt-8 gap-[28.38px]">
-          {/* <Icon className="mt-1" name="investArrow" /> */}
+          <CustomLink destination="/listing">
+            <Icon className="mt-2" name="investArrow" />
+          </CustomLink>
           <div>
             <h1 className="font-bold text-[28px] leading-9 ">{singleListing?.name}</h1>
             <p className="font-medium text-18 leading-6 capitalize">{singleListing?.listingDetails?.location.toLowerCase()}</p>
@@ -78,15 +77,15 @@ const DesktopPropertyDetails = ({singleListing}) => {
             <div>
               <h1 className="font-bold text-HavannaGreen-secondary text-24 leading-8 mt-11 flex gap-[9.33px] text-center   ">
                 {" "}
-                <Icon className="w-[21.33px] h-6 " name="naira" /> {singleListing?.listingDetails?.unitCost.toLocaleString()} 
+                <Icon className="w-[21.33px] h-6 " name="naira" /> {singleListing?.listingDetails?.unitCost.toLocaleString()}
               </h1>
               <p className="font-bold text-18 leading-6 ">Price per Slot</p>
 
               <div className="mt-8">
                 <div className="flex justify-between border-[1.3px] px-[14px] mb-4  border-[#D6D6D6] h-[72px] rounded-[4px]   ">
-                  <div className="flex gap-[15px] text-center items-center  ">
-                    <Icon name="investmentHome" />
-                    <p className="font-bold text-18 leading-6">Investment Type</p>
+                  <div className="flex gap-[15px] ">
+                    <Icon className="flex text-center items-center " name="investmentHome" />
+                    <p className="font-bold text-18 leading-6 flex justify-center items-center ">Investment Type</p>
                   </div>
                   <div className=" flex text-center items-center">
                     <p className="text-HavannaGreen-secondary text-18 font-bold leading-6 ">Lease</p>
@@ -102,30 +101,35 @@ const DesktopPropertyDetails = ({singleListing}) => {
                   </div>
                 </div>
                 <div className="flex justify-between gap-5 border-[1.3px] mb-4 px-[14px] shadow- border-[#D6D6D6] h-[72px] rounded-[4px]   ">
-                  <div className="flex gap-[15px] text-center items-center  ">
-                    <Icon name="maximumIcon" />
-                    <p className="font-bold text-18 leading-6">Minimum Holding Period</p>
+                  <div className="flex gap-[15px]  ">
+                  
+                    <Icon className="flex text-center items-center " name="maximumIcon" />
+                    <p className="font-bold text-18 leading-6 flex justify-center  items-center">Minimum Holding Period</p>
                   </div>
                   <div className=" flex text-center items-center">
                     <p className="text-HavannaGreen-secondary text-18 font-bold leading-6 capitalize">{singleListing?.listingDetails?.minimumHoldingPeriod?.toLowerCase()}</p>
                   </div>
                 </div>
                 <div className="flex justify-between gap-5 border-[1.3px] px-[14px] shadow- border-[#D6D6D6] h-[72px] rounded-[4px]   ">
-                  <div className="flex gap-[15px] text-center items-center  ">
-                    <Icon name="minimumHolding" />
-                    <p className="font-bold text-18 leading-6">Maximum Holding Period</p>
+                  <div className="flex gap-[15px] ">
+                    <Icon className="flex  text-center items-center " name="minimumHolding" />
+                    <p className="font-bold text-18 leading-6  flex justify-center  items-center">Maximum Holding Period</p>
                   </div>
                   <div className=" flex text-center items-center">
                     <p className="text-HavannaGreen-secondary text-18 font-bold leading-6 capitalize">{singleListing?.listingDetails?.maximumHoldingPeriod?.toLowerCase()}</p>
                   </div>
                 </div>
-                <CustomLink customClass="w-full font-bold text-16 leading-[22px] h-[58px] mt-[60px] bg-HavannaGreen-primary text-white rounded-lg flex justify-center items-center  " destination={`/listing/listingInvest/${singleListing?.listingDetails?.listingId}`}>Invest Now</CustomLink>
-               
+                <CustomLink
+                  customClass="w-full font-bold text-16 leading-[22px] h-[58px] mt-[60px] bg-HavannaGreen-primary text-white rounded-lg flex justify-center items-center  "
+                  destination={`/listing/listingInvest/${singleListing?.listingDetails?.listingId}`}
+                >
+                  Invest Now
+                </CustomLink>
+
                 <button className="w-full font-bold text-16 leading-[22px] h-[58px] mt-[30px] mb-11 border-[3px] border-HavannaGreen-primary text-HavannaGreen-primary rounded-lg">
                   Download terms & conditions
                 </button>
               </div>
-             
             </div>
           </div>
         </div>

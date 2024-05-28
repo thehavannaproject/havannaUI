@@ -3,7 +3,7 @@ import React from "react";
 const AccountTier = () => {
   return (
     <section className="font-mulish">
-      <div className="bg-white font-mulish rounded-xl pt-10 m-auto w-full smallLaptopt:w-[880px] shadow-lg px-10 ">
+      <div className="bg-white font-mulish rounded-xl py-10 m-auto w-full tablet:w-[840px] shadow-lg px-10 ">
         <div className="border-HavannaGreen-primary border-[4px] flex  justify-center m-auto rounded-[50px] h-[100px] w-[100px]  ">
           <h1 className="text-HavannaGreen-primary text-center m-auto font-bold text-[44px] leading-[52px] ">1</h1>
         </div>
@@ -22,7 +22,7 @@ const AccountTier = () => {
         <div className="flex justify-between mt-[52px] pb-[60px] ">
           <div>
             <h1 className="font-bold text-24 leading-8">Tier 1 Requierments</h1>
-            <h4 className="font-medium text-18 leading-6 mt-4 ">No reequirements</h4>
+            <h4 className="font-medium text-18 leading-6 mt-4 ">No requirements</h4>
             {/* <p>Verification not yet completed</p> */}
           </div>
           {/* <h1 className="font-bold text-18 leading-6">Verify</h1> */}
