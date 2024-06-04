@@ -26,7 +26,7 @@ const AllTransactionHistory = ({tranHistory}) => {
             </div>
           </div>
           <div>
-            <p className="text-14 text-[#4F5457">₦ {transact.amount.toLocaleString()}</p>
+            <p className="text-14 text-[#4F5457">{transact.type === "Withdrawal" ? `₦ -${transact.amount.toLocaleString()}` : `₦ ${transact.amount.toLocaleString()}`}</p>
           </div>
         </div>
       ))}

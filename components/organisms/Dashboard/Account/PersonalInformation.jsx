@@ -11,6 +11,7 @@ import CustomModal from "@components/atoms/CustomModal/CustomModal";
 import Icon from "@components/atoms/Icons";
 import { setProfile } from "@components/store/Account";
 import { replaceFirstZero } from "@components/shared/libs/helpers";
+import CustomLink from "@components/atoms/CustomLink/CustomLink";
 import Button from "@atoms/CustomButton/CustomButton";
 import FormikCustomInput from "@atoms/CustomInput/FormikCustomInput";
 import CustomButton from "@atoms/CustomButton/CustomButton";
@@ -387,7 +388,7 @@ const PersonalInformation = () => {
       {profile?.customerId && profile?.phoneNumber && (
 
         <p className="font-bold pl-10 mt-7">
-          Need to change any information? <span className="text-HavannaGreen-primary">&nbsp;Contact Us</span>
+          Need to change any information? <span className="text-HavannaGreen-primary">&nbsp;<CustomLink destination="/contact-us">Contact Us</CustomLink></span>
         </p>
       )}
       </div>

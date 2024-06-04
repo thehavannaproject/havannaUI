@@ -11,6 +11,7 @@ import { setProfile } from "@components/store/Account";
 import { replaceFirstZero } from "@components/shared/libs/helpers";
 import CustomModal from "@components/atoms/CustomModal/CustomModal";
 import Icon from "@components/atoms/Icons";
+import CustomLink from "@components/atoms/CustomLink/CustomLink";
 import FormikCustomInput from "@atoms/CustomInput/FormikCustomInput";
 import Button from "@atoms/CustomButton/CustomButton";
 import CustomButton from "@atoms/CustomButton/CustomButton";
@@ -371,7 +372,7 @@ const MyProfile = () => {
           <p className="mb-24 mt-16 text-14 font-bold text-center">
             Need to change any information?{" "}
             <a href="mailto:info@havanna.com">
-              <span className="text-HavannaGreen-primary">&nbsp;Contact Us</span>
+              <span className="text-HavannaGreen-primary">&nbsp;<CustomLink destination="/contact-us">Contact Us</CustomLink></span>
             </a>
           </p>
         )}

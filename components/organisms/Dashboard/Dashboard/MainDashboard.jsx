@@ -8,6 +8,7 @@ import EmptyState from "@components/atoms/EmptyState/EmptyState";
 import CustomLink from "@components/atoms/CustomLink/CustomLink";
 import Icon from "@components/atoms/Icons";
 import TransactionProcessingModal from "@components/atoms/TransactionProcessingModal";
+import CustomModal from "@components/atoms/CustomModal/CustomModal";
 import FundWallet from "../Wallet/FundWallet";
 
 const MainDashboard = () => {
@@ -90,7 +91,12 @@ const MainDashboard = () => {
         )}
       </div>
 
-      {showSuccessModal && <TransactionProcessingModal setShowSuccessModal={setShowSuccessModal} />}
+      <CustomModal cardClassName="w-screen" toggleVisibility={setShowSuccessModal} visibility={showSuccessModal}>
+          <div className=" bg-white py-10 px-11 h-screen w-full flex justify-center items-center font-mulish rounded-xl shadow-md">
+          <TransactionProcessingModal setShowSuccessModal={setShowSuccessModal} />
+          </div>
+        </CustomModal>
+
     </section>
   );
 };

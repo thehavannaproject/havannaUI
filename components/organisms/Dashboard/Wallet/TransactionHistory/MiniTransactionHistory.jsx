@@ -21,7 +21,7 @@ const MiniTransactionHistory = ({ transHistory }) => {
               </div>
             </div>
             <div>
-              <p className="font-medium text-16">₦ {transact.amount.toLocaleString()}</p>
+              <p className="font-medium text-16">{transact.type === "Withdrawal" ? `₦ -${transact.amount.toLocaleString()}` : `₦ ${transact.amount.toLocaleString()}`}</p>
             </div>
           </div>
         ))}

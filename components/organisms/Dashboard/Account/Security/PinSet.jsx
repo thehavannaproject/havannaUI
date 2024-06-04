@@ -75,7 +75,7 @@ const PinSet = ({ setShow }) => {
         <div className="bg-white rounded-xl w-[532px]">
           <Icon className="flex cursor-pointer justify-end pr-[21px] pt-[21px]" name="closeModal" onClick={handleSetclose} />
           <div className=" px-11  ">
-            <h2 className="text-18 font-bold leading-6 ">Set Your Transaction PIN</h2>
+            <h2 className="text-18 font-bold leading-6 ">{profile.transactionPinCreated ? "Update" : "Set"} Your Transaction PIN</h2>
             <div>
               <Formik
                 initialValues={{

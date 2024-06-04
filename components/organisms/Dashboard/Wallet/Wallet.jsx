@@ -151,7 +151,7 @@ const Wallet = ({ type }) => {
 
         {isModalOpen && <FundWallet isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} setShowSuccessModal={setShowSuccessModal} />}
 
-        <CustomModal toggleVisibility={setShowSuccessModal} visibility={showSuccessModal}>
+        <CustomModal cardClassName="w-screen" toggleVisibility={setShowSuccessModal} visibility={showSuccessModal}>
           <div className=" bg-white py-10 px-11 h-screen w-full flex justify-center items-center font-mulish rounded-xl shadow-md">
           <TransactionProcessingModal setShowSuccessModal={setShowSuccessModal} />
           </div>

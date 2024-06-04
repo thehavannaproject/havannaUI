@@ -21,7 +21,7 @@ const AccountTier = () => {
         </div>
         <div className="flex justify-between mt-[52px] pb-[60px] ">
           <div>
-            <h1 className="font-bold text-24 leading-8">Tier 1 Requierments</h1>
+            <h1 className="font-bold text-24 leading-8">Tier 1 Requirements</h1>
             <h4 className="font-medium text-18 leading-6 mt-4 ">No requirements</h4>
             {/* <p>Verification not yet completed</p> */}
           </div>
