@@ -30,6 +30,18 @@ export const forgotPassword = async (data) => {
   }
 };
 
+export const verifyEmail = async (data) => {
+  if (data) {
+    try {
+      const response = await api.post(`/auth/verify-email`, data);
+      return response.data;
+    } catch (error) {
+      toast.error(error.response.data.message)
+      return error;
+    }
+  }
+};
+
 export const ResetUserPassword = async (data) => {
   if (data) {
     try {

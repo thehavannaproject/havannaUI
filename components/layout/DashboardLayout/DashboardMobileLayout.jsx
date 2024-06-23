@@ -65,7 +65,7 @@ const DashboardMobileLayout = ({ children, title, className }) => {
   useEffect(() => {
     if (inactiveTime === 2) {
       toast.warn(
-        "Hello, Are you still there?. You would be logged out in 2 mins due to inactivity",
+        "Hello, Are you still there?. You would be logged out in 1 mins due to inactivity",
         { theme: "colored" }
       );
     } else if (inactiveTime === 3) {

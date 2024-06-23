@@ -1,17 +1,15 @@
 import BaseLayout from "@components/layout/BaseLayout/BaseLayout";
-import Listing from "@components/organisms/Dashboard/Listing/Listing";
-import MobileListing from "@components/organisms/Dashboard/Listing/Mobile";
 
 const invest = () => {
   return (
     <>
     <BaseLayout>
       <div className="hidden tablet:block px-[120px] pb-20 mt-10">
-          <Listing />
+          Havanna
       </div>
-      <div className="tablet:hidden">
+      {/* <div className="tablet:hidden">
           <MobileListing />
-      </div>
+      </div> */}
     
     </BaseLayout>
     </>

@@ -1,8 +1,8 @@
+import { useEffect, useState } from "react";
 import { Form, Formik } from "formik";
 import { useRouter } from "next/dist/client/router";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import * as Yup from "yup";
 
@@ -47,7 +47,7 @@ const ResetPassword = () => {
     ResetUserPassword(data).then((response) => {
         response;
         setLoading(false);
-        router.push("/auth/reset-comfirmation");
+        router.push(`/auth/reset-comfirmation`);
       })
       .catch((error) => {
         setLoading(false);
@@ -99,7 +99,7 @@ const ResetPassword = () => {
                       <div>
                         <h1 className="font-bold text-20 smallLaptop:text-36 text-center leading-[26px] smallLaptop:leading-10 ">Reset your password</h1>
                         <p className="font-normal smallLaptop:font-medium text-base pt-3 pb-8 smallLaptop:pb-16 leading-4 smallLaptop:leading-6 text-center ">
-                          Enter your email address and we will send you a link to reset your password.
+                          Enter a new password to reset your password.
                         </p>
                       </div>
                     </div>

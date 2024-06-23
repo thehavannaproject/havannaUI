@@ -82,6 +82,10 @@ const SideBar = () => {
           <div
             className={`hover:bg-HavannaGreen-light "text-HavannaBlack-neutral50"
              `}
+             onClick={() => {
+              localStorage.clear();
+              router.push("/auth/login");
+            }}
           >
               <div className={`px-3 smallLaptop:px-6 text-20 cursor-pointer font-mulish py-4 mt-6 h-[58px] flex  font-medium justify-between `}>
               <p className="text-[#B82323]">Log out</p>

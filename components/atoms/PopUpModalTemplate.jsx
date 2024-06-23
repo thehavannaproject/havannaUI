@@ -11,7 +11,7 @@ const PopUpModalTemplate = ({title, description, linkTitle, destination}) => {
         </p>
         <div className="w-full">
 
-        <CustomLink customClass="bg-HavannaGreen-primary mt-6 flex font-bold text-16 justify-center items-center px-8 text-white w-full tablet:w-[684px] h-[58px] rounded-lg " destination={destination || ""}>
+        <CustomLink customClass="bg-HavannaGreen-primary mt-6 flex font-bold text-16 justify-center items-center px-8 text-white w-full tablet:w-full h-[58px] rounded-lg " destination={destination || ""}>
         {linkTitle}
         </CustomLink>
         </div>

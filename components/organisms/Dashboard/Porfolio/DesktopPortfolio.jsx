@@ -82,14 +82,14 @@ const DesktopPortfolio = ({ porfolio, loading }) => {
         },
 
         {
-          Header: "ROI",
+          Header: "ROI (%)",
           accessor: "accumulatedReturnOnInvestmentPercentage",
         },
         {
           Header: "Duration",
           accessor: "duration",
           Cell: (row) => {
-            return <p>{row.cell.value} month</p>;
+            return <p>{row.cell.value} years</p>;
           },
         },
 
@@ -131,7 +131,7 @@ const DesktopPortfolio = ({ porfolio, loading }) => {
     {
       id: 3,
       title: "Total Investment",
-      info: (singleData?.value * singleData?.units).toLocaleString(),
+      info: "₦" + (singleData?.value * singleData?.units).toLocaleString(),
     },
     {
       id: 4,
@@ -146,7 +146,7 @@ const DesktopPortfolio = ({ porfolio, loading }) => {
     {
       id: 6,
       title: "Total Holding Period",
-      info: singleData?.holdingPeriod,
+      info:  "₦" + singleData?.holdingPeriod,
     },
   ];
 
@@ -189,12 +189,12 @@ const DesktopPortfolio = ({ porfolio, loading }) => {
                   <h1 className="text-16 mb-8 px-4 font-bold">All Properties</h1>
                   <CustomTable columns={columns} data={subset || []} />
                 </div>
-                {subset >= 5 && (
+                {/* {subset >= 5 && ( */}
                   <div className="flex justify-end mt-8">
                     <CustomPagination onChange={handlePageChange} pageCount={Math.ceil(totalPage/5)} />
                   </div>
 
-                )}
+                {/* )} */}
                 <div className="mt-7">
                   <CustomLink
                     customClass="w-[300px] h-[54px] font-bold text-16 leading-[22px] flex justify-center items-center  rounded-lg text-white bg-HavannaGreen-primary "

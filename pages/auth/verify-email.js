@@ -1,9 +1,9 @@
 import React from "react";
 
-import VerificationEmail from "@components/organisms/AuthenticationPages/VerificationEmail/VerificationEmail";
+import VerificationSuccess from "@components/organisms/AuthenticationPages/VerificationEmail/VerificationSuccess";
 
 const VerifyEmail = () => {
-  return <VerificationEmail />;
+  return <VerificationSuccess />;
 };
 
 export default VerifyEmail;

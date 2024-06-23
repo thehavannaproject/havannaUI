@@ -114,7 +114,7 @@ const Footer = () => {
               </p>
 
               <CustomLink customClass="pt-8" destination="mailto:hello@havanna.com">
-                <a className="text-light-green  hover:transition-all hover:text-white text-16 font-medium  lg:text-base">hello@havanna.com</a>
+                <a className="text-light-green  hover:transition-all hover:text-white text-16 font-medium text-gray-400">hello@havanna.com</a>
               </CustomLink>
             </div>
           </div>
@@ -129,7 +129,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="text-light-green pb-28 lg:pb-[76px] text-center w-full text-sm lg:text-sm-15 flex flex-col lg:flex-row justify-center">
+        <div className="text-light-green pb-28 lg:pb-[76px] text-gray-400 text-center w-full text-sm lg:text-sm-15 flex flex-col lg:flex-row justify-center">
           <p>© {new Date().getFullYear()} havanna. All rights reserved.</p>
           <p className="px-5 hidden lg:block">|</p>
           <p>Privacy Policy | Terms of Use</p>

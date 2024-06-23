@@ -3,14 +3,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Mulish&display=swap");
 @import "./main.css";
 
-:root {
-  /*Default  Color */
-  --color-default: #414141;
-  --color-primary: #0b4340;
-  --color-secondary: #f1bc00;
-  --color-light-green: #04d0c5;
-  --color-dark: #0c0526;
-}
+
 
 @tailwind base;
 @tailwind components;

@@ -69,11 +69,11 @@ const MobileDashboard = () => {
           </div>
         </Carousel>
 
-        <QuickActions setShowSuccessModal={setShowSuccessModal} />
+        <QuickActions setShowSuccessModal={setShowSuccessModal}/>
         <RecentInvestment portfolio={portfolio} />
         <CurrentListings />
         {showSuccessModal && <TransactionProcessingModal setShowSuccessModal={setShowSuccessModal} />}
-        <CustomModal cardClassName="w-[348px]" toggleVisibility={() => setGotoAccountModal(true)} visibility={gotoAccountModal}>
+        <CustomModal cardClassName="w-[348px] tablet:w-[600px]" toggleVisibility={setGotoAccountModal} visibility={gotoAccountModal}>
           <div className="bg-white text-black px-6 pt-4 flex justify-center items-center font-mulish h-[250px] rounded-lg  ">
             <PopUpModalTemplate description="Kindly complete your account information to proceed. " destination="/account" linkTitle="Go to Account" title="Notice" />
           </div>
