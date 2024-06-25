@@ -5,19 +5,19 @@ const WhySection = () => {
   return (
     <section className="px-5 bigLaptop:px-[120px] py-[60px] bg-HavannaGreen-light font-mulish mt-[58px]">
       <div className="">
-        <div className="bigLaptop:w-1/2">
+        <div className="">
           <Animate.Fade bottom>
-            <h2 className="text-24 tablet:text-36 leading-8 text-HavannaGreen-primary text-center tablet:text-left font-bold tablet:leading-[44px]">
+            <h2 className="text-24 smallLaptop:text-36 leading-8 text-HavannaGreen-primary text-center  font-bold tablet:leading-[44px]">
               Why Real Estate Asset Slots <span className="text-HavannaGreen-tertiaryMain">(REAS)</span>?
             </h2>
-            <p className="mt-4 font-medium leading-6 tablet:leading-6 text-center text-16 tablet:text-left pb-4">
+            <p className="mt-4 font-medium leading-6 tablet:leading-6 text-center text-16  pb-4">
               Real Estate Asset Slots (REAS) are units of real estate assets such as income-producing residential or industrial properties, high-growth lands, and ongoing or
               proposed estate development projects.
             </p>
           </Animate.Fade>
         </div>
 
-        <div className="mt-6 grid tablet:grid-cols-2 smallLaptop:grid-cols-3 border bigLaptop:grid-cols-4">
+        <div className="mt-6 grid tablet:grid-cols-2 smallLaptop:grid-cols-4 gap-10">
           {CardContent.map((data, index) => (
             <div className="mt-6 text-14 leading-5 flex justify-center items-center" key={index}>
               <Card customClass="p-6" description={data.description} icon={data.icon} iconClass="mb-6 tablet:mt-10" title={data.title} />
@@ -54,6 +54,6 @@ const CardContent = [
     icon: "cardIcon4",
     title: "Stay hands off",
     description:
-      "Avoid the hassles that come with identifying and managing investments. You may relax knowing that your investment is being professionally managed. No real estate experience is necessary, we save your time and help you make the right decisions.",
+      "Avoid the hassles that come with identifying and managing investments. You may relax knowing that your investment is being professionally managed. .",
   },
 ];

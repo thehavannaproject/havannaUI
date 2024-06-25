@@ -1,9 +1,9 @@
 // import DownloadSection from "@components/organisms/LandingPages/home/downloadSection";
 import FaqsSection from "@components/organisms/LandingPages/home/FaqsSection/Faq";
 import FutureSection from "@components/organisms/LandingPages/home/FutureSection/FutureSection";
-import MailListingSection from "@components/organisms/LandingPages/home/MailListSection/MailListSection";
+// import MailListingSection from "@components/organisms/LandingPages/home/MailListSection/MailListSection";
 // import OpportunitySection from "@components/organisms/LandingPages/home/OpportunitySection/OpportunitySection";
-import StartSection from "@components/organisms/LandingPages/home/StartSection/StartSection";
+// import StartSection from "@components/organisms/LandingPages/home/StartSection/StartSection";
 import TopSection from "@components/organisms/LandingPages/home/TopSection/TopSection";
 import WhySection from "@components/organisms/LandingPages/home/whySection/WhySection";
 
@@ -16,10 +16,10 @@ const HomePage = () => {
       <TopSection />
       <HavannaProvision />
       <WhySection />
-      <StartSection />
+      {/* <StartSection /> */}
       {/* <OpportunitySection /> */}
       <FutureSection />
-      <MailListingSection />
+      {/* <MailListingSection /> */}
       <FaqsSection />
       {/* <DownloadSection /> */}
     </div>

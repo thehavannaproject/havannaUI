@@ -5,15 +5,15 @@ import MobileListing from "@components/organisms/Dashboard/Listing/Mobile";
 const invest = () => {
   return (
     <>
-    <BaseLayout>
-      <div className="hidden tablet:block px-[120px] pb-20 mt-10">
+      <BaseLayout>
+        <div className="hidden !bg-white tablet:block smallLaptop:px-[120px] pb-20 mt-10">
+          <p className="text-center smallLaptop:text-24 mb-10 font-mulish font-bold">Invest in our listed properties.</p>
           <Listing />
-      </div>
-      <div className="tablet:hidden">
+        </div>
+        <div className="tablet:hidden">
           <MobileListing />
-      </div>
-    
-    </BaseLayout>
+        </div>
+      </BaseLayout>
     </>
   );
 };

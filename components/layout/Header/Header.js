@@ -20,6 +20,7 @@ const Header = ({ isDark = false }) => {
           </CustomLink>
           <div className=" tablet:block mt-3">
             <div className={`tablet:flex tablet:gap-8  smallLaptop:gap-16  font-mulish text-16 font-bold  ${isDark ? "text-white" : "text-primary"}`}>
+              <NavItem className="hover:text-HavannaGreen-tertiaryMain" title="Home" url="/" />
               <NavItem className="hover:text-HavannaGreen-tertiaryMain" title="Invest" url="/invest" />
               <NavItem className="hover:text-HavannaGreen-tertiaryMain" title="About Us" url="/about-us" />
               {/* <NavItem className="hover:text-HavannaGreen-tertiaryMain" title="Blog" url="/blog" /> */}

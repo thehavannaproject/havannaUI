@@ -37,12 +37,12 @@
         ]
       }
     ],
-    "react/jsx-sort-props": [
-      "error",
-      {
-        "ignoreCase": true
-      }
-    ],
+    // "react/jsx-sort-props": [
+    //   "error",
+    //   {
+    //     "ignoreCase": true
+    //   }
+    // ],
     "react/require-default-props": [
       2,
       {
@@ -59,7 +59,8 @@
     "no-param-reassign": "error",
     "react/self-closing-comp": "error",
     "react/no-unused-state": "error",
-    "react/no-unused-prop-types": "warn"
+    "react/no-unused-prop-types": "warn",
+    "no-irregular-whitespace": "off"
   },
   "settings": {
     "react": {

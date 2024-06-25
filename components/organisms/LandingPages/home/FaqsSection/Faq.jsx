@@ -3,19 +3,19 @@ import * as Animate from "react-reveal";
 
 const FaqsSection = () => {
   return (
-    <section className="font-mulish px-5 py-[60px] bg-HavannaGreen-light">
+    <section className="font-mulish px-5 py-[60px] smallLaptop:mt-[100px] ">
       <div className="">
         <Animate.Fade bottom>
           <h2 className="text-center text-24 font-bold text-HavannaGreen-primary LEADING-8">Frequently Asked Questions (FAQS).</h2>
-          <div className="w-full lg:w-9/12 rounded-xl mx-auto mt-10 md:mt-14 lg:mt-20 bg-white px-2 md:px-6 lg:px-8 py-6 lg:py-12">
+          <div className="w-full lg:w-9/12 rounded-xl mx-auto mt-10 smallLaptop:mt-[60px] bg-white shadow-lg ">
             {faqsData.map((a, index) => (
               <div className="relative border-b pt-1 pb-1 lg:pb-3 px-8 lg:px-10 mb-1 lg:mb-6" key={index}>
                 <input className="toggle hidden" id={`toggle${index}`} type="checkbox" />
                 <label className="dropdown-faq-title block  p-4 cursor-pointer text-primary font-semibold pb-2 question text-sm-15 lg:text-base" htmlFor={`toggle${index}`}>
-                  {a.question}
+                  + &nbsp; {a.question}
                 </label>
                 <div className="content overflow-hidden">
-                  <p className="p-4 text-default font-light answer text-sm lg:text-sm-15">{a.answer}</p>
+                  <p className="p-4 text-default font-light leading-6 answer text-sm lg:text-sm-15">{a.answer}</p>
                 </div>
               </div>
             ))}

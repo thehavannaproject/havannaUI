@@ -1,17 +1,19 @@
 import React from "react";
+import { useRouter } from "next/router";
 
 import { Carousel } from "antd";
 import Icon from "@components/atoms/Icons";
 import CustomLink from "@components/atoms/CustomLink/CustomLink";
 
 const DesktopPropertyDetails = ({ singleListing }) => {
+  const router = useRouter()
   return (
     <section>
       <div className="  pb-28 font-mulish px-10 ">
         <div className="flex pt-8 gap-[28.38px]">
-          <CustomLink destination="/listing">
+          <div onClick={() => router.back(-1)} className="cursor-pointer">
             <Icon className="mt-2" name="investArrow" />
-          </CustomLink>
+          </div>
           <div>
             <h1 className="font-bold text-[28px] leading-9 ">{singleListing?.name}</h1>
             <p className="font-medium text-18 leading-6 capitalize">{singleListing?.listingDetails?.location.toLowerCase()}</p>
@@ -44,7 +46,7 @@ const DesktopPropertyDetails = ({ singleListing }) => {
             </div>
           </div>
         </div> */}
-        <div className="flex justify-between gap-[100px] mt-12">
+        <div className="smallLaptop:flex justify-between gap-[100px] mt-12">
           <div>
             <div className="">
               <h2 className="font-bold text-[24px] leading-8 capitalize">{singleListing?.name?.toLowerCase()}</h2>

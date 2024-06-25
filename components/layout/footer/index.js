@@ -33,29 +33,29 @@ const Footer = () => {
   const columnData1 = [
     {
       id: "i2",
-      url: "/products/buy",
+      url: "/invest",
       linkName: "Invest",
     },
-    {
-      id: "i3",
-      url: "/products/sell",
-      linkName: "Sell",
-    },
+    // {
+    //   id: "i3",
+    //   url: "/products/sell",
+    //   linkName: "Sell",
+    // },
   ];
   const columnData2 = [
     {
       id: "t2",
-      url: "/terms/privacy",
+      url: "/privacy-policy",
       linkName: "Privacy policy",
     },
     {
       id: "t3",
-      url: "/terms/privacy",
+      url: "/terms-of-use",
       linkName: "Term of use",
     },
     {
       id: "t3",
-      url: "/terms/privacy",
+      url: "/disclaimer",
       linkName: "Disclaimer",
     },
   ];
@@ -66,16 +66,16 @@ const Footer = () => {
       url: "/company",
       linkName: "About",
     },
-    {
-      id: "j2",
-      url: "/company",
-      linkName: "Blog",
-    },
-    {
-      id: "j3",
-      url: "/career",
-      linkName: "Career",
-    },
+    // {
+    //   id: "j2",
+    //   url: "/company",
+    //   linkName: "Blog",
+    // },
+    // {
+    //   id: "j3",
+    //   url: "/career",
+    //   linkName: "Career",
+    // },
   ];
 
   const columnData4 = [
