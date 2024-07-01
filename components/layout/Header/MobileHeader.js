@@ -22,7 +22,7 @@ const MobileHeader = ({ isDark = false }) => {
             <span />
           </label>
           <label className="close" htmlFor="active" />
-          <div className="wrapper ">
+          <div className="wrapper">
             <ul className="">
               <li>
                 <NavItem title="Invest" url="/products/buy" />

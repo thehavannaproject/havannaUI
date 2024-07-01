@@ -13,7 +13,7 @@ const TermsOfUse = () => {
         </div>
         <div className="mt-6 tablet-mt-10">
           <h1 className="text-16 tablet:text-[28px] text-[#031211] font-bold font-mulish">Purpose</h1>
-          <p className="text-14 tablet:text-[16px] text-[#3B3F42] font-mulish mt-4 tablet:mt-[20px]">
+          <p className="text-14 tablet:text-[16px] text-[#3B3F42] leading 6 tablet:leading-9 font-mulish mt-4 tablet:mt-[20px]">
             Havanna Heights provides a platform for investing in real estate properties. Users can purchase slots in a property and hold the investment for a specified period,
             earning returns monthly or yearly based on the investment use. Should you choose to become our Client, you will have the following: 
             <br />
