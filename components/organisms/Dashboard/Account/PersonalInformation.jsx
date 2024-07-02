@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Form, Formik } from "formik";
+import { Field, Form, Formik } from "formik";
 import { toast } from "react-toastify";
 import { UserIcon } from "@heroicons/react/24/solid";
 import moment from "moment";
@@ -24,10 +24,9 @@ const PersonalInformation = () => {
   const [profilePicture, setProfilePicture] = useState(null);
   const [otp, setOtp] = useState("");
   const [showPhoneModal, setShowPhoneNumber] = useState(false);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const fileInputRef = useRef(null);
-
 
   const validateDateOfBirth = (value) => {
     const dateOfBirth = new Date(value);
@@ -38,7 +37,6 @@ const PersonalInformation = () => {
       return "You must be at least 18 years old";
     }
   };
-
 
   const handleProfilePictureUpload = (event) => {
     const selectedFile = event.target.files[0];
@@ -69,8 +67,8 @@ const PersonalInformation = () => {
     if (!profilePicture) {
       toast.error("Please upload a profile picture");
     } else {
-      setLoading(true)
-      const data = new FormData()
+      setLoading(true);
+      const data = new FormData();
       data.append("CustomerId", userDetails?.customerId);
       data.append("PhoneNumber", values?.phoneNumber);
       data.append("DateOfBirth", values?.date);
@@ -79,8 +77,15 @@ const PersonalInformation = () => {
       data.append("Occupation", values?.occupation);
       data.append("Gender", values?.gender);
       data.append("ProfilePicture", profilePicture);
-  
-      customerCompleteProfile(data).then((res) => {toast.success(res.data, {theme: "colored"}); setLoading(false)}).catch(() => {setLoading(false)})
+
+      customerCompleteProfile(data)
+        .then((res) => {
+          toast.success(res.data, { theme: "colored" });
+          setLoading(false);
+        })
+        .catch(() => {
+          setLoading(false);
+        });
     }
   };
 
@@ -90,11 +95,11 @@ const PersonalInformation = () => {
     });
   };
 
-  const sendOtp = () => {  
+  const sendOtp = () => {
     if (profile.phoneNumber) {
       setShowPhoneNumber(true);
-      if(localStorage.getItem("codeSent")) {
-        toast.success("OTP has been sent ")
+      if (localStorage.getItem("codeSent")) {
+        toast.success("OTP has been sent ");
         setTimeout(() => {
           localStorage.removeItem("codeSent");
         }, 30000);
@@ -105,7 +110,7 @@ const PersonalInformation = () => {
           customer_email_address: profile.emailAddress,
           first_name: profile.firstName,
         };
-        if(!localStorage.getItem("codeSent")) {
+        if (!localStorage.getItem("codeSent")) {
           sendPhoneOtp(data)
             .then((response) => {
               toast.success("OTP sent successfully");
@@ -116,7 +121,6 @@ const PersonalInformation = () => {
               toast.error("Something went wrong");
             });
         }
-
       }
     }
   };
@@ -131,12 +135,15 @@ const PersonalInformation = () => {
       };
       verifyPhoneNumber(data)
         .then((response) => {
-          console.log(response)
+          console.log(response);
           response.responseCode === 200 ? toast.success("OTP verification is successful") : toast.error("Sorry, couldn't verify OTP, Please try again");
           setLoading(false);
           localStorage.removeItem("reference");
         })
-        .finally(() => {setShowPhoneNumber(false); _getCustomerProfile();});
+        .finally(() => {
+          setShowPhoneNumber(false);
+          _getCustomerProfile();
+        });
     } else {
       toast.error("Otp field is complusory");
     }
@@ -149,7 +156,12 @@ const PersonalInformation = () => {
           <div>
             <div className="w-fit m-auto">
               {profilePicture || profile.profilePictureUrl ? (
-                <img alt="Profile Picture" className="rounded-full border w-24 h-24" onClick={handleIconClick} src={profile?.profilePictureUrl || URL.createObjectURL(profilePicture)} />
+                <img
+                  alt="Profile Picture"
+                  className="rounded-full border w-24 h-24"
+                  onClick={handleIconClick}
+                  src={profile?.profilePictureUrl || URL.createObjectURL(profilePicture)}
+                />
               ) : (
                 <div className="rounded-full border w-24 h-24 bg-[#DFE1E2] text-HavannaBlack-neutral50 flex justify-center items-center" onClick={handleIconClick}>
                   <UserIcon width={72} />
@@ -157,7 +169,9 @@ const PersonalInformation = () => {
               )}
             </div>
             <input accept=".png, .jpeg, .jpg" className="mt-10 hidden" onChange={handleProfilePictureUpload} ref={fileInputRef} type="file" />
-            <p className="font-bold text-16 leading-[22px] mt-[10px] text-center cursor-pointer" onClick={handleIconClick}>Upload your profile picture</p>
+            <p className="font-bold text-16 leading-[22px] mt-[10px] text-center cursor-pointer" onClick={handleIconClick}>
+              Upload your profile picture
+            </p>
           </div>
         </div>
 
@@ -178,18 +192,18 @@ const PersonalInformation = () => {
           onSubmit={handleSubmit}
           validate={(values) => {
             const errors = {};
-           
+
             // validate date of birth
             if (values.date && validateDateOfBirth(values.date)) {
               errors.date = validateDateOfBirth(values.date);
             }
             if (!/^\d+$/.test(values.phoneNumber) || values.phoneNumber.length !== 11) {
               errors.phoneNumber = "Phone number is invalid";
-          }
+            }
             return errors;
           }}
         >
-          {({values}) => (
+          {() => (
             <Form className="smallLaptop:flex flex-wrap smallLaptop:pl-11 px-3 mt-6 gap-8">
               <div className="smallLaptop:grid items-center grid-cols-2 gap-8">
                 <div className="mt-4 ">
@@ -259,9 +273,18 @@ const PersonalInformation = () => {
                     required
                     type="text"
                   />
-                 
-                    <div className="absolute right-2 top-1/2 text-HavannaGreen-primary font-semibold px-4 py-1 rounded-md">{profile?.phoneNumber && profile?.phoneNumberVerified ? "Verified" : profile?.phoneNumber && !profile.phoneNumberVerified ? (<span className="cursor-pointer" onClick={sendOtp}>Verify</span>) : ""}</div>
-                  
+
+                  <div className="absolute right-2 top-1/2 text-HavannaGreen-primary font-semibold px-4 py-1 rounded-md">
+                    {profile?.phoneNumber && profile?.phoneNumberVerified ? (
+                      "Verified"
+                    ) : profile?.phoneNumber && !profile.phoneNumberVerified ? (
+                      <span className="cursor-pointer" onClick={sendOtp}>
+                        Verify
+                      </span>
+                    ) : (
+                      ""
+                    )}
+                  </div>
                 </div>
 
                 <div className="mt-4 ">
@@ -320,33 +343,14 @@ const PersonalInformation = () => {
                   <h1 className="font-bold text-16 leading-[22px] ">Gender</h1>
                   <div className="flex gap-5">
                     <div>
-                      <label>Male</label>
-                      <FormikCustomInput
-                        checked={values.gender === profile.gender ? true : false}
-                        className="!h-5 accent-HavannaGreen-secondary"
-                        container="!px-0"
-                        // disabled={profile.gender}
-                        // onChange={() => setFieldValue('gender', 'Male')}
-                        name="gender"
-                        required
-                        type="radio"
-                        value="Male"
-                      />
+                      <Field className="w-4 accent-HavannaGreen-secondary" name="gender" required type="radio" value="Male" />
+                      <label className=" ml-1 text-[#3B3F42]">Male</label>
+
                     </div>
-                    <div>
-                      <label>Female</label>
-                      <FormikCustomInput
-                        checked={values.gender === profile.gender ? true : false}
-                        className="!h-5 accent-HavannaGreen-secondary"
-                        container="!px-0"
-                        // disabled={profile?.gender}
-                        name="gender"
-                        // onChange={() => setFieldValue('gender', 'Female')}
-                        required
-                        type="radio"
-                        value="Female"
-                      />
-                    </div>
+                      <div >
+                        <Field className="w-4  accent-HavannaGreen-secondary" name="gender" required type="radio" value="Female" />
+                        <label className=" ml-1 text-[#3B3F42]">Female</label>
+                      </div>
                   </div>
                 </div>
               </div>
@@ -354,43 +358,44 @@ const PersonalInformation = () => {
                 <div className="mt-10">
                   <Button customClass="rounded-[8px] smallLaptop:w-[240px] w-[100%]  text-white h-[58px] bg-HavannaGreen-primary " isLoading={loading} title=" Save information" />
                 </div>
-
               )}
             </Form>
           )}
         </Formik>
 
         <CustomModal cardClassName=" w-[600px]" toggleVisibility={setShowPhoneNumber} visibility={showPhoneModal}>
-        <div>
-          <div className="w-full pt-8 bg-white text-black font-mulish h-[70vh] rounded-t-xl px-5">
-            <Icon className="flex cursor-pointer justify-end" name="otpCancel" onClick={() => setShowPhoneNumber(false)} />
-            <h1 className=" ">Enter OTP Code</h1>
-            <p className="mt-3 mb-[30px]">Enter the OTP code sent to your number {profile?.phoneNumber}</p>
+          <div>
+            <div className="w-full pt-8 bg-white text-black font-mulish h-[70vh] rounded-t-xl px-5">
+              <Icon className="flex cursor-pointer justify-end" name="otpCancel" onClick={() => setShowPhoneNumber(false)} />
+              <h1 className=" ">Enter OTP Code</h1>
+              <p className="mt-3 mb-[30px]">Enter the OTP code sent to your number {profile?.phoneNumber}</p>
 
-            <OTPInput
-              inputStyle={{ width: "60px", height: "60px", background: "transparent", outline: "none", borderRadius: "8px", border: "1px solid black", color: "black" }}
-              numInputs={6}
-              onChange={setOtp}
-              renderInput={(props) => <input type="number"  {...props} />}
-              renderSeparator={<span className="text-gray px-2">-</span>}
-              value={otp}
-            />
+              <OTPInput
+                inputStyle={{ width: "60px", height: "60px", background: "transparent", outline: "none", borderRadius: "8px", border: "1px solid black", color: "black" }}
+                numInputs={6}
+                onChange={setOtp}
+                renderInput={(props) => <input type="number" {...props} />}
+                renderSeparator={<span className="text-gray px-2">-</span>}
+                value={otp}
+              />
 
-            <CustomButton
-              customClass="!text-white cursor-pointer bg-HavannaGreen-primary text-white w-full h-[58px] rounded-lg mt-10 mb-[72px] "
-              isLoading={loading}
-              onClick={handleOtp}
-              title="Verify Otp"
-            />
+              <CustomButton
+                customClass="!text-white cursor-pointer bg-HavannaGreen-primary text-white w-full h-[58px] rounded-lg mt-10 mb-[72px] "
+                isLoading={loading}
+                onClick={handleOtp}
+                title="Verify Otp"
+              />
+            </div>
           </div>
-        </div>
-      </CustomModal>
-      {profile?.customerId && profile?.phoneNumber && (
-
-        <p className="font-bold pl-10 mt-7">
-          Need to change any information? <span className="text-HavannaGreen-primary">&nbsp;<CustomLink destination="/contact-us">Contact Us</CustomLink></span>
-        </p>
-      )}
+        </CustomModal>
+        {profile?.customerId && profile?.phoneNumber && (
+          <p className="font-bold pl-10 mt-7">
+            Need to change any information?{" "}
+            <span className="text-HavannaGreen-primary">
+              &nbsp;<CustomLink destination="/contact-us">Contact Us</CustomLink>
+            </span>
+          </p>
+        )}
       </div>
     </section>
   );
